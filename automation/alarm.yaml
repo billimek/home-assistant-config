@@ -8,10 +8,14 @@
     for:
       seconds: 300
   action:
-    service: notify.slack
-    data_template:
-      title: "Alarm Panel"
-      message: "Door to garage is opened for more than 5 minutes"
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Door to garage is opened for more than 5 minutes"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Door to garage is opened for more than 5 minutes"
 - id: alert_when_upstairs_motion
   alias: 'Alert when motion is detected upstairs and nobody home'
   trigger:
@@ -24,10 +28,14 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    service: notify.slack
-    data_template:
-      title: "Alarm Panel"
-      message: "Upstairs motion detected"
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Upstairs motion detected"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Upstairs motion detected"
 - id: alert_when_main_motion
   alias: 'Alert when motion is detected on the main level and nobody home'
   trigger:
@@ -40,10 +48,14 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    service: notify.slack
-    data_template:
-      title: "Alarm Panel"
-      message: "Main level motion detected"
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Main level motion detected"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Main level motion detected"
 - id: alert_when_basement_motion
   alias: 'Alert when motion is detected in the basement and nobody home'
   trigger:
@@ -56,10 +68,14 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    service: notify.slack
-    data_template:
-      title: "Alarm Panel"
-      message: "Basement motion detected"
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement motion detected"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement motion detected"
 - id: notify_alarm_triggered
   alias: 'Notify Alarm triggered'
   trigger:
@@ -67,10 +83,18 @@
     entity_id: alarm_control_panel.alarm_panel
     to: 'triggered'
   action:
-    service: notify.slack
-    data_template:
-      title: "Alarm Panel"
-      message: "@here Alarm has triggered: {{states('sensor.alarm_panel_display')}}"
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "@here Alarm has triggered: {{states('sensor.alarm_panel_display')}}"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm has triggered: {{states('sensor.alarm_panel_display')}}"
+        data:
+          push:
+            badge: 5
+            category: "alarm"
 - id: arm_alarm_nobody_home
   alias: 'Arm Alarm Away when Nobody Home'
   trigger:
@@ -88,6 +112,10 @@
         entity_id: alarm_control_panel.alarm_panel
         code: !secret ALARMCD
     - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm has Armed Away"
+    - service: notify.ios_jeff_phone
       data_template:
         title: "Alarm Panel"
         message: "Alarm has Armed Away"
