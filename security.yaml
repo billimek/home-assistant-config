@@ -1,7 +1,7 @@
 alarmdecoder:
   device:
     type: socket
-    host: andor
+    host: !secret alarmdecoder-host
     port: 10000
   panel_display: On
   zones:

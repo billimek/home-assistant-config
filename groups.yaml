@@ -4,3 +4,21 @@ garage:
     - cover.jeff_garage_door
     - sensor.garage_status
     - sensor.garage_car_present 
+
+family:
+  name: Family
+  entities:
+    - device_tracker.jeff_phone
+    - device_tracker.jen_phone
+
+alarm:
+  name: Alarm
+  entities:
+    - alarm_control_panel.alarm_panel
+    - sensor.alarm_panel_display
+    - sensor.alarm_status
+    - input_select.alarm_mode
+    - automation.arm_alarm_away_when_nobody_home
+    - automation.notify_alarm_triggered
+
+

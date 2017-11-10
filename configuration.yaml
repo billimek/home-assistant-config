@@ -114,7 +114,7 @@ cover:
   platform: opengarage
   covers:
       garage:
-        host:  og-jeff
+        host:  !secret og-host_og-jeff
         device_key: !secret og-key
         name:  Jeff Garage Door
 
@@ -251,12 +251,12 @@ device_tracker:
   - platform: unifi
     username: !secret unifi-username
     password: !secret unifi-password
-    host: unifi
+    host: !secret unifi-host
     port: 443
 
 
 influxdb:
-  host: andor
+  host: !secret influxdb-host
 
 ring:
   username: !secret ring-username
