@@ -198,7 +198,7 @@ sensor:
         value_template: '{% if states.cover.jeff_garage_door %}
             {% if states.cover.jeff_garage_door.state == "open" %}
               n/a
-            {% elif ((states.cover.jeff_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jeff_garage_door.attributes["distance_sensor"] < 100)) %}
+            {% elif ((states.cover.jeff_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jeff_garage_door.attributes["distance_sensor"] < 130)) %}
               Yes
             {% else %}
               No
