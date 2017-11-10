@@ -1,12 +1,12 @@
 #
 # SHELL COMMANDS
 #
-  camera_porch_day: "curl -X POST --digest -u '${CAMERA_AUTH}' 'http://porch/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=0'"
-  camera_porch_night: "curl -X POST --digest -u '${CAMERA_AUTH}' 'http://porch/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=1'"
-  camera_front_day: "curl -X POST --digest -u '${CAMERA_AUTH}' 'http://front/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=0'"
-  camera_front_night: "curl -X POST --digest -u '${CAMERA_AUTH}' 'http://front/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=1'"
-  camera_driveway_day: "curl -X POST --digest -u '${CAMERA_AUTH}' 'http://driveway/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=0'"
-  camera_driveway_night: "curl -X POST --digest -u '${CAMERA_AUTH}' 'http://driveway/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=1'"
-  camera_pool_day: "curl -X POST --digest -u '${CAMERA_AUTH}' 'http://pool/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=0'"
-  camera_pool_night: "curl -X POST --digest -u '${CAMERA_AUTH}' 'http://pool/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=1'"
+  camera_porch_day: "curl -X POST --digest -u ${CAMERA_AUTH} 'http://porch/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=0'"
+  camera_porch_night: "curl -X POST --digest -u ${CAMERA_AUTH} 'http://porch/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=1'"
+  camera_front_day: "curl -X POST --digest -u ${CAMERA_AUTH} 'http://front/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=0'"
+  camera_front_night: "curl -X POST --digest -u ${CAMERA_AUTH} 'http://front/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=1'"
+  camera_driveway_day: "curl -X POST --digest -u ${CAMERA_AUTH} 'http://driveway/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=0'"
+  camera_driveway_night: "curl -X POST --digest -u ${CAMERA_AUTH} 'http://driveway/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=1'"
+  camera_pool_day: "curl -X POST --digest -u ${CAMERA_AUTH} 'http://pool/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=0'"
+  camera_pool_night: "curl -X POST --digest -u ${CAMERA_AUTH} 'http://pool/cgi-bin/configManager.cgi?action=setConfig&VideoInMode\\[0\\].Config\\[0\\]=1'"
 
