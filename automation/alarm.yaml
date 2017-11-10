@@ -1,0 +1,93 @@
+- id: alert_when_door_open_for_too_long
+  alias: 'Alert when door to garage is opened for too long'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.garage_door
+    from: 'off'
+    to: 'on'
+    for:
+      seconds: 300
+  action:
+    service: notify.slack
+    data_template:
+      title: "Alarm Panel"
+      message: "Door to garage is opened for more than 5 minutes"
+- id: alert_when_upstairs_motion
+  alias: 'Alert when motion is detected upstairs and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.upstairs_motion
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    service: notify.slack
+    data_template:
+      title: "Alarm Panel"
+      message: "Upstairs motion detected"
+- id: alert_when_main_motion
+  alias: 'Alert when motion is detected on the main level and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.main_motion
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    service: notify.slack
+    data_template:
+      title: "Alarm Panel"
+      message: "Main level motion detected"
+- id: alert_when_basement_motion
+  alias: 'Alert when motion is detected in the basement and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.basement_motion
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    service: notify.slack
+    data_template:
+      title: "Alarm Panel"
+      message: "Basement motion detected"
+- id: notify_alarm_triggered
+  alias: 'Notify Alarm triggered'
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.alarm_panel
+    to: 'triggered'
+  action:
+    service: notify.slack
+    data_template:
+      title: "Alarm Panel"
+      message: "@here Alarm has triggered: {{states('sensor.alarm_panel_display')}}"
+- id: arm_alarm_nobody_home
+  alias: 'Arm Alarm Away when Nobody Home'
+  trigger:
+    platform: state
+    entity_id: sensor.anyone_home
+    from: 'not_home'
+    to: 'home'
+  condition:
+    condition: state
+    entity_id: input_select.alarm_mode
+    state: 'automatic'
+  action:
+    - service: alarm_control_panel.alarm_arm_home
+      data:
+        entity_id: alarm_control_panel.alarm_panel
+        code: !secret ALARMCD
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm has Armed Away"

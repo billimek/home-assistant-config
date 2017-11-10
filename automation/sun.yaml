@@ -1,0 +1,19 @@
+- alias: Sunrise - set cameras profile
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    - service: shell_command.camera_porch_day
+    - service: shell_command.camera_front_day
+    - service: shell_command.camera_driveway_day
+    - service: shell_command.camera_pool_day
+
+- alias: Sunset - set cameras profile
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    - service: shell_command.camera_porch_night
+    - service: shell_command.camera_front_night
+    - service: shell_command.camera_driveway_night
+    - service: shell_command.camera_pool_night

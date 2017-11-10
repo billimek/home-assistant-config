@@ -1,0 +1,9 @@
+*
+!*.yaml
+!automation
+!config
+!scripts
+!**/*/*.yaml
+!.gitignore
+secrets.yaml
+known_devices.yaml

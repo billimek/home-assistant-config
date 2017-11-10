@@ -1,0 +1,267 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude 
+  longitude: !secret longitude 
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 318
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+
+# Packages
+  packages:
+    security: !include security.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  api_password: !secret http-api_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  base_url: !secret base_url
+  server_port: 8133
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - plex_mediaserver
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+# conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+map:
+
+
+ios:
+  push:
+    categories:
+      - name: Alarm
+        identifier: 'alarm'
+        actions:
+          - identifier: 'SOUND_ALARM'
+            title: 'Sound Alarm'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: yes
+            behavior: 'default'
+          - identifier: 'SILENCE_ALARM'
+            title: 'Silence Alarm'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: no
+            behavior: 'textInput'
+            textInputButtonTitle: 'Silencio!'
+            textInputPlaceholder: 'Placeholder'
+
+# Custom UI Panels
+# panel_custom:
+#  - name: floorplan
+#    sidebar_title: Floorplan
+#    sidebar_icon: mdi:floor-plan
+#    url_path: floorplan
+#    config: !include config/floorplan.yaml
+
+
+# device_tracker: !include config/device_tracker.yaml
+# zone: !include config/zones.yaml
+# scene: !include_dir_merge_list scenes
+script: !include_dir_merge_named scripts
+# python_script:
+# input_boolean: !include config/input_boolean.yaml
+# input_slider: !include config/input_slider.yaml
+# sensor: !include config/sensors.yaml
+# binary_sensor: !include config/binary_sensors.yaml
+# switch: !include config/switches.yaml
+automation: !include_dir_merge_list automation
+# logbook: !include config/logbook.yaml
+shell_command: !include config/shell.yaml
+# plant: !include config/plants.yaml
+# media_player: !include config/media_players.yaml
+# mqtt: !include config/mqtt.yaml
+# rest_command: !include config/rest.yaml
+# variable: !include config/variable.yaml
+zone: !include config/zones.yaml
+
+cover:
+  platform: opengarage
+  covers:
+      garage:
+        host:  og-jeff
+        device_key: !secret og-key
+        name:  Jeff Garage Door
+
+# Weather prediction
+sensor:
+  - platform: yr
+    name: Weather (yr)
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - humidity
+  - platform: darksky
+    name: Weather
+    api_key: !secret darksky-api_key
+    monitored_conditions:
+      - summary
+      - icon
+      - nearest_storm_distance
+      - precip_intensity
+      - precip_probability
+      - temperature
+      - temperature_max
+      - temperature_min
+      - wind_speed
+      - wind_bearing
+      - visibility
+      - apparent_temperature
+      - minutely_summary
+      - hourly_summary
+      - daily_summary
+      - dew_point
+      - cloud_cover
+      - humidity
+  - platform: ring
+    monitored_conditions:
+      - battery
+      - last_activity
+      - last_ding
+      - last_motion
+      - volume
+
+  - platform: template
+    sensors:
+      anyone_home:
+        value_template: "{% if is_state('device_tracker.jeff_phone', 'home') or is_state('device_tracker.jen_phone', 'home')-%}home{%else%}not_home{% endif %}"
+
+#  - platform: template
+#    sensors:
+#      garage_door:
+#        value_template: "{{ states.cover.garage_door_main_controller_open == 'closed' }}"
+
+#  - platform: template
+#    sensors:
+#      garage_door2:
+#        value_template: "{% if is_state('cover.garage_door_main_controller_open', 'open') %}Open{% elif is_state('cover.garage_door_main_controller_open', 'closed') %}Closed{%else%}ERROR{% endif %}" 
+
+
+  - platform: template
+    sensors:
+      garage_status:
+        friendly_name: 'Jeffs Garage Door Status'
+        value_template: '{% if states.cover.jeff_garage_door %}
+            {% if states.cover.jeff_garage_door.attributes["door_state"] == "open" %}
+              Open
+            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "closed" %}
+              Closed
+            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "opening" %}
+              Opening
+            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "closing" %}
+              Closing
+            {% else %}
+              Unknown
+            {% endif %}
+            {% else %}
+            n/a
+            {% endif %}'
+      garage_car_present:
+        friendly_name: 'Jeffs car in Garage'
+        value_template: '{% if states.cover.jeff_garage_door %}
+            {% if states.cover.jeff_garage_door.state == "open" %}
+              n/a
+            {% elif ((states.cover.jeff_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jeff_garage_door.attributes["distance_sensor"] < 100)) %}
+              Yes
+            {% else %}
+              No
+            {% endif %}
+            {% else %}
+            n/a
+            {% endif %}'
+
+  - platform: template
+    sensors:
+      alarm_status:
+        value_template: "{% if is_state('sensor.alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.alarm_panel_display', 'ARMED ***STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
+
+
+
+binary_sensor:
+  - platform: ring
+    monitored_conditions:
+      - ding
+      - motion
+
+# ffmpeg:
+
+# media_player:
+#  - platform: plex
+
+# Text to speech
+# tts:
+#  - platform: google
+
+group: !include groups.yaml
+# automation: !include automations.yaml
+# script: !include scripts.yaml
+
+notify:
+  - name: slack
+    platform: slack
+    api_key: !secret slack-api_key
+    default_channel: '#general'
+
+nest:
+  client_id: !secret nest-client_id
+  client_secret: !secret nest-client_secret
+
+
+device_tracker:
+  - platform: owntracks_http
+    max_gps_accuracy: 200
+    waypoints: True
+  - platform: unifi
+    username: !secret unifi-username
+    password: !secret unifi-password
+    host: unifi
+    port: 443
+
+
+influxdb:
+  host: andor
+
+ring:
+  username: !secret ring-username
+  password: !secret ring-password
+
+# zwave:
+#  usb_path: /dev/ttyACM0
+

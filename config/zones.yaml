@@ -1,0 +1,12 @@
+#- name: Home
+#  latitude: !secret home_latitude
+#  longitude: !secret home_longitude
+#  radius: 75
+#  icon: mdi:home
+
+- name: Work
+  latitude: !secret work_latitude
+  longitude: !secret work_longitude
+  radius: 100
+  icon: mdi:castle
+

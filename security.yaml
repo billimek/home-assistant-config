@@ -1,0 +1,80 @@
+alarmdecoder:
+  device:
+    type: socket
+    host: andor
+    port: 10000
+  panel_display: On
+  zones:
+    01:
+      name: 'Front Door'
+      type: 'opening'
+    02:
+      name: 'Garage Door'
+      type: 'opening'
+    03:
+      name: 'Family Window'
+      type: 'opening'
+    04:
+      name: 'Living Window'
+      type: 'opening'
+    05:
+      name: 'Sun Room ?'
+      type: 'opening'
+    06:
+      name: 'Basement Motion'
+      type: 'motion'
+    07:
+      name: 'Main Motion'
+      type: 'motion'
+    08:
+      name: 'Basement Window'
+      type: 'opening'
+    09:
+      name: 'Bathroom Window'
+      type: 'opening'
+    10:
+      name: 'Kitchen Window'
+      type: 'opening'
+    11:
+      name: 'Back Door'
+      type: 'opening'
+    12:
+      name: 'LA Window'
+      type: 'opening'
+    13:
+      name: 'Basement Door'
+      type: 'opening'
+    14:
+      name: 'Sliding Door'
+      type: 'opening'
+    15:
+      name: 'Zone 15'
+      type: 'opening'
+    16:
+      name: 'Zone 16'
+      type: 'opening'
+    17:
+      name: 'Upstairs Motion'
+      type: 'motion'
+    18:
+      name: 'Upstairs Window'
+      type: 'opening'
+    19:
+      name: 'Zone 19'
+      type: 'opening'
+    20:
+      name: 'Zone 20'
+      type: 'opening'
+    25:
+      name: 'Hall Smoke'
+      type: 'smoke'
+
+input_select:
+  alarm_mode:
+    name: Alarm mode
+    options:
+     - automatic
+     - standby
+    initial: standby
+    icon: mdi:security-home
+
