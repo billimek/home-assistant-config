@@ -66,20 +66,11 @@ ios:
       - name: Alarm
         identifier: 'alarm'
         actions:
-          - identifier: 'SOUND_ALARM'
-            title: 'Sound Alarm'
+          - identifier: 'DISARM_ALARM'
+            title: 'Disarm Alarm'
             activationMode: 'background'
             authenticationRequired: yes
-            destructive: yes
-            behavior: 'default'
-          - identifier: 'SILENCE_ALARM'
-            title: 'Silence Alarm'
-            activationMode: 'background'
-            authenticationRequired: yes
-            destructive: no
-            behavior: 'textInput'
-            textInputButtonTitle: 'Silencio!'
-            textInputPlaceholder: 'Placeholder'
+
 
 # Custom UI Panels
 # panel_custom:

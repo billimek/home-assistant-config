@@ -403,3 +403,19 @@
       data_template:
         title: "Alarm Panel"
         message: "Alarm has disarmed"
+- id: ios_action_disarm_alarm
+  alias: ios_action_disarm_alarm
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: DISARM_ALARM
+  action:
+    # - service: alarm_control_panel.alarm_disarm
+    #   data:
+    #     entity_id: alarm_control_panel.alarm_panel
+    #     code: !secret ALARMCD
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm has disarmed"
