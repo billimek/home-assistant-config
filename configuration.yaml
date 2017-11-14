@@ -115,14 +115,6 @@ cover:
 
 # Weather prediction
 sensor:
-  - platform: yr
-    name: Weather (yr)
-    monitored_conditions:
-      - temperature
-      - symbol
-      - precipitation
-      - windSpeed
-      - humidity
   - platform: darksky
     name: Weather
     api_key: !secret darksky-api_key
