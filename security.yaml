@@ -18,7 +18,7 @@ alarmdecoder:
       name: 'Living Window'
       type: 'opening'
     05:
-      name: 'Sun Room ?'
+      name: 'Sun Room Window'
       type: 'opening'
     06:
       name: 'Basement Motion'
