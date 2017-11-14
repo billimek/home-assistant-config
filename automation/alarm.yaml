@@ -76,6 +76,266 @@
       data_template:
         title: "Alarm Panel"
         message: "Basement motion detected"
+- id: alert_when_front_door_open
+  alias: 'Alert when front door is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.front_door
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Front door open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Front door open"
+- id: alert_when_garage_door_open
+  alias: 'Alert when garage door is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.garage_door
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Garage door open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Garage door open"
+- id: alert_when_family_window_open
+  alias: 'Alert when family window is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.family_window
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Family window open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Family window open"
+- id: alert_when_living_window_open
+  alias: 'Alert when living window is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.living_window
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Living window open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Living window open"
+- id: alert_when_sun_room_door_open
+  alias: 'Alert when sun room door is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.sun_room_door
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Sun Room Door open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Sun Room Door open"
+- id: alert_when_basement_window_open
+  alias: 'Alert when basement window is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.basement_window
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement Window open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement Window open"
+- id: alert_when_basement_window_open
+  alias: 'Alert when basement window is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.basement_window
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement Window open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement Window open"
+- id: alert_when_kitchen_window_open
+  alias: 'Alert when kitchen window is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.kitchen_window
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Kitchen Window open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Kitchen Window open"
+- id: alert_when_back_door_open
+  alias: 'Alert when back door is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.back_door
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Back Door open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Back Door open"
+- id: alert_when_laundry_window_open
+  alias: 'Alert when laundry window is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.laundry_window
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Laundry Window open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Laundry Window open"
+- id: alert_when_basement_door_open
+  alias: 'Alert when basement door is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.basement_door
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement Door open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement Door open"
+- id: alert_when_sliding_door_open
+  alias: 'Alert when sliding door is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.sliding_door
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Sliding Door open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Sliding Door open"
+- id: alert_when_upstairs_window_open
+  alias: 'Alert when upstairs window is open and nobody home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.upstairs_window
+    from: 'off'
+    to: 'on'
+  condition:
+      condition: state
+      entity_id: sensor.anyone_home
+      state: 'not_home'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Upstairs Window open"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Upstairs Window open"
 - id: notify_alarm_triggered
   alias: 'Notify Alarm triggered'
   trigger:

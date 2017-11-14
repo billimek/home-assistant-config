@@ -39,7 +39,7 @@ alarmdecoder:
       name: 'Back Door'
       type: 'opening'
     12:
-      name: 'LA Window'
+      name: 'Laundry Window'
       type: 'opening'
     13:
       name: 'Basement Door'
@@ -47,23 +47,11 @@ alarmdecoder:
     14:
       name: 'Sliding Door'
       type: 'opening'
-    15:
-      name: 'Zone 15'
-      type: 'opening'
-    16:
-      name: 'Zone 16'
-      type: 'opening'
     17:
       name: 'Upstairs Motion'
       type: 'motion'
     18:
       name: 'Upstairs Window'
-      type: 'opening'
-    19:
-      name: 'Zone 19'
-      type: 'opening'
-    20:
-      name: 'Zone 20'
       type: 'opening'
     25:
       name: 'Hall Smoke'
