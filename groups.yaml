@@ -4,6 +4,9 @@ garage:
     - cover.jeff_garage_door
     - sensor.garage_status
     - sensor.garage_car_present 
+    - cover.jen_garage_door
+    - sensor.garage2_status
+    - sensor.garage2_car_present 
 
 family:
   name: Family
@@ -20,5 +23,3 @@ alarm:
     - input_select.alarm_mode
     - automation.arm_alarm_away_when_nobody_home
     - automation.notify_alarm_triggered
-
-

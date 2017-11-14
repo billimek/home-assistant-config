@@ -117,6 +117,10 @@ cover:
         host:  !secret og-host_og-jeff
         device_key: !secret og-key
         name:  Jeff Garage Door
+      garage2:
+        host:  !secret og-host_og-jen
+        device_key: !secret og-key
+        name:  Jen Garage Door
 
 # Weather prediction
 sensor:
@@ -199,6 +203,36 @@ sensor:
             {% if states.cover.jeff_garage_door.state == "open" %}
               n/a
             {% elif ((states.cover.jeff_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jeff_garage_door.attributes["distance_sensor"] < 130)) %}
+              Yes
+            {% else %}
+              No
+            {% endif %}
+            {% else %}
+            n/a
+            {% endif %}'
+      garage2_status:
+        friendly_name: 'Jens Garage Door Status'
+        value_template: '{% if states.cover.jen_garage_door %}
+            {% if states.cover.jen_garage_door.attributes["door_state"] == "open" %}
+              Open
+            {% elif states.cover.jen_garage_door.attributes["door_state"] == "closed" %}
+              Closed
+            {% elif states.cover.jen_garage_door.attributes["door_state"] == "opening" %}
+              Opening
+            {% elif states.cover.jen_garage_door.attributes["door_state"] == "closing" %}
+              Closing
+            {% else %}
+              Unknown
+            {% endif %}
+            {% else %}
+            n/a
+            {% endif %}'
+      garage2_car_present:
+        friendly_name: 'Jens car in Garage'
+        value_template: '{% if states.cover.jen_garage_door %}
+            {% if states.cover.jen_garage_door.state == "open" %}
+              n/a
+            {% elif ((states.cover.jen_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jen_garage_door.attributes["distance_sensor"] < 130)) %}
               Yes
             {% else %}
               No
