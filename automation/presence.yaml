@@ -1,0 +1,24 @@
+- id: alert_when_everyone_leaves_home
+  alias: 'Alert when everyone leaves home'
+  trigger:
+    platform: state
+    entity_id: sensor.anyone_home
+    from: 'home'
+    to: 'not_home'
+  action:
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Presence"
+        message: "Everyone has left home"
+- id: alert_when_anyone_comes_home
+  alias: 'Alert when anyone comes home'
+  trigger:
+    platform: state
+    entity_id: sensor.anyone_home
+    from: 'not_home'
+    to: 'home'
+  action:
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Presence"
+        message: "Someone came home"
