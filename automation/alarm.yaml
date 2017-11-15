@@ -451,7 +451,7 @@
         title: "Alarm Panel"
         message: "Alarm has disarmed (deprecated mesage)"
 - id: ios_action_disarm_alarm
-  alias: ios_action_disarm_alarm
+  alias: 'iOS action to disarm alarm'
   trigger:
     - platform: event
       event_type: ios.notification_action_fired

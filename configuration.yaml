@@ -74,14 +74,14 @@ ios:
         identifier: 'garage'
         actions:
           - identifier: 'CLOSE_GARAGE'
-            title: 'Close Jeffs Garage Door'
+            title: 'Close Jeff''s garage door'
             activationMode: 'background'
             authenticationRequired: yes
       - name: garage2
         identifier: 'garage2'
         actions:
           - identifier: 'CLOSE_GARAGE2'
-            title: 'Close Jens Garage Door'
+            title: 'Close Jen''s garage door'
             activationMode: 'background'
             authenticationRequired: yes
 
@@ -167,7 +167,7 @@ sensor:
   - platform: template
     sensors:
       garage_status:
-        friendly_name: 'Jeffs Garage Door Status'
+        friendly_name: 'Jeff''s garage door status'
         value_template: '{% if states.cover.jeff_garage_door %}
             {% if states.cover.jeff_garage_door.attributes["door_state"] == "open" %}
               Open
@@ -184,7 +184,7 @@ sensor:
             n/a
             {% endif %}'
       garage_car_present:
-        friendly_name: 'Jeffs car in Garage'
+        friendly_name: 'Jeff''s car in garage'
         value_template: '{% if states.cover.jeff_garage_door %}
             {% if states.cover.jeff_garage_door.state == "open" %}
               n/a
@@ -197,7 +197,7 @@ sensor:
             n/a
             {% endif %}'
       garage2_status:
-        friendly_name: 'Jens Garage Door Status'
+        friendly_name: 'Jen''s garage door status'
         value_template: '{% if states.cover.jen_garage_door %}
             {% if states.cover.jen_garage_door.attributes["door_state"] == "open" %}
               Open
@@ -214,7 +214,7 @@ sensor:
             n/a
             {% endif %}'
       garage2_car_present:
-        friendly_name: 'Jens car in Garage'
+        friendly_name: 'Jen''s car in garage'
         value_template: '{% if states.cover.jen_garage_door %}
             {% if states.cover.jen_garage_door.state == "open" %}
               n/a
