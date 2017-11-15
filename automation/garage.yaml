@@ -1,0 +1,173 @@
+################################################
+## Notify when garage door opens or closes
+################################################
+- id: alert_when_garage_opens
+  alias: 'Alert when Jeffs Garage Door Opens'
+  trigger:
+    platform: state
+    entity_id: sensor.garage_status
+    from: 'Closed'
+    to: 'Open'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Garage Door"
+        message: "Jeffs Garage Door Opened"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Garage Door"
+        message: "Jeffs Garage Door Opened"
+- id: alert_when_garage2_opens
+  alias: 'Alert when Jens Garage Door Opens'
+  trigger:
+    platform: state
+    entity_id: sensor.garage2_status
+    from: 'Closed'
+    to: 'Open'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Garage Door"
+        message: "Jens Garage Door Opened"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Garage Door"
+        message: "Jens Garage Door Opened"
+- id: alert_when_garage_closes
+  alias: 'Alert when Jeffs Garage Door Closes'
+  trigger:
+    platform: state
+    entity_id: sensor.garage_status
+    from: 'Open'
+    to: 'Closed'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Garage Door"
+        message: "Jeffs Garage Door Closed"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Garage Door"
+        message: "Jeffs Garage Door Closed"
+- id: alert_when_garage2_closes
+  alias: 'Alert when Jens Garage Door Closes'
+  trigger:
+    platform: state
+    entity_id: sensor.garage2_status
+    from: 'Open'
+    to: 'Closed'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Garage Door"
+        message: "Jens Garage Door Closed"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Garage Door"
+        message: "Jens Garage Door Closed"
+
+########################################################
+## Notify when garage door is open more than 30 minutes
+########################################################
+- id: alert_when_garage_stays_open
+  alias: 'Alert when Jeffs Garage Door Remains Open'
+  trigger:
+    platform: state
+    entity_id: sensor.garage_status
+    from: 'Closed'
+    to: 'Open'
+    for:
+      seconds: 1800
+  action:
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Garage Door"
+        message: "Jeffs Garage Door has remained open for more than 30 minutes"
+        data:
+          push:
+            badge: 0
+            category: 'garage'
+- id: alert_when_garage2_stays_open
+  alias: 'Alert when Jens Garage Door Remains Open'
+  trigger:
+    platform: state
+    entity_id: sensor.garage2_status
+    from: 'Closed'
+    to: 'Open'
+    for:
+      seconds: 1800
+  action:
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Garage Door"
+        message: "Jens Garage Door has remained open for more than 30 minutes"
+        data:
+          push:
+            badge: 0
+            category: 'garage2'
+
+
+
+################################################
+## Auto close garage door
+################################################
+- id: ios_action_close_garage
+  alias: ios_action_close_garage
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CLOSE_GARAGE
+  action:
+    - service: cover.close_cover
+      entity_id: cover.garage
+- id: ios_action_close_garage2
+  alias: ios_action_close_garage2
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CLOSE_GARAGE2
+  action:
+    - service: cover.close_cover
+      entity_id: cover.garage2
+
+- id: close_garage_after_10pm
+  alias: 'Automatically close Jeffs garage after 10pm'
+  trigger:
+    - platform: time
+      at: '22:00:00'
+  condition:
+    condition: state
+    entity_id: cover.garage
+    state: open
+    for:
+      seconds: 600
+  action:
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Garage Door"
+        message: "Jeffs garage door is open after 10pm. Closing it now!"
+    - service: cover.close_cover
+      entity_id: cover.garage
+
+- id: close_garage2_after_10pm
+  alias: 'Automatically close Jens garage after 10pm'
+  trigger:
+    - platform: time
+      at: '22:00:00'
+  condition:
+    condition: state
+    entity_id: cover.garage2
+    state: open
+    for:
+      seconds: 600
+  action:
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Garage Door"
+        message: "Jens garage door is open after 10pm. Closing it now!"
+    - service: cover.close_cover
+      entity_id: cover.garage2
+
+
