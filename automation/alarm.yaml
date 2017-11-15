@@ -418,14 +418,10 @@
       data:
         entity_id: alarm_control_panel.alarm_panel
         code: !secret ALARMCD
-    - service: notify.slack
-      data_template:
-        title: "Alarm Panel"
-        message: "Alarm has Armed Away (deprecated mesage)"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Alarm Panel"
-        message: "Alarm has Armed Away (deprecated mesage)"
+        message: "Alarm is about to arm (deprecated mesage)"
 - id: disarm_alarm_anybody_home
   alias: 'Disarm alarm when anybody comes home'
   trigger:
@@ -442,14 +438,6 @@
       data:
         entity_id: alarm_control_panel.alarm_panel
         code: !secret ALARMCD
-    - service: notify.slack
-      data_template:
-        title: "Alarm Panel"
-        message: "Alarm has disarmed (deprecated mesage)"
-    - service: notify.ios_jeff_phone
-      data_template:
-        title: "Alarm Panel"
-        message: "Alarm has disarmed (deprecated mesage)"
 - id: ios_action_disarm_alarm
   alias: 'iOS action to disarm alarm'
   trigger:
@@ -462,7 +450,3 @@
       data:
         entity_id: alarm_control_panel.alarm_panel
         code: !secret ALARMCD
-    - service: notify.ios_jeff_phone
-      data_template:
-        title: "Alarm Panel"
-        message: "Alarm has disarmed (deprecated mesage)"

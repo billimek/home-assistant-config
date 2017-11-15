@@ -7,64 +7,64 @@
     platform: state
     entity_id: sensor.garage_status
     from: 'Closed'
-    to: 'Opening'
+    to: 'Open'
   action:
     - service: notify.slack
       data_template:
         title: "Garage Door"
-        message: "Jeff''s garage door is opening"
+        message: "Jeff''s garage door is open"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Garage Door"
-        message: "Jeff''s garage door is opening"
+        message: "Jeff''s garage door is open"
 - id: alert_when_garage2_opens
   alias: 'Notify when Jen''s garage door opens'
   trigger:
     platform: state
     entity_id: sensor.garage2_status
     from: 'Closed'
-    to: 'Opening'
+    to: 'Open'
   action:
     - service: notify.slack
       data_template:
         title: "Garage Door"
-        message: "Jen''s garage door is opening"
+        message: "Jen''s garage door is open"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Garage Door"
-        message: "Jen''s garage door is opening"
+        message: "Jen''s garage door is open"
 - id: alert_when_garage_closes
   alias: 'Notify when Jeff''s garage door closes'
   trigger:
     platform: state
     entity_id: sensor.garage_status
     from: 'Open'
-    to: 'Closing'
+    to: 'Closed'
   action:
     - service: notify.slack
       data_template:
         title: "Garage Door"
-        message: "Jeff''s garage door is closing"
+        message: "Jeff''s garage door is closed"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Garage Door"
-        message: "Jeff''s garage door is closing"
+        message: "Jeff''s garage door is closed"
 - id: alert_when_garage2_closes
   alias: 'Notify when Jen''s garage door closes'
   trigger:
     platform: state
     entity_id: sensor.garage2_status
     from: 'Open'
-    to: 'Closing'
+    to: 'Closed'
   action:
     - service: notify.slack
       data_template:
         title: "Garage Door"
-        message: "Jen''s garage door is closing"
+        message: "Jen''s garage door is closed"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Garage Door"
-        message: "Jen''s garage door is closing"
+        message: "Jen''s garage door is closed"
 
 ########################################################
 ## Notify when garage door is open more than 30 minutes
