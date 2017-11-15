@@ -10,3 +10,8 @@
   radius: 100
   icon: mdi:castle
 
+- name: Jens Work
+  latitude: !secret jens_work_latitude
+  longitude: !secret jens_work_longitude
+  radius: 100
+  icon: mdi:castle

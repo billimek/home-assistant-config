@@ -270,6 +270,7 @@ device_tracker:
     password: !secret unifi-password
     host: !secret unifi-host
     port: 443
+    detection_time: 180
 
 
 influxdb:

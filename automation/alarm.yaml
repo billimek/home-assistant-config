@@ -355,6 +355,38 @@
           push:
             badge: 5
             category: "alarm"
+- id: notify_alarm_armed
+  alias: 'Notify Alarm Armed'
+  trigger:
+    platform: state
+    entity_id: sensor.alarm_status
+    from: 'Disarmed'
+    to: 'Armed'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm is ARMED"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm is ARMED"
+- id: notify_alarm_disarmed
+  alias: 'Notify Alarm Disarmed'
+  trigger:
+    platform: state
+    entity_id: sensor.alarm_status
+    from: 'Armed'
+    to: 'Disarmed'
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm is Disarmed"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm is Disarmed"
 - id: arm_alarm_nobody_home
   alias: 'Arm Alarm Away when Nobody Home'
   trigger:
@@ -374,11 +406,11 @@
     - service: notify.slack
       data_template:
         title: "Alarm Panel"
-        message: "Alarm has Armed Away"
+        message: "Alarm has Armed Away (deprecated mesage)"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Alarm Panel"
-        message: "Alarm has Armed Away"
+        message: "Alarm has Armed Away (deprecated mesage)"
 - id: disarm_alarm_anybody_home
   alias: 'Disarm alarm when anybody comes home'
   trigger:
@@ -398,11 +430,11 @@
     - service: notify.slack
       data_template:
         title: "Alarm Panel"
-        message: "Alarm has disarmed"
+        message: "Alarm has disarmed (deprecated mesage)"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Alarm Panel"
-        message: "Alarm has disarmed"
+        message: "Alarm has disarmed (deprecated mesage)"
 - id: ios_action_disarm_alarm
   alias: ios_action_disarm_alarm
   trigger:
@@ -418,4 +450,4 @@
     - service: notify.ios_jeff_phone
       data_template:
         title: "Alarm Panel"
-        message: "Alarm has disarmed"
+        message: "Alarm has disarmed (deprecated mesage)"
