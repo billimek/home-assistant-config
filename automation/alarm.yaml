@@ -1,3 +1,6 @@
+################################################
+## Custom alerts
+################################################
 - id: alert_when_door_open_for_too_long
   alias: 'Alert when door to garage is opened for too long'
   trigger:
@@ -16,6 +19,10 @@
       data_template:
         title: "Alarm Panel"
         message: "Door to garage is opened for more than 5 minutes"
+
+################################################
+## All door/window sensors
+################################################
 - id: alert_when_upstairs_motion
   alias: 'Alert when motion is detected upstairs and nobody home'
   trigger:
@@ -336,6 +343,10 @@
       data_template:
         title: "Alarm Panel"
         message: "Upstairs Window open"
+
+################################################
+## Notify about alarm panel changes
+################################################
 - id: notify_alarm_triggered
   alias: 'Notify Alarm triggered'
   trigger:
@@ -387,6 +398,10 @@
       data_template:
         title: "Alarm Panel"
         message: "Alarm is Disarmed"
+
+################################################
+## Auto arming & disarming
+################################################
 - id: arm_alarm_nobody_home
   alias: 'Arm Alarm Away when Nobody Home'
   trigger:
