@@ -70,6 +70,7 @@ ios:
             title: 'Disarm Alarm'
             activationMode: 'background'
             authenticationRequired: yes
+            destructive: yes
       - name: garage
         identifier: 'garage'
         actions:
