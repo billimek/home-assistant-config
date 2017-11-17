@@ -98,8 +98,8 @@
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is closed"
-- id: save_when_garage2_from_closed_to_unknown
-  alias: 'Save garage2 closed state when offline'
+- id: save_when_garage_from_closed_to_unknown
+  alias: 'Save garage closed state when offline'
   trigger:
     platform: state
     entity_id: sensor.garage_status
