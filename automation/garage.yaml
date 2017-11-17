@@ -37,6 +37,9 @@
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.previous_garage_open
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.previous_garage_closed
 - id: alert_when_garage2_opens
   alias: 'Notify when Jen''s garage door opens'
   trigger:
@@ -73,6 +76,9 @@
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.previous_garage2_open
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.previous_garage2_closed
 - id: alert_when_garage_closes
   alias: 'Notify when Jeff''s garage door closes'
   trigger:
@@ -109,6 +115,9 @@
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.previous_garage_closed
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.previous_garage_open
 - id: alert_when_garage2_closes
   alias: 'Notify when Jen''s garage door closes'
   trigger:
@@ -145,6 +154,9 @@
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.previous_garage2_closed
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.previous_garage2_open
 
 ########################################################
 ## Notify when garage door is open more than 30 minutes
