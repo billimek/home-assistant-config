@@ -3,6 +3,7 @@
 !automation
 !config
 !scripts
+!shell
 !**/*/*.yaml
 !.gitignore
 secrets.yaml
