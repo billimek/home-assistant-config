@@ -19,6 +19,10 @@
       data_template:
         title: "Alarm Panel"
         message: "Door to garage is opened for more than 5 minutes"
+    - service: notify.ios_jen_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Door to garage is opened for more than 5 minutes"
 
 ################################################
 ## All door/window sensors
@@ -366,6 +370,14 @@
           push:
             badge: 5
             category: "alarm"
+    - service: notify.ios_jen_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm has triggered: {{states('sensor.alarm_panel_display')}}"
+        data:
+          push:
+            badge: 5
+            category: "alarm"
 - id: notify_alarm_armed
   alias: 'Notify Alarm Armed'
   trigger:
@@ -382,6 +394,10 @@
       data_template:
         title: "Alarm Panel"
         message: "Alarm is ARMED"
+    - service: notify.ios_jen_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm is ARMED"
 - id: notify_alarm_disarmed
   alias: 'Notify Alarm Disarmed'
   trigger:
@@ -395,6 +411,10 @@
         title: "Alarm Panel"
         message: "Alarm is Disarmed"
     - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Alarm is Disarmed"
+    - service: notify.ios_jen_phone
       data_template:
         title: "Alarm Panel"
         message: "Alarm is Disarmed"
