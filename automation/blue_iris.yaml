@@ -1,0 +1,74 @@
+######################################################################################################
+### Automations related to setting the Blue Iris profile for various states
+###
+######################################################################################################
+
+#### Core automation to execute shell script to set BI profile based on what's selected on the input_select
+#### all other "set bi profile" automations only change the input_select to the desired BI profile
+
+- alias: BlueIris - Set BI profile when input select changes
+  trigger:
+    platform: state
+    entity_id: input_select.set_biprofile
+  action:
+    service: shell_command.set_bi_profile
+
+#### Set BI profile to home/away based on presence ##### moved to presence automations...
+
+#- alias: Set Blue Iris profile based on presence
+  #trigger:
+    #- platform: state
+      #entity_id: group.presence
+      #to: 'home'
+    #- platform: state
+      #entity_id: group.presence
+      #to: 'not_home'
+  #action:
+    #- service: input_select.select_option
+      #data_template:
+        #entity_id: input_select.set_biprofile
+        #option: "{{ 'away' if trigger.to_state.state == 'not_home' else 'home' }}"
+
+#### Set BI profile to "alert" if a door or garage door opens while we are not home
+- alias: 'BlueIris - Set BI profile to alert if doors open while we are not home'
+  trigger:
+    - platform: state
+      entity_id: group.doors_windows
+      to: open
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'not_home'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'alert'
+
+#### Set BI profile to 'home' at sunrise and 'alert_night' at night
+- alias: BlueIris - Set BI profile to morning/night when home
+  trigger:
+    - platform: sun
+      after: 'sunrise'
+    - platform: time
+      at: '22:00'
+  condition:
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'home'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: "{{ 'alert_night' if trigger.now.time().hour == 22 else 'day' }}"
+        
+        
+- alias: BlueIris - Notify if BI profile is 'unknown'
+  trigger:
+    platform: state
+    entity_id: sensor.blueiris_profile
+    to: 'unknown'
+  action:
+    service: notify.slack
+    data:
+      message: "BI profile switched to 'unknown'"

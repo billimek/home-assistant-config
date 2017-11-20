@@ -37,6 +37,7 @@ weather:
     - sensor.weather_dew_point
     - sensor.weather_wind_speed
     - sensor.weather_wind_bearing
+    - sensor.weather_nearest_storm_distance
     - sensor.weather_visibility
     - sensor.weather_cloud_coverage
     - sensor.weather_daily_low_temperature

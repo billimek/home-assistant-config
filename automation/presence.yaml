@@ -3,7 +3,6 @@
   trigger:
     platform: state
     entity_id: sensor.anyone_home
-    from: 'home'
     to: 'not_home'
   action:
     - service: notify.ios_jeff_phone
@@ -15,10 +14,66 @@
   trigger:
     platform: state
     entity_id: sensor.anyone_home
-    from: 'not_home'
     to: 'home'
   action:
     - service: notify.ios_jeff_phone
       data_template:
         title: "Presence"
         message: "Someone came home"
+        
+        
+- alias: Presence - Set BI day when we get home
+  trigger:
+    - platform: state
+      entity_id: sensor.anyone_home
+      to: 'home'
+  condition:
+    condition: sun
+    after: 'sunrise'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'day'
+
+- alias: Presence - Set BI alert_day when we leave
+  trigger:
+    - platform: state
+      entity_id: sensor.anyone_home
+      to: 'not_home'
+  condition:
+    condition: sun
+    after: 'sunrise'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'alert_day'
+
+- alias: Presence - Set BI night when we get home
+  trigger:
+    - platform: state
+      entity_id: sensor.anyone_home
+      to: 'home'
+  condition:
+    condition: sun
+    after: 'sunset'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'night'
+
+- alias: Presence - Set BI alert_night when we leave
+  trigger:
+    - platform: state
+      entity_id: sensor.anyone_home
+      to: 'not_home'
+  condition:
+    condition: sun
+    after: 'sunset'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'alert_night'
