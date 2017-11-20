@@ -121,16 +121,16 @@ zone: !include config/zones.yaml
 
 input_select:
   set_biprofile:
-  name: "Set BI Profile"
-  initial: "-"
-  options:
-    - "-"
-    - "alert_day"
-    - "alert_day_windy"
-    - "alert_night"
-    - "day"
-    - "day_windy"
-    - "night"
+    name: "Set BI Profile"
+    initial: "-"
+    options:
+      - "-"
+      - "alert_day"
+      - "alert_day_windy"
+      - "alert_night"
+      - "day"
+      - "day_windy"
+      - "night"
 
 cover:
   platform: opengarage

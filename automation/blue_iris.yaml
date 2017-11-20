@@ -49,7 +49,7 @@
 - alias: BlueIris - Set BI profile to morning/night when home
   trigger:
     - platform: sun
-      after: 'sunrise'
+      event: 'sunrise'
     - platform: time
       at: '22:00'
   condition:
