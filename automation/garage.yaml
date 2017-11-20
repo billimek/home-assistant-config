@@ -148,10 +148,6 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.previous_garage_open
-    - service: notify.slack
-      data_template:
-        title: "Garage Door"
-        message: "Jeff's garage door is closed"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Garage Door"
@@ -217,10 +213,6 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.previous_garage2_open
-    - service: notify.slack
-      data_template:
-        title: "Garage Door"
-        message: "Jen's garage door is closed"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Garage Door"

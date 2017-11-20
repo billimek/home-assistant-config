@@ -46,9 +46,9 @@ if session != "":
 				print("alert_night")
 			elif r.json()['data']['profile'] == '4':
 				print("day")
-            elif r.json()['data']['profile'] == '5':
+			elif r.json()['data']['profile'] == '5':
 				print("day_windy")
-            elif r.json()['data']['profile'] == '6':
+			elif r.json()['data']['profile'] == '6':
 				print("night")
 			else:
 				print("unknown")
