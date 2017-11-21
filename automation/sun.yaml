@@ -14,7 +14,7 @@
     - service: shell_command.camera_pool_day
 
 - id: sunset_set_cameras
-  alias: Sunset - set cameras profile 1hr before sunset
+  alias: Sunset - set cameras profile before sunset
   trigger:
     platform: sun
     event: sunset

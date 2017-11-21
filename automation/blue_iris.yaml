@@ -67,7 +67,7 @@
 ## Windy / Not Windy automations
 ################################################################################
 - id: set_bi_profile_alert_windy_when_not_home
-  alias: BI - set to alert_day/alert_day_windy when not home and wind speed > 5mph
+  alias: BI - set to alert_day/alert_day_windy when not home and windy
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
@@ -91,7 +91,7 @@
         option: "{{ 'alert_day_windy' if states('sensor.weather_wind_speed') | float > 5 else 'alert_day' }}"
 
 - id: set_bi_profile_windy_when_home
-  alias: BI - set to day/day_windy when home and wind speed > 5mph
+  alias: BI - set to day/day_windy when home and windy
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
