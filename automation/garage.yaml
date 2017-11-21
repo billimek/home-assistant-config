@@ -26,6 +26,7 @@
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is open"
+
 - id: alert_when_garage_opens_and_no_one_home
   alias: 'Notify when Jeff''s garage door opens and no one is home!'
   trigger:
@@ -52,7 +53,8 @@
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is open and no one is home!"
-- id: save_when_garage_from_open_to_unknow
+
+- id: save_when_garage_from_open_to_unknown
   alias: 'Save garage open state when offline'
   trigger:
     platform: state
@@ -66,6 +68,7 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.previous_garage_closed
+
 - id: alert_when_garage2_opens
   alias: 'Notify when Jen''s garage door opens'
   trigger:
@@ -91,6 +94,7 @@
       data_template:
         title: "Garage Door"
         message: "Jen's garage door is open"
+
 - id: alert_when_garage2_opens_and_no_one_home
   alias: 'Notify when Jen''s garage door opens and no one is home'
   trigger:
@@ -117,7 +121,8 @@
       data_template:
         title: "Garage Door"
         message: "Jen's garage door is open and no one is home!"
-- id: save_when_garage2_from_open_to_unknow
+
+- id: save_when_garage2_from_open_to_unknown
   alias: 'Save garage2 open state when offline'
   trigger:
     platform: state
@@ -131,6 +136,7 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.previous_garage2_closed
+
 - id: alert_when_garage_closes
   alias: 'Notify when Jeff''s garage door closes'
   trigger:
@@ -148,10 +154,6 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.previous_garage_open
-    - service: notify.slack
-      data_template:
-        title: "Garage Door"
-        message: "Jeff's garage door is closed"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Garage Door"
@@ -160,6 +162,7 @@
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is closed"
+
 - id: alert_when_garage_closes_and_no_one_is_home
   alias: 'Notify when Jeff''s garage door closes and no one is home'
   trigger:
@@ -186,6 +189,7 @@
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is closed and no one is home!"
+
 - id: save_when_garage_from_closed_to_unknown
   alias: 'Save garage closed state when offline'
   trigger:
@@ -200,6 +204,7 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.previous_garage_open
+
 - id: alert_when_garage2_closes
   alias: 'Notify when Jen''s garage door closes'
   trigger:
@@ -217,10 +222,6 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.previous_garage2_open
-    - service: notify.slack
-      data_template:
-        title: "Garage Door"
-        message: "Jen's garage door is closed"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Garage Door"
@@ -229,6 +230,7 @@
       data_template:
         title: "Garage Door"
         message: "Jen's garage door is closed"
+
 - id: alert_when_garage2_closes_and_no_one_is_home
   alias: 'Notify when Jen''s garage door closes and no one is home'
   trigger:
@@ -255,6 +257,7 @@
       data_template:
         title: "Garage Door"
         message: "Jen's garage door is closed and no one is home!"
+
 - id: save_when_garage2_from_closed_to_unknown
   alias: 'Save garage2 closed state when offline'
   trigger:
@@ -299,6 +302,7 @@
           push:
             badge: 1
             category: 'garage'
+
 - id: alert_when_garage2_stays_open
   alias: 'Alert when Jen''s garage door remains open'
   trigger:
@@ -397,5 +401,3 @@
         message: "Jen's garage door is open after 10pm. Closing it now!"
     - service: cover.close_cover
       entity_id: cover.jen_garage_door
-
-

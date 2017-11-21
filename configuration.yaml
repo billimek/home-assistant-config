@@ -111,13 +111,26 @@ script: !include_dir_merge_named scripts
 # switch: !include config/switches.yaml
 automation: !include_dir_merge_list automation
 # logbook: !include config/logbook.yaml
-shell_command: !include config/shell.yaml
+shell_command: !include shell/shell.yaml
 # plant: !include config/plants.yaml
 # media_player: !include config/media_players.yaml
 # mqtt: !include config/mqtt.yaml
 # rest_command: !include config/rest.yaml
 # variable: !include config/variable.yaml
 zone: !include config/zones.yaml
+
+input_select:
+  set_biprofile:
+    name: "Set BI Profile"
+    initial: "-"
+    options:
+      - "-"
+      - "alert_day"
+      - "alert_day_windy"
+      - "alert_night"
+      - "day"
+      - "day_windy"
+      - "night"
 
 cover:
   platform: opengarage
@@ -145,14 +158,12 @@ input_boolean:
     name: Track if the garage2 was previously closed
     initial: on
 
-# Weather prediction
 sensor:
   - platform: darksky
     name: Weather
     api_key: !secret darksky-api_key
     monitored_conditions:
       - summary
-      - icon
       - nearest_storm_distance
       - precip_intensity
       - precip_probability
@@ -176,6 +187,10 @@ sensor:
       - last_ding
       - last_motion
       - volume
+
+  - platform: command_line
+    name: "BlueIris Profile"
+    command: "python3 /config/shell/getBIProfile.py"
 
   - platform: template
     sensors:
@@ -258,18 +273,7 @@ binary_sensor:
       - ding
       - motion
 
-# ffmpeg:
-
-# media_player:
-#  - platform: plex
-
-# Text to speech
-# tts:
-#  - platform: google
-
 group: !include groups.yaml
-# automation: !include automations.yaml
-# script: !include scripts.yaml
 
 notify:
   - name: slack
