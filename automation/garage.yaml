@@ -56,7 +56,6 @@
 
 - id: save_when_garage_from_open_to_unknown
   alias: 'Save garage open state when offline'
-  hidden: true
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -125,7 +124,6 @@
 
 - id: save_when_garage2_from_open_to_unknown
   alias: 'Save garage2 open state when offline'
-  hidden: true
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -338,7 +336,6 @@
 ################################################
 - id: ios_action_close_garage
   alias: 'iOS action to close Jeff''s garage door'
-  hidden: true
   trigger:
     - platform: event
       event_type: ios.notification_action_fired
@@ -350,7 +347,6 @@
 
 - id: ios_action_close_garage2
   alias: 'iOS action to close Jen''s garage door'
-  hidden: true
   trigger:
     - platform: event
       event_type: ios.notification_action_fired

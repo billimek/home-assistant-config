@@ -148,19 +148,15 @@ input_boolean:
   previous_garage_open:
     name: Track if the garage was previously open
     initial: on
-    hidden: true
   previous_garage2_open:
     name: Track if the garage2 was previously open
     initial: on
-    hidden: true
   previous_garage_closed:
     name: Track if the garage was previously closed
     initial: on
-    hidden: true
   previous_garage2_closed:
     name: Track if the garage2 was previously closed
     initial: on
-    hidden: true
 
 sensor:
   - platform: darksky

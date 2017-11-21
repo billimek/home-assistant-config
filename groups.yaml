@@ -50,6 +50,8 @@ alarm:
     - automation.arm_alarm_away_when_nobody_home
     - automation.disarm_alarm_when_anybody_comes_home
     - automation.notify_alarm_triggered
+    - automation.notify_alarm_armed
+    - automation.notify_alarm_disarmed
 
 weather:
   name: Weather
@@ -73,8 +75,8 @@ weather:
     - sensor.weather_daily_summary
 
 blue_iris:
-  name: Blue Iris
-  entitites:
+  name: "Blue Iris"
+  entities:
     - sensor.blueiris_profile
     - input_select.set_biprofile
     - automation.presence__set_bi_day_when_we_get_home
@@ -88,10 +90,25 @@ blue_iris:
     - automation.sunset__set_bi_profile_to_night_at_sunset_when_home
     - automation.blueiris__set_bi_profile_when_input_select_changes
     - automation.blueiris__set_bi_profile_to_morningnight_when_home
+    - automation.blueiris__set_bi_profile_to_dayalert_night_when_home
     - automation.blueiris__set_bi_profile_to_dayday_windy_when_home_and_wind_speed__5mph
     - automation.blueiris__set_bi_profile_to_alert_dayalert_day_windy_when_not_home_and_wind_speed__5mph
     - automation.blueiris__notify_if_bi_profile_is_unknown
 
+input_boolean:
+  name: input_boolean_group
+  view: no
+  entities:
+    - input_boolean.previous_garage_open
+    - input_boolean.previous_garage_closed
+    - input_boolean.previous_garage2_open
+    - input_boolean.previous_garage2_closed
 
-
-    
+hidden_automations:
+  name: hidden_automation
+  view: no
+  entities:
+    - automation.save_garage_open_state_when_offline
+    - automation.save_garage_closed_state_when_offline
+    - automation.save_garage2_open_state_when_offline
+    - automation.save_garage2_closed_state_when_offline
