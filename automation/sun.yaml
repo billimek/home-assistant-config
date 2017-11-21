@@ -17,3 +17,4 @@
     - service: shell_command.camera_front_night
     - service: shell_command.camera_driveway_night
     - service: shell_command.camera_pool_night
+

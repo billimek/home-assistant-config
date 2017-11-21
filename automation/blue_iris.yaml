@@ -29,7 +29,7 @@
         entity_id: input_select.set_biprofile
         option: 'alert'
 
-#### Set BI profile to 'home' at sunrise and 'alert_night' at night
+#### Set BI profile to 'day' at sunrise and 'alert_night' at night
 - alias: BlueIris - Set BI profile to morning/night when home
   trigger:
     - platform: sun
@@ -45,8 +45,9 @@
       data_template:
         entity_id: input_select.set_biprofile
         option: "{{ 'alert_night' if trigger.now.time().hour == 22 else 'day' }}"
-        
-        
+
+
+
 - alias: BlueIris - Notify if BI profile is 'unknown'
   trigger:
     platform: state
