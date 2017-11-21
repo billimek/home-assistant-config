@@ -1,20 +1,81 @@
-- alias: Sunrise - set cameras profile
+- alias: Sunrise - set cameras profile 1hr after sunrise
   trigger:
     platform: sun
     event: sunrise
+    offset: "01:00:00"
   action:
     - service: shell_command.camera_porch_day
     - service: shell_command.camera_front_day
     - service: shell_command.camera_driveway_day
     - service: shell_command.camera_pool_day
 
-- alias: Sunset - set cameras profile
+- alias: Sunset - set cameras profile 1hr before sunset
   trigger:
     platform: sun
     event: sunset
+    offset: "-01:00:00"
   action:
     - service: shell_command.camera_porch_night
     - service: shell_command.camera_front_night
     - service: shell_command.camera_driveway_night
     - service: shell_command.camera_pool_night
 
+- alias: Sunrise - Set BI profile to day at sunrise when home
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: "01:00:00"
+  condition:
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'home'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'day'
+
+- alias: Sunrise - Set BI profile to alert_day at sunrise when not home
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: "01:00:00"
+  condition:
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'not_home'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'alert_day'
+
+- alias: Sunset - Set BI profile to night at sunset when home
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-01:00:00"
+  condition:
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'home'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'night'
+
+- alias: Sunset - Set BI profile to alert_night at sunset when not home
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-01:00:00"
+  condition:
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'not_home'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'alert_night'

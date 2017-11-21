@@ -14,26 +14,54 @@
     service: shell_command.set_bi_profile
 
 #### Set BI profile to "alert" if a door or garage door opens while we are not home
-- alias: 'BlueIris - Set BI profile to alert if doors open while we are not home'
-  trigger:
-    - platform: state
-      entity_id: group.doors_windows
-      to: open
-  condition:
-    condition: state
-    entity_id: group.presence
-    state: 'not_home'
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.set_biprofile
-        option: 'alert'
+# - alias: 'BlueIris - Set BI profile to alert if doors open while we are not home'
+#   trigger:
+#     - platform: state
+#       entity_id: group.doors_windows
+#       to: open
+#   condition:
+#     condition: state
+#     entity_id: group.presence
+#     state: 'not_home'
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.set_biprofile
+#         option: 'alert'
 
 #### Set BI profile to 'day' at sunrise and 'alert_night' at night
-- alias: BlueIris - Set BI profile to morning/night when home
+# - alias: BlueIris - Set BI profile to morning/night when home
+#   trigger:
+#     - platform: sun
+#       event: 'sunrise'
+#     - platform: time
+#       at: '22:00'
+#   condition:
+#     condition: state
+#     entity_id: sensor.anyone_home
+#     state: 'home'
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.set_biprofile
+#         option: "{{ 'alert_night' if trigger.now.time().hour == 22 else 'day' }}"
+
+#### Set BI profile to 'alert_day_wind' if we're not home and it is windy during the day
+# TODO
+
+#### Set BI profile to 'alert_day' if we're not home and it is not windy during the day
+# TODO
+
+#### Set BI profile to 'day_wind' if we're  home and it is windy during the day
+# TODO
+
+#### Set BI profile to 'day' if we're  home and it is not windy during the day
+# TODO
+
+
+#### Set BI profile to 'alert_night' at 10pm if we're home
+- alias: BlueIris - Set BI profile to alert_night when home at 10pm
   trigger:
-    - platform: sun
-      event: 'sunrise'
     - platform: time
       at: '22:00'
   condition:
@@ -44,10 +72,9 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: "{{ 'alert_night' if trigger.now.time().hour == 22 else 'day' }}"
+        option: 'alert_night'
 
-
-
+#### Notify is BI profile gets set to 'unknown'
 - alias: BlueIris - Notify if BI profile is 'unknown'
   trigger:
     platform: state

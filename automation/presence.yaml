@@ -50,19 +50,41 @@
         entity_id: input_select.set_biprofile
         option: 'alert_day'
 
-- alias: Presence - Set BI night when we get home
+- alias: Presence - Set BI night when we get home before 10pm
   trigger:
     - platform: state
       entity_id: sensor.anyone_home
       to: 'home'
   condition:
-    condition: sun
-    after: 'sunset'
+    condition: and
+    conditions:
+      - condition: sun
+        after: 'sunset'
+      - condition: time
+        before: '22:00'
   action:
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
         option: 'night'
+
+- alias: Presence - Set BI alert_night when we get home after 10pm
+  trigger:
+    - platform: state
+      entity_id: sensor.anyone_home
+      to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: 'sunset'
+      - condition: time
+        after: '22:00'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: 'alert_night'
 
 - alias: Presence - Set BI alert_night when we leave
   trigger:
