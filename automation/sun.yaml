@@ -1,15 +1,20 @@
-- alias: Sunrise - set cameras profile 1hr after sunrise
+################################################################################
+## Set cameras at sunrise or sunset
+################################################################################
+- id: sunrise_set_cameras
+  alias: Sunrise - set cameras profile after sunrise
   trigger:
     platform: sun
     event: sunrise
-    offset: "01:00:00"
+    offset: "00:30:00"
   action:
     - service: shell_command.camera_porch_day
     - service: shell_command.camera_front_day
     - service: shell_command.camera_driveway_day
     - service: shell_command.camera_pool_day
 
-- alias: Sunset - set cameras profile 1hr before sunset
+- id: sunset_set_cameras
+  alias: Sunset - set cameras profile before sunset
   trigger:
     platform: sun
     event: sunset
@@ -20,7 +25,16 @@
     - service: shell_command.camera_driveway_night
     - service: shell_command.camera_pool_night
 
-- alias: Sunrise - Set BI profile to day at sunrise when home
+
+################################################################################
+## Set BI profile as needed for sunrise or sunset
+################################################################################
+
+# TODO: is there any way to combine some of these using conditionals
+# TODO: in the action section? (maybe a check on sunrise vs sunset?)
+
+- id: set_bi_day_at_sunrise_when_home 
+  alias: Sunrise - Set BI profile to day at sunrise when home
   trigger:
     platform: sun
     event: sunrise
@@ -35,7 +49,8 @@
         entity_id: input_select.set_biprofile
         option: 'day'
 
-- alias: Sunrise - Set BI profile to alert_day at sunrise when not home
+- id: set_bi_alert_day_at_sunrise_when_not_home 
+  alias: Sunrise - Set BI profile to alert_day at sunrise when not home
   trigger:
     platform: sun
     event: sunrise
@@ -50,7 +65,8 @@
         entity_id: input_select.set_biprofile
         option: 'alert_day'
 
-- alias: Sunset - Set BI profile to night at sunset when home
+- id: set_bi_night_at_sunset_when_home
+  alias: Sunset - Set BI profile to night at sunset when home
   trigger:
     platform: sun
     event: sunset
@@ -65,7 +81,8 @@
         entity_id: input_select.set_biprofile
         option: 'night'
 
-- alias: Sunset - Set BI profile to alert_night at sunset when not home
+- id: set_bi_alert_night_at_sunset_when_not_home
+  alias: Sunset - Set BI profile to alert_night at sunset when not home
   trigger:
     platform: sun
     event: sunset

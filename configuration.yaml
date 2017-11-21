@@ -189,12 +189,13 @@ sensor:
       - volume
 
   - platform: command_line
-    name: "BlueIris Profile"
+    name: "Blue Iris Profile"
     command: "python3 /config/shell/getBIProfile.py"
 
   - platform: template
     sensors:
       anyone_home:
+        friendly_name: 'Home Status'
         value_template: "{% if is_state('device_tracker.jeff_phone', 'home') or is_state('device_tracker.jen_phone', 'home')-%}home{%else%}not_home{% endif %}"
 
   - platform: template
@@ -263,6 +264,7 @@ sensor:
   - platform: template
     sensors:
       alarm_status:
+        friendly_name: 'Alarm Status'
         value_template: "{% if is_state('sensor.alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.alarm_panel_display', 'ARMED ***STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
 
 

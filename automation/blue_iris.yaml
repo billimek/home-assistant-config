@@ -1,17 +1,31 @@
-######################################################################################################
+################################################################################
 ### Automations related to setting the Blue Iris profile for various states
-###
-######################################################################################################
+################################################################################
 
-#### Core automation to execute shell script to set BI profile based on what's selected on the input_select
-#### all other "set bi profile" automations only change the input_select to the desired BI profile
-
-- alias: BlueIris - Set BI profile when input select changes
+################################################################################
+## Profile Changes
+################################################################################
+- id: set_bi_profile_when_selection_changes
+  alias: BI - set profile when input select changes
   trigger:
     platform: state
     entity_id: input_select.set_biprofile
   action:
     service: shell_command.set_bi_profile
+
+- id: notify_when_bi_profile_unknown
+  alias: BI - notify if profile is 'unknown'
+  trigger:
+    platform: state
+    entity_id: sensor.blueiris_profile
+    to: 'unknown'
+  action:
+    service: notify.slack
+    data:
+      message: "BI profile switched to 'unknown'"
+
+
+# TODO: trigger an alert for the gasrage camera when a garage door opens and no one is home
 
 #### Set BI profile to "alert" if a door or garage door opens while we are not home
 # - alias: 'BlueIris - Set BI profile to alert if doors open while we are not home'
@@ -29,11 +43,13 @@
 #         entity_id: input_select.set_biprofile
 #         option: 'alert'
 
-#### Set BI profile when home to 'day' at 6am and 'alert_night' at 10pm
-- alias: BlueIris - Set BI profile to day/alert_night when home
+
+################################################################################
+## Set BI profile when home to 'alert_night' at 10pm
+################################################################################
+- id: set_bi_profile_alert_night_10pm
+  alias: BI - set to alert_night at 10pm when home
   trigger:
-    - platform: time
-      at: '06:00'
     - platform: time
       at: '22:00'
   condition:
@@ -44,11 +60,14 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: "{{ 'alert_night' if trigger.now.time().hour == 22 else 'day' }}"
+        option: 'alert_night'
 
-#### Set BI profile to 'alert_day_windy' if we're not home and it is windy during the day
-#### Set BI profile to 'alert_day' if we're not home and it is not windy during the day
-- alias: BlueIris - Set BI profile to alert_day/alert_day_windy when not home and wind speed > 5mph
+
+################################################################################
+## Windy / Not Windy automations
+################################################################################
+- id: set_bi_profile_alert_windy_when_not_home
+  alias: BI - set to alert_day/alert_day_windy when not home and windy
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
@@ -58,7 +77,7 @@
     conditions:
       - condition: sun
         after: 'sunrise'
-        after_offset: "01:00:00"
+        after_offset: "00:30:00"
       - condition: sun
         before: 'sunset'
         before_offset: "-01:00:00"
@@ -71,10 +90,8 @@
         entity_id: input_select.set_biprofile
         option: "{{ 'alert_day_windy' if states('sensor.weather_wind_speed') | float > 5 else 'alert_day' }}"
 
-
-#### Set BI profile to 'day_wind' if we're home and it is windy during the day
-#### Set BI profile to 'day' if we're home and it is not windy during the day
-- alias: BlueIris - Set BI profile to day/day_windy when home and wind speed > 5mph
+- id: set_bi_profile_windy_when_home
+  alias: BI - set to day/day_windy when home and windy
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
@@ -84,7 +101,7 @@
     conditions:
       - condition: sun
         after: 'sunrise'
-        after_offset: "01:00:00"
+        after_offset: "00:30:00"
       - condition: sun
         before: 'sunset'
         before_offset: "-01:00:00"
@@ -97,14 +114,3 @@
         entity_id: input_select.set_biprofile
         option: "{{ 'day_windy' if states('sensor.weather_wind_speed') | float > 5 else 'day' }}"
 
-
-#### Notify is BI profile gets set to 'unknown'
-- alias: BlueIris - Notify if BI profile is 'unknown'
-  trigger:
-    platform: state
-    entity_id: sensor.blueiris_profile
-    to: 'unknown'
-  action:
-    service: notify.slack
-    data:
-      message: "BI profile switched to 'unknown'"
