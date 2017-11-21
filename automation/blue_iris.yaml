@@ -47,17 +47,57 @@
 #         option: "{{ 'alert_night' if trigger.now.time().hour == 22 else 'day' }}"
 
 #### Set BI profile to 'alert_day_wind' if we're not home and it is windy during the day
-# TODO
-
 #### Set BI profile to 'alert_day' if we're not home and it is not windy during the day
-# TODO
+- alias: BlueIris - Set BI profile to alert_day/alert_day_windy when not home and wind speed > 5mph
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.weather_wind_speed
+      above: 5
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: 'sunrise'
+        after_offset: "01:00:00"
+      - condition: sun
+        before: 'sunset'
+        before_offset: "-01:00:00"
+      - condition: state
+        entity_id: sensor.anyone_home
+        state: 'not_home'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: "{{ 'alert_day_windy' if states('sensor.weather_wind_speed') | float > 5 else 'alert_day' }}"
 
-#### Set BI profile to 'day_wind' if we're  home and it is windy during the day
-# TODO
 
-#### Set BI profile to 'day' if we're  home and it is not windy during the day
-# TODO
 
+
+#### Set BI profile to 'day_wind' if we're home and it is windy during the day
+#### Set BI profile to 'day' if we're home and it is not windy during the day
+- alias: BlueIris - Set BI profile to day/day_windy when home and wind speed > 5mph
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.weather_wind_speed
+      above: 5
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: 'sunrise'
+        after_offset: "01:00:00"
+      - condition: sun
+        before: 'sunset'
+        before_offset: "-01:00:00"
+      - condition: state
+        entity_id: sensor.anyone_home
+        state: 'home'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.set_biprofile
+        option: "{{ 'day_windy' if states('sensor.weather_wind_speed') | float > 5 else 'day' }}"
 
 #### Set BI profile to 'alert_night' at 10pm if we're home
 - alias: BlueIris - Set BI profile to alert_night when home at 10pm
