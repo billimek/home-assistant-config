@@ -47,6 +47,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Upstairs motion detected"
+
 - id: alert_when_main_motion
   alias: 'Alert when motion is detected on the main level and nobody home'
   trigger:
@@ -67,6 +68,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Main level motion detected"
+
 - id: alert_when_basement_motion
   alias: 'Alert when motion is detected in the basement and nobody home'
   trigger:
@@ -87,6 +89,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Basement motion detected"
+
 - id: alert_when_front_door_open
   alias: 'Alert when front door is open and nobody home'
   trigger:
@@ -107,6 +110,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Front door open"
+
 - id: alert_when_garage_door_open
   alias: 'Alert when garage door is open and nobody home'
   trigger:
@@ -127,6 +131,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Garage door open"
+
 - id: alert_when_family_window_open
   alias: 'Alert when family window is open and nobody home'
   trigger:
@@ -147,6 +152,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Family window open"
+
 - id: alert_when_living_window_open
   alias: 'Alert when living window is open and nobody home'
   trigger:
@@ -167,6 +173,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Living window open"
+
 - id: alert_when_sun_room_door_open
   alias: 'Alert when sun room door is open and nobody home'
   trigger:
@@ -187,6 +194,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Sun Room Door open"
+
 - id: alert_when_basement_window_open
   alias: 'Alert when basement window is open and nobody home'
   trigger:
@@ -207,11 +215,12 @@
       data_template:
         title: "Alarm Panel"
         message: "Basement Window open"
-- id: alert_when_basement_window_open
-  alias: 'Alert when basement window is open and nobody home'
+
+- id: alert_when_bathroom_window_open
+  alias: 'Alert when bathroom window is open and nobody home'
   trigger:
     platform: state
-    entity_id: binary_sensor.basement_window
+    entity_id: binary_sensor.bathroom_window
     from: 'off'
     to: 'on'
   condition:
@@ -222,11 +231,12 @@
     - service: notify.slack
       data_template:
         title: "Alarm Panel"
-        message: "Basement Window open"
+        message: "Bathroom Window open"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Alarm Panel"
-        message: "Basement Window open"
+        message: "Bathroom Window open"
+
 - id: alert_when_kitchen_window_open
   alias: 'Alert when kitchen window is open and nobody home'
   trigger:
@@ -247,6 +257,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Kitchen Window open"
+
 - id: alert_when_back_door_open
   alias: 'Alert when back door is open and nobody home'
   trigger:
@@ -267,6 +278,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Back Door open"
+
 - id: alert_when_laundry_window_open
   alias: 'Alert when laundry window is open and nobody home'
   trigger:
@@ -287,6 +299,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Laundry Window open"
+
 - id: alert_when_basement_door_open
   alias: 'Alert when basement door is open and nobody home'
   trigger:
@@ -307,6 +320,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Basement Door open"
+
 - id: alert_when_sliding_door_open
   alias: 'Alert when sliding door is open and nobody home'
   trigger:
@@ -327,6 +341,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Sliding Door open"
+
 - id: alert_when_upstairs_window_open
   alias: 'Alert when upstairs window is open and nobody home'
   trigger:
@@ -378,6 +393,7 @@
           push:
             badge: 5
             category: "alarm"
+
 - id: notify_alarm_armed
   alias: 'Notify Alarm Armed'
   trigger:
@@ -398,6 +414,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Alarm is ARMED"
+
 - id: notify_alarm_disarmed
   alias: 'Notify Alarm Disarmed'
   trigger:
@@ -442,6 +459,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Alarm is about to arm (deprecated mesage)"
+
 - id: disarm_alarm_anybody_home
   alias: 'Disarm alarm when anybody comes home'
   trigger:
@@ -458,6 +476,7 @@
       data:
         entity_id: alarm_control_panel.alarm_panel
         code: !secret ALARMCD
+
 - id: ios_action_disarm_alarm
   alias: 'iOS action to disarm alarm'
   trigger:

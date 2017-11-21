@@ -7,6 +7,10 @@ garage:
     - cover.jen_garage_door
     - sensor.garage2_status
     - sensor.garage2_car_present
+
+garage_toggles:
+  name: Garage Toggles
+  entities:
     - automation.alert_when_garage_opens
     - automation.alert_when_garage_opens_and_no_one_home
     - automation.alert_when_garage2_opens
@@ -19,81 +23,167 @@ garage:
     - automation.alert_when_garage2_stays_open
     - automation.close_garage_after_10pm
     - automation.close_garage2_after_10pm
-    
 
 family:
   name: Family
   entities:
     - device_tracker.jeff_phone
     - device_tracker.jen_phone
-    - device_tracker.jensipad
-    - device_tracker.ipad
-    - device_tracker.ansleys5s
-    - device_tracker.ansleysipad
-    - device_tracker.jens5
-    - device_tracker.ipad_2
+    - sensor.anyone_home
+
+presence:
+  name: Presence
+  entities:
+    - device_tracker.juniosantos
+    - device_tracker.sync_xr6ecyt7
+    - device_tracker.jeff_phone_wifi
     - automation.alert_when_everyone_leaves_home
     - automation.alert_when_anyone_comes_home
-    - sensor.anyone_home
     - sensor.jeffs_7_battery_level
     - sensor.jeffs_7_battery_state
     - sensor.jennifers_6s_battery_level
     - sensor.jennifers_6s_battery_state
 
-alarm:
-  name: Alarm
+alarm_panel:
+  name: Alarm Panel
   entities:
     - alarm_control_panel.alarm_panel
     - sensor.alarm_panel_display
     - sensor.alarm_status
     - input_select.alarm_mode
+
+alarm_toggles:
+  name: Alarm Toggles
+  entities:
     - automation.arm_alarm_away_when_nobody_home
     - automation.disarm_alarm_when_anybody_comes_home
     - automation.notify_alarm_triggered
     - automation.notify_alarm_armed
     - automation.notify_alarm_disarmed
+    - automation.alert_when_upstairs_motion
+    - automation.alert_when_main_motion
+    - automation.alert_when_basement_motion
+    - automation.alert_when_front_door_open
+    - automation.alert_when_garage_door_open
+    - automation.alert_when_family_window_open
+    - automation.alert_when_living_window_open
+    - automation.alert_when_sun_room_door_open
+    - automation.alert_when_basement_window_open
+    - automation.alert_when_bathroom_window_open
+    - automation.alert_when_kitchen_window_open
+    - automation.alert_when_back_door_open
+    - automation.alert_when_laundry_window_open
+    - automation.alert_when_basement_door_open
+    - automation.alert_when_sliding_door_open
+    - automation.alert_when_upstairs_window_open
 
-weather:
-  name: Weather
+alarm_sensors:
+  name: Alarm Sensors
+  entities:
+    - binary_sensor.ring_front_door_ding
+    - binary_sensor.ring_front_door_motion
+    - binary_sensor.upstairs_motion
+    - binary_sensor.main_motion
+    - binary_sensor.basement_motion
+    - binary_sensor.front_door
+    - binary_sensor.garage_door
+    - binary_sensor.family_window
+    - binary_sensor.living_window
+    - binary_sensor.sun_room_door
+    - binary_sensor.basement_window
+    - binary_sensor.bathroom_window
+    - binary_sensor.kitchen_window
+    - binary_sensor.back_door
+    - binary_sensor.laundry_window
+    - binary_sensor.basement_door
+    - binary_sensor.sliding_door
+    - binary_sensor.upstairs_window
+    - binary_sensor.hall_smoke
+
+
+weather_summary:
+  name: Weather Summary
   entities:
     - sensor.weather_summary
     - sensor.weather_temperature
+    - sensor.weather_wind_speed
+    - sensor.weather_nearest_storm_distance
+    - sensor.weather_daily_low_temperature
+    - sensor.weather_daily_high_temperature
+    - sensor.weather_daily_summary
+
+weather_details:
+  name: Weather Details
+  entities:
     - sensor.weather_humidity
     - sensor.weather_precip_probability
     - sensor.weather_precip_intensity
     - sensor.weather_apparent_temperature
     - sensor.weather_dew_point
-    - sensor.weather_wind_speed
     - sensor.weather_wind_bearing
-    - sensor.weather_nearest_storm_distance
     - sensor.weather_visibility
     - sensor.weather_cloud_coverage
-    - sensor.weather_daily_low_temperature
-    - sensor.weather_daily_high_temperature
     - sensor.weather_minutely_summary
     - sensor.weather_hourly_summary
-    - sensor.weather_daily_summary
 
-blue_iris:
-  name: "Blue Iris"
+cameras:
+  name: "Cameras"
   entities:
     - sensor.blueiris_profile
     - input_select.set_biprofile
-    - automation.presence__set_bi_day_when_we_get_home
-    - automation.presence__set_bi_alert_night_when_we_leave
-    - automation.presence__set_bi_alert_day_when_we_leave
-    - automation.presence__set_bi_alert_night_when_we_get_home_after_10pm
-    - automation.presence__set_bi_night_when_we_get_home_before_10pm
-    - automation.sunrise__set_bi_profile_to_day_at_sunrise_when_home
-    - automation.sunrise__set_bi_profile_to_alert_day_at_sunrise_when_not_home
-    - automation.sunset__set_bi_profile_to_alert_night_at_sunset_when_not_home
-    - automation.sunset__set_bi_profile_to_night_at_sunset_when_home
-    - automation.blueiris__set_bi_profile_when_input_select_changes
-    - automation.blueiris__set_bi_profile_to_morningnight_when_home
-    - automation.blueiris__set_bi_profile_to_dayalert_night_when_home
-    - automation.blueiris__set_bi_profile_to_dayday_windy_when_home_and_wind_speed__5mph
-    - automation.blueiris__set_bi_profile_to_alert_dayalert_day_windy_when_not_home_and_wind_speed__5mph
-    - automation.blueiris__notify_if_bi_profile_is_unknown
+
+cameras_toggles:
+  name: Cameras Toggles
+  entities:
+    - automation.sunrise_set_cameras
+    - automation.sunset_set_cameras
+    - automation.set_bi_day_when_home
+    - automation.set_bi_alert_night_when_leave
+    - automation.set_bi_alert_day_when_leave
+    - automation.set_bi_alert_night_when_home_after_10pm
+    - automation.set_bi_night_when_home_before_10pm
+    - automation.set_bi_day_at_sunrise_when_home
+    - automation.set_bi_alert_day_at_sunrise_when_not_home
+    - automation.set_bi_alert_night_at_sunset_when_not_home
+    - automation.set_bi_night_at_sunset_when_home
+    - automation.set_bi_profile_when_selection_changes
+    - automation.set_bi_profile_alert_night_10pm
+    - automation.set_bi_profile_windy_when_home
+    - automation.set_bi_profile_alert_windy_when_not_home
+    - automation.notify_when_bi_profile_unknown
+
+nest:
+  name: Nest
+  icon: mdi:thermometer
+  entities:
+    - climate.downstairs
+    - climate.master_bedroom_nest
+    - climate.basement
+
+nest_details:
+  name: Nest Details
+  entities:
+    - sensor.downstairs_thermostat_humidity
+    - sensor.downstairs_thermostat_hvac_state
+    - sensor.downstairs_thermostat_operation_mode
+    - sensor.downstairs_thermostat_target
+    - sensor.downstairs_thermostat_temperature
+    - sensor.master_bedroom_nest_thermostat_humidity
+    - sensor.master_bedroom_nest_thermostat_hvac_state
+    - sensor.master_bedroom_nests_thermostat_operation_mode
+    - sensor.master_bedroom_nest_thermostat_target
+    - sensor.master_bedroom_nest_thermostat_temperature
+    - sensor.basement_thermostat_humidity
+    - sensor.basement_thermostat_hvac_state
+    - sensor.basement_thermostat_operation_mode
+    - sensor.basement_thermostat_target
+    - sensor.basement_thermostat_temperature
+    - sensor.dining_room_nest_protect_smoke_status
+    - sensor.dining_room_nest_protect_co_status
+    - sensor.downstairs_nest_protect_smoke_status
+    - sensor.downstairs_nest_protect_co_status
+    - sensor.upstairs_nest_protect_smoke_status
+    - sensor.upstairs_nest_protect_co_status
 
 input_boolean:
   name: input_boolean_group
