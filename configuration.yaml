@@ -148,17 +148,20 @@ input_boolean:
   previous_garage_open:
     name: Track if the garage was previously open
     initial: on
+    hidden: true
   previous_garage2_open:
     name: Track if the garage2 was previously open
     initial: on
+    hidden: true
   previous_garage_closed:
     name: Track if the garage was previously closed
     initial: on
+    hidden: true
   previous_garage2_closed:
     name: Track if the garage2 was previously closed
     initial: on
+    hidden: true
 
-# Weather prediction
 sensor:
   - platform: darksky
     name: Weather
@@ -273,15 +276,6 @@ binary_sensor:
     monitored_conditions:
       - ding
       - motion
-
-# ffmpeg:
-
-# media_player:
-#  - platform: plex
-
-# Text to speech
-# tts:
-#  - platform: google
 
 group: !include groups.yaml
 

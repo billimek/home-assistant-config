@@ -9,6 +9,7 @@
       data_template:
         title: "Presence"
         message: "Everyone has left home"
+
 - id: alert_when_anyone_comes_home
   alias: 'Alert when anyone comes home'
   trigger:
@@ -20,7 +21,6 @@
       data_template:
         title: "Presence"
         message: "Someone came home"
-
 
 - alias: Presence - Set BI day when we get home
   trigger:

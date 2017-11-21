@@ -6,13 +6,39 @@ garage:
     - sensor.garage_car_present 
     - cover.jen_garage_door
     - sensor.garage2_status
-    - sensor.garage2_car_present 
+    - sensor.garage2_car_present
+    - automation.alert_when_garage_opens
+    - automation.alert_when_garage_opens_and_no_one_home
+    - automation.alert_when_garage2_opens
+    - automation.alert_when_garage2_opens_and_no_one_home
+    - automation.alert_when_garage_closes
+    - automation.alert_when_garage_closes_and_no_one_is_home
+    - automation.alert_when_garage2_closes
+    - automation.alert_when_garage2_closes_and_no_one_is_home
+    - automation.alert_when_garage_stays_open
+    - automation.alert_when_garage2_stays_open
+    - automation.close_garage_after_10pm
+    - automation.close_garage2_after_10pm
+    
 
 family:
   name: Family
   entities:
     - device_tracker.jeff_phone
     - device_tracker.jen_phone
+    - device_tracker.jensipad
+    - device_tracker.ipad
+    - device_tracker.ansleys5s
+    - device_tracker.ansleysipad
+    - device_tracker.jens5
+    - device_tracker.ipad_2
+    - automation.alert_when_everyone_leaves_home
+    - automation.alert_when_anyone_comes_home
+    - sensor.anyone_home
+    - sensor.jeffs_7_battery_level
+    - sensor.jeffs_7_battery_state
+    - sensor.jennifers_6s_battery_level
+    - sensor.jennifers_6s_battery_state
 
 alarm:
   name: Alarm
@@ -46,3 +72,26 @@ weather:
     - sensor.weather_hourly_summary
     - sensor.weather_daily_summary
 
+blue_iris:
+  name: Blue Iris
+  entitites:
+    - sensor.blueiris_profile
+    - input_select.set_biprofile
+    - automation.presence__set_bi_day_when_we_get_home
+    - automation.presence__set_bi_alert_night_when_we_leave
+    - automation.presence__set_bi_alert_day_when_we_leave
+    - automation.presence__set_bi_alert_night_when_we_get_home_after_10pm
+    - automation.presence__set_bi_night_when_we_get_home_before_10pm
+    - automation.sunrise__set_bi_profile_to_day_at_sunrise_when_home
+    - automation.sunrise__set_bi_profile_to_alert_day_at_sunrise_when_not_home
+    - automation.sunset__set_bi_profile_to_alert_night_at_sunset_when_not_home
+    - automation.sunset__set_bi_profile_to_night_at_sunset_when_home
+    - automation.blueiris__set_bi_profile_when_input_select_changes
+    - automation.blueiris__set_bi_profile_to_morningnight_when_home
+    - automation.blueiris__set_bi_profile_to_dayday_windy_when_home_and_wind_speed__5mph
+    - automation.blueiris__set_bi_profile_to_alert_dayalert_day_windy_when_not_home_and_wind_speed__5mph
+    - automation.blueiris__notify_if_bi_profile_is_unknown
+
+
+
+    
