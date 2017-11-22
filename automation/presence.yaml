@@ -37,7 +37,8 @@
       to: 'home'
   condition:
     condition: sun
-    after: 'sunrise'
+    after: sunrise
+    before: sunset
   action:
     - service: input_select.select_option
       data_template:
@@ -52,7 +53,8 @@
       to: 'not_home'
   condition:
     condition: sun
-    after: 'sunrise'
+    after: sunrise
+    before: sunset
   action:
     - service: input_select.select_option
       data_template:
@@ -67,7 +69,8 @@
       to: 'not_home'
   condition:
     condition: sun
-    after: 'sunset'
+    after: sunset
+    before: sunrise
   action:
     - service: input_select.select_option
       data_template:
@@ -84,7 +87,8 @@
     condition: and
     conditions:
       - condition: sun
-        after: 'sunset'
+        after: sunset
+        before: sunrise
       - condition: time
         before: '22:00'
   action:
@@ -103,7 +107,8 @@
     condition: and
     conditions:
       - condition: sun
-        after: 'sunset'
+        after: sunset
+        before: sunrise
       - condition: time
         after: '22:00'
   action:
