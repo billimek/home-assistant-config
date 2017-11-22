@@ -63,6 +63,5 @@ input_select:
     options:
      - automatic
      - standby
-    initial: standby
     icon: mdi:security-home
 
