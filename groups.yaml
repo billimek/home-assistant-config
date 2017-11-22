@@ -186,8 +186,10 @@ camera_toggles:
     - automation.sunset__set_bi_profile_to_night_at_sunset_when_home
     - automation.bi__set_profile_when_input_select_changes
     - automation.bi__set_to_alert_night_at_10pm_when_home
-    - automation.bi__set_to_dayday_windy_when_home_and_windy
-    - automation.bi__set_to_alert_dayalert_day_windy_when_not_home_and_windy
+    - automation.bi__set_to_alert_day_when_not_home_and_not_windy
+    - automation.bi__set_to_alert_day_windy_when_not_home_and_windy
+    - automation.bi__set_to_day_when_home_and_not_windy
+    - automation.bi__set_to_day_windy_when_home_and_windy
     - automation.bi__notify_if_profile_is_unknown
 
 nest:

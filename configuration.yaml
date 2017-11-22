@@ -182,6 +182,10 @@ sensor:
       - dew_point
       - cloud_cover
       - humidity
+  - platform: yr
+    name: yr
+    monitored_conditions:
+      - windSpeed
   - platform: ring
     monitored_conditions:
       - battery
