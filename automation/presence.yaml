@@ -38,7 +38,9 @@
   condition:
     condition: sun
     after: sunrise
+    after_offset: "00:30:00"
     before: sunset
+    before_offset: "-01:00:00"
   action:
     - service: input_select.select_option
       data_template:
@@ -54,7 +56,9 @@
   condition:
     condition: sun
     after: sunrise
+    after_offset: "00:30:00"
     before: sunset
+    before_offset: "-01:00:00"
   action:
     - service: input_select.select_option
       data_template:
@@ -70,6 +74,7 @@
   condition:
     condition: sun
     after: sunset
+    after_offset: "-01:00:00"
     before: sunrise
   action:
     - service: input_select.select_option
