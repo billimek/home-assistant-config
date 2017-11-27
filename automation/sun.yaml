@@ -18,7 +18,7 @@
   trigger:
     platform: sun
     event: sunset
-    offset: "-01:00:00"
+    offset: "-00:30:00"
   action:
     - service: shell_command.camera_porch_night
     - service: shell_command.camera_front_night
@@ -70,7 +70,7 @@
   trigger:
     platform: sun
     event: sunset
-    offset: "-01:00:00"
+    offset: "-00:30:00"
   condition:
     condition: state
     entity_id: sensor.anyone_home
@@ -86,7 +86,7 @@
   trigger:
     platform: sun
     event: sunset
-    offset: "-01:00:00"
+    offset: "-00:30:00"
   condition:
     condition: state
     entity_id: sensor.anyone_home

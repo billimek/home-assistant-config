@@ -20,6 +20,7 @@ homeassistant:
 
 # Enables the frontend
 frontend:
+  javascript_version: latest
 
 # Enables configuration UI
 config:
@@ -217,6 +218,8 @@ sensor:
               Opening
             {% elif states.cover.jeff_garage_door.attributes["door_state"] == "closing" %}
               Closing
+            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "offline" %}
+              Offline
             {% else %}
               Unknown
             {% endif %}
@@ -247,6 +250,8 @@ sensor:
               Opening
             {% elif states.cover.jen_garage_door.attributes["door_state"] == "closing" %}
               Closing
+            {% elif states.cover.jen_garage_door.attributes["door_state"] == "offline" %}
+              Offline
             {% else %}
               Unknown
             {% endif %}

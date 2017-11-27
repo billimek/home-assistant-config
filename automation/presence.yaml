@@ -40,7 +40,7 @@
     after: sunrise
     after_offset: "00:30:00"
     before: sunset
-    before_offset: "-01:00:00"
+    before_offset: "-00:30:00"
   action:
     - service: input_select.select_option
       data_template:
@@ -58,7 +58,7 @@
     after: sunrise
     after_offset: "00:30:00"
     before: sunset
-    before_offset: "-01:00:00"
+    before_offset: "-00:30:00"
   action:
     - service: input_select.select_option
       data_template:
@@ -74,7 +74,7 @@
   condition:
     condition: sun
     after: sunset
-    after_offset: "-01:00:00"
+    after_offset: "-00:30:00"
     before: sunrise
   action:
     - service: input_select.select_option
@@ -120,4 +120,5 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'alert_night'
+        option:
+          'alert_night'

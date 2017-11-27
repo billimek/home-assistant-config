@@ -80,7 +80,7 @@
         after_offset: "00:30:00"
       - condition: sun
         before: 'sunset'
-        before_offset: "-01:00:00"
+        before_offset: "-00:30:00"
       - condition: state
         entity_id: sensor.anyone_home
         state: 'not_home'
@@ -107,7 +107,7 @@
         after_offset: "00:30:00"
       - condition: sun
         before: 'sunset'
-        before_offset: "-01:00:00"
+        before_offset: "-00:30:00"
       - condition: state
         entity_id: sensor.anyone_home
         state: 'not_home'
@@ -134,7 +134,7 @@
         after_offset: "00:30:00"
       - condition: sun
         before: 'sunset'
-        before_offset: "-01:00:00"
+        before_offset: "-00:30:00"
       - condition: state
         entity_id: sensor.anyone_home
         state: 'home'
@@ -161,7 +161,7 @@
         after_offset: "00:30:00"
       - condition: sun
         before: 'sunset'
-        before_offset: "-01:00:00"
+        before_offset: "-00:30:00"
       - condition: state
         entity_id: sensor.anyone_home
         state: 'home'
