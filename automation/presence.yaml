@@ -95,7 +95,7 @@
         after: sunset
         before: sunrise
       - condition: time
-        before: '22:00'
+        before: '22:00:00'
   action:
     - service: input_select.select_option
       data_template:
@@ -115,7 +115,7 @@
         after: sunset
         before: sunrise
       - condition: time
-        after: '22:00'
+        after: '22:00:00'
   action:
     - service: input_select.select_option
       data_template:
