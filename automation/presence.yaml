@@ -93,17 +93,9 @@
     conditions:
       - condition: sun
         after: sunset
-        before: sunrise
+        after_offset: "-00:30:00"
       - condition: time
         before: '22:00:00'
-        weekday:
-          - sun
-          - mon
-          - tue
-          - wed
-          - thu
-          - fri
-          - sat
   action:
     - service: input_select.select_option
       data_template:
