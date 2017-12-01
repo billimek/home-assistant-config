@@ -446,6 +446,8 @@
     entity_id: sensor.anyone_home
     from: 'home'
     to: 'not_home'
+    for:
+      minutes: 2
   condition:
     condition: state
     entity_id: input_select.alarm_mode
