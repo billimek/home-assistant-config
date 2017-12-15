@@ -71,7 +71,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
-      above: 3.0
+      above: 5.0
   condition:
     condition: and
     conditions:
@@ -98,7 +98,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
-      below: 3.0
+      below: 5.0
   condition:
     condition: and
     conditions:
@@ -125,7 +125,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
-      above: 3.0
+      above: 5.0
   condition:
     condition: and
     conditions:
@@ -152,7 +152,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
-      below: 3.0
+      below: 5.0
   condition:
     condition: and
     conditions:

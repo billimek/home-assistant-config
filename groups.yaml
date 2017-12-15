@@ -205,8 +205,8 @@ nest_details:
   entities:
     - sensor.downstairs_thermostat_humidity
     - sensor.downstairs_thermostat_hvac_state
-    - sensor.master_bedroom_nest_thermostat_humidity
-    - sensor.master_bedroom_nest_thermostat_hvac_state
+    - sensor.master_bedroom_thermostat_nest_humidity
+    - sensor.master_bedroom_thermostat_nest_hvac_state
     - sensor.basement_thermostat_humidity
     - sensor.basement_thermostat_hvac_state
     - sensor.dining_room_nest_protect_smoke_status

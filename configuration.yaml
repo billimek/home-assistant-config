@@ -309,10 +309,12 @@ device_tracker:
     host: !secret unifi-host
     port: 443
     detection_time: 180
+    consider_home: 180
 
 
 influxdb:
   host: !secret influxdb-host
+  max_retries: 3
 
 ring:
   username: !secret ring-username
