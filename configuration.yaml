@@ -314,7 +314,8 @@ device_tracker:
 
 influxdb:
   host: !secret influxdb-host
-  max_retries: 3
+  max_retries: 10
+  retry_queue_limit: 100
 
 ring:
   username: !secret ring-username
