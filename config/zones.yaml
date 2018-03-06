@@ -1,8 +1,8 @@
-#- name: Home
-#  latitude: !secret home_latitude
-#  longitude: !secret home_longitude
-#  radius: 75
-#  icon: mdi:home
+- name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  radius: 50
+  icon: mdi:home
 
 - name: Work
   latitude: !secret work_latitude
