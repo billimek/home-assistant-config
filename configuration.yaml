@@ -11,6 +11,13 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/New_York
 
+  customize:
+    zone.home:
+        beacon:
+          uuid: !secret beacon_uuid
+          major: 0
+          minor: 0
+
 # Packages
   packages:
     security: !include security.yaml
