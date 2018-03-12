@@ -13,10 +13,10 @@ homeassistant:
 
   customize:
     zone.home:
-        beacon:
-          uuid: !secret beacon_uuid
-          major: 0
-          minor: 0
+      beacon:
+        uuid: !secret beacon_uuid
+        major: 0
+        minor: 0
 
 # Packages
   packages:
@@ -66,6 +66,8 @@ recorder:
 
 # View all events in a logbook
 logbook:
+
+mqtt:
 
 # Track the sun
 sun:
@@ -210,7 +212,7 @@ sensor:
     sensors:
       anyone_home:
         friendly_name: 'Home Status'
-        value_template: "{% if is_state('device_tracker.jeff_phone', 'home') or is_state('device_tracker.jen_phone', 'home')-%}home{%else%}not_home{% endif %}"
+        value_template: "{% if is_state('binary_sensor.jeff_presence', 'on') or is_state('binary_sensor.jen_presence', 'on')-%}home{%else%}not_home{% endif %}"
 
   - platform: template
     sensors:
@@ -292,6 +294,41 @@ binary_sensor:
     monitored_conditions:
       - ding
       - motion
+  - platform: bayesian
+    prior: 0.5
+    name: 'Jeff Presence'
+    probability_threshold: 0.9
+    observations:
+      - entity_id: 'device_tracker.jeff_wifi'
+        prob_given_true: 0.9
+        prob_given_false: 0.1
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.jeff_phone'
+        prob_given_true: 0.9
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.jeff_owntracks'
+        prob_given_true: 0.9
+        prob_given_false: 0.4
+        platform: 'state'
+        to_state: 'home'
+  - platform: bayesian
+    prior: 0.5
+    name: 'Jen Presence'
+    probability_threshold: 0.9
+    observations:
+      - entity_id: 'device_tracker.jen_wifi'
+        prob_given_true: 0.9
+        prob_given_false: 0.1
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.jen_phone'
+        prob_given_true: 0.9
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
 
 group: !include groups.yaml
 
@@ -308,8 +345,10 @@ nest:
 
 device_tracker:
   - platform: owntracks_http
-    max_gps_accuracy: 200
+    max_gps_accuracy: 100
     waypoints: True
+    region_mapping:
+      ibeacon-home: home
   - platform: unifi
     username: !secret unifi-username
     password: !secret unifi-password

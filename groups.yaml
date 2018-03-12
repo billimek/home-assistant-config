@@ -62,7 +62,13 @@ family:
   name: Family
   entities:
     - device_tracker.jeff_phone
+    - device_tracker.jeff_wifi
+    - device_tracker.jeff_owntracks
+    - binary_sensor.jeff_presence
     - device_tracker.jen_phone
+    - device_tracker.jen_wifi
+    - device_tracker.jen_owntracks
+    - binary_sensor.jen_presence
     - sensor.anyone_home
 
 presence:
