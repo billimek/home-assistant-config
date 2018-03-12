@@ -329,6 +329,11 @@ binary_sensor:
         prob_given_false: 0.2
         platform: 'state'
         to_state: 'home'
+      - entity_id: 'device_tracker.jen_owntracks'
+        prob_given_true: 0.9
+        prob_given_false: 0.4
+        platform: 'state'
+        to_state: 'home'
 
 group: !include groups.yaml
 
