@@ -26,6 +26,7 @@
           push:
             badge: 1
             category: 'garage'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
@@ -34,6 +35,7 @@
           push:
             badge: 1
             category: 'garage'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
 - id: alert_when_garage_opens_and_no_one_home
   alias: 'Notify when Jeff''s garage door opens and no one is home!'
@@ -61,6 +63,7 @@
           push:
             badge: 1
             category: 'garage'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
@@ -69,6 +72,7 @@
           push:
             badge: 1
             category: 'garage'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
 - id: save_when_garage_from_open_to_unknown
   alias: 'Save garage open state when offline'
@@ -110,6 +114,7 @@
           push:
             badge: 1
             category: 'garage2'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
@@ -118,6 +123,7 @@
           push:
             badge: 1
             category: 'garage2'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
 - id: alert_when_garage2_opens_and_no_one_home
   alias: 'Notify when Jen''s garage door opens and no one is home'
@@ -145,6 +151,7 @@
           push:
             badge: 1
             category: 'garage2'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
@@ -153,6 +160,7 @@
           push:
             badge: 1
             category: 'garage2'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
 - id: save_when_garage2_from_open_to_unknown
   alias: 'Save garage2 open state when offline'
@@ -190,10 +198,16 @@
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is closed"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is closed"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
 
 - id: alert_when_garage_closes_and_no_one_is_home
   alias: 'Notify when Jeff''s garage door closes and no one is home'
@@ -217,10 +231,16 @@
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is closed and no one is home!"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
         message: "Jeff's garage door is closed and no one is home!"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
 
 - id: save_when_garage_from_closed_to_unknown
   alias: 'Save garage closed state when offline'
@@ -258,10 +278,16 @@
       data_template:
         title: "Garage Door"
         message: "Jen's garage door is closed"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
         message: "Jen's garage door is closed"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
 
 - id: alert_when_garage2_closes_and_no_one_is_home
   alias: 'Notify when Jen''s garage door closes and no one is home'
@@ -285,10 +311,16 @@
       data_template:
         title: "Garage Door"
         message: "Jen's garage door is closed and no one is home!"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
         message: "Jen's garage door is closed and no one is home!"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
 
 - id: save_when_garage2_from_closed_to_unknown
   alias: 'Save garage2 closed state when offline'
@@ -326,6 +358,7 @@
           push:
             badge: 1
             category: 'garage'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
@@ -334,6 +367,7 @@
           push:
             badge: 1
             category: 'garage'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
 - id: alert_when_garage2_stays_open
   alias: 'Alert when Jen''s garage door remains open'
@@ -353,6 +387,7 @@
           push:
             badge: 1
             category: 'garage2'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Garage Door"
@@ -361,6 +396,7 @@
           push:
             badge: 1
             category: 'garage2'
+            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
 
 ################################################

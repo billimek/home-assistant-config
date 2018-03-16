@@ -24,7 +24,47 @@
       data_template:
         title: "Presence"
         message: "Someone came home"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Welcome-Home.wav"
+    - service: notify.ios_jen_phone
+      data_template:
+        title: "Presence"
+        message: "Someone came home"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Welcome-Home.wav"
 
+
+################################################################################
+## Wife or Husband comes home
+################################################################################
+- id: alert_when_jen_comes_home
+  alias: 'Alert when jen comes home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.jen_presence
+    to: 'on'
+  action:
+    - service: notify.ios_jeff_phone
+      data:
+        message: "Jennifer came home"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Wife-Is-Arriving.wav"
+- id: alert_when_jeff_comes_home
+  alias: 'Alert when jeff comes home'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.jeff_presence
+    to: 'on'
+  action:
+    - service: notify.ios_jen_phone
+      data:
+        message: "Jeff came home"
+        data:
+          push:
+            sound: "US-EN-Morgan-Freeman-Boyfriend-Is-Arriving.wav"
 
 ################################################################################
 ## Set BI profile when we leave or come home
