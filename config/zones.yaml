@@ -1,17 +1,17 @@
 - name: Home
   latitude: !secret latitude
   longitude: !secret longitude
-  radius: 50
+  radius: 100
   icon: mdi:home
 
 - name: Work
   latitude: !secret work_latitude
   longitude: !secret work_longitude
-  radius: 100
+  radius: 200
   icon: mdi:castle
 
 - name: Jens Work
   latitude: !secret jens_work_latitude
   longitude: !secret jens_work_longitude
-  radius: 100
+  radius: 200
   icon: mdi:castle
