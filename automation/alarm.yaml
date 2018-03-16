@@ -385,6 +385,7 @@
           push:
             badge: 5
             category: "alarm"
+            sound: "US-EN-Morgan-Freeman-Vacate-The-Premises.wav"
     - service: notify.ios_jen_phone
       data_template:
         title: "Alarm Panel"
