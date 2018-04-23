@@ -24,6 +24,53 @@
         title: "Alarm Panel"
         message: "Door to garage is opened for more than 5 minutes"
 
+- id: alert_when_basement_door_open_for_too_long
+  alias: 'Alert when basement door is opened for too long'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.basement_door
+    from: 'off'
+    to: 'on'
+    for:
+      seconds: 300
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement door is opened for more than 5 minutes"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement door is opened for more than 5 minutes"
+    - service: notify.ios_jen_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Basement door is opened for more than 5 minutes"
+
+
+- id: alert_when_front_door_open_for_too_long
+  alias: 'Alert when front door is opened for too long'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.front_door
+    from: 'off'
+    to: 'on'
+    for:
+      seconds: 300
+  action:
+    - service: notify.slack
+      data_template:
+        title: "Alarm Panel"
+        message: "Front door is opened for more than 5 minutes"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Front door is opened for more than 5 minutes"
+    - service: notify.ios_jen_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Front door is opened for more than 5 minutes"
+
 ################################################
 ## All door/window sensors
 ################################################
