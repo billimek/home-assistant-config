@@ -102,6 +102,8 @@ alarm_toggles:
     - automation.notify_alarm_armed
     - automation.notify_alarm_disarmed
     - automation.alert_when_door_to_garage_is_opened_for_too_long
+    - automation.alert_when_basement_door_is_opened_for_too_long
+    - automation.alert_when_front_door_is_opened_for_too_long
 
 alarm_sensor_toggles:
   name: Alarm Sensor Alert Toggles
