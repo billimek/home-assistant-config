@@ -93,15 +93,14 @@
     - platform: state
       entity_id: sensor.anyone_home
       to: 'home'
-  condition: and
-  conditions:
+  condition:
     - condition: sun
       after: 'sunrise'
       after_offset: "00:30:00"
     - condition: sun
       before: 'sunset'
       before_offset: "-00:30:00"
-    - condition: state
+    - condition: numeric_state
       entity_id: sensor.weather_wind_speed
       above: 5.0
   action:
@@ -135,15 +134,14 @@
     - platform: state
       entity_id: sensor.anyone_home
       to: 'not_home'
-  condition: and
-  conditions:
+  condition:
     - condition: sun
       after: 'sunrise'
       after_offset: "00:30:00"
     - condition: sun
       before: 'sunset'
       before_offset: "-00:30:00"
-    - condition: state
+    - condition: numeric_state
       entity_id: sensor.weather_wind_speed
       above: 5.0
   action:
