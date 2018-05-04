@@ -378,6 +378,16 @@ google_assistant:
   agent_user_id: !secret google_assistant_agent_user_id
   api_key: !secret google_assistant_api_key
   expose_by_default: true
+  exposed_domains:
+    - switch
+    - cover
+  entity_config:
+    cover.jeff_garage_door:
+      name: "Jeffs Garage Door"
+      room: garage
+    cover.jen_garage_door:
+      name: "Jens Garage Door"
+      room: garage
 
 # zwave:
 #  usb_path: /dev/ttyACM0
