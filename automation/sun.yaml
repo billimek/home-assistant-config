@@ -3,6 +3,7 @@
 ################################################################################
 - id: sunrise_set_cameras
   alias: Sunrise - set cameras profile after sunrise
+  initial_state: on
   trigger:
     platform: sun
     event: sunrise
@@ -15,6 +16,7 @@
 
 - id: sunset_set_cameras
   alias: Sunset - set cameras profile before sunset
+  initial_state: on
   trigger:
     platform: sun
     event: sunset
@@ -35,6 +37,7 @@
 
 - id: set_bi_day_at_sunrise_when_home 
   alias: Sunrise - Set BI profile to day at sunrise when home
+  initial_state: on
   trigger:
     platform: sun
     event: sunrise
@@ -51,6 +54,7 @@
 
 - id: set_bi_alert_day_at_sunrise_when_not_home 
   alias: Sunrise - Set BI profile to alert_day at sunrise when not home
+  initial_state: on
   trigger:
     platform: sun
     event: sunrise
@@ -67,6 +71,7 @@
 
 - id: set_bi_night_at_sunset_when_home
   alias: Sunset - Set BI profile to night at sunset when home
+  initial_state: on
   trigger:
     platform: sun
     event: sunset
@@ -83,6 +88,7 @@
 
 - id: set_bi_alert_night_at_sunset_when_not_home
   alias: Sunset - Set BI profile to alert_night at sunset when not home
+  initial_state: on
   trigger:
     platform: sun
     event: sunset

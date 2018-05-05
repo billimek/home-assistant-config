@@ -3,6 +3,7 @@
 ################################################
 - id: alert_when_garage_opens
   alias: 'Notify when Jeff''s garage door opens'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -39,6 +40,7 @@
 
 - id: alert_when_garage_opens_and_no_one_home
   alias: 'Notify when Jeff''s garage door opens and no one is home!'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -74,6 +76,7 @@
 
 - id: save_when_garage_from_open_to_unknown
   alias: 'Save garage open state when offline'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -89,6 +92,7 @@
 
 - id: alert_when_garage2_opens
   alias: 'Notify when Jen''s garage door opens'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -125,6 +129,7 @@
 
 - id: alert_when_garage2_opens_and_no_one_home
   alias: 'Notify when Jen''s garage door opens and no one is home'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -160,6 +165,7 @@
 
 - id: save_when_garage2_from_open_to_unknown
   alias: 'Save garage2 open state when offline'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -175,6 +181,7 @@
 
 - id: alert_when_garage_closes
   alias: 'Notify when Jeff''s garage door closes'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -207,6 +214,7 @@
 
 - id: alert_when_garage_closes_and_no_one_is_home
   alias: 'Notify when Jeff''s garage door closes and no one is home'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -234,6 +242,7 @@
 
 - id: save_when_garage_from_closed_to_unknown
   alias: 'Save garage closed state when offline'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -249,6 +258,7 @@
 
 - id: alert_when_garage2_closes
   alias: 'Notify when Jen''s garage door closes'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -281,6 +291,7 @@
 
 - id: alert_when_garage2_closes_and_no_one_is_home
   alias: 'Notify when Jen''s garage door closes and no one is home'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -308,6 +319,7 @@
 
 - id: save_when_garage2_from_closed_to_unknown
   alias: 'Save garage2 closed state when offline'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -326,6 +338,7 @@
 ########################################################
 - id: alert_when_garage_stays_open
   alias: 'Notify when Jeff''s garage door remains open'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -355,6 +368,7 @@
 
 - id: alert_when_garage2_stays_open
   alias: 'Alert when Jen''s garage door remains open'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -388,6 +402,7 @@
 ################################################
 - id: ios_action_close_garage
   alias: 'iOS action to close Jeff''s garage door'
+  initial_state: on
   trigger:
     - platform: event
       event_type: ios.notification_action_fired
@@ -399,6 +414,7 @@
 
 - id: ios_action_close_garage2
   alias: 'iOS action to close Jen''s garage door'
+  initial_state: on
   trigger:
     - platform: event
       event_type: ios.notification_action_fired
@@ -410,6 +426,7 @@
 
 - id: close_garage_after_10pm
   alias: 'Auto close Jeff''s garage door after 10pm'
+  initial_state: on
   trigger:
     - platform: time
       at: '22:00:00'
@@ -433,6 +450,7 @@
 
 - id: close_garage2_after_10pm
   alias: 'Auto close Jen''s garage door after 10pm'
+  initial_state: on
   trigger:
     - platform: time
       at: '22:00:00'
