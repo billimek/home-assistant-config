@@ -199,7 +199,7 @@
 # - id: set_bi_alert_night_when_home_after_10pm 
 #   alias: Presence - Set BI alert_night when we get home after 10pm
 #   initial_state: on
-  trigger:
+#  trigger:
 #     - platform: state
 #       entity_id: sensor.anyone_home
 #       to: 'home'

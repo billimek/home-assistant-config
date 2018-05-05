@@ -32,7 +32,7 @@
 #### Set BI profile to "alert" if a door or garage door opens while we are not home
 # - alias: 'BlueIris - Set BI profile to alert if doors open while we are not home'
 #   initial_state: on
-  trigger:
+#   trigger:
 #     - platform: state
 #       entity_id: group.doors_windows
 #       to: open
