@@ -7,6 +7,7 @@
 ################################################################################
 - id: set_bi_profile_when_selection_changes
   alias: BI - set profile when input select changes
+  initial_state: on
   trigger:
     platform: state
     entity_id: input_select.set_biprofile
@@ -15,6 +16,7 @@
 
 - id: notify_when_bi_profile_unknown
   alias: BI - notify if profile is 'unknown'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.blue_iris_profile
@@ -29,7 +31,8 @@
 
 #### Set BI profile to "alert" if a door or garage door opens while we are not home
 # - alias: 'BlueIris - Set BI profile to alert if doors open while we are not home'
-#   trigger:
+#   initial_state: on
+  trigger:
 #     - platform: state
 #       entity_id: group.doors_windows
 #       to: open
@@ -49,6 +52,7 @@
 ################################################################################
 - id: set_bi_profile_alert_night_10pm
   alias: BI - set to alert_night at 10pm when home
+  initial_state: on
   trigger:
     - platform: time
       at: '22:00'
@@ -68,6 +72,7 @@
 ################################################################################
 - id: set_bi_profile_alert_day_windy_when_not_home_and_windy
   alias: BI - set to alert_day_windy when not home and windy
+  initial_state: on
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
@@ -95,6 +100,7 @@
 
 - id: set_bi_profile_alert_day_when_not_home_and_not_windy
   alias: BI - set to alert_day when not home and not windy
+  initial_state: on
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
@@ -122,6 +128,7 @@
 
 - id: set_bi_profile_day_windy_when_home_and_windy
   alias: BI - set to day_windy when home and windy
+  initial_state: on
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed
@@ -149,6 +156,7 @@
 
 - id: set_bi_profile_day_when_home_and_not_windy
   alias: BI - set to day when home and not windy
+  initial_state: on
   trigger:
     - platform: numeric_state
       entity_id: sensor.weather_wind_speed

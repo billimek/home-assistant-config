@@ -3,6 +3,7 @@
 ################################################################################
 - id: alert_when_everyone_leaves_home
   alias: 'Alert when everyone leaves home'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.anyone_home
@@ -15,6 +16,7 @@
 
 - id: alert_when_anyone_comes_home
   alias: 'Alert when anyone comes home'
+  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.anyone_home
@@ -41,6 +43,7 @@
 ################################################################################
 - id: alert_when_jen_comes_home
   alias: 'Alert when jen comes home'
+  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.jen_presence
@@ -54,6 +57,7 @@
             sound: "US-EN-Morgan-Freeman-Wife-Is-Arriving.wav"
 - id: alert_when_jeff_comes_home
   alias: 'Alert when jeff comes home'
+  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.jeff_presence
@@ -71,6 +75,7 @@
 ################################################################################
 - id: set_bi_day_when_home 
   alias: Presence - Set BI day when we get home
+  initial_state: on
   trigger:
     - platform: state
       entity_id: sensor.anyone_home
@@ -89,6 +94,7 @@
 
 - id: set_bi_day_windy_when_home_and_windy
   alias: Presence - Set BI day_windy when we get home and it is windy
+  initial_state: on
   trigger:
     - platform: state
       entity_id: sensor.anyone_home
@@ -112,6 +118,7 @@
 
 - id: set_bi_alert_day_when_leave 
   alias: Presence - Set BI alert_day when we leave
+  initial_state: on
   trigger:
     - platform: state
       entity_id: sensor.anyone_home
@@ -130,6 +137,7 @@
 
 - id: set_bi_alert_day_windy_when_leave_and_windy
   alias: Presence - Set BI alert_day_windy when we leave and it is windy
+  initial_state: on
   trigger:
     - platform: state
       entity_id: sensor.anyone_home
@@ -152,6 +160,7 @@
 
 - id: set_bi_alert_night_when_leave
   alias: Presence - Set BI alert_night when we leave
+  initial_state: on
   trigger:
     - platform: state
       entity_id: sensor.anyone_home
@@ -168,6 +177,7 @@
 
 - id: set_bi_night_when_home_before_10pm 
   alias: Presence - Set BI night when we get home before 10pm
+  initial_state: on
   trigger:
     - platform: state
       entity_id: sensor.anyone_home
@@ -188,7 +198,8 @@
 
 # - id: set_bi_alert_night_when_home_after_10pm 
 #   alias: Presence - Set BI alert_night when we get home after 10pm
-#   trigger:
+#   initial_state: on
+  trigger:
 #     - platform: state
 #       entity_id: sensor.anyone_home
 #       to: 'home'
