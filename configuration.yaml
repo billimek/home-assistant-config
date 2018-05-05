@@ -100,6 +100,20 @@ ios:
             title: 'Close Jen''s garage door'
             activationMode: 'background'
             authenticationRequired: yes
+      - name: garage_open
+        identifier: 'garage_open'
+        actions:
+          - identifier: 'OPEN_GARAGE'
+            title: 'Open Jeff''s garage door'
+            activationMode: 'background'
+            authenticationRequired: yes
+      - name: garage2_open
+        identifier: 'garage2_open'
+        actions:
+          - identifier: 'OPEN_GARAGE2'
+            title: 'Open Jen''s garage door'
+            activationMode: 'background'
+            authenticationRequired: yes
 
 
 # Custom UI Panels

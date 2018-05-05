@@ -203,6 +203,7 @@
         message: "Jeff's garage door is closed"
         data:
           push:
+            category: 'garage_open'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
     - service: notify.ios_jen_phone
       data_template:
@@ -210,6 +211,7 @@
         message: "Jeff's garage door is closed"
         data:
           push:
+            category: 'garage_open'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
 
 - id: alert_when_garage_closes_and_no_one_is_home
@@ -280,6 +282,7 @@
         message: "Jen's garage door is closed"
         data:
           push:
+            category: 'garage2_open'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
     - service: notify.ios_jen_phone
       data_template:
@@ -287,6 +290,7 @@
         message: "Jen's garage door is closed"
         data:
           push:
+            category: 'garage2_open'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
 
 - id: alert_when_garage2_closes_and_no_one_is_home
@@ -398,7 +402,7 @@
 
 
 ################################################
-## Auto close garage door
+## Auto open and close garage door
 ################################################
 - id: ios_action_close_garage
   alias: 'iOS action to close Jeff''s garage door'
@@ -412,6 +416,18 @@
     service: cover.close_cover
     entity_id: cover.jeff_garage_door
 
+- id: ios_action_open_garage
+  alias: 'iOS action to open Jeff''s garage door'
+  initial_state: on
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: OPEN_GARAGE
+  action:
+    service: cover.open_cover
+    entity_id: cover.jeff_garage_door
+
 - id: ios_action_close_garage2
   alias: 'iOS action to close Jen''s garage door'
   initial_state: on
@@ -422,6 +438,18 @@
         actionName: CLOSE_GARAGE2
   action:
     service: cover.close_cover
+    entity_id: cover.jen_garage_door
+
+- id: ios_action_open_garage2
+  alias: 'iOS action to open Jen''s garage door'
+  initial_state: on
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: OPEN_GARAGE2
+  action:
+    service: cover.open_cover
     entity_id: cover.jen_garage_door
 
 - id: close_garage_after_10pm
