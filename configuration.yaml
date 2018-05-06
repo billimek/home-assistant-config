@@ -219,7 +219,7 @@ sensor:
       - volume
 
   - platform: filter
-    name: "filtered wind speed"
+    name: "Weather Wind Speed (Filtered)"
     entity_id: sensor.weather_wind_speed
     filters:
         - filter: outlier
@@ -228,20 +228,6 @@ sensor:
         - filter: lowpass
           time_constant: 3
           precision: 2
-
-  - platform: filter
-    name: "filtered wind speed2"
-    entity_id: sensor.weather_wind_speed
-    filters:
-      - filter: outlier
-        window_size: 4
-        radius: 2.0
-      - filter: lowpass
-        time_constant: 10
-      - filter: time_simple_moving_average
-        window_size: 00:05
-        precision: 2
-
 
   - platform: command_line
     name: "Blue Iris Profile"

@@ -154,8 +154,7 @@ weather_summary:
     - sensor.weather_summary
     - sensor.weather_temperature
     - sensor.weather_wind_speed
-    - sensor.filtered_wind_speed
-    - sensor.filtered_wind_speed2
+    - sensor.weather_wind_speed_filtered
     - sensor.weather_nearest_storm_distance
     - sensor.weather_daily_low_temperature
     - sensor.weather_daily_high_temperature
