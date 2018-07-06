@@ -37,7 +37,7 @@ http:
   api_password: !secret http-api_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
-  server_port: 8133
+  # server_port: 8123
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -61,13 +61,13 @@ history:
 
 # persist states between restarts ??
 recorder:
-  purge_interval: 2
-  purge_keep_days: 7
+#   purge_interval: 2
+#   purge_keep_days: 7
 
 # View all events in a logbook
 logbook:
 
-mqtt:
+# mqtt:
 
 # Track the sun
 sun:
@@ -194,8 +194,8 @@ sensor:
       - precip_intensity
       - precip_probability
       - temperature
-      - temperature_max
-      - temperature_min
+      - temperature_high
+      - temperature_low
       - wind_speed
       - wind_bearing
       - visibility
@@ -386,10 +386,13 @@ device_tracker:
     port: 443
     detection_time: 60
     #    consider_home: 180
+    new_device_defaults:
+      track_new_devices: False
 
 
 influxdb:
   host: !secret influxdb-host
+  port: 8086
   max_retries: 10
 
 ring:
