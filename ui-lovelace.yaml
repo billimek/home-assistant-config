@@ -1,0 +1,198 @@
+title: Home
+views:
+  - icon: mdi:home-assistant
+    cards:
+      - type: entities
+        title: Family
+        entities:
+          - device_tracker.jeff_phone
+          - device_tracker.jeff_wifi
+          - device_tracker.jeff_owntracks
+          - binary_sensor.jeff_presence
+          - device_tracker.jen_phone
+          - device_tracker.jen_wifi
+          - device_tracker.jen_owntracks
+          - binary_sensor.jen_presence
+          - sensor.anyone_home
+      - type: entities
+        title: Presence
+        entities:
+          - automation.alert_when_everyone_leaves_home
+          - automation.alert_when_anyone_comes_home
+          - sensor.jeffs_7_battery_level
+          - sensor.jeffs_7_battery_state
+          - sensor.jennifers_6s_battery_level
+          - sensor.jennifers_6s_battery_state
+      - type: entities
+        title: Garage
+        entities:
+          - cover.jeff_garage_door
+          - sensor.garage_status
+          - sensor.garage_car_present
+          - cover.jen_garage_door
+          - sensor.garage2_status
+          - sensor.garage2_car_present
+      - type: entities
+        title: Alarm Panel
+        entities:
+          - alarm_control_panel.alarm_panel
+          - sensor.alarm_panel_display
+          - sensor.alarm_status
+          - input_select.alarm_mode
+      - type: entities
+        title: Nest
+        entities:
+          - climate.downstairs
+          - climate.master_bedroom_nest
+          - climate.basement
+      - type: entities
+        title: Weather Summary
+        entities:
+          - sensor.weather_summary
+          - sensor.weather_temperature
+          - sensor.weather_wind_speed
+          - sensor.weather_wind_speed_filtered
+          - sensor.weather_nearest_storm_distance
+          - sensor.weather_overnight_low_temperature
+          - sensor.weather_daytime_high_temperature
+          - sensor.weather_daily_summary
+      - type: entities
+        title: Cameras
+        entities:
+          - sensor.blue_iris_profile
+          - input_select.set_biprofile
+  - icon: mdi:weather-cloudy
+    cards:
+      - type: entities
+        title: Nest Details
+        entities:
+          - sensor.downstairs_thermostat_humidity
+          - sensor.downstairs_thermostat_hvac_state
+          - sensor.master_bedroom_thermostat_nest_humidity
+          - sensor.master_bedroom_thermostat_nest_hvac_state
+          - sensor.basement_thermostat_humidity
+          - sensor.basement_thermostat_hvac_state
+          - sensor.dining_room_nest_protect_smoke_status
+          - sensor.dining_room_nest_protect_co_status
+          - sensor.downstairs_nest_protect_smoke_status
+          - sensor.downstairs_nest_protect_co_status
+          - sensor.upstairs_nest_protect_smoke_status
+          - sensor.upstairs_nest_protect_co_status
+      - type: entities
+        title: Weather Summary
+        entities:
+          - sensor.weather_summary
+          - sensor.weather_temperature
+          - sensor.weather_wind_speed
+          - sensor.weather_wind_speed_filtered
+          - sensor.weather_nearest_storm_distance
+          - sensor.weather_overnight_low_temperature
+          - sensor.weather_daytime_high_temperature
+          - sensor.weather_daily_summary
+      - type: entities
+        title: Weather Details
+        entities:
+          - sensor.weather_humidity
+          - sensor.weather_precip_probability
+          - sensor.weather_precip_intensity
+          - sensor.weather_apparent_temperature
+          - sensor.weather_dew_point
+          - sensor.weather_wind_bearing
+          - sensor.weather_visibility
+          - sensor.weather_cloud_coverage
+          - sensor.weather_minutely_summary
+          - sensor.weather_hourly_summary
+  - icon: mdi:security-home
+    cards:
+      - type: entities
+        title: Alarm Sensors
+        entities:
+          - binary_sensor.ring_front_door_ding
+          - binary_sensor.ring_front_door_motion
+          - binary_sensor.upstairs_motion
+          - binary_sensor.main_motion
+          - binary_sensor.basement_motion
+          - binary_sensor.front_door
+          - binary_sensor.garage_door
+          - binary_sensor.family_window
+          - binary_sensor.living_window
+          - binary_sensor.sun_room_door
+          - binary_sensor.basement_window
+          - binary_sensor.bathroom_window
+          - binary_sensor.kitchen_window
+          - binary_sensor.back_door
+          - binary_sensor.laundry_window
+          - binary_sensor.basement_door
+          - binary_sensor.sliding_door
+          - binary_sensor.upstairs_window
+          - binary_sensor.hall_smoke
+      - type: entities
+        title: Camera Toggles
+        entities:
+          - automation.sunrise__set_cameras_profile_after_sunrise
+          - automation.sunset__set_cameras_profile_before_sunset
+          - automation.presence__set_bi_day_when_we_get_home
+          - automation.presence__set_bi_day_windy_when_we_get_home_and_it_is_windy
+          - automation.presence__set_bi_alert_night_when_we_leave
+          - automation.presence__set_bi_alert_day_when_we_leave
+          - automation.presence__set_bi_alert_day_windy_when_we_leave_and_it_is_windy
+          - automation.presence__set_bi_night_when_we_get_home_before_10pm
+          - automation.sunrise__set_bi_profile_to_day_at_sunrise_when_home
+          - automation.sunrise__set_bi_profile_to_alert_day_at_sunrise_when_not_home
+          - automation.sunset__set_bi_profile_to_alert_night_at_sunset_when_not_home
+          - automation.sunset__set_bi_profile_to_night_at_sunset_when_home
+          - automation.bi__set_profile_when_input_select_changes
+          - automation.bi__set_to_alert_night_at_10pm_when_home
+          - automation.bi__set_to_alert_day_when_not_home_and_not_windy
+          - automation.bi__set_to_alert_day_windy_when_not_home_and_windy
+          - automation.bi__set_to_day_when_home_and_not_windy
+          - automation.bi__set_to_day_windy_when_home_and_windy
+          - automation.bi__notify_if_profile_is_unknown
+      - type: entities
+        title: Alarm Toggles
+        entities:
+          - automation.arm_alarm_away_when_nobody_home
+          - automation.disarm_alarm_when_anybody_comes_home
+          - automation.notify_alarm_triggered
+          - automation.notify_alarm_armed
+          - automation.notify_alarm_disarmed
+          - automation.alert_when_door_to_garage_is_opened_for_too_long
+          - automation.alert_when_basement_door_is_opened_for_too_long
+          - automation.alert_when_front_door_is_opened_for_too_long
+      - type: entities
+        title: Alarm Sensor Alert Toggles
+        entities:
+          - automation.alert_when_motion_is_detected_upstairs_and_nobody_home
+          - automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home
+          - automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home
+          - automation.alert_when_front_door_is_open_and_nobody_home
+          - automation.alert_when_garage_door_is_open_and_nobody_home
+          - automation.alert_when_family_window_is_open_and_nobody_home
+          - automation.alert_when_living_window_is_open_and_nobody_home
+          - automation.alert_when_sun_room_door_is_open_and_nobody_home
+          - automation.alert_when_basement_window_is_open_and_nobody_home
+          - automation.alert_when_bathroom_window_is_open_and_nobody_home
+          - automation.alert_when_kitchen_window_is_open_and_nobody_home
+          - automation.alert_when_back_door_is_open_and_nobody_home
+          - automation.alert_when_laundry_window_is_open_and_nobody_home
+          - automation.alert_when_basement_door_is_open_and_nobody_home
+          - automation.alert_when_sliding_door_is_open_and_nobody_home
+          - automation.alert_when_upstairs_window_is_open_and_nobody_home
+      - type: entities
+        title: Jeff's Garage Toggles
+        entities:
+          - automation.notify_when_jeffs_garage_door_opens
+          - automation.notify_when_jeffs_garage_door_opens_and_no_one_is_home
+          - automation.notify_when_jeffs_garage_door_closes
+          - automation.notify_when_jeffs_garage_door_closes_and_no_one_is_home
+          - automation.notify_when_jeffs_garage_door_remains_open
+          - automation.auto_close_jeffs_garage_door_after_10pm
+      - type: entities
+        title: Jen's Garage Toggles
+        entities:
+          - automation.notify_when_jens_garage_door_opens
+          - automation.notify_when_jens_garage_door_opens_and_no_one_is_home
+          - automation.notify_when_jens_garage_door_closes
+          - automation.notify_when_jens_garage_door_closes_and_no_one_is_home
+          - automation.alert_when_jens_garage_door_remains_open
+          - automation.auto_close_jens_garage_door_after_10pm
