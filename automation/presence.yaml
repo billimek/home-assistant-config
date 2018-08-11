@@ -55,20 +55,6 @@
         data:
           push:
             sound: "US-EN-Morgan-Freeman-Wife-Is-Arriving.wav"
-- id: alert_when_jeff_comes_home
-  alias: 'Alert when jeff comes home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.jeff_presence
-    to: 'on'
-  action:
-    - service: notify.ios_jen_phone
-      data:
-        message: "Jeff came home"
-        data:
-          push:
-            sound: "US-EN-Morgan-Freeman-Boyfriend-Is-Arriving.wav"
 
 ################################################################################
 ## Set BI profile when we leave or come home

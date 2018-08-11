@@ -409,3 +409,4 @@ google_assistant:
 # zwave:
 #  usb_path: /dev/ttyACM0
 
+# testing git integration
