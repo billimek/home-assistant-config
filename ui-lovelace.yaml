@@ -3,6 +3,22 @@ views:
   - icon: mdi:home-assistant
     cards:
       - type: entities
+        title: Garage
+        entities:
+          - cover.jeff_garage_door
+          - sensor.garage_status
+          - sensor.garage_car_present
+          - cover.jen_garage_door
+          - sensor.garage2_status
+          - sensor.garage2_car_present
+      - type: entities
+        title: Alarm Panel
+        entities:
+          - alarm_control_panel.alarm_panel
+          - sensor.alarm_panel_display
+          - sensor.alarm_status
+          - input_select.alarm_mode
+      - type: entities
         title: Family
         entities:
           - device_tracker.jeff_phone
@@ -23,22 +39,6 @@ views:
           - sensor.jeffs_7_battery_state
           - sensor.jennifers_6s_battery_level
           - sensor.jennifers_6s_battery_state
-      - type: entities
-        title: Garage
-        entities:
-          - cover.jeff_garage_door
-          - sensor.garage_status
-          - sensor.garage_car_present
-          - cover.jen_garage_door
-          - sensor.garage2_status
-          - sensor.garage2_car_present
-      - type: entities
-        title: Alarm Panel
-        entities:
-          - alarm_control_panel.alarm_panel
-          - sensor.alarm_panel_display
-          - sensor.alarm_status
-          - input_select.alarm_mode
       - type: entities
         title: Nest
         entities:
@@ -107,6 +107,9 @@ views:
       - type: entities
         title: Alarm Sensors
         entities:
+          - automation.alert_when_motion_is_detected_upstairs_and_nobody_home
+          - automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home
+          - automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home
           - binary_sensor.ring_front_door_ding
           - binary_sensor.ring_front_door_motion
           - binary_sensor.upstairs_motion

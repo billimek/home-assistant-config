@@ -2,10 +2,10 @@ default_view:
   name: Home
   view: yes
   entities:
-    - group.family
-    - group.presence
     - group.garage
     - group.alarm_panel
+    - group.family
+    - group.presence
     - group.nest
     - group.weather_summary
     - group.cameras
@@ -128,6 +128,9 @@ alarm_sensor_toggles:
 alarm_sensors:
   name: Alarm Sensors
   entities:
+    - automation.alert_when_motion_is_detected_upstairs_and_nobody_home
+    - automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home
+    - automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home
     - binary_sensor.ring_front_door_ding
     - binary_sensor.ring_front_door_motion
     - binary_sensor.upstairs_motion
