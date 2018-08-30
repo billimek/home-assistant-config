@@ -61,7 +61,7 @@ history:
 
 # persist states between restarts ??
 recorder:
-   db_url: !secret db_url
+        #   db_url: !secret db_url
 
 # View all events in a logbook
 logbook:
@@ -386,7 +386,7 @@ device_tracker:
     detection_time: 60
     #    consider_home: 180
     new_device_defaults:
-      track_new_devices: False
+      track_new_devices: false
 
 
 influxdb:
@@ -409,4 +409,3 @@ google_assistant:
 # zwave:
 #  usb_path: /dev/ttyACM0
 
-# testing git integration
