@@ -61,7 +61,7 @@ history:
 
 # persist states between restarts ??
 recorder:
-  db_url: !secret db_url
+#  db_url: !secret db_url
 
 # View all events in a logbook
 logbook:
