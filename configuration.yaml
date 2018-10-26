@@ -210,12 +210,6 @@ sensor:
     monitored_conditions:
       - windSpeed
   - platform: ring
-    monitored_conditions:
-      - battery
-      - last_activity
-      - last_ding
-      - last_motion
-      - volume
 
   - platform: filter
     name: "Weather Wind Speed (Filtered)"
@@ -315,9 +309,6 @@ sensor:
 
 binary_sensor:
   - platform: ring
-    monitored_conditions:
-      - ding
-      - motion
   - platform: bayesian
     prior: 0.5
     name: 'Jeff Presence'
@@ -382,7 +373,8 @@ device_tracker:
     username: !secret unifi-username
     password: !secret unifi-password
     host: !secret unifi-host
-    port: 443
+    port: 8443
+    verify_ssl: false
     detection_time: 60
     #    consider_home: 180
     new_device_defaults:
@@ -398,13 +390,13 @@ ring:
   username: !secret ring-username
   password: !secret ring-password
 
-google_assistant:
-  project_id: home-assistant-7c48d
-  client_id: !secret google_assistant_client_id
-  access_token: !secret google_assistant_access_token
-  agent_user_id: !secret google_assistant_agent_user_id
-  api_key: !secret google_assistant_api_key
-  expose_by_default: true
+  #google_assistant:
+  #  project_id: home-assistant-7c48d
+  #  client_id: !secret google_assistant_client_id
+  #  access_token: !secret google_assistant_access_token
+  #  agent_user_id: !secret google_assistant_agent_user_id
+  #  api_key: !secret google_assistant_api_key
+  #  expose_by_default: true
 
 # zwave:
 #  usb_path: /dev/ttyACM0
