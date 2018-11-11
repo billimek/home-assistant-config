@@ -1,8 +1,10 @@
 title: Home
 views:
-  - icon: mdi:home-assistant
+  - id: 0  # Automatically created id
+    icon: mdi:home-assistant
     cards:
-      - type: entities
+      - id: 6288b90aba8e4ed2ba732072d9aeb1aa  # Automatically created id
+        type: entities
         title: Garage
         entities:
           - cover.jeff_garage_door
@@ -11,14 +13,16 @@ views:
           - cover.jen_garage_door
           - sensor.garage2_status
           - sensor.garage2_car_present
-      - type: entities
+      - id: d088388ec5d54701880eaf657ed27571  # Automatically created id
+        type: entities
         title: Alarm Panel
         entities:
           - alarm_control_panel.alarm_panel
           - sensor.alarm_panel_display
           - sensor.alarm_status
           - input_select.alarm_mode
-      - type: entities
+      - id: b7c5c71a050c4966b08d6b220c3fefa1  # Automatically created id
+        type: entities
         title: Family
         entities:
           - device_tracker.jeff_phone
@@ -30,22 +34,25 @@ views:
           - device_tracker.jen_owntracks
           - binary_sensor.jen_presence
           - sensor.anyone_home
-      - type: entities
+      - id: ccaa7d12cbdf40238b79f73e7279b65e  # Automatically created id
+        type: entities
         title: Presence
         entities:
           - automation.alert_when_everyone_leaves_home
           - automation.alert_when_anyone_comes_home
-          - sensor.jeffs_7_battery_level
-          - sensor.jeffs_7_battery_state
-          - sensor.jennifers_6s_battery_level
-          - sensor.jennifers_6s_battery_state
-      - type: entities
+          - sensor.jeffs_phone_battery_level
+          - sensor.jeffs_phone_battery_state
+          - sensor.jennifers_phone_battery_level
+          - sensor.jennifers_phone_battery_state
+      - id: d3e23d43fb154d899d629e4e73081c65  # Automatically created id
+        type: entities
         title: Nest
         entities:
           - climate.downstairs
           - climate.master_bedroom_nest
           - climate.basement
-      - type: entities
+      - id: 5374735126f3465e8ca9dc99cf9c33ee  # Automatically created id
+        type: entities
         title: Weather Summary
         entities:
           - sensor.weather_summary
@@ -56,14 +63,17 @@ views:
           - sensor.weather_overnight_low_temperature
           - sensor.weather_daytime_high_temperature
           - sensor.weather_daily_summary
-      - type: entities
+      - id: 05613e4cf2b3452d8607669c92006a0f  # Automatically created id
+        type: entities
         title: Cameras
         entities:
           - sensor.blue_iris_profile
           - input_select.set_biprofile
-  - icon: mdi:weather-cloudy
+  - id: 1  # Automatically created id
+    icon: mdi:weather-cloudy
     cards:
-      - type: entities
+      - id: 2db7774dd0014869bae203fe090e0b6c  # Automatically created id
+        type: entities
         title: Nest Details
         entities:
           - sensor.downstairs_thermostat_humidity
@@ -78,7 +88,8 @@ views:
           - sensor.downstairs_nest_protect_co_status
           - sensor.upstairs_nest_protect_smoke_status
           - sensor.upstairs_nest_protect_co_status
-      - type: entities
+      - id: 2ea475fc91c1413bbb019f743b7520bd  # Automatically created id
+        type: entities
         title: Weather Summary
         entities:
           - sensor.weather_summary
@@ -89,7 +100,8 @@ views:
           - sensor.weather_overnight_low_temperature
           - sensor.weather_daytime_high_temperature
           - sensor.weather_daily_summary
-      - type: entities
+      - id: 18c31cd5a0ca4ddcad3ba332a9b8cb60  # Automatically created id
+        type: entities
         title: Weather Details
         entities:
           - sensor.weather_humidity
@@ -102,9 +114,11 @@ views:
           - sensor.weather_cloud_coverage
           - sensor.weather_minutely_summary
           - sensor.weather_hourly_summary
-  - icon: mdi:security-home
+  - id: 2  # Automatically created id
+    icon: mdi:security-home
     cards:
-      - type: entities
+      - id: 9dd7fcc1bcfe48a8b84aaad0ab914ebe  # Automatically created id
+        type: entities
         title: Alarm Sensors
         entities:
           - automation.alert_when_motion_is_detected_upstairs_and_nobody_home
@@ -123,35 +137,37 @@ views:
           - binary_sensor.basement_window
           - binary_sensor.bathroom_window
           - binary_sensor.kitchen_window
-          - binary_sensor.back_door
+          - binary_sensor.unknown_door
           - binary_sensor.laundry_window
           - binary_sensor.basement_door
           - binary_sensor.sliding_door
           - binary_sensor.upstairs_window
           - binary_sensor.hall_smoke
-      - type: entities
+      - id: 74add53dccaa486488f5dfb384c676de  # Automatically created id
+        type: entities
         title: Camera Toggles
         entities:
-          - automation.sunrise__set_cameras_profile_after_sunrise
+          - automation.cameras_profile_to_day_after_sunrise
           - automation.sunset__set_cameras_profile_before_sunset
-          - automation.presence__set_bi_day_when_we_get_home
-          - automation.presence__set_bi_day_windy_when_we_get_home_and_it_is_windy
-          - automation.presence__set_bi_alert_night_when_we_leave
-          - automation.presence__set_bi_alert_day_when_we_leave
-          - automation.presence__set_bi_alert_day_windy_when_we_leave_and_it_is_windy
-          - automation.presence__set_bi_night_when_we_get_home_before_10pm
-          - automation.sunrise__set_bi_profile_to_day_at_sunrise_when_home
-          - automation.sunrise__set_bi_profile_to_alert_day_at_sunrise_when_not_home
-          - automation.sunset__set_bi_profile_to_alert_night_at_sunset_when_not_home
-          - automation.sunset__set_bi_profile_to_night_at_sunset_when_home
+          - automation.bi_day_when_we_get_home
+          - automation.bi_day_windy_when_we_get_home_and_it_is_windy
+          - automation.bi_alert_night_when_we_leave
+          - automation.bi_alert_day_when_we_leave
+          - automation.bi_alert_day_windy_when_we_leave_and_it_is_windy
+          - automation.bi_night_when_we_get_home_before_10pm
+          - automation.bi_profile_to_day_at_sunrise_when_home
+          - automation.bi_profile_to_alert_day_at_sunrise_when_not_home
+          - automation.bi_profile_to_alert_night_at_sunset_when_not_home
+          - automation.bi_profile_to_night_at_sunset_when_home
           - automation.bi__set_profile_when_input_select_changes
-          - automation.bi__set_to_alert_night_at_10pm_when_home
-          - automation.bi__set_to_alert_day_when_not_home_and_not_windy
-          - automation.bi__set_to_alert_day_windy_when_not_home_and_windy
-          - automation.bi__set_to_day_when_home_and_not_windy
-          - automation.bi__set_to_day_windy_when_home_and_windy
+          - automation.bi__alert_night_at_10pm_when_home
+          - automation.bi__alert_day_when_not_home_and_not_windy
+          - automation.bi__day_when_home_and_not_windy
+          - automation.bi__alert_day_windy_when_not_home_and_windy
+          - automation.bi__day_windy_when_home_and_windy
           - automation.bi__notify_if_profile_is_unknown
-      - type: entities
+      - id: 0a98397d0d6546d5bd40b12eca841340  # Automatically created id
+        type: entities
         title: Alarm Toggles
         entities:
           - automation.arm_alarm_away_when_nobody_home
@@ -162,7 +178,10 @@ views:
           - automation.alert_when_door_to_garage_is_opened_for_too_long
           - automation.alert_when_basement_door_is_opened_for_too_long
           - automation.alert_when_front_door_is_opened_for_too_long
-      - type: entities
+          - automation.alert_when_unknown_door_is_opened_for_too_long
+          - automation.alert_when_sun_room_door_is_opened_for_too_long
+      - id: c7ff995d0d40499ca51203cfab01cb83  # Automatically created id
+        type: entities
         title: Alarm Sensor Alert Toggles
         entities:
           - automation.alert_when_motion_is_detected_upstairs_and_nobody_home
@@ -176,12 +195,13 @@ views:
           - automation.alert_when_basement_window_is_open_and_nobody_home
           - automation.alert_when_bathroom_window_is_open_and_nobody_home
           - automation.alert_when_kitchen_window_is_open_and_nobody_home
-          - automation.alert_when_back_door_is_open_and_nobody_home
+          - automation.alert_when_unknown_door_is_open_and_nobody_home
           - automation.alert_when_laundry_window_is_open_and_nobody_home
           - automation.alert_when_basement_door_is_open_and_nobody_home
           - automation.alert_when_sliding_door_is_open_and_nobody_home
           - automation.alert_when_upstairs_window_is_open_and_nobody_home
-      - type: entities
+      - id: ddcb691a7f07437ca5fb0be2ed0c3a3f  # Automatically created id
+        type: entities
         title: Jeff's Garage Toggles
         entities:
           - automation.notify_when_jeffs_garage_door_opens
@@ -190,7 +210,8 @@ views:
           - automation.notify_when_jeffs_garage_door_closes_and_no_one_is_home
           - automation.notify_when_jeffs_garage_door_remains_open
           - automation.auto_close_jeffs_garage_door_after_10pm
-      - type: entities
+      - id: 9f8817e8fccc4e96b555ac73554eb292  # Automatically created id
+        type: entities
         title: Jen's Garage Toggles
         entities:
           - automation.notify_when_jens_garage_door_opens

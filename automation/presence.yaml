@@ -60,7 +60,7 @@
 ## Set BI profile when we leave or come home
 ################################################################################
 - id: set_bi_day_when_home 
-  alias: Presence - Set BI day when we get home
+  alias: BI day when we get home
   initial_state: on
   trigger:
     - platform: state
@@ -79,7 +79,7 @@
         option: 'day'
 
 - id: set_bi_day_windy_when_home_and_windy
-  alias: Presence - Set BI day_windy when we get home and it is windy
+  alias: BI day_windy when we get home and it is windy
   initial_state: on
   trigger:
     - platform: state
@@ -103,7 +103,7 @@
 
 
 - id: set_bi_alert_day_when_leave 
-  alias: Presence - Set BI alert_day when we leave
+  alias: BI alert_day when we leave
   initial_state: on
   trigger:
     - platform: state
@@ -122,7 +122,7 @@
         option: 'alert_day'
 
 - id: set_bi_alert_day_windy_when_leave_and_windy
-  alias: Presence - Set BI alert_day_windy when we leave and it is windy
+  alias: BI alert_day_windy when we leave and it is windy
   initial_state: on
   trigger:
     - platform: state
@@ -145,7 +145,7 @@
         option: 'alert_day_windy'
 
 - id: set_bi_alert_night_when_leave
-  alias: Presence - Set BI alert_night when we leave
+  alias: BI alert_night when we leave
   initial_state: on
   trigger:
     - platform: state
@@ -162,7 +162,7 @@
         option: 'alert_night'
 
 - id: set_bi_night_when_home_before_10pm 
-  alias: Presence - Set BI night when we get home before 10pm
+  alias: BI night when we get home before 10pm
   initial_state: on
   trigger:
     - platform: state

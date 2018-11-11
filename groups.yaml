@@ -104,6 +104,7 @@ alarm_toggles:
     - automation.alert_when_door_to_garage_is_opened_for_too_long
     - automation.alert_when_basement_door_is_opened_for_too_long
     - automation.alert_when_front_door_is_opened_for_too_long
+    - automation.alert_when_sun_room_door_is_opened_for_too_long
 
 alarm_sensor_toggles:
   name: Alarm Sensor Alert Toggles
@@ -119,7 +120,7 @@ alarm_sensor_toggles:
     - automation.alert_when_basement_window_is_open_and_nobody_home
     - automation.alert_when_bathroom_window_is_open_and_nobody_home
     - automation.alert_when_kitchen_window_is_open_and_nobody_home
-    - automation.alert_when_back_door_is_open_and_nobody_home
+    - automation.alert_when_unknown_door_is_open_and_nobody_home
     - automation.alert_when_laundry_window_is_open_and_nobody_home
     - automation.alert_when_basement_door_is_open_and_nobody_home
     - automation.alert_when_sliding_door_is_open_and_nobody_home
@@ -141,6 +142,7 @@ alarm_sensors:
     - binary_sensor.family_window
     - binary_sensor.living_window
     - binary_sensor.sun_room_door
+    - binary_sensor.unknown_door
     - binary_sensor.basement_window
     - binary_sensor.bathroom_window
     - binary_sensor.kitchen_window

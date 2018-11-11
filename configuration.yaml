@@ -61,7 +61,10 @@ history:
 
 # persist states between restarts ??
 recorder:
-#  db_url: !secret db_url
+  db_url: !secret db_url
+  exclude:
+    domains:
+      - device_tracker
 
 # View all events in a logbook
 logbook:

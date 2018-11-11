@@ -74,6 +74,54 @@
         title: "Alarm Panel"
         message: "Front door is opened for more than 5 minutes"
 
+- id: alert_when_sun_room_door_open_for_too_long
+  alias: 'Alert when sun room door is opened for too long'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.sun_room_door
+    from: 'off'
+    to: 'on'
+    for:
+      seconds: 300
+  action:
+    # - service: notify.slack
+    #   data_template:
+    #     title: "Alarm Panel"
+    #     message: "Sun room door is opened for more than 5 minutes"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Sun room door is opened for more than 5 minutes"
+    - service: notify.ios_jen_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Sun room door is opened for more than 5 minutes"
+
+- id: alert_when_unknown_door_open_for_too_long
+  alias: 'Alert when unknown door is opened for too long'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.unknown_door
+    from: 'off'
+    to: 'on'
+    for:
+      seconds: 300
+  action:
+    # - service: notify.slack
+    #   data_template:
+    #     title: "Alarm Panel"
+    #     message: "Unknown door is opened for more than 5 minutes"
+    - service: notify.ios_jeff_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Unknown door is opened for more than 5 minutes"
+    - service: notify.ios_jen_phone
+      data_template:
+        title: "Alarm Panel"
+        message: "Unknown door is opened for more than 5 minutes"
+
 ################################################
 ## All door/window sensors
 ################################################
@@ -319,12 +367,12 @@
         title: "Alarm Panel"
         message: "Kitchen Window open"
 
-- id: alert_when_back_door_open
-  alias: 'Alert when back door is open and nobody home'
+- id: alert_when_unknown_door_open
+  alias: 'Alert when unknown door is open and nobody home'
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.back_door
+    entity_id: binary_sensor.unknown_door
     from: 'off'
     to: 'on'
   condition:
@@ -335,11 +383,11 @@
     # - service: notify.slack
     #   data_template:
     #     title: "Alarm Panel"
-    #     message: "Back Door open"
+    #     message: "Unknown Door open"
     - service: notify.ios_jeff_phone
       data_template:
         title: "Alarm Panel"
-        message: "Back Door open"
+        message: "Unknown Door open"
 
 - id: alert_when_laundry_window_open
   alias: 'Alert when laundry window is open and nobody home'

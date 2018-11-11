@@ -51,7 +51,7 @@
 ## Set BI profile when home to 'alert_night' at 10pm
 ################################################################################
 - id: set_bi_profile_alert_night_10pm
-  alias: BI - set to alert_night at 10pm when home
+  alias: BI - alert_night at 10pm when home
   initial_state: on
   trigger:
     - platform: time
@@ -71,7 +71,7 @@
 ## Windy / Not Windy automations
 ################################################################################
 - id: set_bi_profile_alert_day_windy_when_not_home_and_windy
-  alias: BI - set to alert_day_windy when not home and windy
+  alias: BI - alert_day_windy when not home and windy
   initial_state: on
   trigger:
     - platform: numeric_state
@@ -99,7 +99,7 @@
         option: 'alert_day_windy'
 
 - id: set_bi_profile_alert_day_when_not_home_and_not_windy
-  alias: BI - set to alert_day when not home and not windy
+  alias: BI - alert_day when not home and not windy
   initial_state: on
   trigger:
     - platform: numeric_state
@@ -127,7 +127,7 @@
         option: 'alert_day'
 
 - id: set_bi_profile_day_windy_when_home_and_windy
-  alias: BI - set to day_windy when home and windy
+  alias: BI - day_windy when home and windy
   initial_state: on
   trigger:
     - platform: numeric_state
@@ -155,7 +155,7 @@
         option: 'day_windy'
 
 - id: set_bi_profile_day_when_home_and_not_windy
-  alias: BI - set to day when home and not windy
+  alias: BI - day when home and not windy
   initial_state: on
   trigger:
     - platform: numeric_state

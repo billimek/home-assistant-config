@@ -2,7 +2,7 @@
 ## Set cameras at sunrise or sunset
 ################################################################################
 - id: sunrise_set_cameras
-  alias: Sunrise - set cameras profile after sunrise
+  alias: Cameras profile to day after sunrise
   initial_state: on
   trigger:
     platform: sun
@@ -36,7 +36,7 @@
 # TODO: in the action section? (maybe a check on sunrise vs sunset?)
 
 - id: set_bi_day_at_sunrise_when_home 
-  alias: Sunrise - Set BI profile to day at sunrise when home
+  alias: BI profile to day at sunrise when home
   initial_state: on
   trigger:
     platform: sun
@@ -53,7 +53,7 @@
         option: 'day'
 
 - id: set_bi_alert_day_at_sunrise_when_not_home 
-  alias: Sunrise - Set BI profile to alert_day at sunrise when not home
+  alias: BI profile to alert_day at sunrise when not home
   initial_state: on
   trigger:
     platform: sun
@@ -70,7 +70,7 @@
         option: 'alert_day'
 
 - id: set_bi_night_at_sunset_when_home
-  alias: Sunset - Set BI profile to night at sunset when home
+  alias: BI profile to night at sunset when home
   initial_state: on
   trigger:
     platform: sun
@@ -87,7 +87,7 @@
         option: 'night'
 
 - id: set_bi_alert_night_at_sunset_when_not_home
-  alias: Sunset - Set BI profile to alert_night at sunset when not home
+  alias: BI profile to alert_night at sunset when not home
   initial_state: on
   trigger:
     platform: sun
