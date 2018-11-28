@@ -3,7 +3,6 @@
 ################################################
 - id: alert_when_garage_opens
   alias: 'Notify when Jeff''s garage door opens'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -40,7 +39,6 @@
 
 - id: alert_when_garage_opens_and_no_one_home
   alias: 'Notify when Jeff''s garage door opens and no one is home!'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -92,7 +90,6 @@
 
 - id: alert_when_garage2_opens
   alias: 'Notify when Jen''s garage door opens'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -129,7 +126,6 @@
 
 - id: alert_when_garage2_opens_and_no_one_home
   alias: 'Notify when Jen''s garage door opens and no one is home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -181,7 +177,6 @@
 
 - id: alert_when_garage_closes
   alias: 'Notify when Jeff''s garage door closes'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -216,7 +211,6 @@
 
 - id: alert_when_garage_closes_and_no_one_is_home
   alias: 'Notify when Jeff''s garage door closes and no one is home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -260,7 +254,6 @@
 
 - id: alert_when_garage2_closes
   alias: 'Notify when Jen''s garage door closes'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -295,7 +288,6 @@
 
 - id: alert_when_garage2_closes_and_no_one_is_home
   alias: 'Notify when Jen''s garage door closes and no one is home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status
@@ -342,7 +334,6 @@
 ########################################################
 - id: alert_when_garage_stays_open
   alias: 'Notify when Jeff''s garage door remains open'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage_status
@@ -372,7 +363,6 @@
 
 - id: alert_when_garage2_stays_open
   alias: 'Alert when Jen''s garage door remains open'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.garage2_status

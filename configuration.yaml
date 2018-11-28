@@ -379,9 +379,10 @@ device_tracker:
     port: 8443
     verify_ssl: false
     detection_time: 60
+    #track_new_devices: False
     #    consider_home: 180
     new_device_defaults:
-      track_new_devices: false
+      track_new_devices: no
 
 
 influxdb:

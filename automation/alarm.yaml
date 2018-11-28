@@ -3,7 +3,6 @@
 ################################################
 - id: alert_when_door_open_for_too_long
   alias: 'Alert when door to garage is opened for too long'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.garage_door
@@ -76,7 +75,6 @@
 
 - id: alert_when_sun_room_door_open_for_too_long
   alias: 'Alert when sun room door is opened for too long'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.sun_room_door
@@ -127,7 +125,6 @@
 ################################################
 - id: alert_when_upstairs_motion
   alias: 'Alert when motion is detected upstairs and nobody home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.upstairs_motion
@@ -149,7 +146,6 @@
 
 - id: alert_when_main_motion
   alias: 'Alert when motion is detected on the main level and nobody home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.main_motion
@@ -171,7 +167,6 @@
 
 - id: alert_when_basement_motion
   alias: 'Alert when motion is detected in the basement and nobody home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.basement_motion
@@ -193,7 +188,6 @@
 
 - id: alert_when_front_door_open
   alias: 'Alert when front door is open and nobody home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.front_door
@@ -215,7 +209,6 @@
 
 - id: alert_when_garage_door_open
   alias: 'Alert when garage door is open and nobody home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.garage_door
@@ -281,7 +274,6 @@
 
 - id: alert_when_sun_room_door_open
   alias: 'Alert when sun room door is open and nobody home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.sun_room_door
@@ -435,7 +427,6 @@
 
 - id: alert_when_sliding_door_open
   alias: 'Alert when sliding door is open and nobody home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.sliding_door
@@ -512,7 +503,6 @@
 
 - id: notify_alarm_armed
   alias: 'Notify Alarm Armed'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.alarm_status
@@ -534,7 +524,6 @@
 
 - id: notify_alarm_disarmed
   alias: 'Notify Alarm Disarmed'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.alarm_status
@@ -559,7 +548,6 @@
 ################################################
 - id: arm_alarm_nobody_home
   alias: 'Arm Alarm Away when Nobody Home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: sensor.anyone_home
