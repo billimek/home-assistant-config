@@ -63,11 +63,11 @@ family:
   entities:
     - device_tracker.jeff_phone
     - device_tracker.jeff_wifi
-    - device_tracker.jeff_owntracks
+    - device_tracker.jeff_7e398d513e7b4034b2dfda65e5cf3310
     - binary_sensor.jeff_presence
     - device_tracker.jen_phone
     - device_tracker.jen_wifi
-    - device_tracker.jen_owntracks
+    - device_tracker.jen_fb82b2dd6a324199823795dae03ed82d
     - binary_sensor.jen_presence
     - sensor.anyone_home
 

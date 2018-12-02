@@ -27,11 +27,11 @@ views:
         entities:
           - device_tracker.jeff_phone
           - device_tracker.jeff_wifi
-          - device_tracker.jeff_owntracks
+          - device_tracker.jeff_7e398d513e7b4034b2dfda65e5cf3310
           - binary_sensor.jeff_presence
           - device_tracker.jen_phone
           - device_tracker.jen_wifi
-          - device_tracker.jen_owntracks
+          - device_tracker.jen_fb82b2dd6a324199823795dae03ed82d
           - binary_sensor.jen_presence
           - sensor.anyone_home
       - id: ccaa7d12cbdf40238b79f73e7279b65e  # Automatically created id
@@ -60,8 +60,8 @@ views:
           - sensor.weather_wind_speed
           - sensor.weather_wind_speed_filtered
           - sensor.weather_nearest_storm_distance
-          - sensor.weather_overnight_low_temperature
-          - sensor.weather_daytime_high_temperature
+          - sensor.weather_overnight_low_temperature_0
+          - sensor.weather_daytime_high_temperature_0
           - sensor.weather_daily_summary
       - id: 05613e4cf2b3452d8607669c92006a0f  # Automatically created id
         type: entities
@@ -97,8 +97,8 @@ views:
           - sensor.weather_wind_speed
           - sensor.weather_wind_speed_filtered
           - sensor.weather_nearest_storm_distance
-          - sensor.weather_overnight_low_temperature
-          - sensor.weather_daytime_high_temperature
+          - sensor.weather_overnight_low_temperature_0
+          - sensor.weather_daytime_high_temperature_0
           - sensor.weather_daily_summary
       - id: 18c31cd5a0ca4ddcad3ba332a9b8cb60  # Automatically created id
         type: entities

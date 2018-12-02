@@ -186,10 +186,16 @@ input_boolean:
     name: Track if the garage2 was previously closed
     initial: on
 
+weather:
+  - platform: darksky
+    api_key: !secret darksky-api_key
+
 sensor:
   - platform: darksky
     name: Weather
     api_key: !secret darksky-api_key
+    forecast:
+      - 0
     monitored_conditions:
       - summary
       - nearest_storm_distance
@@ -327,7 +333,7 @@ binary_sensor:
         prob_given_false: 0.4
         platform: 'state'
         to_state: 'home'
-      - entity_id: 'device_tracker.jeff_owntracks'
+      - entity_id: 'device_tracker.jeff_7e398d513e7b4034b2dfda65e5cf3310'
         prob_given_true: 0.9
         prob_given_false: 0.1
         platform: 'state'
@@ -347,7 +353,7 @@ binary_sensor:
         prob_given_false: 0.4
         platform: 'state'
         to_state: 'home'
-      - entity_id: 'device_tracker.jen_owntracks'
+      - entity_id: 'device_tracker.jen_fb82b2dd6a324199823795dae03ed82d'
         prob_given_true: 0.9
         prob_given_false: 0.1
         platform: 'state'
@@ -365,11 +371,13 @@ nest:
   client_id: !secret nest-client_id
   client_secret: !secret nest-client_secret
 
+owntracks:
+  waypoints: true
 
 device_tracker:
-  - platform: owntracks_http
+#  - platform: owntracks_http
     #    max_gps_accuracy: 100
-    waypoints: True
+#    waypoints: True
     #    region_mapping:
     #      ibeacon-home: home
   - platform: unifi
