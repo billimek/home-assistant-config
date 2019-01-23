@@ -25,6 +25,9 @@ homeassistant:
 # Show links to resources in log and frontend
 # introduction:
 
+#lovelace:
+#  mode: yaml
+
 # Enables the frontend
 frontend:
   javascript_version: latest
@@ -333,11 +336,6 @@ binary_sensor:
         prob_given_false: 0.4
         platform: 'state'
         to_state: 'home'
-      - entity_id: 'device_tracker.jeff_7e398d513e7b4034b2dfda65e5cf3310'
-        prob_given_true: 0.9
-        prob_given_false: 0.1
-        platform: 'state'
-        to_state: 'home'
   - platform: bayesian
     prior: 0.5
     name: 'Jen Presence'
@@ -351,11 +349,6 @@ binary_sensor:
       - entity_id: 'device_tracker.jen_phone'
         prob_given_true: 0.9
         prob_given_false: 0.4
-        platform: 'state'
-        to_state: 'home'
-      - entity_id: 'device_tracker.jen_fb82b2dd6a324199823795dae03ed82d'
-        prob_given_true: 0.9
-        prob_given_false: 0.1
         platform: 'state'
         to_state: 'home'
 
