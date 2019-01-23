@@ -37,18 +37,23 @@ if session != "":
 	if r.json()['result'] == 'success':
 		data = {'cmd':'status','session':session}
 		r = requests.post(url,json.dumps(data))
+		#print("profile is: \'", r.json()['data']['profile'], "\'\n")
+		#profiles_list = r.json()["data"]["profile"]
+		#profile_id = int(r["profile"])
+		#print("new profile is: \'", profiles_list, "\'")
 		if r.json()['result'] == 'success':
-			if r.json()['data']['profile'] == '1':
+			if r.json()['data']['profile'] == 1:
 				print("alert_day")
-			elif r.json()['data']['profile'] == '2':
+			elif r.json()['data']['profile'] == 2:
 				print("alert_day_windy")
-			elif r.json()['data']['profile'] == '3':
+			elif r.json()['data']['profile'] == 3:
 				print("alert_night")
-			elif r.json()['data']['profile'] == '4':
+			elif r.json()['data']['profile'] == 4:
 				print("day")
-			elif r.json()['data']['profile'] == '5':
+			elif r.json()['data']['profile'] == 5:
 				print("day_windy")
-			elif r.json()['data']['profile'] == '6':
+			elif r.json()['data']['profile'] == 6:
 				print("night")
 			else:
 				print("unknown")
+				#print(r.json()['data']['profile'])
