@@ -59,6 +59,8 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 # conversation:
 
+system_health:
+
 # Enables support for tracking state changes over time
 history:
 
@@ -73,6 +75,8 @@ recorder:
 logbook:
 
 # mqtt:
+#   broker: 10.0.7.16
+
 
 # Track the sun
 sun:
@@ -317,6 +321,23 @@ sensor:
         friendly_name: 'Alarm Status'
         value_template: "{% if is_state('sensor.alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.alarm_panel_display', 'ARMED ***STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
 
+  - platform: mqtt
+    state_topic: 'monitor/lb/E0:33:8E:B8:C0:A9'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jeff_basement'
+  - platform: mqtt
+    state_topic: 'monitor/pihole/E0:33:8E:B8:C0:A9'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jeff_dining'
+  - platform: min_max
+    name: "Home Occupancy Confidence"
+    type: max
+    round_digits: 0
+    entity_ids:
+      - sensor.jeff_basement
+      - sensor.jeff_dining
 
 
 binary_sensor:
