@@ -547,7 +547,7 @@
 ## Auto arming & disarming
 ################################################
 - id: arm_alarm_nobody_home
-  alias: 'Arm Alarm Away when Nobody Home'
+  alias: 'Arm Alarm when Nobody Home'
   trigger:
     platform: state
     entity_id: sensor.anyone_home
