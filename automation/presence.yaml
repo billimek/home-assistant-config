@@ -203,3 +203,47 @@
 #         entity_id: input_select.set_biprofile
 #         option:
 #           'alert_night'
+
+- alias: Jeff Occupancy On
+#   hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.jeff_occupancy_confidence
+      above: 10
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: input_boolean.jeff_occupancy
+
+- alias: Jeff Occupancy Off
+#   hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.jeff_occupancy_confidence
+      below: 10
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: input_boolean.jeff_occupancy
+
+- alias: Jen Occupancy On
+#   hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.jen_occupancy_confidence
+      above: 10
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: input_boolean.jen_occupancy
+
+- alias: Jen Occupancy Off
+#   hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.jen_occupancy_confidence
+      below: 10
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: input_boolean.jen_occupancy
