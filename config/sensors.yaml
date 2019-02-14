@@ -1,0 +1,352 @@
+  - platform: darksky
+    name: Weather
+    api_key: !secret darksky-api_key
+    forecast:
+      - 0
+    monitored_conditions:
+      - summary
+      - nearest_storm_distance
+      - precip_intensity
+      - precip_probability
+      - temperature
+      - temperature_high
+      - temperature_low
+      - wind_speed
+      - wind_bearing
+      - visibility
+      - apparent_temperature
+      - minutely_summary
+      - hourly_summary
+      - daily_summary
+      - dew_point
+      - cloud_cover
+      - humidity
+  - platform: yr
+    name: yr
+    monitored_conditions:
+      - windSpeed
+  - platform: ring
+  - platform: filter
+    name: "Weather Wind Speed (Filtered)"
+    entity_id: sensor.weather_wind_speed
+    filters:
+        - filter: outlier
+          window_size: 4
+          radius: 6.0
+        - filter: lowpass
+          time_constant: 3
+          precision: 2
+  - platform: command_line
+    name: "Blue Iris Profile"
+    command: "python3 /config/shell/getBIProfile.py"
+  - platform: template
+    sensors:
+      anyone_home:
+        friendly_name: 'Home Status'
+        value_template: "{% if is_state('binary_sensor.jeff_presence', 'on') or is_state('binary_sensor.jen_presence', 'on')-%}home{%else%}not_home{% endif %}"
+  - platform: template
+    sensors:
+      garage_status:
+        friendly_name: 'Jeff''s garage door status'
+        value_template: '{% if states.cover.jeff_garage_door %}
+            {% if states.cover.jeff_garage_door.attributes["door_state"] == "open" %}
+              Open
+            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "closed" %}
+              Closed
+            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "opening" %}
+              Opening
+            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "closing" %}
+              Closing
+            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "offline" %}
+              Offline
+            {% else %}
+              Unknown
+            {% endif %}
+            {% else %}
+            n/a
+            {% endif %}'
+      garage_car_present:
+        friendly_name: 'Jeff''s car in garage'
+        value_template: '{% if states.cover.jeff_garage_door %}
+            {% if states.cover.jeff_garage_door.state == "open" %}
+              n/a
+            {% elif ((states.cover.jeff_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jeff_garage_door.attributes["distance_sensor"] < 130)) %}
+              Yes
+            {% else %}
+              No
+            {% endif %}
+            {% else %}
+            n/a
+            {% endif %}'
+      garage2_status:
+        friendly_name: 'Jen''s garage door status'
+        value_template: '{% if states.cover.jen_garage_door %}
+            {% if states.cover.jen_garage_door.attributes["door_state"] == "open" %}
+              Open
+            {% elif states.cover.jen_garage_door.attributes["door_state"] == "closed" %}
+              Closed
+            {% elif states.cover.jen_garage_door.attributes["door_state"] == "opening" %}
+              Opening
+            {% elif states.cover.jen_garage_door.attributes["door_state"] == "closing" %}
+              Closing
+            {% elif states.cover.jen_garage_door.attributes["door_state"] == "offline" %}
+              Offline
+            {% else %}
+              Unknown
+            {% endif %}
+            {% else %}
+            n/a
+            {% endif %}'
+      garage2_car_present:
+        friendly_name: 'Jen''s car in garage'
+        value_template: '{% if states.cover.jen_garage_door %}
+            {% if states.cover.jen_garage_door.state == "open" %}
+              n/a
+            {% elif ((states.cover.jen_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jen_garage_door.attributes["distance_sensor"] < 130)) %}
+              Yes
+            {% else %}
+              No
+            {% endif %}
+            {% else %}
+            n/a
+            {% endif %}'
+  - platform: template
+    sensors:
+      alarm_status:
+        friendly_name: 'Alarm Status'
+        value_template: "{% if is_state('sensor.alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.alarm_panel_display', 'ARMED ***STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
+#### Jeff's phone (bluetooth)
+  - platform: mqtt
+    state_topic: 'monitor/basement/jeffs_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jeff_basement'
+  - platform: mqtt
+    state_topic: 'monitor/dining/jeffs_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jeff_dining'
+  - platform: mqtt
+    state_topic: 'monitor/garage/jeffs_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jeff_garage'
+  - platform: mqtt
+    state_topic: 'monitor/livingroom/jeffs_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jeff_livingroom'
+  - platform: mqtt
+    state_topic: 'monitor/upstairs/jeffs_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jeff_upstairs'
+  - platform: min_max
+    name: "Jeff's Phone Bluetooth Occupancy Confidence"
+    type: max
+    round_digits: 0
+    entity_ids:
+      - sensor.jeff_basement
+      - sensor.jeff_dining
+      - sensor.jeff_garage
+      - sensor.jeff_livingroom
+      - sensor.jeff_upstairs
+#### Jeff's phone bluetooth RSSI stuff
+  - platform: mqtt
+    state_topic: 'monitor/basement/jeffs_phone/rssi'
+    name: 'Jeff Basement RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jeff Basement RSSI"
+    entity_id: sensor.jeff_basement_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+  - platform: mqtt
+    state_topic: 'monitor/dining/jeffs_phone/rssi'
+    name: 'Jeff Dining RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jeff Dining RSSI"
+    entity_id: sensor.jeff_dining_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+  - platform: mqtt
+    state_topic: 'monitor/garage/jeffs_phone/rssi'
+    name: 'Jeff Garage RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jeff Garage RSSI"
+    entity_id: sensor.jeff_garage_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+  - platform: mqtt
+    state_topic: 'monitor/livingroom/jeffs_phone/rssi'
+    name: 'Jeff Livingroom RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jeff Livingroom RSSI"
+    entity_id: sensor.jeff_livingroom_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+  - platform: mqtt
+    state_topic: 'monitor/upstairs/jeffs_phone/rssi'
+    name: 'Jeff Upstairs RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jeff Upstairs RSSI"
+    entity_id: sensor.jeff_upstairs_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+
+#### Jen's phone (bluetooth)
+  - platform: mqtt
+    state_topic: 'monitor/basement/jens_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jen_basement'
+  - platform: mqtt
+    state_topic: 'monitor/dining/jens_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jen_dining'
+  - platform: mqtt
+    state_topic: 'monitor/garage/jens_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jen_garage'
+  - platform: mqtt
+    state_topic: 'monitor/livingroom/jens_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jen_livingroom'
+  - platform: mqtt
+    state_topic: 'monitor/upstairs/jens_phone'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'jen_upstairs'
+  - platform: min_max
+    name: "Jen's Phone Bluetooth Occupancy Confidence"
+    type: max
+    round_digits: 0
+    entity_ids:
+      - sensor.jen_basement
+      - sensor.jen_dining
+      - sensor.jen_garage
+      - sensor.jen_livingroom
+      - sensor.jen_upstairs
+#### Jen's phone bluetooth RSSI stuff
+  - platform: mqtt
+    state_topic: 'monitor/basement/jens_phone/rssi'
+    name: 'Jen Basement RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jen Basement RSSI"
+    entity_id: sensor.jen_basement_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+  - platform: mqtt
+    state_topic: 'monitor/dining/jens_phone/rssi'
+    name: 'Jen Dining RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jen Dining RSSI"
+    entity_id: sensor.jen_dining_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+  - platform: mqtt
+    state_topic: 'monitor/garage/jens_phone/rssi'
+    name: 'Jen Garage RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jen Garage RSSI"
+    entity_id: sensor.jen_garage_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+  - platform: mqtt
+    state_topic: 'monitor/livingroom/jens_phone/rssi'
+    name: 'Jen Livingroom RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jen Livingroom RSSI"
+    entity_id: sensor.jen_livingroom_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
+  - platform: mqtt
+    state_topic: 'monitor/upstairs/jens_phone/rssi'
+    name: 'Jen Upstairs RSSI raw'
+    unit_of_measurement: 'dBm'
+  - platform: filter
+    name: "Jen Upstairs RSSI"
+    entity_id: sensor.jen_upstairs_rssi_raw
+    filters:
+      - filter: outlier
+        window_size: 2
+        radius: 1.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:01
+        precision: 1
