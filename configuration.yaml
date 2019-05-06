@@ -22,6 +22,9 @@ homeassistant:
   packages:
     security: !include security.yaml
 
+  whitelist_external_dirs:
+    - /config/tensorflow/snapshot
+
 # Show links to resources in log and frontend
 # introduction:
 
@@ -60,6 +63,8 @@ discovery:
 # conversation:
 
 system_health:
+
+person:
 
 # Enables support for tracking state changes over time
 history:
@@ -149,6 +154,8 @@ shell_command: !include shell/shell.yaml
 # rest_command: !include config/rest.yaml
 # variable: !include config/variable.yaml
 zone: !include config/zones.yaml
+camera: !include_dir_merge_list cameras
+image_processing: !include_dir_merge_list tensorflow
 
 input_select:
   set_biprofile:
@@ -156,12 +163,8 @@ input_select:
     initial: "-"
     options:
       - "-"
-      - "alert_day"
-      - "alert_day_windy"
-      - "alert_night"
-      - "day"
-      - "day_windy"
-      - "night"
+      - "home"
+      - "away"
 
 cover:
   platform: opengarage
@@ -210,11 +213,11 @@ binary_sensor:
         prob_given_false: 0.1
         platform: 'state'
         to_state: 'home'
-      - entity_id: 'device_tracker.jeff_phone'
-        prob_given_true: 0.9
-        prob_given_false: 0.4
-        platform: 'state'
-        to_state: 'home'
+    #   - entity_id: 'device_tracker.jeff_phone'
+    #     prob_given_true: 0.9
+    #     prob_given_false: 0.4
+    #     platform: 'state'
+    #     to_state: 'home'
       - entity_id: 'input_boolean.jeff_occupancy'
         prob_given_true: 0.9
         prob_given_false: 0.1
@@ -231,16 +234,46 @@ binary_sensor:
         prob_given_false: 0.1
         platform: 'state'
         to_state: 'home'
-      - entity_id: 'device_tracker.jen_phone'
-        prob_given_true: 0.9
-        prob_given_false: 0.4
-        platform: 'state'
-        to_state: 'home'
+    #   - entity_id: 'device_tracker.jen_phone'
+    #     prob_given_true: 0.9
+    #     prob_given_false: 0.4
+    #     platform: 'state'
+    #     to_state: 'home'
       - entity_id: 'input_boolean.jen_occupancy'
         prob_given_true: 0.9
         prob_given_false: 0.1
         platform: 'state'
         to_state: 'on'
+  - platform: mqtt
+    name: "Front Camera Motion"
+    state_topic: BlueIris/alert/front
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
+  - platform: mqtt
+    name: "Driveway Camera Motion"
+    state_topic: BlueIris/alert/driveway
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
+  - platform: mqtt
+    name: "Porch Camera Motion"
+    state_topic: BlueIris/alert/porch
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
+  - platform: mqtt
+    name: "Pool Camrea Motion"
+    state_topic: BlueIris/alert/pool
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
+  - platform: mqtt
+    name: "Basement Camera Motion"
+    state_topic: BlueIris/alert/basement
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
 
 group: !include groups.yaml
 
@@ -254,8 +287,8 @@ nest:
   client_id: !secret nest-client_id
   client_secret: !secret nest-client_secret
 
-owntracks:
-  waypoints: true
+# owntracks:
+#   waypoints: true
 
 device_tracker:
 #  - platform: owntracks_http
@@ -273,7 +306,19 @@ device_tracker:
     #track_new_devices: False
     #    consider_home: 180
     new_device_defaults:
-      track_new_devices: no
+      track_new_devices: false
+  - platform: mqtt
+    devices:
+      jeff_basement: 'monitor/basement/jeffs_phone/device_tracker'
+      jeff_dining: 'monitor/dining/jeffs_phone/device_tracker'
+      jeff_garage: 'monitor/garage/jeffs_phone/device_tracker'
+      jeff_livingroom: 'monitor/livingroom/jeffs_phone/device_tracker'
+      jeff_upstairs: 'monitor/upstairs/jeffs_phone/device_tracker'
+      jen_basement: 'monitor/basement/jens_phone/device_tracker'
+      jen_dining: 'monitor/dining/jens_phone/device_tracker'
+      jen_garage: 'monitor/garage/jens_phone/device_tracker'
+      jen_livingroom: 'monitor/livingroom/jens_phone/device_tracker'
+      jen_upstairs: 'monitor/upstairs/jens_phone/device_tracker'
 
 
 influxdb:

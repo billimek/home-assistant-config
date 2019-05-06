@@ -43,9 +43,9 @@ if session != "":
 		#print("new profile is: \'", profiles_list, "\'")
 		if r.json()['result'] == 'success':
 			if r.json()['data']['profile'] == 1:
-				print("alert_day")
+				print("home")
 			elif r.json()['data']['profile'] == 2:
-				print("alert_day_windy")
+				print("away")
 			elif r.json()['data']['profile'] == 3:
 				print("alert_night")
 			elif r.json()['data']['profile'] == 4:
@@ -54,6 +54,8 @@ if session != "":
 				print("day_windy")
 			elif r.json()['data']['profile'] == 6:
 				print("night")
+			elif r.json()['data']['profile'] == 7:
+				print("tensorflow")
 			else:
 				print("unknown")
 				#print(r.json()['data']['profile'])

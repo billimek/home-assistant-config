@@ -49,10 +49,10 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-if sys.argv[1] == "alert_day":
+if sys.argv[1] == "home":
 	prof = 1
 	enabled = False
-elif sys.argv[1] == "alert_day_windy":
+elif sys.argv[1] == "away":
 	prof = 2
 	enabled = True
 elif sys.argv[1] == "alert_night":
@@ -66,6 +66,9 @@ elif sys.argv[1] == "day_windy":
     enabled = True
 elif sys.argv[1] == "night":
     prof = 6
+    enabled = True
+elif sys.argv[1] == "tensorflow":
+    prof = 7
     enabled = True
 else:
 	quit

@@ -50,7 +50,7 @@
 ################################################################################
 ## Set BI profile when home to 'alert_night' at 10pm
 ################################################################################
-- id: set_bi_profile_alert_night_10pm
+- id: set_bi_profile_away_10pm
   alias: BI - alert_night at 10pm when home
   initial_state: on
   trigger:
@@ -64,120 +64,120 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'alert_night'
+        option: 'away'
 
 
 ################################################################################
 ## Windy / Not Windy automations
 ################################################################################
-- id: set_bi_profile_alert_day_windy_when_not_home_and_windy
-  alias: BI - alert_day_windy when not home and windy
-  initial_state: on
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.weather_wind_speed
-      above: 5.0
-  condition:
-    condition: and
-    conditions:
-      - condition: sun
-        after: 'sunrise'
-        after_offset: "00:30:00"
-      - condition: sun
-        before: 'sunset'
-        before_offset: "-00:30:00"
-      - condition: state
-        entity_id: sensor.anyone_home
-        state: 'not_home'
-      - condition: state
-        entity_id: sensor.blue_iris_profile
-        state: 'alert_day'
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.set_biprofile
-        option: 'alert_day_windy'
+# - id: set_bi_profile_alert_day_windy_when_not_home_and_windy
+#   alias: BI - alert_day_windy when not home and windy
+#   initial_state: off
+#   trigger:
+#     - platform: numeric_state
+#       entity_id: sensor.weather_wind_speed
+#       above: 5.0
+#   condition:
+#     condition: and
+#     conditions:
+#       - condition: sun
+#         after: 'sunrise'
+#         after_offset: "00:30:00"
+#       - condition: sun
+#         before: 'sunset'
+#         before_offset: "-00:30:00"
+#       - condition: state
+#         entity_id: sensor.anyone_home
+#         state: 'not_home'
+#       - condition: state
+#         entity_id: sensor.blue_iris_profile
+#         state: 'alert_day'
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.set_biprofile
+#         option: 'alert_day_windy'
 
-- id: set_bi_profile_alert_day_when_not_home_and_not_windy
-  alias: BI - alert_day when not home and not windy
-  initial_state: on
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.weather_wind_speed
-      below: 5.0
-  condition:
-    condition: and
-    conditions:
-      - condition: sun
-        after: 'sunrise'
-        after_offset: "00:30:00"
-      - condition: sun
-        before: 'sunset'
-        before_offset: "-00:30:00"
-      - condition: state
-        entity_id: sensor.anyone_home
-        state: 'not_home'
-      - condition: state
-        entity_id: sensor.blue_iris_profile
-        state: 'alert_day_windy'
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.set_biprofile
-        option: 'alert_day'
+# - id: set_bi_profile_alert_day_when_not_home_and_not_windy
+#   alias: BI - alert_day when not home and not windy
+#   initial_state: off
+#   trigger:
+#     - platform: numeric_state
+#       entity_id: sensor.weather_wind_speed
+#       below: 5.0
+#   condition:
+#     condition: and
+#     conditions:
+#       - condition: sun
+#         after: 'sunrise'
+#         after_offset: "00:30:00"
+#       - condition: sun
+#         before: 'sunset'
+#         before_offset: "-00:30:00"
+#       - condition: state
+#         entity_id: sensor.anyone_home
+#         state: 'not_home'
+#       - condition: state
+#         entity_id: sensor.blue_iris_profile
+#         state: 'alert_day_windy'
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.set_biprofile
+#         option: 'alert_day'
 
-- id: set_bi_profile_day_windy_when_home_and_windy
-  alias: BI - day_windy when home and windy
-  initial_state: on
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.weather_wind_speed
-      above: 5.0
-  condition:
-    condition: and
-    conditions:
-      - condition: sun
-        after: 'sunrise'
-        after_offset: "00:30:00"
-      - condition: sun
-        before: 'sunset'
-        before_offset: "-00:30:00"
-      - condition: state
-        entity_id: sensor.anyone_home
-        state: 'home'
-      - condition: state
-        entity_id: sensor.blue_iris_profile
-        state: 'day'
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.set_biprofile
-        option: 'day_windy'
+# - id: set_bi_profile_day_windy_when_home_and_windy
+#   alias: BI - day_windy when home and windy
+#   initial_state: off
+#   trigger:
+#     - platform: numeric_state
+#       entity_id: sensor.weather_wind_speed
+#       above: 5.0
+#   condition:
+#     condition: and
+#     conditions:
+#       - condition: sun
+#         after: 'sunrise'
+#         after_offset: "00:30:00"
+#       - condition: sun
+#         before: 'sunset'
+#         before_offset: "-00:30:00"
+#       - condition: state
+#         entity_id: sensor.anyone_home
+#         state: 'home'
+#       - condition: state
+#         entity_id: sensor.blue_iris_profile
+#         state: 'day'
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.set_biprofile
+#         option: 'day_windy'
 
-- id: set_bi_profile_day_when_home_and_not_windy
-  alias: BI - day when home and not windy
-  initial_state: on
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.weather_wind_speed
-      below: 5.0
-  condition:
-    condition: and
-    conditions:
-      - condition: sun
-        after: 'sunrise'
-        after_offset: "00:30:00"
-      - condition: sun
-        before: 'sunset'
-        before_offset: "-00:30:00"
-      - condition: state
-        entity_id: sensor.anyone_home
-        state: 'home'
-      - condition: state
-        entity_id: sensor.blue_iris_profile
-        state: 'day_windy'
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.set_biprofile
-        option: 'day'
+# - id: set_bi_profile_day_when_home_and_not_windy
+#   alias: BI - day when home and not windy
+#   initial_state: off
+#   trigger:
+#     - platform: numeric_state
+#       entity_id: sensor.weather_wind_speed
+#       below: 5.0
+#   condition:
+#     condition: and
+#     conditions:
+#       - condition: sun
+#         after: 'sunrise'
+#         after_offset: "00:30:00"
+#       - condition: sun
+#         before: 'sunset'
+#         before_offset: "-00:30:00"
+#       - condition: state
+#         entity_id: sensor.anyone_home
+#         state: 'home'
+#       - condition: state
+#         entity_id: sensor.blue_iris_profile
+#         state: 'day_windy'
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.set_biprofile
+#         option: 'day'

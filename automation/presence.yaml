@@ -59,8 +59,8 @@
 ################################################################################
 ## Set BI profile when we leave or come home
 ################################################################################
-- id: set_bi_day_when_home 
-  alias: BI day when we get home
+- id: set_bi_home_when_home 
+  alias: BI home when we get home
   initial_state: on
   trigger:
     - platform: state
@@ -76,34 +76,34 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'day'
+        option: 'home'
 
-- id: set_bi_day_windy_when_home_and_windy
-  alias: BI day_windy when we get home and it is windy
-  initial_state: on
-  trigger:
-    - platform: state
-      entity_id: sensor.anyone_home
-      to: 'home'
-  condition:
-    - condition: sun
-      after: 'sunrise'
-      after_offset: "00:30:00"
-    - condition: sun
-      before: 'sunset'
-      before_offset: "-00:30:00"
-    - condition: numeric_state
-      entity_id: sensor.weather_wind_speed
-      above: 5.0
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.set_biprofile
-        option: 'day_windy'
+# - id: set_bi_day_windy_when_home_and_windy
+#   alias: BI day_windy when we get home and it is windy
+#   initial_state: on
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.anyone_home
+#       to: 'home'
+#   condition:
+#     - condition: sun
+#       after: 'sunrise'
+#       after_offset: "00:30:00"
+#     - condition: sun
+#       before: 'sunset'
+#       before_offset: "-00:30:00"
+#     - condition: numeric_state
+#       entity_id: sensor.weather_wind_speed
+#       above: 5.0
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.set_biprofile
+#         option: 'day_windy'
 
 
-- id: set_bi_alert_day_when_leave 
-  alias: BI alert_day when we leave
+- id: set_bi_away_when_leave 
+  alias: BI away when we leave
   initial_state: on
   trigger:
     - platform: state
@@ -119,33 +119,33 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'alert_day'
+        option: 'away'
 
-- id: set_bi_alert_day_windy_when_leave_and_windy
-  alias: BI alert_day_windy when we leave and it is windy
-  initial_state: on
-  trigger:
-    - platform: state
-      entity_id: sensor.anyone_home
-      to: 'not_home'
-  condition:
-    - condition: sun
-      after: 'sunrise'
-      after_offset: "00:30:00"
-    - condition: sun
-      before: 'sunset'
-      before_offset: "-00:30:00"
-    - condition: numeric_state
-      entity_id: sensor.weather_wind_speed
-      above: 5.0
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.set_biprofile
-        option: 'alert_day_windy'
+# - id: set_bi_alert_day_windy_when_leave_and_windy
+#   alias: BI alert_day_windy when we leave and it is windy
+#   initial_state: on
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.anyone_home
+#       to: 'not_home'
+#   condition:
+#     - condition: sun
+#       after: 'sunrise'
+#       after_offset: "00:30:00"
+#     - condition: sun
+#       before: 'sunset'
+#       before_offset: "-00:30:00"
+#     - condition: numeric_state
+#       entity_id: sensor.weather_wind_speed
+#       above: 5.0
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.set_biprofile
+#         option: 'alert_day_windy'
 
-- id: set_bi_alert_night_when_leave
-  alias: BI alert_night when we leave
+- id: set_bi_away_when_leave_after_sunset
+  alias: BI away when we leave after sunset
   initial_state: on
   trigger:
     - platform: state
@@ -159,9 +159,9 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'alert_night'
+        option: 'away'
 
-- id: set_bi_night_when_home_before_10pm 
+- id: set_bi_home_when_home_before_10pm 
   alias: BI night when we get home before 10pm
   initial_state: on
   trigger:
@@ -180,7 +180,7 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'night'
+        option: 'home'
 
 # - id: set_bi_alert_night_when_home_after_10pm 
 #   alias: Presence - Set BI alert_night when we get home after 10pm
@@ -205,10 +205,11 @@
 #           'alert_night'
 
 - alias: Jeff Occupancy On
+  initial_state: on
 #   hide_entity: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.jeff_occupancy_confidence
+      entity_id: sensor.jeff_s_phone_bluetooth_occupancy_confidence
       above: 10
   action:
     - service: homeassistant.turn_on
@@ -216,10 +217,11 @@
         entity_id: input_boolean.jeff_occupancy
 
 - alias: Jeff Occupancy Off
+  initial_state: on
 #   hide_entity: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.jeff_occupancy_confidence
+      entity_id: sensor.jeff_s_phone_bluetooth_occupancy_confidence
       below: 10
   action:
     - service: homeassistant.turn_off
@@ -227,10 +229,11 @@
         entity_id: input_boolean.jeff_occupancy
 
 - alias: Jen Occupancy On
+  initial_state: on
 #   hide_entity: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.jen_occupancy_confidence
+      entity_id: sensor.jen_s_phone_bluetooth_occupancy_confidence
       above: 10
   action:
     - service: homeassistant.turn_on
@@ -238,10 +241,11 @@
         entity_id: input_boolean.jen_occupancy
 
 - alias: Jen Occupancy Off
+  initial_state: on
 #   hide_entity: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.jen_occupancy_confidence
+      entity_id: sensor.jen_s_phone_bluetooth_occupancy_confidence
       below: 10
   action:
     - service: homeassistant.turn_off
