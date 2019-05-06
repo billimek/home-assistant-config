@@ -35,8 +35,8 @@
 # TODO: is there any way to combine some of these using conditionals
 # TODO: in the action section? (maybe a check on sunrise vs sunset?)
 
-- id: set_bi_day_at_sunrise_when_home 
-  alias: BI profile to day at sunrise when home
+- id: set_bi_home_at_sunrise_when_home 
+  alias: BI profile to home at sunrise when home
   initial_state: on
   trigger:
     platform: sun
@@ -50,10 +50,10 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'day'
+        option: 'home'
 
-- id: set_bi_alert_day_at_sunrise_when_not_home 
-  alias: BI profile to alert_day at sunrise when not home
+- id: set_bi_away_at_sunrise_when_not_home 
+  alias: BI profile to away at sunrise when not home
   initial_state: on
   trigger:
     platform: sun
@@ -67,10 +67,10 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'alert_day'
+        option: 'away'
 
-- id: set_bi_night_at_sunset_when_home
-  alias: BI profile to night at sunset when home
+- id: set_bi_home_at_sunset_when_home
+  alias: BI profile to home at sunset when home
   initial_state: on
   trigger:
     platform: sun
@@ -84,10 +84,10 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'night'
+        option: 'home'
 
-- id: set_bi_alert_night_at_sunset_when_not_home
-  alias: BI profile to alert_night at sunset when not home
+- id: set_bi_away_at_sunset_when_not_home
+  alias: BI profile to away at sunset when not home
   initial_state: on
   trigger:
     platform: sun
@@ -101,4 +101,4 @@
     - service: input_select.select_option
       data_template:
         entity_id: input_select.set_biprofile
-        option: 'alert_night'
+        option: 'away'
