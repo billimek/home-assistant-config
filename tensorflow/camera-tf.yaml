@@ -2,7 +2,6 @@
   source:
     - entity_id: camera.porch
     - entity_id: camera.pool
-    - entity_id: camera.basement
     - entity_id: camera.front
   file_out:
     - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
@@ -12,6 +11,22 @@
     graph: /config/tensorflow/frozen_inference_graph.pb
     categories:
       - person
+      - cat
+      - dog
+- platform: tensorflow
+  source:
+    - entity_id: camera.basement
+  file_out:
+    - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  scan_interval: 604800
+  model:
+    graph: /config/tensorflow/frozen_inference_graph.pb
+    categories:
+      - category: person
+        area:
+          bottom: 0.85
+          left: 0.15
       - cat
       - dog
 - platform: tensorflow
