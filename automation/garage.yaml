@@ -464,8 +464,6 @@
     condition: state
     entity_id: cover.jeff_garage_door
     state: open
-    for:
-      seconds: 600
   action:
     - service: notify.ios_jeff_phone
       data_template:
@@ -488,8 +486,6 @@
     condition: state
     entity_id: cover.jen_garage_door
     state: open
-    for:
-      seconds: 600
   action:
     - service: notify.ios_jeff_phone
       data_template:
