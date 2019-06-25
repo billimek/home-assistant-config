@@ -1,11 +1,35 @@
 - platform: tensorflow
   source:
     - entity_id: camera.porch
+  file_out:
+    - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    # - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  scan_interval: 604800
+  model:
+    graph: /config/tensorflow/frozen_inference_graph.pb
+    categories:
+      - person
+      - cat
+      - dog
+- platform: tensorflow
+  source:
     - entity_id: camera.pool
+  file_out:
+    - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    # - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  scan_interval: 604800
+  model:
+    graph: /config/tensorflow/frozen_inference_graph.pb
+    categories:
+      - person
+      - cat
+      - dog
+- platform: tensorflow
+  source:
     - entity_id: camera.front
   file_out:
-    - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    # - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: /config/tensorflow/frozen_inference_graph.pb
@@ -17,24 +41,24 @@
   source:
     - entity_id: camera.basement
   file_out:
-    - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    # - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: /config/tensorflow/frozen_inference_graph.pb
     categories:
-      - category: person
-        area:
-          bottom: 0.85
-          left: 0.15
+      - person
       - cat
       - dog
+    area:
+      bottom: 0.9
+      left: 0
 - platform: tensorflow
   source:
     - entity_id: camera.driveway
   file_out:
-    - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    # - "/config/www/tensorflow/snapshot/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: /config/tensorflow/frozen_inference_graph.pb
