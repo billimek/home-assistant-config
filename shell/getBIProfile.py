@@ -15,7 +15,7 @@ configdir = "/config"
 #configdir = "x:\\hass-config"
 
 with open('{}/secrets.yaml'.format(configdir), 'r') as sf:
-    secrets = yaml.load(sf)
+    secrets = yaml.safe_load(sf)
 
 bi_server = secrets["bi_server"]
 bi_user = secrets["bi_user"]
