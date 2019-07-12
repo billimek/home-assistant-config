@@ -1,3 +1,7 @@
+# to install opencv for use by tensorflow:
+# 'mkdir -p /config/deps/lib/python3.7/site-packages/'
+# 'pip install -t /config/deps/lib/python3.7/site-packages/ opencv-python'
+
 - platform: tensorflow
   source:
     - entity_id: camera.porch
