@@ -215,8 +215,13 @@ input_boolean:
   camera_basement_notify:
     name: Notifications for object detection from basement camera
     initial: on
-
-
+  auto_arm_disarm_alarm_night:
+    name: Arm alarm at midnight and disarm at 5am
+    initial: on
+  auto_close_garage_door_jen:
+    name: Automatically close Jen's Garage Door if open for 30 mins
+  auto_close_garage_door_jeff:
+    name: Automatically close Jeff's Garage Door if open for 30 mins
 
 
 weather:

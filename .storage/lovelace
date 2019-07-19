@@ -8,12 +8,30 @@
                     "cards": [
                         {
                             "entities": [
-                                "cover.jeff_garage_door",
-                                "sensor.garage_status",
-                                "sensor.garage_car_present",
-                                "cover.jen_garage_door",
-                                "sensor.garage2_status",
-                                "sensor.garage2_car_present"
+                                {
+                                    "entity": "cover.jeff_garage_door"
+                                },
+                                {
+                                    "entity": "sensor.garage_status"
+                                },
+                                {
+                                    "entity": "sensor.garage_car_present"
+                                },
+                                {
+                                    "entity": "input_boolean.auto_close_garage_door_jeff"
+                                },
+                                {
+                                    "entity": "cover.jen_garage_door"
+                                },
+                                {
+                                    "entity": "sensor.garage2_status"
+                                },
+                                {
+                                    "entity": "sensor.garage2_car_present"
+                                },
+                                {
+                                    "entity": "input_boolean.auto_close_garage_door_jen"
+                                }
                             ],
                             "show_header_toggle": false,
                             "title": "Garage",
@@ -32,6 +50,9 @@
                                 },
                                 {
                                     "entity": "alarm_control_panel.alarm_panel"
+                                },
+                                {
+                                    "entity": "input_boolean.auto_arm_disarm_alarm_night"
                                 }
                             ],
                             "show_header_toggle": false,
