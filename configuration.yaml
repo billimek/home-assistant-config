@@ -11,6 +11,10 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/New_York
 
+  auth_providers:
+    - type: legacy_api_password
+      api_password: !secret http-api_password
+
 #   customize:
 #     zone.home:
 #       beacon:
@@ -39,8 +43,6 @@ frontend:
 config:
 
 http:
-  # Uncomment this to add a password (recommended!)
-  api_password: !secret http-api_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
   # server_port: 8123
@@ -195,6 +197,26 @@ input_boolean:
     name: Jeff is home (bluetooth)
   jen_occupancy:
     name: Jen is home (bluetooth)
+  auto_run_basement_fan:
+    name: Auto-run basement fan at noon, daily
+    initial: on
+  camera_front_notify:
+    name: Notifications for object detection from front camera
+    initial: on
+  camera_driveway_notify:
+    name: Notifications for object detection from driveway camera
+    initial: on
+  camera_porch_notify:
+    name: Notifications for object detection from porch camera
+    initial: on
+  camera_pool_notify:
+    name: Notifications for object detection from pool camera
+    initial: on
+  camera_basement_notify:
+    name: Notifications for object detection from basement camera
+    initial: on
+
+
 
 
 weather:
