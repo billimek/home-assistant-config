@@ -1,0 +1,657 @@
+{
+    "data": {
+        "config": {
+            "title": "\ud83c\udfe1",
+            "views": [
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                "cover.jeff_garage_door",
+                                "sensor.garage_status",
+                                "sensor.garage_car_present",
+                                "cover.jen_garage_door",
+                                "sensor.garage2_status",
+                                "sensor.garage2_car_present"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Garage",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.alarm_panel_display"
+                                },
+                                {
+                                    "entity": "sensor.alarm_status"
+                                },
+                                {
+                                    "entity": "input_select.alarm_mode"
+                                },
+                                {
+                                    "entity": "alarm_control_panel.alarm_panel"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Alarm Panel",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "device_tracker.jeff_phone"
+                                },
+                                {
+                                    "entity": "device_tracker.jeff_wifi"
+                                },
+                                {
+                                    "entity": "input_boolean.jeff_occupancy"
+                                },
+                                {
+                                    "entity": "binary_sensor.jeff_presence"
+                                },
+                                {
+                                    "entity": "device_tracker.jen_phone"
+                                },
+                                {
+                                    "entity": "device_tracker.jen_wifi"
+                                },
+                                {
+                                    "entity": "input_boolean.jen_occupancy"
+                                },
+                                {
+                                    "entity": "binary_sensor.jen_presence"
+                                },
+                                {
+                                    "entity": "sensor.anyone_home"
+                                },
+                                {
+                                    "entity": "person.jeff_billimek"
+                                },
+                                {
+                                    "entity": "person.jennifer_billimek"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Family",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.alert_when_everyone_leaves_home"
+                                },
+                                {
+                                    "entity": "automation.alert_when_anyone_comes_home"
+                                },
+                                {
+                                    "entity": "sensor.jeffs_phone_battery_level"
+                                },
+                                {
+                                    "entity": "sensor.jeffs_phone_battery_state"
+                                },
+                                {
+                                    "entity": "sensor.jennifers_phone_battery_level"
+                                },
+                                {
+                                    "entity": "sensor.jennifers_phone_battery_state"
+                                }
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Presence",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.weather_summary"
+                                },
+                                {
+                                    "entity": "sensor.weather_temperature"
+                                },
+                                {
+                                    "entity": "sensor.weather_wind_speed"
+                                },
+                                {
+                                    "entity": "sensor.weather_nearest_storm_distance"
+                                },
+                                {
+                                    "entity": "sensor.weather_overnight_low_temperature_0d"
+                                },
+                                {
+                                    "entity": "sensor.weather_daytime_high_temperature_0d"
+                                },
+                                {
+                                    "entity": "sensor.weather_daily_summary"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Weather Summary",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.blue_iris_profile",
+                                "input_select.set_biprofile"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Cameras",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "climate.basement",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "climate.master_bedroom_nest",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entity": "climate.downstairs",
+                            "theme": "default",
+                            "type": "thermostat"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.jeff_s_phone_bluetooth_occupancy_confidence"
+                                },
+                                {
+                                    "entity": "sensor.jen_s_phone_bluetooth_occupancy_confidence"
+                                },
+                                {
+                                    "entity": "sensor.jeff_basement"
+                                },
+                                {
+                                    "entity": "sensor.jeff_dining"
+                                },
+                                {
+                                    "entity": "sensor.jeff_garage"
+                                },
+                                {
+                                    "entity": "sensor.jeff_livingroom"
+                                },
+                                {
+                                    "entity": "sensor.jeff_upstairs"
+                                },
+                                {
+                                    "entity": "sensor.jen_basement"
+                                },
+                                {
+                                    "entity": "sensor.jen_dining"
+                                },
+                                {
+                                    "entity": "sensor.jen_garage"
+                                },
+                                {
+                                    "entity": "sensor.jen_livingroom"
+                                },
+                                {
+                                    "entity": "sensor.jen_upstairs"
+                                },
+                                {
+                                    "entity": "sensor.jeff_basement_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jeff_dining_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jeff_garage_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jeff_livingroom_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jeff_upstairs_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jen_basement_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jen_dining_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jen_garage_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jen_livingroom_rssi_raw"
+                                },
+                                {
+                                    "entity": "sensor.jen_upstairs_rssi_raw"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Bluetooth LE",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:home-assistant",
+                    "path": "default_view",
+                    "title": "Home"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.downstairs_thermostat_humidity"
+                                },
+                                {
+                                    "entity": "sensor.downstairs_thermostat_hvac_state"
+                                },
+                                {
+                                    "entity": "sensor.master_bedroom_thermostat_nest_humidity"
+                                },
+                                {
+                                    "entity": "sensor.master_bedroom_thermostat_nest_hvac_state"
+                                },
+                                {
+                                    "entity": "sensor.basement_thermostat_humidity"
+                                },
+                                {
+                                    "entity": "sensor.basement_thermostat_hvac_state"
+                                },
+                                {
+                                    "entity": "sensor.dining_room_nest_protect_smoke_status"
+                                },
+                                {
+                                    "entity": "sensor.dining_room_nest_protect_co_status"
+                                },
+                                {
+                                    "entity": "sensor.downstairs_nest_protect_smoke_status"
+                                },
+                                {
+                                    "entity": "sensor.downstairs_nest_protect_co_status"
+                                },
+                                {
+                                    "entity": "sensor.upstairs_nest_protect_smoke_status"
+                                },
+                                {
+                                    "entity": "sensor.upstairs_nest_protect_co_status"
+                                },
+                                {
+                                    "entity": "input_boolean.auto_run_basement_fan"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Nest Details",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.weather_summary"
+                                },
+                                {
+                                    "entity": "sensor.weather_temperature"
+                                },
+                                {
+                                    "entity": "sensor.weather_wind_speed"
+                                },
+                                {
+                                    "entity": "sensor.weather_nearest_storm_distance"
+                                },
+                                {
+                                    "entity": "sensor.weather_overnight_low_temperature_0d"
+                                },
+                                {
+                                    "entity": "sensor.weather_daytime_high_temperature_0d"
+                                },
+                                {
+                                    "entity": "sensor.weather_daily_summary"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Weather Summary",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.weather_humidity",
+                                "sensor.weather_precip_probability",
+                                "sensor.weather_precip_intensity",
+                                "sensor.weather_apparent_temperature",
+                                "sensor.weather_dew_point",
+                                "sensor.weather_wind_bearing",
+                                "sensor.weather_visibility",
+                                "sensor.weather_cloud_coverage",
+                                "sensor.weather_minutely_summary",
+                                "sensor.weather_hourly_summary"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Weather Details",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:weather-cloudy",
+                    "path": "climate_view",
+                    "title": "Climate"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.alert_when_motion_is_detected_upstairs_and_nobody_home"
+                                },
+                                {
+                                    "entity": "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home"
+                                },
+                                {
+                                    "entity": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
+                                },
+                                {
+                                    "entity": "binary_sensor.ring_front_door_ding"
+                                },
+                                {
+                                    "entity": "binary_sensor.ring_front_door_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.upstairs_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.main_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.basement_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.front_door"
+                                },
+                                {
+                                    "entity": "binary_sensor.garage_door"
+                                },
+                                {
+                                    "entity": "binary_sensor.family_window"
+                                },
+                                {
+                                    "entity": "binary_sensor.living_window"
+                                },
+                                {
+                                    "entity": "binary_sensor.sun_room_door"
+                                },
+                                {
+                                    "entity": "binary_sensor.unknown_door"
+                                },
+                                {
+                                    "entity": "binary_sensor.basement_window"
+                                },
+                                {
+                                    "entity": "binary_sensor.bathroom_window"
+                                },
+                                {
+                                    "entity": "binary_sensor.kitchen_window"
+                                },
+                                {
+                                    "entity": "binary_sensor.unknown_door"
+                                },
+                                {
+                                    "entity": "binary_sensor.laundry_window"
+                                },
+                                {
+                                    "entity": "binary_sensor.basement_door"
+                                },
+                                {
+                                    "entity": "binary_sensor.sliding_door"
+                                },
+                                {
+                                    "entity": "binary_sensor.upstairs_window"
+                                },
+                                {
+                                    "entity": "binary_sensor.hall_smoke"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Alarm Sensors",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.bi_set_profile_when_input_select_changes"
+                                },
+                                {
+                                    "entity": "automation.bi_notify_if_profile_is_unknown"
+                                },
+                                {
+                                    "entity": "automation.bi_alert_night_at_10pm_when_home"
+                                },
+                                {
+                                    "entity": "automation.bi_away_when_we_leave"
+                                },
+                                {
+                                    "entity": "automation.bi_away_when_we_leave_after_sunset"
+                                },
+                                {
+                                    "entity": "automation.bi_home_when_we_get_home"
+                                },
+                                {
+                                    "entity": "automation.bi_night_when_we_get_home_before_10pm"
+                                },
+                                {
+                                    "entity": "automation.bi_profile_to_away_at_sunrise_when_not_home"
+                                },
+                                {
+                                    "entity": "automation.bi_profile_to_away_at_sunset_when_not_home"
+                                },
+                                {
+                                    "entity": "automation.bi_profile_to_home_at_sunrise_when_home"
+                                },
+                                {
+                                    "entity": "automation.bi_profile_to_home_at_sunset_when_home"
+                                },
+                                {
+                                    "entity": "automation.cameras_profile_to_day_after_sunrise"
+                                },
+                                {
+                                    "entity": "automation.sunset_set_cameras_profile_before_sunset"
+                                }
+                            ],
+                            "title": "Camera Toggles",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.arm_alarm_when_nobody_home"
+                                },
+                                {
+                                    "entity": "automation.disarm_alarm_when_anybody_comes_home"
+                                },
+                                {
+                                    "entity": "automation.notify_alarm_triggered"
+                                },
+                                {
+                                    "entity": "automation.notify_alarm_armed"
+                                },
+                                {
+                                    "entity": "automation.notify_alarm_disarmed"
+                                },
+                                {
+                                    "entity": "automation.alert_when_door_to_garage_is_opened_for_too_long"
+                                },
+                                {
+                                    "entity": "automation.alert_when_basement_door_is_opened_for_too_long"
+                                },
+                                {
+                                    "entity": "automation.alert_when_front_door_is_opened_for_too_long"
+                                },
+                                {
+                                    "entity": "automation.alert_when_sun_room_door_is_opened_for_too_long"
+                                }
+                            ],
+                            "title": "Alarm Toggles",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "automation.alert_when_motion_is_detected_upstairs_and_nobody_home",
+                                "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home",
+                                "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home",
+                                "automation.alert_when_front_door_is_open_and_nobody_home",
+                                "automation.alert_when_garage_door_is_open_and_nobody_home",
+                                "automation.alert_when_family_window_is_open_and_nobody_home",
+                                "automation.alert_when_living_window_is_open_and_nobody_home",
+                                "automation.alert_when_sun_room_door_is_open_and_nobody_home",
+                                "automation.alert_when_basement_window_is_open_and_nobody_home",
+                                "automation.alert_when_bathroom_window_is_open_and_nobody_home",
+                                "automation.alert_when_kitchen_window_is_open_and_nobody_home",
+                                "automation.alert_when_unknown_door_is_open_and_nobody_home",
+                                "automation.alert_when_laundry_window_is_open_and_nobody_home",
+                                "automation.alert_when_basement_door_is_open_and_nobody_home",
+                                "automation.alert_when_sliding_door_is_open_and_nobody_home",
+                                "automation.alert_when_upstairs_window_is_open_and_nobody_home"
+                            ],
+                            "title": "Alarm Sensor Alert Toggles",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.notify_when_jeff_s_garage_door_opens"
+                                },
+                                {
+                                    "entity": "automation.notify_when_jeff_s_garage_door_opens_and_no_one_is_home"
+                                },
+                                {
+                                    "entity": "automation.notify_when_jeff_s_garage_door_closes"
+                                },
+                                {
+                                    "entity": "automation.notify_when_jeff_s_garage_door_closes_and_no_one_is_home"
+                                },
+                                {
+                                    "entity": "automation.notify_when_jeff_s_garage_door_remains_open"
+                                },
+                                {
+                                    "entity": "automation.auto_close_jeff_s_garage_door_after_10pm"
+                                }
+                            ],
+                            "title": "Jeff's Garage Toggles",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.notify_when_jen_s_garage_door_opens"
+                                },
+                                {
+                                    "entity": "automation.notify_when_jen_s_garage_door_opens_and_no_one_is_home"
+                                },
+                                {
+                                    "entity": "automation.notify_when_jen_s_garage_door_closes"
+                                },
+                                {
+                                    "entity": "automation.notify_when_jen_s_garage_door_closes_and_no_one_is_home"
+                                },
+                                {
+                                    "entity": "automation.alert_when_jen_s_garage_door_remains_open"
+                                },
+                                {
+                                    "entity": "automation.auto_close_jen_s_garage_door_after_10pm"
+                                }
+                            ],
+                            "title": "Jen's Garage Toggles",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "alarm_control_panel.alarm_panel",
+                            "type": "alarm-panel"
+                        }
+                    ],
+                    "icon": "mdi:shield-home",
+                    "path": "security_view",
+                    "title": "Security"
+                },
+                {
+                    "cards": [
+                        {
+                            "camera_image": "camera.front",
+                            "entity": "camera.front",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "camera_image": "camera.driveway",
+                            "entity": "camera.driveway",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "camera_image": "camera.porch",
+                            "entity": "camera.porch",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "camera_image": "camera.pool",
+                            "entity": "camera.pool",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "camera_image": "camera.basement",
+                            "entity": "camera.basement",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "image_processing.tensorflow_basement"
+                                },
+                                {
+                                    "entity": "image_processing.tensorflow_driveway"
+                                },
+                                {
+                                    "entity": "image_processing.tensorflow_front"
+                                },
+                                {
+                                    "entity": "image_processing.tensorflow_pool"
+                                },
+                                {
+                                    "entity": "image_processing.tensorflow_porch"
+                                }
+                            ],
+                            "title": "Tensorflow",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "input_boolean.camera_front_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_driveway_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_porch_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_pool_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_basement_notify"
+                                }
+                            ],
+                            "title": "Camera Notifications",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:camcorder",
+                    "title": "Cameras"
+                }
+            ]
+        }
+    },
+    "key": "lovelace",
+    "version": 1
+}
