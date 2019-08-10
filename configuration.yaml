@@ -12,15 +12,7 @@ homeassistant:
   time_zone: America/New_York
 
   auth_providers:
-    - type: legacy_api_password
-      api_password: !secret http-api_password
-
-#   customize:
-#     zone.home:
-#       beacon:
-#         uuid: !secret beacon_uuid
-#         major: 0
-#         minor: 0
+    - type: homeassistant
 
 # Packages
   packages:
@@ -28,9 +20,6 @@ homeassistant:
 
   whitelist_external_dirs:
     - /config/tensorflow/snapshot
-
-# Show links to resources in log and frontend
-# introduction:
 
 #lovelace:
 #  mode: yaml
@@ -45,7 +34,6 @@ config:
 http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
-  # server_port: 8123
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -61,9 +49,6 @@ discovery:
   ignore:
     - plex_mediaserver
 
-# Allows you to issue voice commands from the frontend in enabled browsers
-# conversation:
-
 system_health:
 
 person:
@@ -71,12 +56,12 @@ person:
 # Enables support for tracking state changes over time
 history:
 
-# persist states between restarts ??
+# persist states between restarts
 recorder:
-  db_url: !secret db_url
-  exclude:
-    domains:
-      - device_tracker
+ db_url: !secret db_url
+ exclude:
+   domains:
+     - device_tracker
 
 # View all events in a logbook
 logbook:
@@ -85,7 +70,6 @@ logbook:
 sun:
 
 map:
-
 
 ios:
   push:
@@ -96,46 +80,40 @@ ios:
           - identifier: 'DISARM_ALARM'
             title: 'Disarm Alarm'
             activationMode: 'background'
-            authenticationRequired: yes
-            destructive: yes
+            authenticationRequired: true
+            destructive: true
       - name: garage
         identifier: 'garage'
         actions:
           - identifier: 'CLOSE_GARAGE'
-            title: 'Close Jeff''s garage door'
+            title: 'Close Jeffs garage door'
             activationMode: 'background'
-            authenticationRequired: yes
+            authenticationRequired: true
+          - identifier: 'OPEN_GARAGE'
+            title: 'Open Jeffs garage door'
+            activationMode: 'background'
+            authenticationRequired: true
       - name: garage2
         identifier: 'garage2'
         actions:
           - identifier: 'CLOSE_GARAGE2'
-            title: 'Close Jen''s garage door'
+            title: 'Close Jens garage door'
             activationMode: 'background'
-            authenticationRequired: yes
+            authenticationRequired: true
       - name: garage_open
         identifier: 'garage_open'
         actions:
           - identifier: 'OPEN_GARAGE'
-            title: 'Open Jeff''s garage door'
+            title: 'Open Jeffs garage door'
             activationMode: 'background'
-            authenticationRequired: yes
+            authenticationRequired: true
       - name: garage2_open
         identifier: 'garage2_open'
         actions:
           - identifier: 'OPEN_GARAGE2'
-            title: 'Open Jen''s garage door'
+            title: 'Open Jens garage door'
             activationMode: 'background'
-            authenticationRequired: yes
-
-
-# Custom UI Panels
-# panel_custom:
-#  - name: floorplan
-#    sidebar_title: Floorplan
-#    sidebar_icon: mdi:floor-plan
-#    url_path: floorplan
-#    config: !include config/floorplan.yaml
-
+            authenticationRequired: true
 
 # device_tracker: !include config/device_tracker.yaml
 # zone: !include config/zones.yaml
@@ -201,19 +179,19 @@ input_boolean:
     name: Auto-run basement fan at noon, daily
     initial: on
   camera_front_notify:
-    name: Notifications for object detection from front camera
+    name: Front camera notifications
     initial: on
   camera_driveway_notify:
-    name: Notifications for object detection from driveway camera
+    name: Driveway camera notifications
     initial: on
   camera_porch_notify:
-    name: Notifications for object detection from porch camera
+    name: Porch camera notifications
     initial: on
   camera_pool_notify:
-    name: Notifications for object detection from pool camera
+    name: Pool camera notifications
     initial: on
   camera_basement_notify:
-    name: Notifications for object detection from basement camera
+    name: Basement camera notifications
     initial: on
   auto_arm_disarm_alarm_night:
     name: Arm alarm at midnight and disarm at 5am
@@ -235,7 +213,7 @@ binary_sensor:
     name: 'Jeff Presence'
     probability_threshold: 0.9
     observations:
-      - entity_id: 'device_tracker.jeff_wifi'
+      - entity_id: 'device_tracker.jeffs_xs'
         prob_given_true: 0.9
         prob_given_false: 0.1
         platform: 'state'
@@ -256,7 +234,7 @@ binary_sensor:
     name: 'Jen Presence'
     probability_threshold: 0.9
     observations:
-      - entity_id: 'device_tracker.jen_wifi'
+      - entity_id: 'device_tracker.jennifersxsmax'
         prob_given_true: 0.9
         prob_given_false: 0.1
         platform: 'state'
@@ -314,26 +292,18 @@ nest:
   client_id: !secret nest-client_id
   client_secret: !secret nest-client_secret
 
-# owntracks:
-#   waypoints: true
-
 device_tracker:
-#  - platform: owntracks_http
-    #    max_gps_accuracy: 100
-#    waypoints: True
-    #    region_mapping:
-    #      ibeacon-home: home
-  - platform: unifi
-    username: !secret unifi-username
-    password: !secret unifi-password
-    host: !secret unifi-host
-    port: 8443
-    verify_ssl: false
-    detection_time: 60
-    #track_new_devices: False
-    #    consider_home: 180
-    new_device_defaults:
-      track_new_devices: false
+  # - platform: unifi
+  #   username: !secret unifi-username
+  #   password: !secret unifi-password
+  #   host: !secret unifi-host
+  #   port: 8443
+  #   verify_ssl: false
+  #   detection_time: 60
+  #   #track_new_devices: False
+  #   #    consider_home: 180
+  #   new_device_defaults:
+  #     track_new_devices: false
   - platform: mqtt
     devices:
       jeff_basement: 'monitor/basement/jeffs_phone/device_tracker'
@@ -367,4 +337,3 @@ ring:
 
 # zwave:
 #  usb_path: /dev/ttyACM0
-

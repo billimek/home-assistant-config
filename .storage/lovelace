@@ -65,7 +65,7 @@
                                     "entity": "device_tracker.jeff_phone"
                                 },
                                 {
-                                    "entity": "device_tracker.jeff_wifi"
+                                    "entity": "device_tracker.jeffs_xs"
                                 },
                                 {
                                     "entity": "input_boolean.jeff_occupancy"
@@ -77,7 +77,7 @@
                                     "entity": "device_tracker.jen_phone"
                                 },
                                 {
-                                    "entity": "device_tracker.jen_wifi"
+                                    "entity": "device_tracker.jennifersxsmax"
                                 },
                                 {
                                     "entity": "input_boolean.jen_occupancy"
@@ -590,6 +590,27 @@
                 {
                     "cards": [
                         {
+                            "entities": [
+                                {
+                                    "entity": "input_boolean.camera_front_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_driveway_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_porch_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_pool_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_basement_notify"
+                                }
+                            ],
+                            "title": "Camera Notifications",
+                            "type": "entities"
+                        },
+                        {
                             "camera_image": "camera.front",
                             "entity": "camera.front",
                             "show_name": false,
@@ -643,27 +664,6 @@
                                 }
                             ],
                             "title": "Tensorflow",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.camera_front_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_driveway_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_porch_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_pool_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_basement_notify"
-                                }
-                            ],
-                            "title": "Camera Notifications",
                             "type": "entities"
                         }
                     ],

@@ -407,7 +407,7 @@
 ## Auto open and close garage door
 ################################################
 - id: ios_action_close_garage
-  alias: 'iOS action to close Jeff''s garage door'
+  alias: 'iOS action to close Jeffs garage door'
   initial_state: on
   trigger:
     - platform: event
@@ -419,7 +419,7 @@
     entity_id: cover.jeff_garage_door
 
 - id: ios_action_open_garage
-  alias: 'iOS action to open Jeff''s garage door'
+  alias: 'iOS action to open Jeffs garage door'
   initial_state: on
   trigger:
     - platform: event
@@ -431,7 +431,7 @@
     entity_id: cover.jeff_garage_door
 
 - id: ios_action_close_garage2
-  alias: 'iOS action to close Jen''s garage door'
+  alias: 'iOS action to close Jens garage door'
   initial_state: on
   trigger:
     - platform: event
@@ -443,7 +443,7 @@
     entity_id: cover.jen_garage_door
 
 - id: ios_action_open_garage2
-  alias: 'iOS action to open Jen''s garage door'
+  alias: 'iOS action to open Jens garage door'
   initial_state: on
   trigger:
     - platform: event
