@@ -31,6 +31,12 @@
                                 },
                                 {
                                     "entity": "input_boolean.auto_close_garage_door_jen"
+                                },
+                                {
+                                    "entity": "sensor.garage_status_new"
+                                },
+                                {
+                                    "entity": "sensor.garage2_status_new"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -545,9 +551,6 @@
                                     "entity": "automation.notify_when_jeff_s_garage_door_closes_and_no_one_is_home"
                                 },
                                 {
-                                    "entity": "automation.notify_when_jeff_s_garage_door_remains_open"
-                                },
-                                {
                                     "entity": "automation.auto_close_jeff_s_garage_door_after_10pm"
                                 }
                             ],
@@ -569,9 +572,6 @@
                                     "entity": "automation.notify_when_jen_s_garage_door_closes_and_no_one_is_home"
                                 },
                                 {
-                                    "entity": "automation.alert_when_jen_s_garage_door_remains_open"
-                                },
-                                {
                                     "entity": "automation.auto_close_jen_s_garage_door_after_10pm"
                                 }
                             ],
@@ -580,6 +580,11 @@
                         },
                         {
                             "entity": "alarm_control_panel.alarm_panel",
+                            "states": [
+                                "arm_night",
+                                "arm_home",
+                                "arm_away"
+                            ],
                             "type": "alarm-panel"
                         }
                     ],
