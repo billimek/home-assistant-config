@@ -114,7 +114,7 @@
     sensors:
       alarm_status:
         friendly_name: 'Alarm Status'
-        value_template: "{% if is_state('sensor.alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.alarm_panel_display', 'ARMED ***STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
+        value_template: "{% if is_state('sensor.alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.alarm_panel_display', 'ARMED ***STAY***                ') or is_state('sensor.alarm_panel_display', '***NIGHT-STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
 #### Jeff's phone (bluetooth)
   - platform: mqtt
     state_topic: 'monitor/basement/jeffs_phone'

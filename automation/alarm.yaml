@@ -564,7 +564,7 @@
     entity_id: input_select.alarm_mode
     state: 'automatic'
   action:
-    - service: alarm_control_panel.alarm_arm_home
+    - service: alarm_control_panel.alarm_arm_night
       data:
         entity_id: alarm_control_panel.alarm_panel
         code: !secret ALARMCD
