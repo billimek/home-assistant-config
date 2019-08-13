@@ -18,8 +18,8 @@ homeassistant:
   packages:
     security: !include security.yaml
 
-  whitelist_external_dirs:
-    - /config/tensorflow/snapshot
+  # whitelist_external_dirs:
+  #   - /config/tensorflow/snapshot
 
 #lovelace:
 #  mode: yaml
@@ -27,6 +27,17 @@ homeassistant:
 # Enables the frontend
 frontend:
   javascript_version: latest
+
+logger:
+  default: info
+  logs:
+    homeassistant.components.alarm_control_panel: debug
+    homeassistant.components.alarmdecoder: debug
+    homeassistant.components.sensor.alarm_panel_display: debug
+    alarmdecoder: debug
+    # homeassistant.components.websocket_api: debug
+    # homeassistant.core: debug
+
 
 # Enables configuration UI
 config:
