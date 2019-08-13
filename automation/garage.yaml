@@ -71,9 +71,9 @@
           push:
             badge: 1
             category: 'garage'
-    - service: 'mqtt.publish'
-      data: 
-        topic: monitor/scan/arrive
+    # - service: 'mqtt.publish'
+    #   data: 
+    #     topic: monitor/scan/arrive
 
 - id: save_when_garage_from_open_to_unknown
   alias: 'Save garage open state when offline'
@@ -161,9 +161,9 @@
           push:
             badge: 1
             category: 'garage2'
-    - service: 'mqtt.publish'
-      data: 
-        topic: monitor/scan/arrive
+    # - service: 'mqtt.publish'
+    #   data: 
+    #     topic: monitor/scan/arrive
 
 - id: save_when_garage2_from_open_to_unknown
   alias: 'Save garage2 open state when offline'
@@ -214,9 +214,9 @@
           push:
             category: 'garage_open'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
-    - service: 'mqtt.publish'
-      data: 
-        topic: monitor/scan/depart
+    # - service: 'mqtt.publish'
+    #   data: 
+    #     topic: monitor/scan/depart
 
 - id: alert_when_garage_closes_and_no_one_is_home
   alias: 'Notify when Jeff''s garage door closes and no one is home'
@@ -294,9 +294,9 @@
           push:
             category: 'garage2_open'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
-    - service: 'mqtt.publish'
-      data: 
-        topic: monitor/scan/depart
+    # - service: 'mqtt.publish'
+    #   data: 
+    #     topic: monitor/scan/depart
 
 - id: alert_when_garage2_closes_and_no_one_is_home
   alias: 'Notify when Jen''s garage door closes and no one is home'
@@ -344,63 +344,63 @@
 ########################################################
 ## Notify when garage door is open more than 30 minutes
 ########################################################
-- id: alert_when_garage_stays_open
-  alias: 'Notify when Jeff''s garage door remains open'
-  trigger:
-    platform: state
-    entity_id: sensor.garage_status
-    from: 'Closed'
-    to: 'Open'
-    for:
-      seconds: 1800
-  action:
-    - service: notify.ios_jeff_phone
-      data_template:
-        title: "Garage Door"
-        message: "Jeff's garage door has remained open for more than 30 minutes"
-        data:
-          push:
-            badge: 1
-            category: 'garage'
-            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
-    - service: notify.ios_jen_phone
-      data_template:
-        title: "Garage Door"
-        message: "Jeff's garage door has remained open for more than 30 minutes"
-        data:
-          push:
-            badge: 1
-            category: 'garage'
-            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
+# - id: alert_when_garage_stays_open
+#   alias: 'Notify when Jeff''s garage door remains open'
+#   trigger:
+#     platform: state
+#     entity_id: sensor.garage_status
+#     from: 'Closed'
+#     to: 'Open'
+#     for:
+#       seconds: 1800
+#   action:
+#     - service: notify.ios_jeff_phone
+#       data_template:
+#         title: "Garage Door"
+#         message: "Jeff's garage door has remained open for more than 30 minutes"
+#         data:
+#           push:
+#             badge: 1
+#             category: 'garage'
+#             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
+#     - service: notify.ios_jen_phone
+#       data_template:
+#         title: "Garage Door"
+#         message: "Jeff's garage door has remained open for more than 30 minutes"
+#         data:
+#           push:
+#             badge: 1
+#             category: 'garage'
+#             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
-- id: alert_when_garage2_stays_open
-  alias: 'Alert when Jen''s garage door remains open'
-  trigger:
-    platform: state
-    entity_id: sensor.garage2_status
-    from: 'Closed'
-    to: 'Open'
-    for:
-      seconds: 1800
-  action:
-    - service: notify.ios_jeff_phone
-      data_template:
-        title: "Garage Door"
-        message: "Jen's garage door has remained open for more than 30 minutes"
-        data:
-          push:
-            badge: 1
-            category: 'garage2'
-            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
-    - service: notify.ios_jen_phone
-      data_template:
-        title: "Garage Door"
-        message: "Jen's garage door has remained open for more than 30 minutes"
-        data:
-          push:
-            badge: 1
-            category: 'garage2'
-            sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
+# - id: alert_when_garage2_stays_open
+#   alias: 'Alert when Jen''s garage door remains open'
+#   trigger:
+#     platform: state
+#     entity_id: sensor.garage2_status
+#     from: 'Closed'
+#     to: 'Open'
+#     for:
+#       seconds: 1800
+#   action:
+#     - service: notify.ios_jeff_phone
+#       data_template:
+#         title: "Garage Door"
+#         message: "Jen's garage door has remained open for more than 30 minutes"
+#         data:
+#           push:
+#             badge: 1
+#             category: 'garage2'
+#             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
+#     - service: notify.ios_jen_phone
+#       data_template:
+#         title: "Garage Door"
+#         message: "Jen's garage door has remained open for more than 30 minutes"
+#         data:
+#           push:
+#             badge: 1
+#             category: 'garage2'
+#             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
 
 ################################################
