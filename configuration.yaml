@@ -212,7 +212,21 @@ input_boolean:
     name: Automatically close Jen's Garage Door if open for 30 mins
   auto_close_garage_door_jeff:
     name: Automatically close Jeff's Garage Door if open for 30 mins
-
+  auto_arm_alarm_when_gone:
+    name: Automatically arm alarm when no one is home
+    initial: on
+  auto_disarm_alarm_when_home:
+    name: Automatically disarm alarm when someone comes home
+    initial: on
+  notify_alarm_armed:
+    name: Notification when alarm is armed
+    initial: on
+  notify_alarm_disarmed:
+    name: Notification when alarm is disarmed
+    initial: on
+  notify_alarm_triggered:
+    name: Notification when alarm is triggered
+    initial: on
 
 weather:
   - platform: darksky

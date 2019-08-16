@@ -497,19 +497,19 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "automation.arm_alarm_when_nobody_home"
+                                    "entity": "input_boolean.auto_arm_alarm_when_gone"
                                 },
                                 {
-                                    "entity": "automation.disarm_alarm_when_anybody_comes_home"
+                                    "entity": "input_boolean.auto_disarm_alarm_when_home"
                                 },
                                 {
-                                    "entity": "automation.notify_alarm_triggered"
+                                    "entity": "input_boolean.notify_alarm_triggered"
                                 },
                                 {
-                                    "entity": "automation.notify_alarm_armed"
+                                    "entity": "input_boolean.notify_alarm_armed"
                                 },
                                 {
-                                    "entity": "automation.notify_alarm_disarmed"
+                                    "entity": "input_boolean.notify_alarm_disarmed"
                                 },
                                 {
                                     "entity": "automation.alert_when_door_to_garage_is_opened_for_too_long"
