@@ -18,8 +18,9 @@ homeassistant:
   packages:
     security: !include security.yaml
 
-  # whitelist_external_dirs:
-  #   - /config/tensorflow/snapshot
+  whitelist_external_dirs:
+    - /config/tensorflow/snapshot
+    - /config/www/camera
 
 #lovelace:
 #  mode: yaml
@@ -298,6 +299,8 @@ notify:
     platform: slack
     api_key: !secret slack-api_key
     default_channel: '#home'
+    username: "Home Assistant"
+    icon: home-assistant
 
 nest:
   client_id: !secret nest-client_id
