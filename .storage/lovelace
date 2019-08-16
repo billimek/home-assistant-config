@@ -31,12 +31,6 @@
                                 },
                                 {
                                     "entity": "input_boolean.auto_close_garage_door_jen"
-                                },
-                                {
-                                    "entity": "sensor.garage_status_new"
-                                },
-                                {
-                                    "entity": "sensor.garage2_status_new"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -301,6 +295,15 @@
                                 },
                                 {
                                     "entity": "input_boolean.auto_run_basement_fan"
+                                },
+                                {
+                                    "entity": "sensor.master_bedroom_thermostat_nest_temperature"
+                                },
+                                {
+                                    "entity": "sensor.downstairs_thermostat_temperature"
+                                },
+                                {
+                                    "entity": "sensor.basement_thermostat_temperature"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -351,6 +354,16 @@
                             "show_header_toggle": false,
                             "title": "Weather Details",
                             "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.downstairs_thermostat_temperature",
+                                "sensor.master_bedroom_thermostat_nest_temperature",
+                                "sensor.basement_thermostat_temperature"
+                            ],
+                            "hours_to_show": 168,
+                            "title": "Temperature History",
+                            "type": "history-graph"
                         }
                     ],
                     "icon": "mdi:weather-cloudy",
