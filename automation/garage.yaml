@@ -24,7 +24,6 @@
         message: "Jeff's garage door is open"
         data:
           push:
-            badge: 1
             category: 'garage'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
     - service: notify.ios_jen_phone
@@ -33,7 +32,6 @@
         message: "Jeff's garage door is open"
         data:
           push:
-            badge: 1
             category: 'garage'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
@@ -61,7 +59,6 @@
         message: "Jeff's garage door is open and no one is home!"
         data:
           push:
-            badge: 1
             category: 'garage'
     - service: notify.ios_jen_phone
       data_template:
@@ -69,7 +66,6 @@
         message: "Jeff's garage door is open and no one is home!"
         data:
           push:
-            badge: 1
             category: 'garage'
     # - service: 'mqtt.publish'
     #   data: 
@@ -114,7 +110,6 @@
         message: "Jen's garage door is open"
         data:
           push:
-            badge: 1
             category: 'garage2'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
     - service: notify.ios_jen_phone
@@ -123,7 +118,6 @@
         message: "Jen's garage door is open"
         data:
           push:
-            badge: 1
             category: 'garage2'
             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
 
@@ -151,7 +145,6 @@
         message: "Jen's garage door is open and no one is home!"
         data:
           push:
-            badge: 1
             category: 'garage2'
     - service: notify.ios_jen_phone
       data_template:
@@ -159,7 +152,6 @@
         message: "Jen's garage door is open and no one is home!"
         data:
           push:
-            badge: 1
             category: 'garage2'
     # - service: 'mqtt.publish'
     #   data: 
