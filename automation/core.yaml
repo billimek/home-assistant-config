@@ -1,0 +1,10 @@
+- id: 'startup_automation'
+  alias: Perform arrical scan on HA Startup
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+    - service: 'mqtt.publish'
+      data: 
+        topic: monitor/scan/arrive
