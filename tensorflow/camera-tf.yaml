@@ -1,4 +1,4 @@
-# to install opencv for use by tensorflow:
+# to install opencv for use by tensorflow (may not be necessary):
 # 'mkdir -p /config/deps/lib/python3.7/site-packages/'
 # 'pip install -t /config/deps/lib/python3.7/site-packages/ opencv-python'
 
@@ -54,9 +54,9 @@
       - person
       - cat
       - dog
-    area:
-      bottom: 0.9
-      left: 0
+    # area:
+    #   bottom: 0.9
+    #   left: 0
 - platform: tensorflow
   source:
     - entity_id: camera.driveway
