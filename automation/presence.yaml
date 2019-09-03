@@ -20,30 +20,6 @@
         entity_id: input_select.set_biprofile
         option: 'home'
 
-# - id: set_bi_day_windy_when_home_and_windy
-#   alias: BI day_windy when we get home and it is windy
-#   initial_state: on
-#   trigger:
-#     - platform: state
-#       entity_id: sensor.anyone_home
-#       to: 'home'
-#   condition:
-#     - condition: sun
-#       after: 'sunrise'
-#       after_offset: "00:30:00"
-#     - condition: sun
-#       before: 'sunset'
-#       before_offset: "-00:30:00"
-#     - condition: numeric_state
-#       entity_id: sensor.weather_wind_speed
-#       above: 5.0
-#   action:
-#     - service: input_select.select_option
-#       data_template:
-#         entity_id: input_select.set_biprofile
-#         option: 'day_windy'
-
-
 - id: set_bi_away_when_leave 
   alias: BI away when we leave
   initial_state: on
@@ -62,29 +38,6 @@
       data_template:
         entity_id: input_select.set_biprofile
         option: 'away'
-
-# - id: set_bi_alert_day_windy_when_leave_and_windy
-#   alias: BI alert_day_windy when we leave and it is windy
-#   initial_state: on
-#   trigger:
-#     - platform: state
-#       entity_id: sensor.anyone_home
-#       to: 'not_home'
-#   condition:
-#     - condition: sun
-#       after: 'sunrise'
-#       after_offset: "00:30:00"
-#     - condition: sun
-#       before: 'sunset'
-#       before_offset: "-00:30:00"
-#     - condition: numeric_state
-#       entity_id: sensor.weather_wind_speed
-#       above: 5.0
-#   action:
-#     - service: input_select.select_option
-#       data_template:
-#         entity_id: input_select.set_biprofile
-#         option: 'alert_day_windy'
 
 - id: set_bi_away_when_leave_after_sunset
   alias: BI away when we leave after sunset
@@ -123,28 +76,6 @@
       data_template:
         entity_id: input_select.set_biprofile
         option: 'home'
-
-# - id: set_bi_alert_night_when_home_after_10pm 
-#   alias: Presence - Set BI alert_night when we get home after 10pm
-#   initial_state: on
-#  trigger:
-#     - platform: state
-#       entity_id: sensor.anyone_home
-#       to: 'home'
-#   condition:
-#     condition: and
-#     conditions:
-#       - condition: sun
-#         after: sunset
-#         before: sunrise
-#       - condition: time
-#         after: '22:00:00'
-#   action:
-#     - service: input_select.select_option
-#       data_template:
-#         entity_id: input_select.set_biprofile
-#         option:
-#           'alert_night'
 
 - alias: Jeff Occupancy On
   initial_state: on

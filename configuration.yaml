@@ -145,24 +145,11 @@ ios:
             activationMode: 'background'
             authenticationRequired: true
 
-# device_tracker: !include config/device_tracker.yaml
-# zone: !include config/zones.yaml
-# scene: !include_dir_merge_list scenes
 script: !include_dir_merge_named scripts
 # python_script:
-# input_boolean: !include config/input_boolean.yaml
-# input_slider: !include config/input_slider.yaml
 sensor: !include config/sensors.yaml
-# binary_sensor: !include config/binary_sensors.yaml
-# switch: !include config/switches.yaml
 automation: !include_dir_merge_list automation
-# logbook: !include config/logbook.yaml
 shell_command: !include shell/shell.yaml
-# plant: !include config/plants.yaml
-# media_player: !include config/media_players.yaml
-# mqtt: !include config/mqtt.yaml
-# rest_command: !include config/rest.yaml
-# variable: !include config/variable.yaml
 zone: !include config/zones.yaml
 camera: !include_dir_merge_list cameras
 image_processing: !include_dir_merge_list tensorflow

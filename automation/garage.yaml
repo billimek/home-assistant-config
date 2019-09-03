@@ -333,68 +333,6 @@
       data:
         entity_id: input_boolean.previous_garage2_open
 
-########################################################
-## Notify when garage door is open more than 30 minutes
-########################################################
-# - id: alert_when_garage_stays_open
-#   alias: 'Notify when Jeff''s garage door remains open'
-#   trigger:
-#     platform: state
-#     entity_id: sensor.garage_status
-#     from: 'Closed'
-#     to: 'Open'
-#     for:
-#       seconds: 1800
-#   action:
-#     - service: notify.ios_jeff_phone
-#       data_template:
-#         title: "Garage Door"
-#         message: "Jeff's garage door has remained open for more than 30 minutes"
-#         data:
-#           push:
-#             badge: 1
-#             category: 'garage'
-#             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
-#     - service: notify.ios_jen_phone
-#       data_template:
-#         title: "Garage Door"
-#         message: "Jeff's garage door has remained open for more than 30 minutes"
-#         data:
-#           push:
-#             badge: 1
-#             category: 'garage'
-#             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
-
-# - id: alert_when_garage2_stays_open
-#   alias: 'Alert when Jen''s garage door remains open'
-#   trigger:
-#     platform: state
-#     entity_id: sensor.garage2_status
-#     from: 'Closed'
-#     to: 'Open'
-#     for:
-#       seconds: 1800
-#   action:
-#     - service: notify.ios_jeff_phone
-#       data_template:
-#         title: "Garage Door"
-#         message: "Jen's garage door has remained open for more than 30 minutes"
-#         data:
-#           push:
-#             badge: 1
-#             category: 'garage2'
-#             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
-#     - service: notify.ios_jen_phone
-#       data_template:
-#         title: "Garage Door"
-#         message: "Jen's garage door has remained open for more than 30 minutes"
-#         data:
-#           push:
-#             badge: 1
-#             category: 'garage2'
-#             sound: "US-EN-Morgan-Freeman-Garage-Door-Opened.wav"
-
-
 ################################################
 ## Auto open and close garage door
 ################################################
