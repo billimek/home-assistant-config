@@ -62,6 +62,12 @@
                         {
                             "entities": [
                                 {
+                                    "entity": "sensor.jeff_home_status"
+                                },
+                                {
+                                    "entity": "person.jeff_billimek"
+                                },
+                                {
                                     "entity": "device_tracker.jeff_phone"
                                 },
                                 {
@@ -71,7 +77,10 @@
                                     "entity": "input_boolean.jeff_occupancy"
                                 },
                                 {
-                                    "entity": "binary_sensor.jeff_presence"
+                                    "entity": "sensor.jen_home_status"
+                                },
+                                {
+                                    "entity": "person.jennifer_billimek"
                                 },
                                 {
                                     "entity": "device_tracker.jen_phone"
@@ -83,16 +92,7 @@
                                     "entity": "input_boolean.jen_occupancy"
                                 },
                                 {
-                                    "entity": "binary_sensor.jen_presence"
-                                },
-                                {
                                     "entity": "sensor.anyone_home"
-                                },
-                                {
-                                    "entity": "person.jeff_billimek"
-                                },
-                                {
-                                    "entity": "person.jennifer_billimek"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -101,12 +101,6 @@
                         },
                         {
                             "entities": [
-                                {
-                                    "entity": "automation.alert_when_everyone_leaves_home"
-                                },
-                                {
-                                    "entity": "automation.alert_when_anyone_comes_home"
-                                },
                                 {
                                     "entity": "sensor.jeffs_phone_battery_level"
                                 },

@@ -27,7 +27,6 @@ homeassistant:
 
 # Enables the frontend
 frontend:
-  javascript_version: latest
 
 logger:
   default: info
@@ -38,7 +37,6 @@ logger:
     alarmdecoder: debug
     # homeassistant.components.websocket_api: debug
     # homeassistant.core: debug
-
 
 # Enables configuration UI
 config:
@@ -63,6 +61,8 @@ discovery:
 
 system_health:
 
+cloud:
+
 person:
 
 # Enables support for tracking state changes over time
@@ -71,9 +71,21 @@ history:
 # persist states between restarts
 recorder:
  db_url: !secret db_url
- exclude:
-   domains:
-     - device_tracker
+#  exclude:
+#    domains:
+#      - device_tracker
+
+# prometheus:
+#   namespace: hass
+#   component_config_glob:
+#     sensor.*_hum:
+#       override_metric: humidity_percent
+#     sensor.*temp:
+#       override_metric: temperature_c
+#     sensor.temperature*:
+#       override_metric: temperature_c
+#     sensor.*_bat:
+#       override_metric: battery_percent
 
 # View all events in a logbook
 logbook:
@@ -81,7 +93,13 @@ logbook:
 # Track the sun
 sun:
 
+ssdp:
+
+zeroconf:
+
 map:
+
+mobile_app:
 
 ios:
   push:
@@ -234,47 +252,6 @@ weather:
 
 binary_sensor:
   - platform: ring
-  - platform: bayesian
-    prior: 0.5
-    name: 'Jeff Presence'
-    probability_threshold: 0.9
-    observations:
-      - entity_id: 'device_tracker.jeffs_xs'
-        prob_given_true: 0.9
-        prob_given_false: 0.1
-        platform: 'state'
-        to_state: 'home'
-    #   - entity_id: 'device_tracker.jeff_phone'
-    #     prob_given_true: 0.9
-    #     prob_given_false: 0.4
-    #     platform: 'state'
-    #     to_state: 'home'
-      - entity_id: 'input_boolean.jeff_occupancy'
-        prob_given_true: 0.9
-        prob_given_false: 0.1
-        platform: 'state'
-        to_state: 'on'
-
-  - platform: bayesian
-    prior: 0.5
-    name: 'Jen Presence'
-    probability_threshold: 0.9
-    observations:
-      - entity_id: 'device_tracker.jennifersxsmax'
-        prob_given_true: 0.9
-        prob_given_false: 0.1
-        platform: 'state'
-        to_state: 'home'
-    #   - entity_id: 'device_tracker.jen_phone'
-    #     prob_given_true: 0.9
-    #     prob_given_false: 0.4
-    #     platform: 'state'
-    #     to_state: 'home'
-      - entity_id: 'input_boolean.jen_occupancy'
-        prob_given_true: 0.9
-        prob_given_false: 0.1
-        platform: 'state'
-        to_state: 'on'
   - platform: mqtt
     name: "Front Camera Motion"
     state_topic: BlueIris/alert/front
@@ -321,17 +298,6 @@ nest:
   client_secret: !secret nest-client_secret
 
 device_tracker:
-  # - platform: unifi
-  #   username: !secret unifi-username
-  #   password: !secret unifi-password
-  #   host: !secret unifi-host
-  #   port: 8443
-  #   verify_ssl: false
-  #   detection_time: 60
-  #   #track_new_devices: False
-  #   #    consider_home: 180
-  #   new_device_defaults:
-  #     track_new_devices: false
   - platform: mqtt
     devices:
       jeff_basement: 'monitor/basement/jeffs_phone/device_tracker'
