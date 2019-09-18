@@ -3,7 +3,7 @@
 ################################################################################
 - id: sunrise_set_cameras
   alias: Cameras profile to day after sunrise
-  initial_state: on
+  initial_state: off
   trigger:
     platform: sun
     event: sunrise
@@ -16,7 +16,7 @@
 
 - id: sunset_set_cameras
   alias: Sunset - set cameras profile before sunset
-  initial_state: on
+  initial_state: off
   trigger:
     platform: sun
     event: sunset
