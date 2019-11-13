@@ -31,6 +31,12 @@
                                 },
                                 {
                                     "entity": "input_boolean.auto_close_garage_door_jen"
+                                },
+                                {
+                                    "entity": "cover.jens_garage_mqtt"
+                                },
+                                {
+                                    "entity": "cover.jeffs_garage_mqtt"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -240,6 +246,27 @@
                             "show_header_toggle": false,
                             "title": "Bluetooth LE",
                             "type": "entities"
+                        },
+                        {
+                            "entity": "sensor.anyone_home",
+                            "hold_action": {
+                                "action": "none"
+                            },
+                            "icon": "mdi:bluetooth",
+                            "name": "Restart BTLE Monitors",
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "call-service",
+                                "service": "mqtt.publish",
+                                "service_data": {
+                                    "payload": "",
+                                    "qos": 0,
+                                    "retain": 0,
+                                    "topic": "monitor/scan/restart"
+                                }
+                            },
+                            "type": "entity-button"
                         }
                     ],
                     "icon": "mdi:home-assistant",
