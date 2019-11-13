@@ -70,7 +70,7 @@ history:
 
 # persist states between restarts
 recorder:
- db_url: !secret db_url
+#  db_url: !secret db_url
 #  exclude:
 #    domains:
 #      - device_tracker
@@ -164,16 +164,40 @@ input_select:
       - "away"
 
 cover:
-  platform: opengarage
-  covers:
-      garage:
-        host:  !secret og-host_og-jeff
-        device_key: !secret og-key
-        name:  Jeff Garage Door
-      garage2:
-        host:  !secret og-host_og-jen
-        device_key: !secret og-key
-        name:  Jen Garage Door
+  - platform: opengarage
+    covers:
+        garage:
+          host:  !secret og-host_og-jeff
+          device_key: !secret og-key
+          name:  Jeff Garage Door
+        garage2:
+          host:  !secret og-host_og-jen
+          device_key: !secret og-key
+          name:  Jen Garage Door
+  - platform: mqtt
+    name: "Jens Garage - MQTT"
+    command_topic: "og-jen/IN/STATE"
+    state_topic: "og-jen/OUT/STATE"
+    # availability_topic: "jens/OUT/STATUS"
+    payload_open: "open"
+    payload_close: "close"
+    payload_available: "online"
+    state_open: "OPEN"
+    state_closed: "CLOSED"
+    device_class: "garage"
+    # value_template: '{{ value.x }}'
+  - platform: mqtt
+    name: "Jeffs Garage - MQTT"
+    command_topic: "og-jeff/IN/STATE"
+    state_topic: "og-jeff/OUT/STATE"
+    # availability_topic: "jeffs/OUT/STATUS"
+    payload_open: "open"
+    payload_close: "close"
+    payload_available: "online"
+    state_open: "OPEN"
+    state_closed: "CLOSED"
+    device_class: "garage"
+    # value_template: '{{ value.x }}'
 
 input_boolean:
   previous_garage_open:
