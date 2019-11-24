@@ -573,19 +573,13 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "automation.notify_when_jeff_s_garage_door_opens"
-                                },
-                                {
-                                    "entity": "automation.notify_when_jeff_s_garage_door_opens_and_no_one_is_home"
-                                },
-                                {
-                                    "entity": "automation.notify_when_jeff_s_garage_door_closes"
-                                },
-                                {
-                                    "entity": "automation.notify_when_jeff_s_garage_door_closes_and_no_one_is_home"
-                                },
-                                {
                                     "entity": "automation.auto_close_jeff_s_garage_door_after_10pm"
+                                },
+                                {
+                                    "entity": "input_boolean.notify_garage_doors_home"
+                                },
+                                {
+                                    "entity": "input_boolean.notify_garage_doors_away"
                                 }
                             ],
                             "title": "Jeff's Garage Toggles",
@@ -594,19 +588,13 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "automation.notify_when_jen_s_garage_door_opens"
-                                },
-                                {
-                                    "entity": "automation.notify_when_jen_s_garage_door_opens_and_no_one_is_home"
-                                },
-                                {
-                                    "entity": "automation.notify_when_jen_s_garage_door_closes"
-                                },
-                                {
-                                    "entity": "automation.notify_when_jen_s_garage_door_closes_and_no_one_is_home"
-                                },
-                                {
                                     "entity": "automation.auto_close_jen_s_garage_door_after_10pm"
+                                },
+                                {
+                                    "entity": "input_boolean.notify_garage_doors_home"
+                                },
+                                {
+                                    "entity": "input_boolean.notify_garage_doors_away"
                                 }
                             ],
                             "title": "Jen's Garage Toggles",

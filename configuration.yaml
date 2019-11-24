@@ -179,8 +179,8 @@ cover:
     command_topic: "og-jen/IN/STATE"
     state_topic: "og-jen/OUT/STATE"
     # availability_topic: "jens/OUT/STATUS"
-    payload_open: "open"
-    payload_close: "close"
+    payload_open: "OPEN"
+    payload_close: "CLOSE"
     payload_available: "online"
     state_open: "OPEN"
     state_closed: "CLOSED"
@@ -191,8 +191,8 @@ cover:
     command_topic: "og-jeff/IN/STATE"
     state_topic: "og-jeff/OUT/STATE"
     # availability_topic: "jeffs/OUT/STATUS"
-    payload_open: "open"
-    payload_close: "close"
+    payload_open: "OPEN"
+    payload_close: "CLOSE"
     payload_available: "online"
     state_open: "OPEN"
     state_closed: "CLOSED"
@@ -255,6 +255,12 @@ input_boolean:
     initial: on
   notify_alarm_triggered:
     name: Notification when alarm is triggered
+    initial: on
+  notify_garage_doors_home:
+    name: Notification when garage doors are open/closed and we are home
+    initial: on
+  notify_garage_doors_away:
+    name: Notification when garage doors are open/closed and we are away
     initial: on
 
 weather:
