@@ -7,4 +7,4 @@
   action:
     - service: 'mqtt.publish'
       data: 
-        topic: monitor/scan/arrive
+        topic: monitor/scan/restart
