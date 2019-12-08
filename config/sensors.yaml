@@ -43,12 +43,12 @@
     sensors:
       jeff_home_status:
         friendly_name: 'Jeff Home Status'
-        value_template: "{{is_state('input_boolean.jeff_occupancy','on') or (is_state('device_tracker.jeffs_xs','home') and is_state('device_tracker.jeff_phone','home'))}}"
+        value_template: "{{is_state('input_boolean.jeff_occupancy','on') or (is_state('device_tracker.jeffs_xs_2','home') and is_state('device_tracker.jeffs_xs','home'))}}"
   - platform: template
     sensors:
       jen_home_status:
         friendly_name: 'Jen Home Status'
-        value_template: "{{is_state('input_boolean.jen_occupancy','on') or (is_state('device_tracker.jennifersxsmax','home') and is_state('device_tracker.jen_phone','home'))}}"
+        value_template: "{{is_state('input_boolean.jen_occupancy','on') or (is_state('device_tracker.jennifers_xs_max','home') and is_state('device_tracker.jennifersxsmax','home'))}}"
   - platform: template
     sensors:
       anyone_home:

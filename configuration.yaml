@@ -101,6 +101,19 @@ map:
 
 mobile_app:
 
+mqtt:
+  discovery: true
+  discovery_prefix: homeassistant
+  broker: rabbitmq-ha
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+
 ios:
   push:
     categories:
@@ -119,10 +132,10 @@ ios:
             title: 'Close Jeffs garage door'
             activationMode: 'background'
             authenticationRequired: true
-          - identifier: 'OPEN_GARAGE'
-            title: 'Open Jeffs garage door'
-            activationMode: 'background'
-            authenticationRequired: true
+          # - identifier: 'OPEN_GARAGE'
+          #   title: 'Open Jeffs garage door'
+          #   activationMode: 'background'
+          #   authenticationRequired: true
       - name: garage2
         identifier: 'garage2'
         actions:
@@ -262,6 +275,10 @@ input_boolean:
   notify_garage_doors_away:
     name: Notification when garage doors are open/closed and we are away
     initial: on
+  auto_garage_doors:
+    name: Automatically open/close garage doors
+    initial: on
+
 
 weather:
   - platform: darksky
@@ -338,13 +355,23 @@ ring:
   username: !secret ring-username
   password: !secret ring-password
 
-  #google_assistant:
-  #  project_id: home-assistant-7c48d
-  #  client_id: !secret google_assistant_client_id
-  #  access_token: !secret google_assistant_access_token
-  #  agent_user_id: !secret google_assistant_agent_user_id
-  #  api_key: !secret google_assistant_api_key
-  #  expose_by_default: true
-
-# zwave:
-#  usb_path: /dev/ttyACM0
+google_assistant:
+  project_id: home-assistant-7c48d
+  api_key: !secret google_assistant_api_key
+  secure_devices_pin: !secret secure_devices_pin
+  service_account: !include home-assistant-4d8d1f2ca10f.json
+  report_state: true
+  # exposed_domains:
+  #   - switch
+  #   - light
+  # entity_config:
+  #   switch.kitchen:
+  #     name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
+  #     aliases:
+  #       - BRIGHT_LIGHTS
+  #       - ENTRY_LIGHTS
+  #   light.living_room:
+  #     expose: false
+  #     room: LIVING_ROOM
+  #   group.all_automations:
+  #     expose: false

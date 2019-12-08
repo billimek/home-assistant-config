@@ -37,6 +37,9 @@
                                 },
                                 {
                                     "entity": "cover.jeffs_garage_mqtt"
+                                },
+                                {
+                                    "entity": "input_boolean.auto_garage_doors"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -74,7 +77,7 @@
                                     "entity": "person.jeff_billimek"
                                 },
                                 {
-                                    "entity": "device_tracker.jeff_phone"
+                                    "entity": "device_tracker.jeffs_xs_2"
                                 },
                                 {
                                     "entity": "device_tracker.jeffs_xs"
@@ -89,7 +92,7 @@
                                     "entity": "person.jennifer_billimek"
                                 },
                                 {
-                                    "entity": "device_tracker.jen_phone"
+                                    "entity": "device_tracker.jennifers_xs_max"
                                 },
                                 {
                                     "entity": "device_tracker.jennifersxsmax"
@@ -108,16 +111,28 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.jeffs_phone_battery_level"
+                                    "entity": "sensor.battery_state"
                                 },
                                 {
-                                    "entity": "sensor.jeffs_phone_battery_state"
+                                    "entity": "sensor.battery_level"
                                 },
                                 {
-                                    "entity": "sensor.jennifers_phone_battery_level"
+                                    "entity": "sensor.battery_state_2"
                                 },
                                 {
-                                    "entity": "sensor.jennifers_phone_battery_state"
+                                    "entity": "sensor.battery_level_2"
+                                },
+                                {
+                                    "entity": "device_tracker.jeffs_xs_2"
+                                },
+                                {
+                                    "entity": "device_tracker.jeff_7e398d51_3e7b_4034_b2df_da65e5cf3310"
+                                },
+                                {
+                                    "entity": "device_tracker.jennifers_xs_max"
+                                },
+                                {
+                                    "entity": "device_tracker.jen_fb82b2dd_6a32_4199_8237_95dae03ed82d"
                                 }
                             ],
                             "show_header_toggle": true,
@@ -272,6 +287,112 @@
                     "icon": "mdi:home-assistant",
                     "path": "default_view",
                     "title": "Home"
+                },
+                {
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "input_boolean.camera_front_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_driveway_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_porch_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_pool_notify"
+                                },
+                                {
+                                    "entity": "input_boolean.camera_basement_notify"
+                                }
+                            ],
+                            "title": "Camera Notifications",
+                            "type": "entities"
+                        },
+                        {
+                            "camera_image": "camera.front",
+                            "entity": "camera.front",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "camera_image": "camera.driveway",
+                            "entity": "camera.driveway",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "camera_image": "camera.porch",
+                            "entity": "camera.porch",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "camera_image": "camera.pool",
+                            "entity": "camera.pool",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "camera_image": "camera.basement",
+                            "entity": "camera.basement",
+                            "show_name": false,
+                            "show_state": true,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "image_processing.tensorflow_basement"
+                                },
+                                {
+                                    "entity": "image_processing.tensorflow_driveway"
+                                },
+                                {
+                                    "entity": "image_processing.tensorflow_front"
+                                },
+                                {
+                                    "entity": "image_processing.tensorflow_pool"
+                                },
+                                {
+                                    "entity": "image_processing.tensorflow_porch"
+                                }
+                            ],
+                            "title": "Tensorflow",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:camcorder",
+                    "title": "Cameras"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.portable_outlet_a_switch"
+                                },
+                                {
+                                    "entity": "switch.portable_outlet_b_switch"
+                                },
+                                {
+                                    "entity": "light.sunroom_garage_dimmer"
+                                }
+                            ],
+                            "title": "Portable Outlets",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:nfc",
+                    "path": "zwave",
+                    "title": "ZWave"
                 },
                 {
                     "badges": [],
@@ -613,89 +734,6 @@
                     "icon": "mdi:shield-home",
                     "path": "security_view",
                     "title": "Security"
-                },
-                {
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.camera_front_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_driveway_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_porch_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_pool_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_basement_notify"
-                                }
-                            ],
-                            "title": "Camera Notifications",
-                            "type": "entities"
-                        },
-                        {
-                            "camera_image": "camera.front",
-                            "entity": "camera.front",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "camera_image": "camera.driveway",
-                            "entity": "camera.driveway",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "camera_image": "camera.porch",
-                            "entity": "camera.porch",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "camera_image": "camera.pool",
-                            "entity": "camera.pool",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "camera_image": "camera.basement",
-                            "entity": "camera.basement",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "image_processing.tensorflow_basement"
-                                },
-                                {
-                                    "entity": "image_processing.tensorflow_driveway"
-                                },
-                                {
-                                    "entity": "image_processing.tensorflow_front"
-                                },
-                                {
-                                    "entity": "image_processing.tensorflow_pool"
-                                },
-                                {
-                                    "entity": "image_processing.tensorflow_porch"
-                                }
-                            ],
-                            "title": "Tensorflow",
-                            "type": "entities"
-                        }
-                    ],
-                    "icon": "mdi:camcorder",
-                    "title": "Cameras"
                 }
             ]
         }
