@@ -250,3 +250,9 @@ hidden_automations:
     - automation.save_garage_closed_state_when_offline
     - automation.save_garage2_open_state_when_offline
     - automation.save_garage2_closed_state_when_offline
+
+cabinet_lights:
+  name: Cabinet Lights
+  entities:
+    - switch.portable_outlet_b_switch
+    - switch.portable_outlet_c_switch

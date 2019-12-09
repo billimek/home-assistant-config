@@ -377,15 +377,28 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "switch.portable_outlet_a_switch"
+                                    "entity": "group.cabinet_lights"
                                 },
                                 {
                                     "entity": "switch.portable_outlet_b_switch"
                                 },
                                 {
+                                    "entity": "switch.portable_outlet_c_switch"
+                                },
+                                {
+                                    "entity": "switch.portable_outlet_a_switch"
+                                },
+                                {
                                     "entity": "light.sunroom_garage_dimmer"
+                                },
+                                {
+                                    "entity": "light.porch_porch_dimmer"
+                                },
+                                {
+                                    "entity": "switch.pool_pool_switch"
                                 }
                             ],
+                            "show_header_toggle": false,
                             "title": "Portable Outlets",
                             "type": "entities"
                         }
