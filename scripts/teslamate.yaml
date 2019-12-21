@@ -1,0 +1,7 @@
+wake_teslamate:
+  sequence:
+    - service: shell_command.wake_teslamate
+
+sleep_teslamate:
+  sequence:
+    - service: shell_command.sleep_teslamate

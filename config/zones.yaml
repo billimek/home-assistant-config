@@ -1,17 +1,29 @@
 - name: Home
   latitude: !secret latitude
   longitude: !secret longitude
-  radius: 100
+  radius: 200
   icon: mdi:home
+
+# - name: Near Home
+#   latitude: !secret latitude
+#   longitude: !secret longitude
+#   radius: 100
+#   icon: mdi:home-outline
 
 - name: Work
   latitude: !secret work_latitude
   longitude: !secret work_longitude
-  radius: 200
-  icon: mdi:castle
+  radius: 100
+  icon: mdi:office-building
 
 - name: Jens Work
   latitude: !secret jens_work_latitude
   longitude: !secret jens_work_longitude
-  radius: 200
-  icon: mdi:castle
+  radius: 100
+  icon: mdi:briefcase
+
+- name: SSC
+  latitude: !secret ssc_latitude
+  longitude: !secret ssc_longitude
+  radius: 100
+  icon: mdi:office-building

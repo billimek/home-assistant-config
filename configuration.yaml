@@ -35,9 +35,10 @@ logger:
     homeassistant.components.alarmdecoder: debug
     homeassistant.components.sensor.alarm_panel_display: debug
     alarmdecoder: debug
+    # hacs: debug
+    # aiogithubapi: debug
     # homeassistant.components.websocket_api: debug
     # homeassistant.core: debug
-
 # Enables configuration UI
 config:
 
@@ -50,7 +51,7 @@ http:
 # the developers to assist with development of Home Assistant.
 # For more information, please see:
 # https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
+# updater:
   # Optional, allows Home Assistant developers to focus on popular components.
   # include_used_components: true
 
@@ -70,10 +71,11 @@ history:
 
 # persist states between restarts
 recorder:
-#  db_url: !secret db_url
-#  exclude:
-#    domains:
-#      - device_tracker
+  # purge_keep_days: 5
+  db_url: !secret db_url
+  # exclude:
+  #   domains:
+  #     - device_tracker
 
 # prometheus:
 #   namespace: hass
@@ -93,7 +95,7 @@ logbook:
 # Track the sun
 sun:
 
-ssdp:
+# ssdp:
 
 zeroconf:
 
@@ -159,6 +161,7 @@ ios:
             authenticationRequired: true
 
 script: !include_dir_merge_named scripts
+
 # python_script:
 sensor: !include config/sensors.yaml
 automation: !include_dir_merge_list automation
@@ -375,3 +378,35 @@ google_assistant:
   #     room: LIVING_ROOM
   #   group.all_automations:
   #     expose: false
+
+proximity:
+  home:
+    zone: home
+    ignored_zones:
+      - Work
+      - SSC
+      - Jens Work
+    devices:
+      - device_tracker.tesla_location
+      - device_tracker.jeffs_xs_2
+    tolerance: 50
+    unit_of_measurement: m
+  home_tesla:
+    zone: home
+    devices:
+      - device_tracker.tesla_location
+    tolerance: 50
+    unit_of_measurement: m
+  home_jeffs_phone:
+    zone: home
+    devices:
+      - device_tracker.jeffs_xs_2
+    tolerance: 50
+    unit_of_measurement: m
+
+tesla:
+  username: !secret email
+  password: !secret tesla_password
+  scan_interval: 3600
+
+# unifi:
