@@ -12,13 +12,12 @@
         location_name: not_home
         gps: [ '{{ states.sensor.tesla_latitude.state }}', '{{ states.sensor.tesla_longitude.state }}' ]
 
-
-# - alias: Wake TeslaMate on Garage Open
-#   initial_state: on
-#   trigger:
-#     - platform: state
-#       entity_id: switch.garage_door_switch
-#       to: 'off'
-#   action:
-#     - service: script.turn_on
-#       entity_id: script.wake_teslamate
+- alias: 'Shortcuts Webhook Call Service'
+  initial_state: 'on'
+  trigger:
+    platform: webhook
+    webhook_id: shortcuts_call_service
+  action:
+    service_template: '{{ trigger.json.service }}'
+    data_template:
+      entity_id: '{{ trigger.json.entity_id }}'

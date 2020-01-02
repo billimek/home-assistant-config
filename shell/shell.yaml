@@ -14,5 +14,5 @@ set_bi_profile: python /config/shell/setBIProfile.py {{states.input_select.set_b
 set_bi_home: python /config/shell/setBIProfile.py home
 set_bi_away: python /config/shell/setBIProfile.py away
 
-sleep_teslamate: curl -X PUT http://home:4000/api/car/1/logging/suspend
-wake_teslamate: curl -X PUT http://home:4000/api/car/1/logging/resume
+sleep_teslamate: curl -X PUT http://teslamate:4000/api/car/1/logging/suspend
+wake_teslamate: curl -X PUT http://teslamate:4000/api/car/1/logging/resume
