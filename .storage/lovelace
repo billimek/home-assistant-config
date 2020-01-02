@@ -582,16 +582,34 @@
                                     "entity": "switch.portable_outlet_a_switch"
                                 },
                                 {
-                                    "entity": "light.sunroom_garage_dimmer"
+                                    "entity": "switch.sunroom_garage_switch"
                                 },
                                 {
-                                    "entity": "light.porch_porch_dimmer"
+                                    "entity": "sensor.sunroom_garage_power"
+                                },
+                                {
+                                    "entity": "sensor.sunroom_garage_power_2"
+                                },
+                                {
+                                    "entity": "switch.porch_porch_switch"
+                                },
+                                {
+                                    "entity": "sensor.porch_porch_power"
+                                },
+                                {
+                                    "entity": "sensor.porch_porch_power_2"
                                 },
                                 {
                                     "entity": "switch.pool_pool_switch"
                                 },
                                 {
                                     "entity": "switch.portable_outlet_d_switch"
+                                },
+                                {
+                                    "entity": "binary_sensor.basement_water_sensor_a_contact"
+                                },
+                                {
+                                    "entity": "sensor.basement_water_sensor_a_battery"
                                 }
                             ],
                             "show_header_toggle": false,
