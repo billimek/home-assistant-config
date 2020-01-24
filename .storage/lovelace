@@ -108,31 +108,6 @@
                                 },
                                 {
                                     "entity": "sensor.anyone_home"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Family",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.battery_state"
-                                },
-                                {
-                                    "entity": "sensor.battery_level"
-                                },
-                                {
-                                    "entity": "sensor.battery_state_2"
-                                },
-                                {
-                                    "entity": "sensor.battery_level_2"
-                                },
-                                {
-                                    "entity": "device_tracker.jeffs_xs_2"
-                                },
-                                {
-                                    "entity": "device_tracker.jennifers_xs_max"
                                 },
                                 {
                                     "entity": "proximity.home_jeffs_phone"
@@ -141,8 +116,8 @@
                                     "entity": "proximity.home"
                                 }
                             ],
-                            "show_header_toggle": true,
-                            "title": "Presence",
+                            "show_header_toggle": false,
+                            "title": "Family",
                             "type": "entities"
                         },
                         {
@@ -232,36 +207,6 @@
                                 },
                                 {
                                     "entity": "sensor.jen_upstairs"
-                                },
-                                {
-                                    "entity": "sensor.jeff_basement_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jeff_dining_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jeff_garage_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jeff_livingroom_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jeff_upstairs_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jen_basement_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jen_dining_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jen_garage_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jen_livingroom_rssi_raw"
-                                },
-                                {
-                                    "entity": "sensor.jen_upstairs_rssi_raw"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -351,27 +296,6 @@
                             "show_name": false,
                             "show_state": true,
                             "type": "picture-entity"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "image_processing.tensorflow_basement"
-                                },
-                                {
-                                    "entity": "image_processing.tensorflow_driveway"
-                                },
-                                {
-                                    "entity": "image_processing.tensorflow_front"
-                                },
-                                {
-                                    "entity": "image_processing.tensorflow_pool"
-                                },
-                                {
-                                    "entity": "image_processing.tensorflow_porch"
-                                }
-                            ],
-                            "title": "Tensorflow",
-                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:camcorder",
@@ -432,7 +356,7 @@
                                 {
                                     "cards": [
                                         {
-                                            "entity": "sensor.tesla_locked",
+                                            "entity": "sensor.tesla_charge_port_door_open",
                                             "name": "Charger Door",
                                             "show_state": true,
                                             "state": [
@@ -443,7 +367,7 @@
                                                         "action": "call-service",
                                                         "service": "lock.unlock",
                                                         "service_data": {
-                                                            "entity_id": "lock.tesla_model_3_charger_door_lock"
+                                                            "entity_id": "lock.sulaco_charger_door_lock"
                                                         }
                                                     },
                                                     "value": "locked"
@@ -455,7 +379,7 @@
                                                         "action": "call-service",
                                                         "service": "lock.lock",
                                                         "service_data": {
-                                                            "entity_id": "lock.tesla_model_3_charger_door_lock"
+                                                            "entity_id": "lock.sulaco_charger_door_lock"
                                                         }
                                                     },
                                                     "value": "unlocked"
@@ -464,7 +388,7 @@
                                             "type": "custom:button-card"
                                         },
                                         {
-                                            "entity": "lock.tesla_door_lock",
+                                            "entity": "lock.sulaco_door_lock",
                                             "name": "Car Door",
                                             "show_state": true,
                                             "state": [
@@ -475,7 +399,7 @@
                                                         "action": "call-service",
                                                         "service": "lock.unlock",
                                                         "service_data": {
-                                                            "entity_id": "lock.tesla_model_3_door_lock"
+                                                            "entity_id": "lock.sulaco_door_lock"
                                                         }
                                                     },
                                                     "value": "locked"
@@ -487,7 +411,7 @@
                                                         "action": "call-service",
                                                         "service": "lock.lock",
                                                         "service_data": {
-                                                            "entity_id": "lock.tesla_model_3_door_lock"
+                                                            "entity_id": "lock.sulaco_door_lock"
                                                         }
                                                     },
                                                     "value": "unlocked"
@@ -610,6 +534,12 @@
                                 },
                                 {
                                     "entity": "sensor.basement_water_sensor_a_battery"
+                                },
+                                {
+                                    "entity": "binary_sensor.sump_pump_water_sensor_b_contact"
+                                },
+                                {
+                                    "entity": "sensor.sump_pump_water_sensor_b_battery"
                                 }
                             ],
                             "show_header_toggle": false,

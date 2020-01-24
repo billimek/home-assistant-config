@@ -156,7 +156,7 @@
     type: max
     round_digits: 0
     entity_ids:
-      - sensor.jeff_basement
+      # - sensor.jeff_basement # removed this device on 2020-01-11
       - sensor.jeff_dining
       - sensor.jeff_garage
       - sensor.jeff_livingroom

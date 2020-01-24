@@ -106,7 +106,7 @@ mobile_app:
 mqtt:
   discovery: true
   discovery_prefix: homeassistant
-  broker: rabbitmq-ha
+  broker: vernemq
   username: !secret mqtt_user
   password: !secret mqtt_password
   birth_message:
@@ -168,7 +168,7 @@ automation: !include_dir_merge_list automation
 shell_command: !include shell/shell.yaml
 zone: !include config/zones.yaml
 camera: !include_dir_merge_list cameras
-image_processing: !include_dir_merge_list tensorflow
+# image_processing: !include_dir_merge_list tensorflow
 
 input_select:
   set_biprofile:
