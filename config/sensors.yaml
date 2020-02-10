@@ -25,6 +25,9 @@
     name: yr
     monitored_conditions:
       - windSpeed
+  - platform: xfinity
+    username: !secret xfinity_email
+    password: !secret xfinity_password
   - platform: ring
   - platform: filter
     name: "Weather Wind Speed (Filtered)"
