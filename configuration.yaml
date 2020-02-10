@@ -358,12 +358,12 @@ ring:
   username: !secret ring-username
   password: !secret ring-password
 
-google_assistant:
-  project_id: home-assistant-7c48d
-  api_key: !secret google_assistant_api_key
-  secure_devices_pin: !secret secure_devices_pin
-  service_account: !include home-assistant-4d8d1f2ca10f.json
-  report_state: true
+# google_assistant:
+#   project_id: home-assistant-7c48d
+#   api_key: !secret google_assistant_api_key
+#   secure_devices_pin: !secret secure_devices_pin
+#   service_account: !include home-assistant-4d8d1f2ca10f.json
+#   report_state: true
   # exposed_domains:
   #   - switch
   #   - light
