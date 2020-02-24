@@ -233,6 +233,26 @@
                                 }
                             },
                             "type": "entity-button"
+                        },
+                        {
+                            "entity": "media_player.kitchen_display",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.sun_room_speaker",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.office_speaker",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.ansley_speaker",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.basement_speaker",
+                            "type": "media-control"
                         }
                     ],
                     "icon": "mdi:home-assistant",

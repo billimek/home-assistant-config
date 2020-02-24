@@ -358,12 +358,12 @@ ring:
   username: !secret ring-username
   password: !secret ring-password
 
-# google_assistant:
-#   project_id: home-assistant-7c48d
-#   api_key: !secret google_assistant_api_key
-#   secure_devices_pin: !secret secure_devices_pin
-#   service_account: !include home-assistant-4d8d1f2ca10f.json
-#   report_state: true
+google_assistant:
+  project_id: home-assistant-7c48d
+  # api_key: !secret google_assistant_api_key
+  secure_devices_pin: !secret secure_devices_pin
+  service_account: !include home-assistant-4d8d1f2ca10f.json
+  report_state: true
   # exposed_domains:
   #   - switch
   #   - light
@@ -410,3 +410,19 @@ tesla:
   scan_interval: 3600
 
 # unifi:
+
+tts:
+  - platform: google_translate
+    cache: true
+    # cache_dir: /tmp/tts
+    time_memory: 300
+    # base_url: !secret tts_base_url
+    service_name: google_say
+
+cast:
+  media_player:
+    - host: 10.0.3.10
+    - host: 10.0.3.11
+    - host: 10.0.3.12
+    - host: 10.0.3.13
+    - host: 10.0.3.14
