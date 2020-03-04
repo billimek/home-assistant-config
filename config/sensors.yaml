@@ -532,3 +532,77 @@
     name: tesla_update_available
     state_topic: "teslamate/cars/1/update_available"
     icon: mdi:gift
+
+### frigate
+  - platform: rest
+    name: Frigate Debug
+    resource: http://frigate:5000/debug/stats
+    scan_interval: 5
+    json_attributes:
+      - coral
+      - tracked_objects_queue
+      - front
+      - porch
+      - driveway
+      - pool
+      - basement
+    value_template: 'OK'  
+  - platform: template
+    sensors:
+      frigate_tracked_objects_queue:
+        value_template: '{{ states.sensor.frigate_debug.attributes["tracked_objects_queue"] }}' 
+        unit_of_measurement: 'queue'
+      frigate_coral_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["fps"] }}'
+        unit_of_measurement: 'FPS'
+      frigate_coral_inference:
+        value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["inference_speed"] }}' 
+        unit_of_measurement: 'ms'
+      frigate_coral_detection_queue:
+        value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["detection_queue"] }}' 
+        unit_of_measurement: 'queue'
+      front_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["front"]["fps"] }}'
+        unit_of_measurement: 'FPS'
+      front_skipped_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["front"]["skipped_fps"] }}'
+        unit_of_measurement: 'FPS'
+      front_detection_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["front"]["detection_fps"] }}'
+        unit_of_measurement: 'FPS'
+      driveway_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["fps"] }}'
+        unit_of_measurement: 'FPS'
+      driveway_skipped_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["skipped_fps"] }}'
+        unit_of_measurement: 'FPS'
+      driveway_detection_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["detection_fps"] }}'
+        unit_of_measurement: 'FPS'
+      porch_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["fps"] }}'
+        unit_of_measurement: 'FPS'
+      porch_skipped_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["skipped_fps"] }}'
+        unit_of_measurement: 'FPS'
+      porch_detection_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["detection_fps"] }}'
+        unit_of_measurement: 'FPS'
+      pool_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["fps"] }}'
+        unit_of_measurement: 'FPS'
+      pool_skipped_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["skipped_fps"] }}'
+        unit_of_measurement: 'FPS'
+      pool_detection_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["detection_fps"] }}'
+        unit_of_measurement: 'FPS'
+      basement_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["fps"] }}'
+        unit_of_measurement: 'FPS'
+      basement_skipped_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["skipped_fps"] }}'
+        unit_of_measurement: 'FPS'
+      basement_detection_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["detection_fps"] }}'
+        unit_of_measurement: 'FPS'
