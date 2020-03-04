@@ -123,56 +123,6 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.weather_summary"
-                                },
-                                {
-                                    "entity": "sensor.weather_temperature"
-                                },
-                                {
-                                    "entity": "sensor.weather_wind_speed"
-                                },
-                                {
-                                    "entity": "sensor.weather_nearest_storm_distance"
-                                },
-                                {
-                                    "entity": "sensor.weather_overnight_low_temperature_0d"
-                                },
-                                {
-                                    "entity": "sensor.weather_daytime_high_temperature_0d"
-                                },
-                                {
-                                    "entity": "sensor.weather_daily_summary"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Weather Summary",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "sensor.blue_iris_profile",
-                                "input_select.set_biprofile"
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Cameras",
-                            "type": "entities"
-                        },
-                        {
-                            "entity": "climate.basement",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entity": "climate.master_bedroom_nest",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entity": "climate.downstairs",
-                            "theme": "default",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entities": [
-                                {
                                     "entity": "sensor.jeff_s_phone_bluetooth_occupancy_confidence"
                                 },
                                 {
@@ -235,24 +185,17 @@
                             "type": "entity-button"
                         },
                         {
-                            "entity": "media_player.kitchen_display",
-                            "type": "media-control"
+                            "entity": "climate.master_bedroom_nest",
+                            "type": "thermostat"
                         },
                         {
-                            "entity": "media_player.sun_room_speaker",
-                            "type": "media-control"
+                            "entity": "climate.downstairs",
+                            "theme": "default",
+                            "type": "thermostat"
                         },
                         {
-                            "entity": "media_player.office_speaker",
-                            "type": "media-control"
-                        },
-                        {
-                            "entity": "media_player.ansley_speaker",
-                            "type": "media-control"
-                        },
-                        {
-                            "entity": "media_player.basement_speaker",
-                            "type": "media-control"
+                            "entity": "climate.basement",
+                            "type": "thermostat"
                         }
                     ],
                     "icon": "mdi:home-assistant",
@@ -316,6 +259,15 @@
                             "show_name": false,
                             "show_state": true,
                             "type": "picture-entity"
+                        },
+                        {
+                            "entities": [
+                                "sensor.blue_iris_profile",
+                                "input_select.set_biprofile"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Cameras",
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:camcorder",
@@ -577,6 +529,34 @@
                         {
                             "entities": [
                                 {
+                                    "entity": "sensor.weather_summary"
+                                },
+                                {
+                                    "entity": "sensor.weather_temperature"
+                                },
+                                {
+                                    "entity": "sensor.weather_wind_speed"
+                                },
+                                {
+                                    "entity": "sensor.weather_nearest_storm_distance"
+                                },
+                                {
+                                    "entity": "sensor.weather_overnight_low_temperature_0d"
+                                },
+                                {
+                                    "entity": "sensor.weather_daytime_high_temperature_0d"
+                                },
+                                {
+                                    "entity": "sensor.weather_daily_summary"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Weather Summary",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
                                     "entity": "sensor.downstairs_thermostat_humidity"
                                 },
                                 {
@@ -631,34 +611,6 @@
                         },
                         {
                             "entities": [
-                                {
-                                    "entity": "sensor.weather_summary"
-                                },
-                                {
-                                    "entity": "sensor.weather_temperature"
-                                },
-                                {
-                                    "entity": "sensor.weather_wind_speed"
-                                },
-                                {
-                                    "entity": "sensor.weather_nearest_storm_distance"
-                                },
-                                {
-                                    "entity": "sensor.weather_overnight_low_temperature_0d"
-                                },
-                                {
-                                    "entity": "sensor.weather_daytime_high_temperature_0d"
-                                },
-                                {
-                                    "entity": "sensor.weather_daily_summary"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Weather Summary",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
                                 "sensor.weather_humidity",
                                 "sensor.weather_precip_probability",
                                 "sensor.weather_precip_intensity",
@@ -704,10 +656,10 @@
                                     "entity": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
                                 },
                                 {
-                                    "entity": "binary_sensor.ring_front_door_ding"
+                                    "entity": "binary_sensor.front_door_ding"
                                 },
                                 {
-                                    "entity": "binary_sensor.ring_front_door_motion"
+                                    "entity": "binary_sensor.front_door_motion"
                                 },
                                 {
                                     "entity": "binary_sensor.upstairs_motion"
