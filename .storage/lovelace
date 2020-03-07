@@ -512,6 +512,18 @@
                                 },
                                 {
                                     "entity": "sensor.sump_pump_water_sensor_b_battery"
+                                },
+                                {
+                                    "entity": "switch.basement_stairs_switch"
+                                },
+                                {
+                                    "entity": "switch.basement_hallway_switch"
+                                },
+                                {
+                                    "entity": "switch.basement_bedroom_switch"
+                                },
+                                {
+                                    "entity": "switch.basement_livingroom_switch"
                                 }
                             ],
                             "show_header_toggle": false,
