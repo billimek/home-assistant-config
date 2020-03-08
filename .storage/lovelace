@@ -524,11 +524,25 @@
                                 },
                                 {
                                     "entity": "switch.basement_livingroom_switch"
+                                },
+                                {
+                                    "entity": "light.foyer_stairs_dimmer"
+                                },
+                                {
+                                    "entity": "light.upstairs_hallway_dimmer"
                                 }
                             ],
                             "show_header_toggle": false,
                             "title": "Portable Outlets",
                             "type": "entities"
+                        },
+                        {
+                            "entity": "light.foyer_stairs_dimmer",
+                            "type": "light"
+                        },
+                        {
+                            "entity": "light.upstairs_hallway_dimmer",
+                            "type": "light"
                         }
                     ],
                     "icon": "mdi:nfc",
