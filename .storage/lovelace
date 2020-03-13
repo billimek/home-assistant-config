@@ -5,6 +5,10 @@
                 {
                     "type": "module",
                     "url": "/community_plugin/button-card/button-card.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/mini-graph-card/mini-graph-card-bundle.js"
                 }
             ],
             "title": "\ud83c\udfe1",
@@ -196,6 +200,47 @@
                         {
                             "entity": "climate.basement",
                             "type": "thermostat"
+                        },
+                        {
+                            "color_thresholds": [
+                                {
+                                    "color": "#e74c3c",
+                                    "value": 150
+                                },
+                                {
+                                    "color": "#ffff00",
+                                    "value": 75
+                                },
+                                {
+                                    "color": "#1db954",
+                                    "value": 0
+                                }
+                            ],
+                            "entities": [
+                                {
+                                    "entity": "sensor.us_coronavirus_confirmed",
+                                    "index": 0
+                                },
+                                {
+                                    "entity": "sensor.us_coronavirus_deaths",
+                                    "index": 0
+                                },
+                                {
+                                    "entity": "sensor.us_coronavirus_current",
+                                    "index": 0
+                                }
+                            ],
+                            "font_size": 65,
+                            "height": 46,
+                            "hours_to_show": 168,
+                            "line_width": 2,
+                            "name": "Coronavirus",
+                            "points_per_hour": 1,
+                            "show": {
+                                "extrema": true,
+                                "icon": false
+                            },
+                            "type": "custom:mini-graph-card"
                         }
                     ],
                     "icon": "mdi:home-assistant",
