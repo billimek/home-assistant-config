@@ -77,8 +77,8 @@ recorder:
   #   domains:
   #     - device_tracker
 
-# prometheus:
-#   namespace: hass
+prometheus:
+  namespace: hass
 #   component_config_glob:
 #     sensor.*_hum:
 #       override_metric: humidity_percent
