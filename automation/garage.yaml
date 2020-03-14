@@ -49,46 +49,46 @@
     service: cover.open_cover
     entity_id: cover.jen_garage_door
 
-- id: close_garage_after_10pm
-  alias: 'Auto close Jeff''s garage door after 10pm'
-  initial_state: on
-  trigger:
-    - platform: time
-      at: '22:00:00'
-  condition:
-    condition: state
-    entity_id: cover.jeff_garage_door
-    state: open
-  action:
-    - service: notify.ios_jeff_phone
-      data_template:
-        title: "Garage Door"
-        message: "Jeff's garage door is open after 10pm. Closing it now!"
-    - service: notify.ios_jen_phone
-      data_template:
-        title: "Garage Door"
-        message: "Jeff's garage door is open after 10pm. Closing it now!"
-    - service: cover.close_cover
-      entity_id: cover.jeff_garage_door
+# - id: close_garage_after_10pm
+#   alias: 'Auto close Jeff''s garage door after 10pm'
+#   initial_state: on
+#   trigger:
+#     - platform: time
+#       at: '22:00:00'
+#   condition:
+#     condition: state
+#     entity_id: cover.jeff_garage_door
+#     state: open
+#   action:
+#     - service: notify.ios_jeff_phone
+#       data_template:
+#         title: "Garage Door"
+#         message: "Jeff's garage door is open after 10pm. Closing it now!"
+#     - service: notify.ios_jen_phone
+#       data_template:
+#         title: "Garage Door"
+#         message: "Jeff's garage door is open after 10pm. Closing it now!"
+#     - service: cover.close_cover
+#       entity_id: cover.jeff_garage_door
 
-- id: close_garage2_after_10pm
-  alias: 'Auto close Jen''s garage door after 10pm'
-  initial_state: on
-  trigger:
-    - platform: time
-      at: '22:00:00'
-  condition:
-    condition: state
-    entity_id: cover.jen_garage_door
-    state: open
-  action:
-    - service: notify.ios_jeff_phone
-      data_template:
-        title: "Garage Door"
-        message: "Jen's garage door is open after 10pm. Closing it now!"
-    - service: notify.ios_jen_phone
-      data_template:
-        title: "Garage Door"
-        message: "Jen's garage door is open after 10pm. Closing it now!"
-    - service: cover.close_cover
-      entity_id: cover.jen_garage_door
+# - id: close_garage2_after_10pm
+#   alias: 'Auto close Jen''s garage door after 10pm'
+#   initial_state: on
+#   trigger:
+#     - platform: time
+#       at: '22:00:00'
+#   condition:
+#     condition: state
+#     entity_id: cover.jen_garage_door
+#     state: open
+#   action:
+#     - service: notify.ios_jeff_phone
+#       data_template:
+#         title: "Garage Door"
+#         message: "Jen's garage door is open after 10pm. Closing it now!"
+#     - service: notify.ios_jen_phone
+#       data_template:
+#         title: "Garage Door"
+#         message: "Jen's garage door is open after 10pm. Closing it now!"
+#     - service: cover.close_cover
+#       entity_id: cover.jen_garage_door

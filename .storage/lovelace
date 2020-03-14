@@ -50,6 +50,9 @@
                                 },
                                 {
                                     "entity": "input_boolean.auto_garage_doors"
+                                },
+                                {
+                                    "entity": "input_boolean.auto_garage_doors_night"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -572,9 +575,6 @@
                                 },
                                 {
                                     "entity": "light.foyer_stairs_dimmer"
-                                },
-                                {
-                                    "entity": "light.upstairs_hallway_dimmer"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -813,24 +813,6 @@
                                 },
                                 {
                                     "entity": "automation.bi_night_when_we_get_home_before_10pm"
-                                },
-                                {
-                                    "entity": "automation.bi_profile_to_away_at_sunrise_when_not_home"
-                                },
-                                {
-                                    "entity": "automation.bi_profile_to_away_at_sunset_when_not_home"
-                                },
-                                {
-                                    "entity": "automation.bi_profile_to_home_at_sunrise_when_home"
-                                },
-                                {
-                                    "entity": "automation.bi_profile_to_home_at_sunset_when_home"
-                                },
-                                {
-                                    "entity": "automation.cameras_profile_to_day_after_sunrise"
-                                },
-                                {
-                                    "entity": "automation.sunset_set_cameras_profile_before_sunset"
                                 }
                             ],
                             "title": "Camera Toggles",
@@ -894,9 +876,6 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "automation.auto_close_jeff_s_garage_door_after_10pm"
-                                },
-                                {
                                     "entity": "input_boolean.notify_garage_doors_home"
                                 },
                                 {
@@ -908,9 +887,6 @@
                         },
                         {
                             "entities": [
-                                {
-                                    "entity": "automation.auto_close_jen_s_garage_door_after_10pm"
-                                },
                                 {
                                     "entity": "input_boolean.notify_garage_doors_home"
                                 },

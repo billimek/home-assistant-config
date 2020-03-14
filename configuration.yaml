@@ -281,7 +281,9 @@ input_boolean:
   auto_garage_doors:
     name: Automatically open/close garage doors
     initial: on
-
+  auto_garage_doors_night:
+    name: Automatically close garage doors at night
+    initial: on
 
 weather:
   - platform: darksky
