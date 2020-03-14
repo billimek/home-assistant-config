@@ -1,5 +1,5 @@
 - id: 'startup_automation'
-  alias: Perform arrical scan on HA Startup
+  alias: Perform arrival scan on HA Startup
   trigger:
   - event: start
     platform: homeassistant
