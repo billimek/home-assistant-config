@@ -1,16 +1,6 @@
 {
     "data": {
         "config": {
-            "resources": [
-                {
-                    "type": "module",
-                    "url": "/community_plugin/button-card/button-card.js"
-                },
-                {
-                    "type": "module",
-                    "url": "/community_plugin/mini-graph-card/mini-graph-card-bundle.js"
-                }
-            ],
             "title": "\ud83c\udfe1",
             "views": [
                 {
@@ -274,6 +264,15 @@
                             "type": "entities"
                         },
                         {
+                            "entities": [
+                                "sensor.blue_iris_profile",
+                                "input_select.set_biprofile"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Cameras",
+                            "type": "entities"
+                        },
+                        {
                             "camera_image": "camera.front",
                             "entity": "camera.front",
                             "show_name": false,
@@ -310,11 +309,147 @@
                         },
                         {
                             "entities": [
-                                "sensor.blue_iris_profile",
-                                "input_select.set_biprofile"
+                                {
+                                    "entity": "switch.wyze_1_blue_led"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_h264_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_ir_filter"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_ir_led"
+                                },
+                                {
+                                    "entity": "sensor.wyze_1_light_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_mjpeg_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_motion_detection"
+                                },
+                                {
+                                    "entity": "binary_sensor.wyze_1_motion_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_night_mode"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_night_mode_auto"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_recording"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_yellow_led"
+                                }
                             ],
                             "show_header_toggle": false,
-                            "title": "Cameras",
+                            "type": "entities"
+                        },
+                        {
+                            "aspect_ratio": "50%",
+                            "entity": "camera.wyze_1",
+                            "show_name": false,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.wyze_2_blue_led"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_h264_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_ir_filter"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_ir_led"
+                                },
+                                {
+                                    "entity": "sensor.wyze_2_light_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_mjpeg_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_motion_detection"
+                                },
+                                {
+                                    "entity": "binary_sensor.wyze_2_motion_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_night_mode"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_night_mode_auto"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_recording"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_yellow_led"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "type": "entities"
+                        },
+                        {
+                            "aspect_ratio": "50%",
+                            "entity": "camera.wyze_2",
+                            "show_name": false,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "aspect_ratio": "50%",
+                            "entity": "camera.wyze_3",
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.wyze_3_blue_led"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_h264_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_ir_filter"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_ir_led"
+                                },
+                                {
+                                    "entity": "sensor.wyze_3_light_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_mjpeg_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_motion_detection"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_motion_send_mail"
+                                },
+                                {
+                                    "entity": "binary_sensor.wyze_3_motion_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_night_mode"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_night_mode_auto"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_recording"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_yellow_led"
+                                }
+                            ],
                             "type": "entities"
                         }
                     ],
@@ -547,9 +682,6 @@
                                     "entity": "switch.pool_pool_switch"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_d_switch"
-                                },
-                                {
                                     "entity": "binary_sensor.basement_water_sensor_a_contact"
                                 },
                                 {
@@ -562,9 +694,6 @@
                                     "entity": "sensor.sump_pump_water_sensor_b_battery"
                                 },
                                 {
-                                    "entity": "switch.basement_stairs_switch"
-                                },
-                                {
                                     "entity": "switch.basement_hallway_switch"
                                 },
                                 {
@@ -575,6 +704,9 @@
                                 },
                                 {
                                     "entity": "light.foyer_stairs_dimmer"
+                                },
+                                {
+                                    "entity": "light.basement_stairs_dimmer"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -586,8 +718,12 @@
                             "type": "light"
                         },
                         {
-                            "entity": "light.upstairs_hallway_dimmer",
+                            "entity": "light.basement_stairs_dimmer",
                             "type": "light"
+                        },
+                        {
+                            "entity": "media_player.office_speaker",
+                            "type": "media-control"
                         }
                     ],
                     "icon": "mdi:nfc",
