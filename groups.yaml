@@ -1,6 +1,6 @@
 default_view:
   name: Home
-  view: yes
+  # view: yes
   entities:
     - group.garage
     - group.alarm_panel
@@ -12,7 +12,7 @@ default_view:
 
 climate_view:
   name: Climate
-  view: yes
+  # view: yes
   entities:
     - group.nest_details
     - group.weather_summary
@@ -20,7 +20,7 @@ climate_view:
 
 security_view:
   name: Security
-  view: yes
+  # view: yes
   entities:
     - group.alarm_sensors
     - group.camera_toggles
@@ -73,7 +73,7 @@ family:
 
 presence:
   name: Presence
-  control: hidden
+  # control: hidden
   entities:
     - device_tracker.juniosantos
     - device_tracker.sync_xr6ecyt7
@@ -235,7 +235,7 @@ nest_details:
 
 input_boolean:
   name: input_boolean_group
-  view: no
+  # view: no
   entities:
     - input_boolean.previous_garage_open
     - input_boolean.previous_garage_closed
@@ -244,7 +244,7 @@ input_boolean:
 
 hidden_automations:
   name: hidden_automation
-  view: no
+  # view: no
   entities:
     - automation.save_garage_open_state_when_offline
     - automation.save_garage_closed_state_when_offline
@@ -253,6 +253,7 @@ hidden_automations:
 
 cabinet_lights:
   name: Cabinet Lights
+  all: true
   entities:
     - switch.portable_outlet_b_switch
     - switch.portable_outlet_c_switch
