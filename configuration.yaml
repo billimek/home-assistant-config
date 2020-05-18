@@ -35,6 +35,7 @@ logger:
     homeassistant.components.alarmdecoder: debug
     homeassistant.components.sensor.alarm_panel_display: debug
     alarmdecoder: debug
+    # homeassistant.components.mqtt: debug
     # hacs: debug
     # aiogithubapi: debug
     # homeassistant.components.websocket_api: debug
@@ -57,8 +58,8 @@ http:
 
 # Discover some devices automatically
 discovery:
-  ignore:
-    - plex_mediaserver
+  # ignore:
+  #   - plex_mediaserver
 
 system_health:
 
@@ -107,6 +108,8 @@ mqtt:
   discovery: true
   discovery_prefix: homeassistant
   broker: vernemq
+  # port: 8080
+  client_id: homeassistant
   username: !secret mqtt_user
   password: !secret mqtt_password
   birth_message:
