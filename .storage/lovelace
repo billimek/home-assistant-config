@@ -9,6 +9,28 @@
                         {
                             "entities": [
                                 {
+                                    "entity": "sensor.alarm_panel_display"
+                                },
+                                {
+                                    "entity": "sensor.alarm_status"
+                                },
+                                {
+                                    "entity": "input_select.alarm_mode"
+                                },
+                                {
+                                    "entity": "alarm_control_panel.alarm_panel"
+                                },
+                                {
+                                    "entity": "input_boolean.auto_arm_disarm_alarm_night"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Alarm Panel",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
                                     "entity": "cover.jeff_garage_door"
                                 },
                                 {
@@ -47,28 +69,6 @@
                             ],
                             "show_header_toggle": false,
                             "title": "Garage",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.alarm_panel_display"
-                                },
-                                {
-                                    "entity": "sensor.alarm_status"
-                                },
-                                {
-                                    "entity": "input_select.alarm_mode"
-                                },
-                                {
-                                    "entity": "alarm_control_panel.alarm_panel"
-                                },
-                                {
-                                    "entity": "input_boolean.auto_arm_disarm_alarm_night"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Alarm Panel",
                             "type": "entities"
                         },
                         {
@@ -234,6 +234,32 @@
                                 "icon": false
                             },
                             "type": "custom:mini-graph-card"
+                        },
+                        {
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "name": "Enable Blocky",
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "call-service",
+                                "service": "rest_command.enable_blocky"
+                            },
+                            "type": "button"
+                        },
+                        {
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "name": "Disable Blocky 5 minutes",
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "call-service",
+                                "service": "rest_command.disable_blocky_5m"
+                            },
+                            "type": "button"
                         }
                     ],
                     "icon": "mdi:home-assistant",
@@ -308,147 +334,17 @@
                             "type": "picture-entity"
                         },
                         {
-                            "entities": [
-                                {
-                                    "entity": "switch.wyze_1_blue_led"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_h264_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_ir_filter"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_ir_led"
-                                },
-                                {
-                                    "entity": "sensor.wyze_1_light_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_mjpeg_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_motion_detection"
-                                },
-                                {
-                                    "entity": "binary_sensor.wyze_1_motion_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_night_mode"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_night_mode_auto"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_recording"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_yellow_led"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "type": "entities"
-                        },
-                        {
-                            "aspect_ratio": "50%",
-                            "entity": "camera.wyze_1",
-                            "show_name": false,
+                            "entity": "camera.front_door",
                             "type": "picture-entity"
                         },
                         {
                             "entities": [
-                                {
-                                    "entity": "switch.wyze_2_blue_led"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_h264_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_ir_filter"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_ir_led"
-                                },
-                                {
-                                    "entity": "sensor.wyze_2_light_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_mjpeg_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_motion_detection"
-                                },
-                                {
-                                    "entity": "binary_sensor.wyze_2_motion_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_night_mode"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_night_mode_auto"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_recording"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_yellow_led"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "type": "entities"
-                        },
-                        {
-                            "aspect_ratio": "50%",
-                            "entity": "camera.wyze_2",
-                            "show_name": false,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "aspect_ratio": "50%",
-                            "entity": "camera.wyze_3",
-                            "type": "picture-entity"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "switch.wyze_3_blue_led"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_h264_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_ir_filter"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_ir_led"
-                                },
-                                {
-                                    "entity": "sensor.wyze_3_light_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_mjpeg_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_motion_detection"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_motion_send_mail"
-                                },
-                                {
-                                    "entity": "binary_sensor.wyze_3_motion_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_night_mode"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_night_mode_auto"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_recording"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_yellow_led"
-                                }
+                                "binary_sensor.front_door_ding",
+                                "sensor.front_door_last_activity",
+                                "sensor.front_door_last_ding",
+                                "sensor.front_door_last_motion",
+                                "binary_sensor.front_door_motion",
+                                "sensor.front_door_volume"
                             ],
                             "type": "entities"
                         }
@@ -694,6 +590,9 @@
                                     "entity": "sensor.sump_pump_water_sensor_b_battery"
                                 },
                                 {
+                                    "entity": "light.basement_stairs_dimmer"
+                                },
+                                {
                                     "entity": "switch.basement_hallway_switch"
                                 },
                                 {
@@ -706,7 +605,7 @@
                                     "entity": "light.foyer_stairs_dimmer"
                                 },
                                 {
-                                    "entity": "light.basement_stairs_dimmer"
+                                    "entity": "switch.portable_outlet_d_switch"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -723,6 +622,10 @@
                         },
                         {
                             "entity": "media_player.office_speaker",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.sun_room_speaker",
                             "type": "media-control"
                         }
                     ],

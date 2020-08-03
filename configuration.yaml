@@ -11,6 +11,10 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/New_York
 
+  external_url: !secret  tts_base_url
+  internal_url: "http://10.0.6.56:8123"
+
+
   auth_providers:
     - type: homeassistant
 
@@ -45,7 +49,7 @@ config:
 
 http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  base_url: !secret base_url
+  # base_url: !secret base_url
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -292,7 +296,7 @@ weather:
     api_key: !secret darksky-api_key
 
 binary_sensor:
-  - platform: ring
+  # - platform: ring
   - platform: mqtt
     name: "Front Camera Motion"
     state_topic: BlueIris/alert/front
@@ -420,13 +424,11 @@ tts:
     cache: true
     # cache_dir: /tmp/tts
     time_memory: 300
-    # base_url: !secret tts_base_url
+    base_url: !secret tts_base_url
     service_name: google_say
 
-cast:
-  media_player:
-    - host: 10.0.3.10
-    - host: 10.0.3.11
-    - host: 10.0.3.12
-    - host: 10.0.3.13
-    - host: 10.0.3.14
+rest_command:
+  enable_blocky:
+    url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/enable'
+  disable_blocky_5m:
+    url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/disable?300'
