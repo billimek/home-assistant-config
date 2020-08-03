@@ -25,10 +25,10 @@
     name: yr
     monitored_conditions:
       - windSpeed
-  - platform: xfinity
-    username: !secret xfinity_email
-    password: !secret xfinity_password
-  - platform: ring
+  # - platform: xfinity
+  #   username: !secret xfinity_email
+  #   password: !secret xfinity_password
+  # - platform: ring
   - platform: filter
     name: "Weather Wind Speed (Filtered)"
     entity_id: sensor.weather_wind_speed
@@ -562,7 +562,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["detection_queue"] }}' 
         unit_of_measurement: 'queue'
       front_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["front"]["fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["front"]["process_fps"] }}'
         unit_of_measurement: 'FPS'
       front_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["front"]["skipped_fps"] }}'
@@ -571,7 +571,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["front"]["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       driveway_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["process_fps"] }}'
         unit_of_measurement: 'FPS'
       driveway_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["skipped_fps"] }}'
@@ -580,7 +580,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       porch_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["process_fps"] }}'
         unit_of_measurement: 'FPS'
       porch_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["skipped_fps"] }}'
@@ -589,7 +589,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       pool_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["process_fps"] }}'
         unit_of_measurement: 'FPS'
       pool_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["skipped_fps"] }}'
@@ -598,7 +598,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       basement_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["process_fps"] }}'
         unit_of_measurement: 'FPS'
       basement_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["skipped_fps"] }}'
