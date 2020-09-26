@@ -22,7 +22,7 @@ homeassistant:
   packages:
     security: !include security.yaml
 
-  whitelist_external_dirs:
+  allowlist_external_dirs:
     - /config/tensorflow/snapshot
     - /config/www/camera
 
@@ -296,7 +296,6 @@ weather:
     api_key: !secret darksky-api_key
 
 binary_sensor:
-  # - platform: ring
   - platform: mqtt
     name: "Front Camera Motion"
     state_topic: BlueIris/alert/front
@@ -356,15 +355,19 @@ device_tracker:
       jen_livingroom: 'monitor/livingroom/jens_phone/device_tracker'
       jen_upstairs: 'monitor/upstairs/jens_phone/device_tracker'
 
+# device_tracker:
+#   - platform: mqtt
+#     devices:
+#       jeffs_phone_bt: 'room-assistant/device_tracker/bluetooth-classic-e0-33-8e-b8-c0-a9-tracker/state'
+#       jens_phone_bt: 'room-assistant/device_tracker/bluetooth-classic-f0-99-b6-49-6d-55-tracker/state'
+#     payload_home: 'true'
+#     payload_not_home: 'false'
+#     source_type: bluetooth
 
 influxdb:
   host: !secret influxdb-host
   port: 8086
   max_retries: 10
-
-ring:
-  username: !secret ring-username
-  password: !secret ring-password
 
 google_assistant:
   project_id: home-assistant-7c48d
@@ -416,8 +419,6 @@ tesla:
   username: !secret email
   password: !secret tesla_password
   scan_interval: 3600
-
-# unifi:
 
 tts:
   - platform: google_translate

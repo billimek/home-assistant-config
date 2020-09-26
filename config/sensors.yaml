@@ -21,14 +21,13 @@
       - dew_point
       - cloud_cover
       - humidity
-  - platform: yr
-    name: yr
-    monitored_conditions:
-      - windSpeed
+  # - platform: yr
+  #   name: yr
+  #   monitored_conditions:
+  #     - windSpeed
   # - platform: xfinity
   #   username: !secret xfinity_email
   #   password: !secret xfinity_password
-  # - platform: ring
   - platform: filter
     name: "Weather Wind Speed (Filtered)"
     entity_id: sensor.weather_wind_speed
@@ -159,11 +158,11 @@
     type: max
     round_digits: 0
     entity_ids:
-      # - sensor.jeff_basement # removed this device on 2020-01-11
       - sensor.jeff_dining
       - sensor.jeff_garage
       - sensor.jeff_livingroom
       - sensor.jeff_upstairs
+      - sensor.jeff_basement
 #### Jeff's phone bluetooth RSSI stuff
   - platform: mqtt
     state_topic: 'monitor/basement/jeffs_phone/rssi'
@@ -278,8 +277,8 @@
     round_digits: 0
     entity_ids:
       - sensor.jen_basement
-      - sensor.jen_dining
       - sensor.jen_garage
+      - sensor.jen_dining
       - sensor.jen_livingroom
       - sensor.jen_upstairs
 #### Jen's phone bluetooth RSSI stuff
