@@ -4,3 +4,6 @@
   username: !secret bi_user
   password:  !secret bi_pass
   authentication: basic
+- platform: mqtt
+  name: Porch Camera Last Person
+  topic: frigate/porch/person/snapshot

@@ -4,3 +4,6 @@
   username: !secret bi_user
   password: !secret bi_pass
   authentication: basic
+- platform: mqtt
+  name: Front Camera Last Person
+  topic: frigate/front/person/snapshot

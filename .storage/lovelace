@@ -292,6 +292,81 @@
                             "type": "entities"
                         },
                         {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.front",
+                                    "show_name": false,
+                                    "show_state": false,
+                                    "camera_view": "live"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.front_camera_last_person",
+                                    "show_name": false,
+                                    "show_state": false
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.driveway",
+                                    "show_name": false,
+                                    "show_state": false,
+                                    "camera_view": "live"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.driveway_camera_last_person",
+                                    "show_name": false,
+                                    "show_state": false
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.porch",
+                                    "show_name": false,
+                                    "show_state": false,
+                                    "camera_view": "live"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.porch_camera_last_person",
+                                    "show_name": false,
+                                    "show_state": false
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.pool",
+                                    "show_name": false,
+                                    "show_state": false,
+                                    "camera_view": "live"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.pool_camera_last_person",
+                                    "show_name": false,
+                                    "show_state": false
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.basement",
+                                    "show_name": false,
+                                    "show_state": false,
+                                    "camera_view": "live"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.basement_camera_last_person",
+                                    "show_name": false,
+                                    "show_state": false
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.front_door",
+                                    "show_name": false
+                                }
+                            ]
+                        },
+                        {
                             "entities": [
                                 "sensor.blue_iris_profile",
                                 "input_select.set_biprofile"
@@ -299,45 +374,6 @@
                             "show_header_toggle": false,
                             "title": "Cameras",
                             "type": "entities"
-                        },
-                        {
-                            "camera_image": "camera.front",
-                            "entity": "camera.front",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "camera_image": "camera.driveway",
-                            "entity": "camera.driveway",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "camera_image": "camera.porch",
-                            "entity": "camera.porch",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "camera_image": "camera.pool",
-                            "entity": "camera.pool",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "camera_image": "camera.basement",
-                            "entity": "camera.basement",
-                            "show_name": false,
-                            "show_state": true,
-                            "type": "picture-entity"
-                        },
-                        {
-                            "entity": "camera.front_door",
-                            "type": "picture-entity"
                         },
                         {
                             "entities": [

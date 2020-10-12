@@ -326,6 +326,32 @@ binary_sensor:
     payload_on: "ON"
     payload_off: "OFF"
     device_class: motion
+  - platform: mqtt
+    name: Front Camera Person
+    state_topic: "frigate/front/person"
+    device_class: motion
+    availability_topic: "frigate/available"
+  - platform: mqtt
+    name: Driveway Camera Person
+    state_topic: "frigate/driveway/person"
+    device_class: motion
+    availability_topic: "frigate/available"
+  - platform: mqtt
+    name: Porch Camera Person
+    state_topic: "frigate/porch/person"
+    device_class: motion
+    availability_topic: "frigate/available"
+  - platform: mqtt
+    name: Pool Camera Person
+    state_topic: "frigate/pool/person"
+    device_class: motion
+    availability_topic: "frigate/available"
+  - platform: mqtt
+    name: Basement Camera Person
+    state_topic: "frigate/basement/person"
+    device_class: motion
+    availability_topic: "frigate/available"
+
 
 group: !include groups.yaml
 
