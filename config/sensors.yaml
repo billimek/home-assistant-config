@@ -25,9 +25,9 @@
   #   name: yr
   #   monitored_conditions:
   #     - windSpeed
-  # - platform: xfinity
-  #   username: !secret xfinity_email
-  #   password: !secret xfinity_password
+  - platform: xfinity
+    username: !secret xfinity_email
+    password: !secret xfinity_password
   - platform: filter
     name: "Weather Wind Speed (Filtered)"
     entity_id: sensor.weather_wind_speed
@@ -538,8 +538,8 @@
     resource: http://frigate:5000/debug/stats
     scan_interval: 5
     json_attributes:
-      - coral
-      - tracked_objects_queue
+      - detectors
+      - detection_fps
       - front
       - porch
       - driveway
@@ -548,20 +548,14 @@
     value_template: 'OK'  
   - platform: template
     sensors:
-      frigate_tracked_objects_queue:
-        value_template: '{{ states.sensor.frigate_debug.attributes["tracked_objects_queue"] }}' 
-        unit_of_measurement: 'queue'
-      frigate_coral_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["fps"] }}'
+      frigate_detection_fps: 
+        value_template: '{{ states.sensor.frigate_debug.attributes["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       frigate_coral_inference:
-        value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["inference_speed"] }}' 
+        value_template: '{{ states.sensor.frigate_debug.attributes["detectors"]["coral"]["inference_speed"] }}' 
         unit_of_measurement: 'ms'
-      frigate_coral_detection_queue:
-        value_template: '{{ states.sensor.frigate_debug.attributes["coral"]["detection_queue"] }}' 
-        unit_of_measurement: 'queue'
       front_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["front"]["process_fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["front"]["camera_fps"] }}'
         unit_of_measurement: 'FPS'
       front_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["front"]["skipped_fps"] }}'
@@ -570,7 +564,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["front"]["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       driveway_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["process_fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["camera_fps"] }}'
         unit_of_measurement: 'FPS'
       driveway_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["skipped_fps"] }}'
@@ -579,7 +573,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["driveway"]["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       porch_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["process_fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["camera_fps"] }}'
         unit_of_measurement: 'FPS'
       porch_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["skipped_fps"] }}'
@@ -588,7 +582,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["porch"]["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       pool_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["process_fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["camera_fps"] }}'
         unit_of_measurement: 'FPS'
       pool_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["skipped_fps"] }}'
@@ -597,7 +591,7 @@
         value_template: '{{ states.sensor.frigate_debug.attributes["pool"]["detection_fps"] }}'
         unit_of_measurement: 'FPS'
       basement_fps: 
-        value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["process_fps"] }}'
+        value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["camera_fps"] }}'
         unit_of_measurement: 'FPS'
       basement_skipped_fps: 
         value_template: '{{ states.sensor.frigate_debug.attributes["basement"]["skipped_fps"] }}'

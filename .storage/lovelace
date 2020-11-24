@@ -120,49 +120,6 @@
                             "type": "entities"
                         },
                         {
-                            "entities": [
-                                {
-                                    "entity": "sensor.jeff_s_phone_bluetooth_occupancy_confidence"
-                                },
-                                {
-                                    "entity": "sensor.jen_s_phone_bluetooth_occupancy_confidence"
-                                },
-                                {
-                                    "entity": "sensor.jeff_basement"
-                                },
-                                {
-                                    "entity": "sensor.jeff_dining"
-                                },
-                                {
-                                    "entity": "sensor.jeff_garage"
-                                },
-                                {
-                                    "entity": "sensor.jeff_livingroom"
-                                },
-                                {
-                                    "entity": "sensor.jeff_upstairs"
-                                },
-                                {
-                                    "entity": "sensor.jen_basement"
-                                },
-                                {
-                                    "entity": "sensor.jen_dining"
-                                },
-                                {
-                                    "entity": "sensor.jen_garage"
-                                },
-                                {
-                                    "entity": "sensor.jen_livingroom"
-                                },
-                                {
-                                    "entity": "sensor.jen_upstairs"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Bluetooth LE",
-                            "type": "entities"
-                        },
-                        {
                             "entity": "sensor.anyone_home",
                             "hold_action": {
                                 "action": "none"
@@ -262,6 +219,47 @@
                                 "service": "rest_command.disable_blocky_5m"
                             },
                             "type": "button"
+                        },
+                        {
+                            "type": "glance",
+                            "entities": [
+                                {
+                                    "entity": "sensor.jeff_basement"
+                                },
+                                {
+                                    "entity": "sensor.jeff_dining"
+                                },
+                                {
+                                    "entity": "sensor.jeff_garage"
+                                },
+                                {
+                                    "entity": "sensor.jeff_livingroom"
+                                },
+                                {
+                                    "entity": "sensor.jeff_upstairs"
+                                },
+                                {
+                                    "entity": "sensor.jen_basement"
+                                },
+                                {
+                                    "entity": "sensor.jen_dining"
+                                },
+                                {
+                                    "entity": "sensor.jen_garage"
+                                },
+                                {
+                                    "entity": "sensor.jen_livingroom"
+                                },
+                                {
+                                    "entity": "sensor.jen_upstairs"
+                                }
+                            ],
+                            "show_icon": false,
+                            "show_state": true,
+                            "show_name": true,
+                            "state_color": false,
+                            "title": "Bluetooth Detection",
+                            "columns": 4
                         }
                     ],
                     "icon": "mdi:home-assistant",
@@ -675,6 +673,10 @@
                     "badges": [],
                     "cards": [
                         {
+                            "type": "weather-forecast",
+                            "entity": "weather.dark_sky"
+                        },
+                        {
                             "entities": [
                                 {
                                     "entity": "sensor.weather_summary"
@@ -982,6 +984,49 @@
                                 "arm_away"
                             ],
                             "type": "alarm-panel"
+                        },
+                        {
+                            "type": "glance",
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.main_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.upstairs_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.basement_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.basement_camera_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.front_camera_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.porch_camera_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.driveway_camera_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.pool_camrea_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.basement_camera_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.ring_front_door_motion"
+                                },
+                                {
+                                    "entity": "sensor.front_door_last_motion"
+                                }
+                            ],
+                            "state_color": true,
+                            "show_icon": true,
+                            "show_name": true,
+                            "show_state": true,
+                            "title": "Motion"
                         }
                     ],
                     "icon": "mdi:shield-home",
