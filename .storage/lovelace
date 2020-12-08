@@ -666,6 +666,7 @@
                     "badges": [],
                     "cards": [
                         {
+                            "type": "entities",
                             "entities": [
                                 {
                                     "entity": "group.cabinet_lights"
@@ -683,35 +684,29 @@
                                     "entity": "switch.sunroom_garage_switch"
                                 },
                                 {
-                                    "entity": "sensor.sunroom_garage_power"
-                                },
-                                {
-                                    "entity": "sensor.sunroom_garage_power_2"
-                                },
-                                {
                                     "entity": "switch.porch_porch_switch"
-                                },
-                                {
-                                    "entity": "sensor.porch_porch_power"
-                                },
-                                {
-                                    "entity": "sensor.porch_porch_power_2"
                                 },
                                 {
                                     "entity": "switch.pool_pool_switch"
                                 },
                                 {
-                                    "entity": "binary_sensor.basement_water_sensor_a_contact"
+                                    "entity": "light.foyer_stairs_dimmer"
                                 },
                                 {
-                                    "entity": "sensor.basement_water_sensor_a_battery"
+                                    "entity": "switch.portable_outlet_d_switch"
                                 },
                                 {
-                                    "entity": "binary_sensor.sump_pump_water_sensor_b_contact"
+                                    "entity": "sensor.sunroom_garage_power"
                                 },
                                 {
-                                    "entity": "sensor.sump_pump_water_sensor_b_battery"
-                                },
+                                    "entity": "sensor.porch_porch_power"
+                                }
+                            ],
+                            "title": "Main Level"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
                                 {
                                     "entity": "light.basement_stairs_dimmer"
                                 },
@@ -725,21 +720,34 @@
                                     "entity": "switch.basement_livingroom_switch"
                                 },
                                 {
-                                    "entity": "light.foyer_stairs_dimmer"
+                                    "entity": "binary_sensor.basement_water_sensor_a_contact"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_d_switch"
+                                    "entity": "sensor.basement_water_sensor_a_battery"
                                 },
+                                {
+                                    "entity": "binary_sensor.sump_pump_water_sensor_b_contact"
+                                },
+                                {
+                                    "entity": "sensor.sump_pump_water_sensor_b_battery"
+                                }
+                            ],
+                            "title": "Basement"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
                                 {
                                     "entity": "switch.portable_outlet_e_switch_2"
                                 },
                                 {
                                     "entity": "switch.portable_outlet_e_switch_3"
+                                },
+                                {
+                                    "entity": "light.foyer_stairs_dimmer"
                                 }
                             ],
-                            "show_header_toggle": false,
-                            "title": "Portable Outlets",
-                            "type": "entities"
+                            "title": "Upstairs"
                         },
                         {
                             "entity": "light.foyer_stairs_dimmer",
