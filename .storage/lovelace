@@ -383,6 +383,93 @@
                                 "sensor.front_door_volume"
                             ],
                             "type": "entities"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "switch.wyze_1_h264_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_ir_filter"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_ir_led"
+                                },
+                                {
+                                    "entity": "sensor.wyze_1_light_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_motion_detection"
+                                },
+                                {
+                                    "entity": "binary_sensor.wyze_1_motion_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_night_mode"
+                                },
+                                {
+                                    "entity": "switch.wyze_1_night_mode_auto"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "switch.wyze_2_h264_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_ir_filter"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_ir_led"
+                                },
+                                {
+                                    "entity": "sensor.wyze_2_light_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_motion_detection"
+                                },
+                                {
+                                    "entity": "binary_sensor.wyze_2_motion_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_night_mode"
+                                },
+                                {
+                                    "entity": "switch.wyze_2_night_mode_auto"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "switch.wyze_3_h264_rtsp_server"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_ir_filter"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_ir_led"
+                                },
+                                {
+                                    "entity": "sensor.wyze_3_light_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_motion_detection"
+                                },
+                                {
+                                    "entity": "binary_sensor.wyze_3_motion_sensor"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_night_mode"
+                                },
+                                {
+                                    "entity": "switch.wyze_3_night_mode_auto"
+                                }
+                            ]
                         }
                     ],
                     "icon": "mdi:camcorder",
@@ -642,6 +729,12 @@
                                 },
                                 {
                                     "entity": "switch.portable_outlet_d_switch"
+                                },
+                                {
+                                    "entity": "switch.portable_outlet_e_switch_2"
+                                },
+                                {
+                                    "entity": "switch.portable_outlet_e_switch_3"
                                 }
                             ],
                             "show_header_toggle": false,
