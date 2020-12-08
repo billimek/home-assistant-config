@@ -117,10 +117,10 @@ mqtt:
   username: !secret mqtt_user
   password: !secret mqtt_password
   birth_message:
-    topic: 'hass/status'
+    topic: 'homeassistant/status'
     payload: 'online'
   will_message:
-    topic: 'hass/status'
+    topic: 'homeassistant/status'
     payload: 'offline'
 
 ios:
@@ -362,6 +362,9 @@ notify:
     default_channel: '#home'
     username: "Home Assistant"
     icon: home-assistant
+  - name: discord
+    platform: discord
+    token: !secret discord-token
 
 nest:
   client_id: !secret nest-client_id
