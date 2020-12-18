@@ -451,7 +451,7 @@ tesla:
 
 tts:
   - platform: google_translate
-    cache: true
+    cache: false
     # cache_dir: /tmp/tts
     time_memory: 300
     base_url: !secret tts_base_url
