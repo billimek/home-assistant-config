@@ -124,3 +124,27 @@
     - service: homeassistant.turn_off
       data:
         entity_id: input_boolean.jen_occupancy
+
+- alias: Ansley Occupancy On
+  initial_state: on
+#   hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.ansley_s_phone_bluetooth_occupancy_confidence
+      above: 10
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: input_boolean.ansley_occupancy
+
+- alias: Ansley Occupancy Off
+  initial_state: on
+#   hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.ansley_s_phone_bluetooth_occupancy_confidence
+      below: 10
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: input_boolean.ansley_occupancy
