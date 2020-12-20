@@ -11,7 +11,9 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.anyone_home"
+                                    "entity": "sensor.anyone_home",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:home"
                                 },
                                 {
                                     "entity": "sensor.alarm_panel_display"
@@ -27,10 +29,16 @@
                                 },
                                 {
                                     "entity": "input_boolean.auto_arm_disarm_alarm_night"
+                                },
+                                {
+                                    "entity": "proximity.home"
+                                },
+                                {
+                                    "entity": "sensor.home_eta"
                                 }
                             ],
                             "show_header_toggle": false,
-                            "title": "Alarm Panel",
+                            "title": "Home",
                             "type": "entities"
                         },
                         {
@@ -79,25 +87,42 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.jeff_home_status"
+                                    "entity": "sensor.jeff_home_status",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:home"
                                 },
                                 {
-                                    "entity": "person.jeff_billimek"
+                                    "entity": "person.jeff_billimek",
+                                    "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jeffs_xs_2"
+                                    "entity": "device_tracker.jeffs_xs_2",
+                                    "icon": "hass:satellite-uplink",
+                                    "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jeffs_xs"
+                                    "entity": "device_tracker.jeffs_xs_3",
+                                    "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "input_boolean.jeff_occupancy"
+                                    "entity": "device_tracker.jeffs_xs",
+                                    "icon": "hass:wifi",
+                                    "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "proximity.home_jeffs_phone"
+                                    "entity": "device_tracker.jeffs_phone_bt",
+                                    "name": "Jeff's Xe (Bluetooth)",
+                                    "icon": "hass:bluetooth",
+                                    "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "proximity.home"
+                                    "entity": "input_boolean.jeff_occupancy",
+                                    "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "proximity.home_jeffs_phone",
+                                    "name": "Distance to Home",
+                                    "secondary_info": "last-changed"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -107,19 +132,42 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.jen_home_status"
+                                    "entity": "sensor.jen_home_status",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:home"
                                 },
                                 {
-                                    "entity": "person.jennifer_billimek"
+                                    "entity": "person.jennifer_billimek",
+                                    "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jennifers_xs_max"
+                                    "entity": "device_tracker.jennifers_xs_max",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:satellite-uplink"
                                 },
                                 {
-                                    "entity": "device_tracker.jennifersxsmax"
+                                    "entity": "device_tracker.jennifers_xs_max_2",
+                                    "secondary_info": "last-updated"
                                 },
                                 {
-                                    "entity": "input_boolean.jen_occupancy"
+                                    "entity": "device_tracker.jennifersxsmax",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:wifi"
+                                },
+                                {
+                                    "entity": "device_tracker.jens_phone_bt",
+                                    "name": "Jen's Xs (Bluetooth)",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:bluetooth"
+                                },
+                                {
+                                    "entity": "input_boolean.jen_occupancy",
+                                    "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "proximity.home_jens_phone",
+                                    "name": "Distance to Home",
+                                    "secondary_info": "last-changed"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -130,16 +178,42 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "sensor.ansley_home_status"
+                                    "entity": "sensor.ansley_home_status",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:home"
                                 },
                                 {
-                                    "entity": "person.ansley_billimek"
+                                    "entity": "person.ansley_billimek",
+                                    "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "input_boolean.ansley_occupancy"
+                                    "entity": "device_tracker.ansleys_xr_2",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:satellite-uplink"
                                 },
                                 {
-                                    "entity": "device_tracker.ansleys_xr"
+                                    "entity": "device_tracker.ansleys_xr_3",
+                                    "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "device_tracker.ansleys_xr",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:wifi"
+                                },
+                                {
+                                    "entity": "device_tracker.ansleys_phone_bt",
+                                    "name": "Ansley's Xr (bluetooth)",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:bluetooth"
+                                },
+                                {
+                                    "entity": "input_boolean.ansley_occupancy",
+                                    "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "proximity.home_ansleys_phone",
+                                    "secondary_info": "last-changed",
+                                    "name": "Distance to Home"
                                 }
                             ],
                             "title": "Ansley Presence",
@@ -646,7 +720,9 @@
                                     "entities": [
                                         "device_tracker.tesla_location"
                                     ],
-                                    "type": "map"
+                                    "type": "map",
+                                    "hours_to_show": 0,
+                                    "dark_mode": true
                                 },
                                 {
                                     "entity": "climate.sulaco_hvac_climate_system",
@@ -694,6 +770,9 @@
                                 },
                                 {
                                     "entity": "device_tracker.tesla_model_3_620031_location_tracker"
+                                },
+                                {
+                                    "entity": "device_tracker.tesla_location"
                                 }
                             ],
                             "type": "entities"

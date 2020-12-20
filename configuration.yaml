@@ -434,20 +434,40 @@ proximity:
       - SSC
       - Jens Work
     devices:
-      - device_tracker.tesla_location
       - device_tracker.jeffs_xs_2
+      - device_tracker.jeffs_xs_3
+      - device_tracker.jennifers_xs_max
+      - device_tracker.jennifers_xs_max_2
+      - device_tracker.ansleys_xr_2
+      - device_tracker.ansleys_xr_3
     tolerance: 50
     unit_of_measurement: m
   home_tesla:
     zone: home
     devices:
       - device_tracker.tesla_location
+      - device_tracker.tesla_model_3_620031_location_tracker
     tolerance: 50
     unit_of_measurement: m
   home_jeffs_phone:
     zone: home
     devices:
       - device_tracker.jeffs_xs_2
+      - device_tracker.jeffs_xs_3
+    tolerance: 50
+    unit_of_measurement: m
+  home_jens_phone:
+    zone: home
+    devices:
+      - device_tracker.jennifers_xs_max
+      - device_tracker.jennifers_xs_max_2
+    tolerance: 50
+    unit_of_measurement: m
+  home_ansleys_phone:
+    zone: home
+    devices:
+      - device_tracker.ansleys_xr_2
+      - device_tracker.ansleys_xr_3
     tolerance: 50
     unit_of_measurement: m
 
