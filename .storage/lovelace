@@ -11,6 +11,9 @@
                         {
                             "entities": [
                                 {
+                                    "entity": "sensor.anyone_home"
+                                },
+                                {
                                     "entity": "sensor.alarm_panel_display"
                                 },
                                 {
@@ -91,6 +94,19 @@
                                     "entity": "input_boolean.jeff_occupancy"
                                 },
                                 {
+                                    "entity": "proximity.home_jeffs_phone"
+                                },
+                                {
+                                    "entity": "proximity.home"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Jeff Presence",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
                                     "entity": "sensor.jen_home_status"
                                 },
                                 {
@@ -104,20 +120,30 @@
                                 },
                                 {
                                     "entity": "input_boolean.jen_occupancy"
-                                },
-                                {
-                                    "entity": "sensor.anyone_home"
-                                },
-                                {
-                                    "entity": "proximity.home_jeffs_phone"
-                                },
-                                {
-                                    "entity": "proximity.home"
                                 }
                             ],
                             "show_header_toggle": false,
-                            "title": "Family",
+                            "title": "Jen Presence",
                             "type": "entities"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "sensor.ansley_home_status"
+                                },
+                                {
+                                    "entity": "person.ansley_billimek"
+                                },
+                                {
+                                    "entity": "input_boolean.ansley_occupancy"
+                                },
+                                {
+                                    "entity": "device_tracker.ansleys_xr"
+                                }
+                            ],
+                            "title": "Ansley Presence",
+                            "show_header_toggle": false
                         },
                         {
                             "entity": "sensor.anyone_home",
@@ -252,6 +278,21 @@
                                 },
                                 {
                                     "entity": "sensor.jen_upstairs"
+                                },
+                                {
+                                    "entity": "sensor.ansley_basement"
+                                },
+                                {
+                                    "entity": "sensor.ansley_dining"
+                                },
+                                {
+                                    "entity": "sensor.ansley_garage"
+                                },
+                                {
+                                    "entity": "sensor.ansley_livingroom"
+                                },
+                                {
+                                    "entity": "sensor.ansley_upstairs"
                                 }
                             ],
                             "show_icon": false,

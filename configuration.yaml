@@ -23,7 +23,7 @@ homeassistant:
     security: !include security.yaml
 
   allowlist_external_dirs:
-    - /config/tensorflow/snapshot
+    # - /config/tensorflow/snapshot
     - /config/www/camera
 
 #lovelace:
@@ -239,6 +239,8 @@ input_boolean:
     name: Jeff is home (bluetooth)
   jen_occupancy:
     name: Jen is home (bluetooth)
+  ansley_occupancy:
+    name: Ansley is home (bluetooth)
   auto_run_basement_fan:
     name: Auto-run basement fan at noon, daily
     initial: on
@@ -383,6 +385,11 @@ device_tracker:
       jen_garage: 'monitor/garage/jens_phone/device_tracker'
       jen_livingroom: 'monitor/livingroom/jens_phone/device_tracker'
       jen_upstairs: 'monitor/upstairs/jens_phone/device_tracker'
+      ansley_basement: 'monitor/basement/ansleys_phone/device_tracker'
+      ansley_dining: 'monitor/dining/ansleys_phone/device_tracker'
+      ansley_garage: 'monitor/garage/ansleys_phone/device_tracker'
+      ansley_livingroom: 'monitor/livingroom/ansleys_phone/device_tracker'
+      ansley_upstairs: 'monitor/upstairs/ansleys_phone/device_tracker'
 
 # device_tracker:
 #   - platform: mqtt
