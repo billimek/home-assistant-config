@@ -820,13 +820,19 @@
                                     "entity": "light.foyer_stairs_dimmer"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_d_switch"
-                                },
-                                {
                                     "entity": "sensor.sunroom_garage_power"
                                 },
                                 {
                                     "entity": "sensor.porch_porch_power"
+                                },
+                                {
+                                    "entity": "group.sunroom_lights"
+                                },
+                                {
+                                    "entity": "switch.portable_outlet_d_switch"
+                                },
+                                {
+                                    "entity": "switch.portable_outlet_f_switch_3"
                                 }
                             ],
                             "title": "Main Level"
