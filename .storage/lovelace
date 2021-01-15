@@ -34,7 +34,16 @@
                                     "entity": "proximity.home"
                                 },
                                 {
-                                    "entity": "sensor.home_eta"
+                                    "entity": "group.family"
+                                },
+                                {
+                                    "entity": "group.parents"
+                                },
+                                {
+                                    "entity": "group.kids"
+                                },
+                                {
+                                    "entity": "input_select.presence"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -101,10 +110,6 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jeffs_xs_3",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
                                     "entity": "device_tracker.jeffs_xs",
                                     "icon": "hass:wifi",
                                     "secondary_info": "last-changed"
@@ -123,11 +128,15 @@
                                     "entity": "proximity.home_jeffs_phone",
                                     "name": "Distance to Home",
                                     "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "input_boolean.track_jeff"
                                 }
                             ],
                             "show_header_toggle": false,
                             "title": "Jeff Presence",
-                            "type": "entities"
+                            "type": "entities",
+                            "state_color": true
                         },
                         {
                             "entities": [
@@ -144,10 +153,6 @@
                                     "entity": "device_tracker.jennifers_xs_max",
                                     "secondary_info": "last-changed",
                                     "icon": "hass:satellite-uplink"
-                                },
-                                {
-                                    "entity": "device_tracker.jennifers_xs_max_2",
-                                    "secondary_info": "last-updated"
                                 },
                                 {
                                     "entity": "device_tracker.jennifersxsmax",
@@ -168,6 +173,9 @@
                                     "entity": "proximity.home_jens_phone",
                                     "name": "Distance to Home",
                                     "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "input_boolean.track_jen"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -192,10 +200,6 @@
                                     "icon": "hass:satellite-uplink"
                                 },
                                 {
-                                    "entity": "device_tracker.ansleys_xr_3",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
                                     "entity": "device_tracker.ansleys_xr",
                                     "secondary_info": "last-changed",
                                     "icon": "hass:wifi"
@@ -214,6 +218,9 @@
                                     "entity": "proximity.home_ansleys_phone",
                                     "secondary_info": "last-changed",
                                     "name": "Distance to Home"
+                                },
+                                {
+                                    "entity": "input_boolean.track_ansley"
                                 }
                             ],
                             "title": "Ansley Presence",

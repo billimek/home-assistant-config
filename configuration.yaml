@@ -185,6 +185,13 @@ input_select:
       - "-"
       - "home"
       - "away"
+  presence:
+    name: "People to track"
+    initial: "family"
+    options:
+      - "family"
+      - "parents"
+      - "kids"
 
 cover:
   - platform: opengarage
@@ -223,6 +230,7 @@ cover:
     # value_template: '{{ value.x }}'
 
 input_boolean:
+  # garage stuff
   previous_garage_open:
     name: Track if the garage was previously open
     initial: on
@@ -235,15 +243,45 @@ input_boolean:
   previous_garage2_closed:
     name: Track if the garage2 was previously closed
     initial: on
+  auto_garage_doors:
+    name: Automatically open/close garage doors
+    initial: on
+  auto_garage_doors_night:
+    name: Automatically close garage doors at night
+    initial: on
+
+  # people
   jeff_occupancy:
     name: Jeff is home (bluetooth)
   jen_occupancy:
     name: Jen is home (bluetooth)
   ansley_occupancy:
     name: Ansley is home (bluetooth)
+  track_ansley:
+      name: Track Ansley Presence
+  track_jen:
+      name: Track Jen Presence
+  track_jeff:
+      name: Track Jeff Presence
+
+  # auto-run stuff
   auto_run_basement_fan:
     name: Auto-run basement fan at noon, daily
     initial: on
+  auto_arm_disarm_alarm_night:
+    name: Arm alarm at midnight and disarm at 5am
+  auto_close_garage_door_jen:
+    name: Automatically close Jen's Garage Door if open for 30 mins
+  auto_close_garage_door_jeff:
+    name: Automatically close Jeff's Garage Door if open for 30 mins
+  auto_arm_alarm_when_gone:
+    name: Automatically arm alarm when no one is home
+    initial: on
+  auto_disarm_alarm_when_home:
+    name: Automatically disarm alarm when someone comes home
+    initial: on
+  
+  # notifications
   camera_front_notify:
     name: Front camera notifications
     initial: on
@@ -259,18 +297,6 @@ input_boolean:
   camera_basement_notify:
     name: Basement camera notifications
     initial: on
-  auto_arm_disarm_alarm_night:
-    name: Arm alarm at midnight and disarm at 5am
-  auto_close_garage_door_jen:
-    name: Automatically close Jen's Garage Door if open for 30 mins
-  auto_close_garage_door_jeff:
-    name: Automatically close Jeff's Garage Door if open for 30 mins
-  auto_arm_alarm_when_gone:
-    name: Automatically arm alarm when no one is home
-    initial: on
-  auto_disarm_alarm_when_home:
-    name: Automatically disarm alarm when someone comes home
-    initial: on
   notify_alarm_armed:
     name: Notification when alarm is armed
     initial: on
@@ -285,12 +311,6 @@ input_boolean:
     initial: on
   notify_garage_doors_away:
     name: Notification when garage doors are open/closed and we are away
-    initial: on
-  auto_garage_doors:
-    name: Automatically open/close garage doors
-    initial: on
-  auto_garage_doors_night:
-    name: Automatically close garage doors at night
     initial: on
 
 weather:
@@ -435,11 +455,11 @@ proximity:
       - Jens Work
     devices:
       - device_tracker.jeffs_xs_2
-      - device_tracker.jeffs_xs_3
+      - device_tracker.jeffs_xs
       - device_tracker.jennifers_xs_max
-      - device_tracker.jennifers_xs_max_2
+      - device_tracker.jennifersxsmax
       - device_tracker.ansleys_xr_2
-      - device_tracker.ansleys_xr_3
+      - device_tracker.ansleys_xr
     tolerance: 50
     unit_of_measurement: m
   home_tesla:
@@ -453,21 +473,18 @@ proximity:
     zone: home
     devices:
       - device_tracker.jeffs_xs_2
-      - device_tracker.jeffs_xs_3
     tolerance: 50
     unit_of_measurement: m
   home_jens_phone:
     zone: home
     devices:
       - device_tracker.jennifers_xs_max
-      - device_tracker.jennifers_xs_max_2
     tolerance: 50
     unit_of_measurement: m
   home_ansleys_phone:
     zone: home
     devices:
       - device_tracker.ansleys_xr_2
-      - device_tracker.ansleys_xr_3
     tolerance: 50
     unit_of_measurement: m
 
