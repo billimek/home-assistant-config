@@ -105,6 +105,9 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
+                                    "entity": "device_tracker.jeffs_xs_tracker"
+                                },
+                                {
                                     "entity": "device_tracker.jeffs_xs_2",
                                     "icon": "hass:satellite-uplink",
                                     "secondary_info": "last-changed"
@@ -121,16 +124,15 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "input_boolean.jeff_occupancy",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
                                     "entity": "proximity.home_jeffs_phone",
                                     "name": "Distance to Home",
                                     "secondary_info": "last-changed"
                                 },
                                 {
                                     "entity": "input_boolean.track_jeff"
+                                },
+                                {
+                                    "entity": "sensor.jeffs_xs_room_presence"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -150,6 +152,9 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
+                                    "entity": "device_tracker.jennifers_xs_max_tracker"
+                                },
+                                {
                                     "entity": "device_tracker.jennifers_xs_max",
                                     "secondary_info": "last-changed",
                                     "icon": "hass:satellite-uplink"
@@ -166,21 +171,21 @@
                                     "icon": "hass:bluetooth"
                                 },
                                 {
-                                    "entity": "input_boolean.jen_occupancy",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
                                     "entity": "proximity.home_jens_phone",
                                     "name": "Distance to Home",
                                     "secondary_info": "last-changed"
                                 },
                                 {
                                     "entity": "input_boolean.track_jen"
+                                },
+                                {
+                                    "entity": "sensor.jennifers_xs_max_room_presence"
                                 }
                             ],
                             "show_header_toggle": false,
                             "title": "Jen Presence",
-                            "type": "entities"
+                            "type": "entities",
+                            "state_color": true
                         },
                         {
                             "type": "entities",
@@ -193,6 +198,9 @@
                                 {
                                     "entity": "person.ansley_billimek",
                                     "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "device_tracker.ansleys_xr_tracker"
                                 },
                                 {
                                     "entity": "device_tracker.ansleys_xr_2",
@@ -211,41 +219,20 @@
                                     "icon": "hass:bluetooth"
                                 },
                                 {
-                                    "entity": "input_boolean.ansley_occupancy",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
                                     "entity": "proximity.home_ansleys_phone",
                                     "secondary_info": "last-changed",
                                     "name": "Distance to Home"
                                 },
                                 {
                                     "entity": "input_boolean.track_ansley"
+                                },
+                                {
+                                    "entity": "sensor.ansleys_xr_room_presence"
                                 }
                             ],
                             "title": "Ansley Presence",
-                            "show_header_toggle": false
-                        },
-                        {
-                            "entity": "sensor.anyone_home",
-                            "hold_action": {
-                                "action": "none"
-                            },
-                            "icon": "mdi:bluetooth",
-                            "name": "Restart BTLE Monitors",
-                            "show_icon": true,
-                            "show_name": true,
-                            "tap_action": {
-                                "action": "call-service",
-                                "service": "mqtt.publish",
-                                "service_data": {
-                                    "payload": "",
-                                    "qos": 0,
-                                    "retain": 0,
-                                    "topic": "monitor/scan/restart"
-                                }
-                            },
-                            "type": "entity-button"
+                            "show_header_toggle": false,
+                            "state_color": true
                         },
                         {
                             "entity": "climate.master_bedroom_nest",
@@ -326,62 +313,6 @@
                                 "service": "rest_command.disable_blocky_5m"
                             },
                             "type": "button"
-                        },
-                        {
-                            "type": "glance",
-                            "entities": [
-                                {
-                                    "entity": "sensor.jeff_basement"
-                                },
-                                {
-                                    "entity": "sensor.jeff_dining"
-                                },
-                                {
-                                    "entity": "sensor.jeff_garage"
-                                },
-                                {
-                                    "entity": "sensor.jeff_livingroom"
-                                },
-                                {
-                                    "entity": "sensor.jeff_upstairs"
-                                },
-                                {
-                                    "entity": "sensor.jen_basement"
-                                },
-                                {
-                                    "entity": "sensor.jen_dining"
-                                },
-                                {
-                                    "entity": "sensor.jen_garage"
-                                },
-                                {
-                                    "entity": "sensor.jen_livingroom"
-                                },
-                                {
-                                    "entity": "sensor.jen_upstairs"
-                                },
-                                {
-                                    "entity": "sensor.ansley_basement"
-                                },
-                                {
-                                    "entity": "sensor.ansley_dining"
-                                },
-                                {
-                                    "entity": "sensor.ansley_garage"
-                                },
-                                {
-                                    "entity": "sensor.ansley_livingroom"
-                                },
-                                {
-                                    "entity": "sensor.ansley_upstairs"
-                                }
-                            ],
-                            "show_icon": false,
-                            "show_state": true,
-                            "show_name": true,
-                            "state_color": false,
-                            "title": "Bluetooth Detection",
-                            "columns": 4
                         }
                     ],
                     "icon": "mdi:home-assistant",
@@ -592,6 +523,158 @@
                                     "entity": "switch.wyze_3_night_mode_auto"
                                 }
                             ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                "sensor.basement_camera_fps",
+                                "sensor.basement_cat",
+                                "binary_sensor.basement_cat_motion",
+                                "switch.basement_clips",
+                                "switch.basement_detect",
+                                "sensor.basement_detection_fps_2",
+                                "sensor.basement_dog",
+                                "binary_sensor.basement_dog_motion",
+                                "sensor.basement_person",
+                                "binary_sensor.basement_person_motion",
+                                "sensor.basement_process_fps",
+                                "sensor.basement_skipped_fps_2",
+                                "switch.basement_snapshots",
+                                "sensor.coral_inference_speed",
+                                "sensor.detection_fps",
+                                "sensor.driveway_camera_fps",
+                                "sensor.driveway_cat",
+                                "binary_sensor.driveway_cat_motion",
+                                "switch.driveway_clips",
+                                "switch.driveway_detect",
+                                "sensor.driveway_detection_fps_2",
+                                "sensor.driveway_dog",
+                                "binary_sensor.driveway_dog_motion",
+                                "sensor.driveway_person",
+                                "binary_sensor.driveway_person_motion",
+                                "sensor.driveway_process_fps",
+                                "sensor.driveway_skipped_fps_2",
+                                "switch.driveway_snapshots",
+                                "sensor.front_camera_fps",
+                                "sensor.front_cat",
+                                "binary_sensor.front_cat_motion",
+                                "switch.front_clips",
+                                "switch.front_detect",
+                                "sensor.front_detection_fps_2",
+                                "sensor.front_dog",
+                                "binary_sensor.front_dog_motion",
+                                "sensor.front_person",
+                                "binary_sensor.front_person_motion",
+                                "sensor.front_process_fps",
+                                "sensor.front_skipped_fps_2",
+                                "switch.front_snapshots",
+                                "sensor.pool_camera_fps",
+                                "sensor.pool_cat",
+                                "binary_sensor.pool_cat_motion",
+                                "switch.pool_clips",
+                                "switch.pool_detect",
+                                "sensor.pool_detection_fps_2",
+                                "sensor.pool_dog",
+                                "binary_sensor.pool_dog_motion",
+                                "sensor.pool_person",
+                                "binary_sensor.pool_person_motion",
+                                "sensor.pool_process_fps",
+                                "sensor.pool_skipped_fps_2",
+                                "switch.pool_snapshots",
+                                "sensor.porch_camera_fps",
+                                "sensor.porch_cat",
+                                "binary_sensor.porch_cat_motion",
+                                "switch.porch_clips",
+                                "switch.porch_detect",
+                                "sensor.porch_detection_fps_2",
+                                "sensor.porch_dog",
+                                "binary_sensor.porch_dog_motion",
+                                "sensor.porch_person",
+                                "binary_sensor.porch_person_motion",
+                                "sensor.porch_process_fps",
+                                "sensor.porch_skipped_fps_2",
+                                "switch.porch_snapshots"
+                            ]
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.basement_2"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.basement_cat"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.basement_dog"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.basement_person"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.driveway_2"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.driveway_cat"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.driveway_dog"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.driveway_person"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.front_2"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.front_cat"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.front_dog"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.front_person"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.pool_2"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.pool_cat"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.pool_dog"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.pool_person"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.porch_2"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.porch_cat"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.porch_dog"
+                        },
+                        {
+                            "type": "picture-entity",
+                            "entity": "camera.porch_person"
                         }
                     ],
                     "icon": "mdi:camcorder",
@@ -783,6 +866,29 @@
                                 }
                             ],
                             "type": "entities"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                "lock.sulaco_charger_door_lock",
+                                "binary_sensor.sulaco_charger_sensor",
+                                "switch.sulaco_charger_switch",
+                                "sensor.sulaco_charging_rate_sensor",
+                                "lock.sulaco_door_lock",
+                                "lock.sulaco_frunk_lock",
+                                "device_tracker.sulaco_location_tracker",
+                                "switch.sulaco_maxrange_switch",
+                                "sensor.sulaco_mileage_sensor",
+                                "binary_sensor.sulaco_online_sensor",
+                                "binary_sensor.sulaco_parking_brake_sensor",
+                                "sensor.sulaco_range_sensor",
+                                "switch.sulaco_sentry_mode_switch",
+                                "sensor.sulaco_temperature_sensor_inside",
+                                "sensor.sulaco_temperature_sensor_outside",
+                                "lock.sulaco_trunk_lock",
+                                "binary_sensor.sulaco_update_available_sensor",
+                                "switch.sulaco_update_switch"
+                            ]
                         }
                     ],
                     "icon": "mdi:car-connected",

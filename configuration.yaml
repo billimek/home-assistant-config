@@ -18,61 +18,35 @@ homeassistant:
   auth_providers:
     - type: homeassistant
 
+
 # Packages
   packages:
     security: !include security.yaml
 
   allowlist_external_dirs:
-    # - /config/tensorflow/snapshot
     - /config/www/camera
 
-#lovelace:
-#  mode: yaml
-
-# Enables the frontend
-frontend:
+default_config:
 
 logger:
   default: info
-  logs:
-    homeassistant.components.alarm_control_panel: debug
-    homeassistant.components.alarmdecoder: debug
-    homeassistant.components.sensor.alarm_panel_display: debug
-    alarmdecoder: debug
-    # homeassistant.components.mqtt: debug
-    # hacs: debug
-    # aiogithubapi: debug
-    # homeassistant.components.websocket_api: debug
-    # homeassistant.core: debug
-# Enables configuration UI
-config:
+  # logs:
+  #   homeassistant.components.alarm_control_panel: debug
+  #   homeassistant.components.alarmdecoder: debug
+  #   homeassistant.components.sensor.alarm_panel_display: debug
+  #   alarmdecoder: debug
+  #   homeassistant.components.mqtt: debug
+  #   hacs: debug
+  #   aiogithubapi: debug
+  #   homeassistant.components.websocket_api: debug
+  #   homeassistant.core: debug
 
 http:
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  # base_url: !secret base_url
 
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-# updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
 
 # Discover some devices automatically
 discovery:
-  # ignore:
-  #   - plex_mediaserver
 
-system_health:
-
-cloud:
-
-person:
-
-# Enables support for tracking state changes over time
-history:
 
 # persist states between restarts
 recorder:
@@ -94,25 +68,10 @@ prometheus:
 #     sensor.*_bat:
 #       override_metric: battery_percent
 
-# View all events in a logbook
-logbook:
-
-# Track the sun
-sun:
-
-# ssdp:
-
-zeroconf:
-
-map:
-
-mobile_app:
-
 mqtt:
   discovery: true
   discovery_prefix: homeassistant
   broker: vernemq
-  # port: 8080
   client_id: homeassistant
   username: !secret mqtt_user
   password: !secret mqtt_password
@@ -141,10 +100,6 @@ ios:
             title: 'Close Jeffs garage door'
             activationMode: 'background'
             authenticationRequired: true
-          # - identifier: 'OPEN_GARAGE'
-          #   title: 'Open Jeffs garage door'
-          #   activationMode: 'background'
-          #   authenticationRequired: true
       - name: garage2
         identifier: 'garage2'
         actions:
@@ -175,7 +130,6 @@ automation: !include_dir_merge_list automation
 shell_command: !include shell/shell.yaml
 zone: !include config/zones.yaml
 camera: !include_dir_merge_list cameras
-# image_processing: !include_dir_merge_list tensorflow
 
 input_select:
   set_biprofile:
@@ -208,26 +162,22 @@ cover:
     name: "Jens Garage - MQTT"
     command_topic: "og-jen/IN/STATE"
     state_topic: "og-jen/OUT/STATE"
-    # availability_topic: "jens/OUT/STATUS"
     payload_open: "open"
     payload_close: "close"
     payload_available: "online"
     state_open: "OPEN"
     state_closed: "CLOSED"
     device_class: "garage"
-    # value_template: '{{ value.x }}'
   - platform: mqtt
     name: "Jeffs Garage - MQTT"
     command_topic: "og-jeff/IN/STATE"
     state_topic: "og-jeff/OUT/STATE"
-    # availability_topic: "jeffs/OUT/STATUS"
     payload_open: "open"
     payload_close: "close"
     payload_available: "online"
     state_open: "OPEN"
     state_closed: "CLOSED"
     device_class: "garage"
-    # value_template: '{{ value.x }}'
 
 input_boolean:
   # garage stuff
@@ -392,34 +342,6 @@ nest:
   client_id: !secret nest-client_id
   client_secret: !secret nest-client_secret
 
-device_tracker:
-  - platform: mqtt
-    devices:
-      jeff_basement: 'monitor/basement/jeffs_phone/device_tracker'
-      jeff_dining: 'monitor/dining/jeffs_phone/device_tracker'
-      jeff_garage: 'monitor/garage/jeffs_phone/device_tracker'
-      jeff_livingroom: 'monitor/livingroom/jeffs_phone/device_tracker'
-      jeff_upstairs: 'monitor/upstairs/jeffs_phone/device_tracker'
-      jen_basement: 'monitor/basement/jens_phone/device_tracker'
-      jen_dining: 'monitor/dining/jens_phone/device_tracker'
-      jen_garage: 'monitor/garage/jens_phone/device_tracker'
-      jen_livingroom: 'monitor/livingroom/jens_phone/device_tracker'
-      jen_upstairs: 'monitor/upstairs/jens_phone/device_tracker'
-      ansley_basement: 'monitor/basement/ansleys_phone/device_tracker'
-      ansley_dining: 'monitor/dining/ansleys_phone/device_tracker'
-      ansley_garage: 'monitor/garage/ansleys_phone/device_tracker'
-      ansley_livingroom: 'monitor/livingroom/ansleys_phone/device_tracker'
-      ansley_upstairs: 'monitor/upstairs/ansleys_phone/device_tracker'
-
-# device_tracker:
-#   - platform: mqtt
-#     devices:
-#       jeffs_phone_bt: 'room-assistant/device_tracker/bluetooth-classic-e0-33-8e-b8-c0-a9-tracker/state'
-#       jens_phone_bt: 'room-assistant/device_tracker/bluetooth-classic-f0-99-b6-49-6d-55-tracker/state'
-#     payload_home: 'true'
-#     payload_not_home: 'false'
-#     source_type: bluetooth
-
 influxdb:
   host: !secret influxdb-host
   port: 8086
@@ -427,7 +349,6 @@ influxdb:
 
 google_assistant:
   project_id: home-assistant-7c48d
-  # api_key: !secret google_assistant_api_key
   secure_devices_pin: !secret secure_devices_pin
   service_account: !include home-assistant-4d8d1f2ca10f.json
   report_state: true

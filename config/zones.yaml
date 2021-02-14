@@ -4,12 +4,6 @@
   radius: 200
   icon: mdi:home
 
-# - name: Near Home
-#   latitude: !secret latitude
-#   longitude: !secret longitude
-#   radius: 100
-#   icon: mdi:home-outline
-
 - name: Work
   latitude: !secret work_latitude
   longitude: !secret work_longitude
