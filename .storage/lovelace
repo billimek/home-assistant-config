@@ -118,12 +118,6 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jeffs_phone_bt",
-                                    "name": "Jeff's Xe (Bluetooth)",
-                                    "icon": "hass:bluetooth",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
                                     "entity": "proximity.home_jeffs_phone",
                                     "name": "Distance to Home",
                                     "secondary_info": "last-changed"
@@ -163,12 +157,6 @@
                                     "entity": "device_tracker.jennifersxsmax",
                                     "secondary_info": "last-changed",
                                     "icon": "hass:wifi"
-                                },
-                                {
-                                    "entity": "device_tracker.jens_phone_bt",
-                                    "name": "Jen's Xs (Bluetooth)",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:bluetooth"
                                 },
                                 {
                                     "entity": "proximity.home_jens_phone",
@@ -211,12 +199,6 @@
                                     "entity": "device_tracker.ansleys_xr",
                                     "secondary_info": "last-changed",
                                     "icon": "hass:wifi"
-                                },
-                                {
-                                    "entity": "device_tracker.ansleys_phone_bt",
-                                    "name": "Ansley's Xr (bluetooth)",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:bluetooth"
                                 },
                                 {
                                     "entity": "proximity.home_ansleys_phone",
