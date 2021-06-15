@@ -445,6 +445,12 @@
                                 },
                                 {
                                     "entity": "switch.wyze_1_night_mode_auto"
+                                },
+                                {
+                                    "entity": "camera.wyze_1"
+                                },
+                                {
+                                    "entity": "camera.wyze_1_motion_snapshot"
                                 }
                             ]
                         },
@@ -452,7 +458,7 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "switch.wyze_2_h264_rtsp_server"
+                                    "entity": "switch.wyze_1_h264_rtsp_server"
                                 },
                                 {
                                     "entity": "switch.wyze_2_ir_filter"
@@ -474,6 +480,15 @@
                                 },
                                 {
                                     "entity": "switch.wyze_2_night_mode_auto"
+                                },
+                                {
+                                    "entity": "camera.wyze_2"
+                                },
+                                {
+                                    "entity": "camera.wyze_2_motion_snapshot"
+                                },
+                                {
+                                    "entity": "device_tracker.wyze_2"
                                 }
                             ]
                         },
@@ -887,40 +902,40 @@
                                     "entity": "group.cabinet_lights"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_b_switch"
+                                    "entity": "switch.outlet_b"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_c_switch"
+                                    "entity": "switch.outlet_c"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_a_switch"
+                                    "entity": "switch.outlet_a"
                                 },
                                 {
-                                    "entity": "switch.sunroom_garage_switch"
+                                    "entity": "switch.garage"
                                 },
                                 {
-                                    "entity": "switch.porch_porch_switch"
+                                    "entity": "switch.porch"
                                 },
                                 {
-                                    "entity": "switch.pool_pool_switch"
+                                    "entity": "switch.pool"
                                 },
                                 {
-                                    "entity": "light.foyer_stairs_dimmer"
+                                    "entity": "light.stairs_2"
                                 },
                                 {
-                                    "entity": "sensor.sunroom_garage_power"
+                                    "entity": "sensor.garage_electric_consumed_kwh"
                                 },
                                 {
-                                    "entity": "sensor.porch_porch_power"
+                                    "entity": "sensor.porch_electric_consumed_kwh"
                                 },
                                 {
                                     "entity": "group.sunroom_lights"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_d_switch"
+                                    "entity": "switch.outlet_d"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_f_switch_3"
+                                    "entity": "switch.outlet_f_2"
                                 }
                             ],
                             "title": "Main Level"
@@ -929,28 +944,34 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "light.basement_stairs_dimmer"
+                                    "entity": "light.stairs"
                                 },
                                 {
-                                    "entity": "switch.basement_hallway_switch"
+                                    "entity": "switch.hallway"
                                 },
                                 {
-                                    "entity": "switch.basement_bedroom_switch"
+                                    "entity": "switch.bedroom"
                                 },
                                 {
-                                    "entity": "switch.basement_livingroom_switch"
+                                    "entity": "switch.livingroom"
                                 },
                                 {
-                                    "entity": "binary_sensor.basement_water_sensor_a_contact"
+                                    "entity": "binary_sensor.water_sensor_a_water_alarm_water_leak_detected"
                                 },
                                 {
-                                    "entity": "sensor.basement_water_sensor_a_battery"
+                                    "entity": "sensor.water_sensor_a_battery_level"
                                 },
                                 {
-                                    "entity": "binary_sensor.sump_pump_water_sensor_b_contact"
+                                    "entity": "binary_sensor.water_sensor_a_low_battery_level"
                                 },
                                 {
-                                    "entity": "sensor.sump_pump_water_sensor_b_battery"
+                                    "entity": "binary_sensor.water_sensor_b_water_alarm_water_leak_detected"
+                                },
+                                {
+                                    "entity": "sensor.water_sensor_b_battery_level"
+                                },
+                                {
+                                    "entity": "binary_sensor.water_sensor_b_low_battery_level"
                                 }
                             ],
                             "title": "Basement"
@@ -959,23 +980,23 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "switch.portable_outlet_e_switch_2"
+                                    "entity": "switch.outlet_e_2"
                                 },
                                 {
-                                    "entity": "switch.portable_outlet_e_switch_3"
+                                    "entity": "switch.outlet_e"
                                 },
                                 {
-                                    "entity": "light.foyer_stairs_dimmer"
+                                    "entity": "light.stairs_2"
                                 }
                             ],
                             "title": "Upstairs"
                         },
                         {
-                            "entity": "light.foyer_stairs_dimmer",
+                            "entity": "light.stairs_2",
                             "type": "light"
                         },
                         {
-                            "entity": "light.basement_stairs_dimmer",
+                            "entity": "light.stairs",
                             "type": "light"
                         },
                         {
