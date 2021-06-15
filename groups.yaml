@@ -259,12 +259,12 @@ cabinet_lights:
   name: Cabinet Lights
   all: true
   entities:
-    - switch.portable_outlet_b_switch
-    - switch.portable_outlet_c_switch
+    - switch.outlet_b
+    - switch.outlet_c
 
 sunroom_lights:
   name: Sunroom Lights
   all: true
   entities:
-    - switch.portable_outlet_d_switch
-    - switch.portable_outlet_f_switch_3
+    - switch.outlet_d
+    - switch.outlet_f_2
