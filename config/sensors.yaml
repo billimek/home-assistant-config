@@ -21,9 +21,9 @@
       - dew_point
       - cloud_cover
       - humidity
-  - platform: xfinity
-    username: !secret xfinity_email
-    password: !secret xfinity_password
+  # - platform: xfinity
+  #   username: !secret xfinity_email
+  #   password: !secret xfinity_password
   - platform: filter
     name: "Weather Wind Speed (Filtered)"
     entity_id: sensor.weather_wind_speed
