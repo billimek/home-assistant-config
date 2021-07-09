@@ -21,6 +21,6 @@ Security View
 
 ## Points of interest
 
-* Home-Assistant is running within a kubernetes cluster running the the [home-assistant helm chart](https://github.com/k8s-at-home/charts/blob/master/charts/home-assistant)
+* Home-Assistant is running within a kubernetes cluster running the the [home-assistant helm chart](https://github.com/k8s-at-home/charts/tree/master/charts/stable/home-assistant)
 * Automations are mostly performed via [node-red](https://nodered.org/) with the node-red configuration hosted in [this repo](https://github.com/billimek/node-red-config)
 * In addition to use git to control the configuration, an [embeded](https://github.com/billimek/k8s-gitops/blob/master/default/home-assistant/home-assistant.yaml#L67-L82) instance of the [VSCode server](https://github.com/cdr/code-server) using the [home-assistant config helper extension](https://marketplace.visualstudio.com/items?itemName=keesschollaart.vscode-home-assistant) is leveraged to make live changes to the configuration files
