@@ -12,7 +12,7 @@ homeassistant:
   time_zone: America/New_York
 
   external_url: !secret  tts_base_url
-  internal_url: "http://10.0.6.56:8123"
+  # internal_url: !secret  tts_base_url
 
 
   auth_providers:
@@ -42,6 +42,13 @@ logger:
   #   homeassistant.core: debug
 
 http:
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.2.0.0/24
+    - 10.42.0.0/16
+    - 10.43.0.0/16
 
 
 # Discover some devices automatically
@@ -71,7 +78,7 @@ prometheus:
 mqtt:
   discovery: true
   discovery_prefix: homeassistant
-  broker: vernemq
+  broker: emqx
   client_id: homeassistant
   username: !secret mqtt_user
   password: !secret mqtt_password
