@@ -1041,6 +1041,9 @@
                                 },
                                 {
                                     "entity": "sensor.weather_daily_summary"
+                                },
+                                {
+                                    "entity": "sensor.smartweather_brightness"
                                 }
                             ],
                             "show_header_toggle": false,
