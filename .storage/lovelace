@@ -1044,6 +1044,9 @@
                                 },
                                 {
                                     "entity": "sensor.smartweather_brightness"
+                                },
+                                {
+                                    "entity": "sensor.smartweather_brightness_filtered"
                                 }
                             ],
                             "show_header_toggle": false,
