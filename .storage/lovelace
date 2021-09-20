@@ -44,6 +44,9 @@
                                 },
                                 {
                                     "entity": "input_select.presence"
+                                },
+                                {
+                                    "entity": "binary_sensor.home_away"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -105,9 +108,6 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jeffs_xs_tracker"
-                                },
-                                {
                                     "entity": "device_tracker.jeffs_xs_2",
                                     "icon": "hass:satellite-uplink",
                                     "secondary_info": "last-changed"
@@ -124,9 +124,6 @@
                                 },
                                 {
                                     "entity": "input_boolean.track_jeff"
-                                },
-                                {
-                                    "entity": "sensor.jeffs_xs_room_presence"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -146,9 +143,6 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jennifers_xs_max_tracker"
-                                },
-                                {
                                     "entity": "device_tracker.jennifers_xs_max",
                                     "secondary_info": "last-changed",
                                     "icon": "hass:satellite-uplink"
@@ -165,9 +159,6 @@
                                 },
                                 {
                                     "entity": "input_boolean.track_jen"
-                                },
-                                {
-                                    "entity": "sensor.jennifers_xs_max_room_presence"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -188,9 +179,6 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.ansleys_xr_tracker"
-                                },
-                                {
                                     "entity": "device_tracker.ansleys_xr_2",
                                     "secondary_info": "last-changed",
                                     "icon": "hass:satellite-uplink"
@@ -207,12 +195,44 @@
                                 },
                                 {
                                     "entity": "input_boolean.track_ansley"
-                                },
-                                {
-                                    "entity": "sensor.ansleys_xr_room_presence"
                                 }
                             ],
                             "title": "Ansley Presence",
+                            "show_header_toggle": false,
+                            "state_color": true
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "sensor.brinley_home_status",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:home"
+                                },
+                                {
+                                    "entity": "person.brinley",
+                                    "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "device_tracker.brinleythebest_2",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:wifi"
+                                },
+                                {
+                                    "entity": "device_tracker.brinleythebest",
+                                    "secondary_info": "last-changed",
+                                    "icon": "hass:satellite-uplink"
+                                },
+                                {
+                                    "entity": "proximity.home_brinleys_phone",
+                                    "secondary_info": "last-changed",
+                                    "name": "Distance to Home"
+                                },
+                                {
+                                    "entity": "input_boolean.track_brinley"
+                                }
+                            ],
+                            "title": "Brinley Presence",
                             "show_header_toggle": false,
                             "state_color": true
                         },
@@ -932,10 +952,10 @@
                                     "entity": "group.sunroom_lights"
                                 },
                                 {
-                                    "entity": "switch.outlet_d"
+                                    "entity": "light.outlet_g_2"
                                 },
                                 {
-                                    "entity": "switch.outlet_f_2"
+                                    "entity": "light.outlet_h_2"
                                 }
                             ],
                             "title": "Main Level"
@@ -1006,6 +1026,22 @@
                         {
                             "entity": "media_player.sun_room_speaker",
                             "type": "media-control"
+                        },
+                        {
+                            "type": "light",
+                            "entity": "light.outlet_g"
+                        },
+                        {
+                            "type": "light",
+                            "entity": "light.outlet_g_2"
+                        },
+                        {
+                            "type": "light",
+                            "entity": "light.outlet_h"
+                        },
+                        {
+                            "type": "light",
+                            "entity": "light.outlet_h_2"
                         }
                     ],
                     "icon": "mdi:nfc",

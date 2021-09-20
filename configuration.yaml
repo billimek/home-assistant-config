@@ -217,8 +217,12 @@ input_boolean:
     name: Jen is home (bluetooth)
   ansley_occupancy:
     name: Ansley is home (bluetooth)
+  brinley_occupancy:
+    name: Brinley is home (bluetooth)
   track_ansley:
       name: Track Ansley Presence
+  track_brinley:
+      name: Track Brinley Presence
   track_jen:
       name: Track Jen Presence
   track_jeff:
@@ -386,6 +390,8 @@ proximity:
       - device_tracker.jennifersxsmax
       - device_tracker.ansleys_xr_2
       - device_tracker.ansleys_xr
+      - device_tracker.brinleythebest
+      - device_tracker.brinleythebest_2
     tolerance: 50
     unit_of_measurement: m
   home_tesla:
@@ -413,7 +419,12 @@ proximity:
       - device_tracker.ansleys_xr_2
     tolerance: 50
     unit_of_measurement: m
-
+  home_brinleys_phone:
+    zone: home
+    devices:
+      - device_tracker.brinleythebest_2
+    tolerance: 50
+    unit_of_measurement: m
 tesla:
   username: !secret email
   password: !secret tesla_password

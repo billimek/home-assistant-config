@@ -62,6 +62,7 @@ family:
   name: Family
   entities:
     - person.ansley_billimek
+    - person.brinley_billimek
     - person.jeff_billimek
     - person.jennifer_billimek
 parents:
@@ -73,6 +74,7 @@ kids:
   name: Kids
   entities:
     - person.ansley_billimek
+    - person.brinley_billimek
 
 
 presence:
@@ -266,5 +268,5 @@ sunroom_lights:
   name: Sunroom Lights
   all: true
   entities:
-    - switch.outlet_d
-    - switch.outlet_f_2
+    - light.outlet_g_2
+    - light.outlet_h_2
