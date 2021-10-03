@@ -42,7 +42,7 @@ logger:
   #   homeassistant.core: debug
 
 http:
-  ip_ban_enabled: true
+  ip_ban_enabled: false
   login_attempts_threshold: 5
   use_x_forwarded_for: true
   trusted_proxies:
@@ -384,12 +384,12 @@ proximity:
       - SSC
       - Jens Work
     devices:
-      - device_tracker.jeffs_xs_2
-      - device_tracker.jeffs_xs
+      - device_tracker.jeffsphone
+      - device_tracker.jeffs_phone_2
       - device_tracker.jennifers_xs_max
       - device_tracker.jennifersxsmax
       - device_tracker.ansleys_xr_2
-      - device_tracker.ansleys_xr
+      - device_tracker.eye_phone
       - device_tracker.brinleythebest
       - device_tracker.brinleythebest_2
     tolerance: 50
@@ -404,7 +404,7 @@ proximity:
   home_jeffs_phone:
     zone: home
     devices:
-      - device_tracker.jeffs_xs_2
+      - device_tracker.jeffsphone
     tolerance: 50
     unit_of_measurement: m
   home_jens_phone:

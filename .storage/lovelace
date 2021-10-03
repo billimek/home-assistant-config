@@ -108,19 +108,13 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jeffs_xs_2",
-                                    "icon": "hass:satellite-uplink",
-                                    "secondary_info": "last-changed"
+                                    "entity": "device_tracker.jeffsphone"
                                 },
                                 {
-                                    "entity": "device_tracker.jeffs_xs",
-                                    "icon": "hass:wifi",
-                                    "secondary_info": "last-changed"
+                                    "entity": "device_tracker.jeffs_phone_2"
                                 },
                                 {
-                                    "entity": "proximity.home_jeffs_phone",
-                                    "name": "Distance to Home",
-                                    "secondary_info": "last-changed"
+                                    "entity": "proximity.home_jeffs_phone"
                                 },
                                 {
                                     "entity": "input_boolean.track_jeff"
@@ -184,7 +178,7 @@
                                     "icon": "hass:satellite-uplink"
                                 },
                                 {
-                                    "entity": "device_tracker.ansleys_xr",
+                                    "entity": "device_tracker.eye_phone",
                                     "secondary_info": "last-changed",
                                     "icon": "hass:wifi"
                                 },

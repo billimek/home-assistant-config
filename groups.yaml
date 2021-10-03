@@ -62,7 +62,7 @@ family:
   name: Family
   entities:
     - person.ansley_billimek
-    - person.brinley_billimek
+    - person.brinley
     - person.jeff_billimek
     - person.jennifer_billimek
 parents:
@@ -74,7 +74,7 @@ kids:
   name: Kids
   entities:
     - person.ansley_billimek
-    - person.brinley_billimek
+    - person.brinley
 
 
 presence:
