@@ -425,10 +425,7 @@ proximity:
       - device_tracker.brinleythebest_2
     tolerance: 50
     unit_of_measurement: m
-tesla:
-  username: !secret email
-  password: !secret tesla_password
-  scan_interval: 3600
+
 
 tts:
   - platform: google_translate
