@@ -82,15 +82,15 @@
       garage_status:
         friendly_name: 'Jeff''s garage door status'
         value_template: '{% if states.cover.jeff_garage_door %}
-            {% if states.cover.jeff_garage_door.attributes["door_state"] == "open" %}
+            {% if states.cover.jeff_garage_door.state == "open" %}
               Open
-            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "closed" %}
+            {% elif states.cover.jeff_garage_door.state == "closed" %}
               Closed
-            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "opening" %}
+            {% elif states.cover.jeff_garage_door.state == "opening" %}
               Opening
-            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "closing" %}
+            {% elif states.cover.jeff_garage_door.state == "closing" %}
               Closing
-            {% elif states.cover.jeff_garage_door.attributes["door_state"] == "offline" %}
+            {% elif states.cover.jeff_garage_door.state == "offline" %}
               Offline
             {% else %}
               Unknown
@@ -103,7 +103,7 @@
         value_template: '{% if states.cover.jeff_garage_door %}
             {% if states.cover.jeff_garage_door.state == "open" %}
               n/a
-            {% elif ((states.cover.jeff_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jeff_garage_door.attributes["distance_sensor"] < 130)) %}
+            {% elif states.binary_sensor.og_jeff_vehicle %}
               Yes
             {% else %}
               No
@@ -114,15 +114,15 @@
       garage2_status:
         friendly_name: 'Jen''s garage door status'
         value_template: '{% if states.cover.jen_garage_door %}
-            {% if states.cover.jen_garage_door.attributes["door_state"] == "open" %}
+            {% if states.cover.jen_garage_door.state == "open" %}
               Open
-            {% elif states.cover.jen_garage_door.attributes["door_state"] == "closed" %}
+            {% elif states.cover.jen_garage_door.state == "closed" %}
               Closed
-            {% elif states.cover.jen_garage_door.attributes["door_state"] == "opening" %}
+            {% elif states.cover.jen_garage_door.state == "opening" %}
               Opening
-            {% elif states.cover.jen_garage_door.attributes["door_state"] == "closing" %}
+            {% elif states.cover.jen_garage_door.state == "closing" %}
               Closing
-            {% elif states.cover.jen_garage_door.attributes["door_state"] == "offline" %}
+            {% elif states.cover.jen_garage_door.state == "offline" %}
               Offline
             {% else %}
               Unknown
@@ -135,7 +135,7 @@
         value_template: '{% if states.cover.jen_garage_door %}
             {% if states.cover.jen_garage_door.state == "open" %}
               n/a
-            {% elif ((states.cover.jen_garage_door.attributes["distance_sensor"] > 40) and (states.cover.jen_garage_door.attributes["distance_sensor"] < 130)) %}
+            {% elif states.binary_sensor.og_jen_vehicle %}
               Yes
             {% else %}
               No
