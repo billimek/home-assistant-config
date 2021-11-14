@@ -123,7 +123,12 @@
                             "show_header_toggle": false,
                             "title": "Jeff Presence",
                             "type": "entities",
-                            "state_color": true
+                            "state_color": true,
+                            "header": {
+                                "type": "graph",
+                                "entity": "sensor.jeffsphone_distance",
+                                "hours_to_show": 24
+                            }
                         },
                         {
                             "entities": [
@@ -158,7 +163,12 @@
                             "show_header_toggle": false,
                             "title": "Jen Presence",
                             "type": "entities",
-                            "state_color": true
+                            "state_color": true,
+                            "header": {
+                                "type": "graph",
+                                "entity": "sensor.jennifers_xs_max_distance",
+                                "hours_to_show": 24
+                            }
                         },
                         {
                             "type": "entities",
@@ -193,7 +203,12 @@
                             ],
                             "title": "Ansley Presence",
                             "show_header_toggle": false,
-                            "state_color": true
+                            "state_color": true,
+                            "header": {
+                                "type": "graph",
+                                "entity": "sensor.ansleys_xr_distance",
+                                "hours_to_show": 24
+                            }
                         },
                         {
                             "type": "entities",
@@ -228,7 +243,12 @@
                             ],
                             "title": "Brinley Presence",
                             "show_header_toggle": false,
-                            "state_color": true
+                            "state_color": true,
+                            "header": {
+                                "type": "graph",
+                                "entity": "sensor.brinleythebest_distance",
+                                "hours_to_show": 24
+                            }
                         },
                         {
                             "entity": "climate.master_bedroom_nest",
@@ -437,79 +457,6 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "switch.wyze_1_h264_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_ir_filter"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_ir_led"
-                                },
-                                {
-                                    "entity": "sensor.wyze_1_light_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_motion_detection"
-                                },
-                                {
-                                    "entity": "binary_sensor.wyze_1_motion_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_night_mode"
-                                },
-                                {
-                                    "entity": "switch.wyze_1_night_mode_auto"
-                                },
-                                {
-                                    "entity": "camera.wyze_1"
-                                },
-                                {
-                                    "entity": "camera.wyze_1_motion_snapshot"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "switch.wyze_1_h264_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_ir_filter"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_ir_led"
-                                },
-                                {
-                                    "entity": "sensor.wyze_2_light_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_motion_detection"
-                                },
-                                {
-                                    "entity": "binary_sensor.wyze_2_motion_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_night_mode"
-                                },
-                                {
-                                    "entity": "switch.wyze_2_night_mode_auto"
-                                },
-                                {
-                                    "entity": "camera.wyze_2"
-                                },
-                                {
-                                    "entity": "camera.wyze_2_motion_snapshot"
-                                },
-                                {
-                                    "entity": "device_tracker.wyze_2"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
                                     "entity": "switch.wyze_3_h264_rtsp_server"
                                 },
                                 {
@@ -534,158 +481,6 @@
                                     "entity": "switch.wyze_3_night_mode_auto"
                                 }
                             ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                "sensor.basement_camera_fps",
-                                "sensor.basement_cat",
-                                "binary_sensor.basement_cat_motion",
-                                "switch.basement_clips",
-                                "switch.basement_detect",
-                                "sensor.basement_detection_fps_2",
-                                "sensor.basement_dog",
-                                "binary_sensor.basement_dog_motion",
-                                "sensor.basement_person",
-                                "binary_sensor.basement_person_motion",
-                                "sensor.basement_process_fps",
-                                "sensor.basement_skipped_fps_2",
-                                "switch.basement_snapshots",
-                                "sensor.coral_inference_speed",
-                                "sensor.detection_fps",
-                                "sensor.driveway_camera_fps",
-                                "sensor.driveway_cat",
-                                "binary_sensor.driveway_cat_motion",
-                                "switch.driveway_clips",
-                                "switch.driveway_detect",
-                                "sensor.driveway_detection_fps_2",
-                                "sensor.driveway_dog",
-                                "binary_sensor.driveway_dog_motion",
-                                "sensor.driveway_person",
-                                "binary_sensor.driveway_person_motion",
-                                "sensor.driveway_process_fps",
-                                "sensor.driveway_skipped_fps_2",
-                                "switch.driveway_snapshots",
-                                "sensor.front_camera_fps",
-                                "sensor.front_cat",
-                                "binary_sensor.front_cat_motion",
-                                "switch.front_clips",
-                                "switch.front_detect",
-                                "sensor.front_detection_fps_2",
-                                "sensor.front_dog",
-                                "binary_sensor.front_dog_motion",
-                                "sensor.front_person",
-                                "binary_sensor.front_person_motion",
-                                "sensor.front_process_fps",
-                                "sensor.front_skipped_fps_2",
-                                "switch.front_snapshots",
-                                "sensor.pool_camera_fps",
-                                "sensor.pool_cat",
-                                "binary_sensor.pool_cat_motion",
-                                "switch.pool_clips",
-                                "switch.pool_detect",
-                                "sensor.pool_detection_fps_2",
-                                "sensor.pool_dog",
-                                "binary_sensor.pool_dog_motion",
-                                "sensor.pool_person",
-                                "binary_sensor.pool_person_motion",
-                                "sensor.pool_process_fps",
-                                "sensor.pool_skipped_fps_2",
-                                "switch.pool_snapshots",
-                                "sensor.porch_camera_fps",
-                                "sensor.porch_cat",
-                                "binary_sensor.porch_cat_motion",
-                                "switch.porch_clips",
-                                "switch.porch_detect",
-                                "sensor.porch_detection_fps_2",
-                                "sensor.porch_dog",
-                                "binary_sensor.porch_dog_motion",
-                                "sensor.porch_person",
-                                "binary_sensor.porch_person_motion",
-                                "sensor.porch_process_fps",
-                                "sensor.porch_skipped_fps_2",
-                                "switch.porch_snapshots"
-                            ]
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.basement_2"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.basement_cat"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.basement_dog"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.basement_person"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.driveway_2"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.driveway_cat"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.driveway_dog"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.driveway_person"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.front_2"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.front_cat"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.front_dog"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.front_person"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.pool_2"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.pool_cat"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.pool_dog"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.pool_person"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.porch_2"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.porch_cat"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.porch_dog"
-                        },
-                        {
-                            "type": "picture-entity",
-                            "entity": "camera.porch_person"
                         }
                     ],
                     "icon": "mdi:camcorder",
@@ -1041,6 +836,126 @@
                     "icon": "mdi:nfc",
                     "path": "zwave",
                     "title": "ZWave"
+                },
+                {
+                    "title": "Frigate",
+                    "path": "frigate",
+                    "icon": "mdi:cctv",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.front"
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.driveway"
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.porch"
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.pool"
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.basement"
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.front",
+                            "view": {
+                                "default": "clips"
+                            },
+                            "menu": {
+                                "buttons": {
+                                    "frigate": false,
+                                    "live": false,
+                                    "clips": false,
+                                    "snapshots": false,
+                                    "frigate_ui": false,
+                                    "download": false,
+                                    "fullscreen": false
+                                }
+                            }
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.driveway",
+                            "view": {
+                                "default": "clips"
+                            },
+                            "menu": {
+                                "buttons": {
+                                    "frigate": false,
+                                    "live": false,
+                                    "clips": false,
+                                    "snapshots": false,
+                                    "download": false,
+                                    "frigate_ui": false,
+                                    "fullscreen": false
+                                }
+                            }
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.porch",
+                            "view": {
+                                "default": "clips"
+                            },
+                            "menu": {
+                                "buttons": {
+                                    "frigate": false,
+                                    "live": false,
+                                    "clips": false,
+                                    "image": false,
+                                    "download": false,
+                                    "snapshots": false,
+                                    "frigate_ui": false,
+                                    "fullscreen": false
+                                }
+                            }
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.pool",
+                            "view": {
+                                "default": "clips"
+                            },
+                            "menu": {
+                                "buttons": {
+                                    "frigate": false,
+                                    "live": false,
+                                    "snapshots": false,
+                                    "clips": false,
+                                    "download": false,
+                                    "fullscreen": false,
+                                    "frigate_ui": false
+                                }
+                            }
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "camera_entity": "camera.basement",
+                            "view": {
+                                "default": "clips"
+                            },
+                            "menu": {
+                                "buttons": {
+                                    "frigate": false,
+                                    "live": false,
+                                    "clips": false,
+                                    "image": false,
+                                    "download": false,
+                                    "snapshots": false,
+                                    "frigate_ui": false,
+                                    "fullscreen": false
+                                }
+                            }
+                        }
+                    ]
                 },
                 {
                     "badges": [],
