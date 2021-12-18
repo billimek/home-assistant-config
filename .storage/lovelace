@@ -745,6 +745,12 @@
                                 },
                                 {
                                     "entity": "light.outlet_h_2"
+                                },
+                                {
+                                    "entity": "switch.outlet_d"
+                                },
+                                {
+                                    "entity": "switch.outlet_f"
                                 }
                             ],
                             "title": "Main Level"
