@@ -103,7 +103,7 @@
         value_template: '{% if states.cover.jeff_garage_door %}
             {% if states.cover.jeff_garage_door.state == "open" %}
               n/a
-            {% elif states.binary_sensor.og_jeff_vehicle %}
+            {% elif states.binary_sensor.og_jeff_vehicle.state == "on" %}
               Yes
             {% else %}
               No
@@ -135,7 +135,7 @@
         value_template: '{% if states.cover.jen_garage_door %}
             {% if states.cover.jen_garage_door.state == "open" %}
               n/a
-            {% elif states.binary_sensor.og_jen_vehicle %}
+            {% elif states.binary_sensor.og_jen_vehicle.state == "on" %}
               Yes
             {% else %}
               No
