@@ -842,7 +842,7 @@
                                         },
                                         {
                                             "type": "button",
-                                            "entity": "lock.tesla_door_lock",
+                                            "entity": "lock.sulaco_door_lock",
                                             "name": "Car Door",
                                             "show_state": true,
                                             "state": [
@@ -889,7 +889,7 @@
                                 },
                                 {
                                     "type": "thermostat",
-                                    "entity": "climate.tesla_model_3_hvac_climate_system"
+                                    "entity": "climate.sulaco_hvac_climate_system"
                                 }
                             ]
                         },
@@ -1205,7 +1205,7 @@
                                         },
                                         {
                                             "type": "button",
-                                            "entity": "lock.tesla2_door_lock",
+                                            "entity": "lock.karr_door_lock",
                                             "name": "Car Door",
                                             "show_state": true,
                                             "state": [
@@ -1252,7 +1252,7 @@
                                 },
                                 {
                                     "type": "thermostat",
-                                    "entity": "climate.tesla2_model_3_hvac_climate_system"
+                                    "entity": "climate.karr_hvac_climate_system"
                                 }
                             ]
                         },
