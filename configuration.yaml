@@ -332,7 +332,200 @@ binary_sensor:
     state_topic: "frigate/basement/person"
     device_class: motion
     availability_topic: "frigate/available"
-
+  #### sulaco (teslamate car 1)
+  - platform: template
+    sensors:
+      tesla_park_brake:
+        friendly_name: Parking Brake
+        icon_template: mdi:car-brake-parking
+        value_template: >-
+          {% if is_state('sensor.tesla_shift_state', 'P') %}
+            ON
+          {% else %}
+            OFF
+          {% endif %}
+  - platform: mqtt
+    name: tesla_healthy
+    state_topic: "teslamate/cars/1/healthy"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:heart-pulse
+  - platform: mqtt
+    name: tesla_update_available
+    state_topic: "teslamate/cars/1/update_available"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:alarm
+  - platform: mqtt
+    name: tesla_locked
+    device_class: lock
+    state_topic: "teslamate/cars/1/locked"
+    payload_on: "false"
+    payload_off: "true"
+  - platform: mqtt
+    name: tesla_sentry_mode
+    state_topic: "teslamate/cars/1/sentry_mode"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:cctv
+  - platform: mqtt
+    name: tesla_windows_open
+    device_class: window
+    state_topic: "teslamate/cars/1/windows_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-door
+  - platform: mqtt
+    name: tesla_doors_open
+    device_class: door
+    state_topic: "teslamate/cars/1/doors_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-door
+  - platform: mqtt
+    name: tesla_trunk_open
+    device_class: opening
+    state_topic: "teslamate/cars/1/trunk_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-side
+  - platform: mqtt
+    name: tesla_frunk_open
+    device_class: opening
+    state_topic: "teslamate/cars/1/frunk_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-side
+  - platform: mqtt
+    name: tesla_is_user_present
+    device_class: presence
+    state_topic: "teslamate/cars/1/is_user_present"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:human-greeting
+  - platform: mqtt
+    name: tesla_is_climate_on
+    state_topic: "teslamate/cars/1/is_climate_on"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:fan
+  - platform: mqtt
+    name: tesla_is_preconditioning
+    state_topic: "teslamate/cars/1/is_preconditioning"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:fan
+  - platform: mqtt
+    name: tesla_plugged_in
+    device_class: plug
+    state_topic: "teslamate/cars/1/plugged_in"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:ev-station
+  - platform: mqtt
+    name: tesla_charge_port_door_open
+    device_class: opening
+    state_topic: "teslamate/cars/1/charge_port_door_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:ev-plug-tesla
+  #### KARR (teslamate car 2)
+  - platform: template
+    sensors:
+      tesla2_park_brake:
+        friendly_name: Parking Brake
+        icon_template: mdi:car-brake-parking
+        value_template: >-
+          {% if is_state('sensor.tesla2_shift_state', 'P') %}
+            ON
+          {% else %}
+            OFF
+          {% endif %}
+  - platform: mqtt
+    name: tesla2_healthy
+    state_topic: "teslamate/cars/2/healthy"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:heart-pulse
+  - platform: mqtt
+    name: tesla2_update_available
+    state_topic: "teslamate/cars/2/update_available"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:alarm
+  - platform: mqtt
+    name: tesla2_locked
+    device_class: lock
+    state_topic: "teslamate/cars/2/locked"
+    payload_on: "false"
+    payload_off: "true"
+  - platform: mqtt
+    name: tesla2_sentry_mode
+    state_topic: "teslamate/cars/2/sentry_mode"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:cctv
+  - platform: mqtt
+    name: tesla2_windows_open
+    device_class: window
+    state_topic: "teslamate/cars/2/windows_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-door
+  - platform: mqtt
+    name: tesla2_doors_open
+    device_class: door
+    state_topic: "teslamate/cars/2/doors_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-door
+  - platform: mqtt
+    name: tesla2_trunk_open
+    device_class: opening
+    state_topic: "teslamate/cars/2/trunk_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-side
+  - platform: mqtt
+    name: tesla2_frunk_open
+    device_class: opening
+    state_topic: "teslamate/cars/2/frunk_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-side
+  - platform: mqtt
+    name: tesla2_is_user_present
+    device_class: presence
+    state_topic: "teslamate/cars/2/is_user_present"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:human-greeting
+  - platform: mqtt
+    name: tesla2_is_climate_on
+    state_topic: "teslamate/cars/2/is_climate_on"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:fan
+  - platform: mqtt
+    name: tesla2_is_preconditioning
+    state_topic: "teslamate/cars/2/is_preconditioning"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:fan
+  - platform: mqtt
+    name: tesla2_plugged_in
+    device_class: plug
+    state_topic: "teslamate/cars/2/plugged_in"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:ev-station
+  - platform: mqtt
+    name: tesla2_charge_port_door_open
+    device_class: opening
+    state_topic: "teslamate/cars/2/charge_port_door_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:ev-plug-tesla
 
 group: !include groups.yaml
 
@@ -398,7 +591,12 @@ proximity:
     zone: home
     devices:
       - device_tracker.tesla_location
-      - device_tracker.tesla_model_3_620031_location_tracker
+    tolerance: 50
+    unit_of_measurement: m
+  home_tesla2:
+    zone: home
+    devices:
+      - device_tracker.tesla2_location
     tolerance: 50
     unit_of_measurement: m
   home_jeffs_phone:
