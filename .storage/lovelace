@@ -265,47 +265,6 @@
                             "type": "thermostat"
                         },
                         {
-                            "color_thresholds": [
-                                {
-                                    "color": "#e74c3c",
-                                    "value": 150
-                                },
-                                {
-                                    "color": "#ffff00",
-                                    "value": 75
-                                },
-                                {
-                                    "color": "#1db954",
-                                    "value": 0
-                                }
-                            ],
-                            "entities": [
-                                {
-                                    "entity": "sensor.us_coronavirus_confirmed",
-                                    "index": 0
-                                },
-                                {
-                                    "entity": "sensor.us_coronavirus_deaths",
-                                    "index": 0
-                                },
-                                {
-                                    "entity": "sensor.us_coronavirus_current",
-                                    "index": 0
-                                }
-                            ],
-                            "font_size": 65,
-                            "height": 46,
-                            "hours_to_show": 168,
-                            "line_width": 2,
-                            "name": "Coronavirus",
-                            "points_per_hour": 1,
-                            "show": {
-                                "extrema": true,
-                                "icon": false
-                            },
-                            "type": "custom:mini-graph-card"
-                        },
-                        {
                             "hold_action": {
                                 "action": "more-info"
                             },
@@ -515,7 +474,7 @@
                                     "entity": "switch.pool"
                                 },
                                 {
-                                    "entity": "light.stairs_2"
+                                    "entity": "light.stairs2"
                                 },
                                 {
                                     "entity": "sensor.garage_electric_consumed_kwh"
@@ -587,13 +546,13 @@
                                     "entity": "switch.outlet_e"
                                 },
                                 {
-                                    "entity": "light.stairs_2"
+                                    "entity": "light.stairs2"
                                 }
                             ],
                             "title": "Upstairs"
                         },
                         {
-                            "entity": "light.stairs_2",
+                            "entity": "light.stairs2",
                             "type": "light"
                         },
                         {
@@ -1504,12 +1463,6 @@
                                 },
                                 {
                                     "entity": "sensor.weather_daily_summary"
-                                },
-                                {
-                                    "entity": "sensor.smartweather_brightness"
-                                },
-                                {
-                                    "entity": "sensor.smartweather_brightness_filtered"
                                 }
                             ],
                             "show_header_toggle": false,
