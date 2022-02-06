@@ -11,10 +11,6 @@
     for:
       seconds: 300
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Door to garage is opened for more than 5 minutes"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -35,10 +31,6 @@
     for:
       seconds: 300
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Basement door is opened for more than 5 minutes"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -60,10 +52,6 @@
     for:
       seconds: 300
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Front door is opened for more than 5 minutes"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -83,10 +71,6 @@
     for:
       seconds: 300
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Sun room door is opened for more than 5 minutes"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -107,10 +91,6 @@
     for:
       seconds: 300
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Unknown door is opened for more than 5 minutes"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -135,10 +115,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Upstairs motion detected"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -156,10 +132,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Main level motion detected"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -177,10 +149,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Basement motion detected"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -199,10 +167,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Front door open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -221,10 +185,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Garage door open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -243,10 +203,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Family window open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -265,10 +221,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Living window open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -287,10 +239,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Sun Room Door open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -309,10 +257,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Basement Window open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -331,10 +275,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Bathroom Window open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -353,10 +293,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Kitchen Window open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -375,10 +311,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Unknown Door open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -397,10 +329,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Laundry Window open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -419,10 +347,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Basement Door open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -440,10 +364,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Sliding Door open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"
@@ -462,10 +382,6 @@
       entity_id: sensor.anyone_home
       state: 'not_home'
   action:
-    # - service: notify.slack
-    #   data_template:
-    #     title: "Alarm Panel"
-    #     message: "Upstairs Window open"
     - service: notify.mobile_app_jeffsphone
       data_template:
         title: "Alarm Panel"

@@ -60,23 +60,10 @@ discovery:
 
 # persist states between restarts
 recorder:
-  # purge_keep_days: 5
   db_url: !secret db_url
-  # exclude:
-  #   domains:
-  #     - device_tracker
 
 prometheus:
   namespace: hass
-#   component_config_glob:
-#     sensor.*_hum:
-#       override_metric: humidity_percent
-#     sensor.*temp:
-#       override_metric: temperature_c
-#     sensor.temperature*:
-#       override_metric: temperature_c
-#     sensor.*_bat:
-#       override_metric: battery_percent
 
 mqtt:
   discovery: true
@@ -158,16 +145,6 @@ input_select:
       - "kids"
 
 cover:
-  - platform: opengarage
-    covers:
-        garage:
-          host:  !secret og-host_og-jeff
-          device_key: !secret og-key
-          name:  Jeff Garage Door
-        garage2:
-          host:  !secret og-host_og-jen
-          device_key: !secret og-key
-          name:  Jen Garage Door
   - platform: mqtt
     name: "Jens Garage - MQTT"
     command_topic: "og-jen/IN/STATE"
@@ -554,20 +531,6 @@ google_assistant:
   secure_devices_pin: !secret secure_devices_pin
   service_account: !include home-assistant-4d8d1f2ca10f.json
   report_state: true
-  # exposed_domains:
-  #   - switch
-  #   - light
-  # entity_config:
-  #   switch.kitchen:
-  #     name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
-  #     aliases:
-  #       - BRIGHT_LIGHTS
-  #       - ENTRY_LIGHTS
-  #   light.living_room:
-  #     expose: false
-  #     room: LIVING_ROOM
-  #   group.all_automations:
-  #     expose: false
 
 proximity:
   home:
