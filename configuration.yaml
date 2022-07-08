@@ -12,12 +12,9 @@ homeassistant:
   time_zone: America/New_York
 
   external_url: !secret  tts_base_url
-  # internal_url: !secret  tts_base_url
-
 
   auth_providers:
     - type: homeassistant
-
 
 # Packages
   packages:
@@ -65,68 +62,59 @@ recorder:
 prometheus:
   namespace: hass
 
-mqtt:
-  discovery: true
-  discovery_prefix: homeassistant
-  broker: emqx
-  client_id: homeassistant
-  username: !secret mqtt_user
-  password: !secret mqtt_password
-  birth_message:
-    topic: 'homeassistant/status'
-    payload: 'online'
-  will_message:
-    topic: 'homeassistant/status'
-    payload: 'offline'
-
-ios:
-  push:
-    categories:
-      - name: Alarm
-        identifier: 'alarm'
-        actions:
-          - identifier: 'DISARM_ALARM'
-            title: 'Disarm Alarm'
-            activationMode: 'background'
-            authenticationRequired: true
-            destructive: true
-      - name: garage
-        identifier: 'garage'
-        actions:
-          - identifier: 'CLOSE_GARAGE'
-            title: 'Close Jeffs garage door'
-            activationMode: 'background'
-            authenticationRequired: true
-      - name: garage2
-        identifier: 'garage2'
-        actions:
-          - identifier: 'CLOSE_GARAGE2'
-            title: 'Close Jens garage door'
-            activationMode: 'background'
-            authenticationRequired: true
-      - name: garage_open
-        identifier: 'garage_open'
-        actions:
-          - identifier: 'OPEN_GARAGE'
-            title: 'Open Jeffs garage door'
-            activationMode: 'background'
-            authenticationRequired: true
-      - name: garage2_open
-        identifier: 'garage2_open'
-        actions:
-          - identifier: 'OPEN_GARAGE2'
-            title: 'Open Jens garage door'
-            activationMode: 'background'
-            authenticationRequired: true
-
+mqtt: !include config/mqtt.yaml
 script: !include_dir_merge_named scripts
-
-# python_script:
 sensor: !include config/sensors.yaml
 automation: !include_dir_merge_list automation
 shell_command: !include shell/shell.yaml
 zone: !include config/zones.yaml
-camera: !include_dir_merge_list cameras
+group: !include groups.yaml
+
+# ios:
+#   push:
+#     categories:
+#       - name: Alarm
+#         identifier: 'alarm'
+#         actions:
+#           - identifier: 'DISARM_ALARM'
+#             title: 'Disarm Alarm'
+#             activationMode: 'background'
+#             authenticationRequired: true
+#             destructive: true
+#       - name: garage
+#         identifier: 'garage'
+#         actions:
+#           - identifier: 'CLOSE_GARAGE'
+#             title: 'Close Jeffs garage door'
+#             activationMode: 'background'
+#             authenticationRequired: true
+#       - name: garage2
+#         identifier: 'garage2'
+#         actions:
+#           - identifier: 'CLOSE_GARAGE2'
+#             title: 'Close Jens garage door'
+#             activationMode: 'background'
+#             authenticationRequired: true
+#       - name: garage_open
+#         identifier: 'garage_open'
+#         actions:
+#           - identifier: 'OPEN_GARAGE'
+#             title: 'Open Jeffs garage door'
+#             activationMode: 'background'
+#             authenticationRequired: true
+#       - name: garage2_open
+#         identifier: 'garage2_open'
+#         actions:
+#           - identifier: 'OPEN_GARAGE2'
+#             title: 'Open Jens garage door'
+#             activationMode: 'background'
+#             authenticationRequired: true
+#       - name: camera
+#         identifier: 'camera'
+#         actions:
+#           - identifier: 'SENDSTILLANDCLIP'
+#             title: 'Send still and video clip'
+#             authenticationRequired: false
 
 input_select:
   set_biprofile:
@@ -143,28 +131,6 @@ input_select:
       - "family"
       - "parents"
       - "kids"
-
-cover:
-  - platform: mqtt
-    name: "Jens Garage - MQTT"
-    command_topic: "og-jen/IN/STATE"
-    state_topic: "og-jen/OUT/STATE"
-    payload_open: "open"
-    payload_close: "close"
-    payload_available: "online"
-    state_open: "OPEN"
-    state_closed: "CLOSED"
-    device_class: "garage"
-  - platform: mqtt
-    name: "Jeffs Garage - MQTT"
-    command_topic: "og-jeff/IN/STATE"
-    state_topic: "og-jeff/OUT/STATE"
-    payload_open: "open"
-    payload_close: "close"
-    payload_available: "online"
-    state_open: "OPEN"
-    state_closed: "CLOSED"
-    device_class: "garage"
 
 input_boolean:
   # garage stuff
@@ -254,61 +220,6 @@ weather:
     api_key: !secret darksky-api_key
 
 binary_sensor:
-  - platform: mqtt
-    name: "Front Camera Motion"
-    state_topic: BlueIris/alert/front
-    payload_on: "ON"
-    payload_off: "OFF"
-    device_class: motion
-  - platform: mqtt
-    name: "Driveway Camera Motion"
-    state_topic: BlueIris/alert/driveway
-    payload_on: "ON"
-    payload_off: "OFF"
-    device_class: motion
-  - platform: mqtt
-    name: "Porch Camera Motion"
-    state_topic: BlueIris/alert/porch
-    payload_on: "ON"
-    payload_off: "OFF"
-    device_class: motion
-  - platform: mqtt
-    name: "Pool Camrea Motion"
-    state_topic: BlueIris/alert/pool
-    payload_on: "ON"
-    payload_off: "OFF"
-    device_class: motion
-  - platform: mqtt
-    name: "Basement Camera Motion"
-    state_topic: BlueIris/alert/basement
-    payload_on: "ON"
-    payload_off: "OFF"
-    device_class: motion
-  - platform: mqtt
-    name: Front Camera Person
-    state_topic: "frigate/front/person"
-    device_class: motion
-    availability_topic: "frigate/available"
-  - platform: mqtt
-    name: Driveway Camera Person
-    state_topic: "frigate/driveway/person"
-    device_class: motion
-    availability_topic: "frigate/available"
-  - platform: mqtt
-    name: Porch Camera Person
-    state_topic: "frigate/porch/person"
-    device_class: motion
-    availability_topic: "frigate/available"
-  - platform: mqtt
-    name: Pool Camera Person
-    state_topic: "frigate/pool/person"
-    device_class: motion
-    availability_topic: "frigate/available"
-  - platform: mqtt
-    name: Basement Camera Person
-    state_topic: "frigate/basement/person"
-    device_class: motion
-    availability_topic: "frigate/available"
   #### sulaco (teslamate car 1)
   - platform: template
     sensors:
@@ -321,91 +232,6 @@ binary_sensor:
           {% else %}
             OFF
           {% endif %}
-  - platform: mqtt
-    name: tesla_healthy
-    state_topic: "teslamate/cars/1/healthy"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:heart-pulse
-  - platform: mqtt
-    name: tesla_update_available
-    state_topic: "teslamate/cars/1/update_available"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:alarm
-  - platform: mqtt
-    name: tesla_locked
-    device_class: lock
-    state_topic: "teslamate/cars/1/locked"
-    payload_on: "false"
-    payload_off: "true"
-  - platform: mqtt
-    name: tesla_sentry_mode
-    state_topic: "teslamate/cars/1/sentry_mode"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:cctv
-  - platform: mqtt
-    name: tesla_windows_open
-    device_class: window
-    state_topic: "teslamate/cars/1/windows_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:car-door
-  - platform: mqtt
-    name: tesla_doors_open
-    device_class: door
-    state_topic: "teslamate/cars/1/doors_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:car-door
-  - platform: mqtt
-    name: tesla_trunk_open
-    device_class: opening
-    state_topic: "teslamate/cars/1/trunk_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:car-side
-  - platform: mqtt
-    name: tesla_frunk_open
-    device_class: opening
-    state_topic: "teslamate/cars/1/frunk_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:car-side
-  - platform: mqtt
-    name: tesla_is_user_present
-    device_class: presence
-    state_topic: "teslamate/cars/1/is_user_present"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:human-greeting
-  - platform: mqtt
-    name: tesla_is_climate_on
-    state_topic: "teslamate/cars/1/is_climate_on"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:fan
-  - platform: mqtt
-    name: tesla_is_preconditioning
-    state_topic: "teslamate/cars/1/is_preconditioning"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:fan
-  - platform: mqtt
-    name: tesla_plugged_in
-    device_class: plug
-    state_topic: "teslamate/cars/1/plugged_in"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:ev-station
-  - platform: mqtt
-    name: tesla_charge_port_door_open
-    device_class: opening
-    state_topic: "teslamate/cars/1/charge_port_door_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:ev-plug-tesla
   #### KARR (teslamate car 2)
   - platform: template
     sensors:
@@ -418,108 +244,10 @@ binary_sensor:
           {% else %}
             OFF
           {% endif %}
-  - platform: mqtt
-    name: tesla2_healthy
-    state_topic: "teslamate/cars/2/healthy"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:heart-pulse
-  - platform: mqtt
-    name: tesla2_update_available
-    state_topic: "teslamate/cars/2/update_available"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:alarm
-  - platform: mqtt
-    name: tesla2_locked
-    device_class: lock
-    state_topic: "teslamate/cars/2/locked"
-    payload_on: "false"
-    payload_off: "true"
-  - platform: mqtt
-    name: tesla2_sentry_mode
-    state_topic: "teslamate/cars/2/sentry_mode"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:cctv
-  - platform: mqtt
-    name: tesla2_windows_open
-    device_class: window
-    state_topic: "teslamate/cars/2/windows_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:car-door
-  - platform: mqtt
-    name: tesla2_doors_open
-    device_class: door
-    state_topic: "teslamate/cars/2/doors_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:car-door
-  - platform: mqtt
-    name: tesla2_trunk_open
-    device_class: opening
-    state_topic: "teslamate/cars/2/trunk_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:car-side
-  - platform: mqtt
-    name: tesla2_frunk_open
-    device_class: opening
-    state_topic: "teslamate/cars/2/frunk_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:car-side
-  - platform: mqtt
-    name: tesla2_is_user_present
-    device_class: presence
-    state_topic: "teslamate/cars/2/is_user_present"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:human-greeting
-  - platform: mqtt
-    name: tesla2_is_climate_on
-    state_topic: "teslamate/cars/2/is_climate_on"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:fan
-  - platform: mqtt
-    name: tesla2_is_preconditioning
-    state_topic: "teslamate/cars/2/is_preconditioning"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:fan
-  - platform: mqtt
-    name: tesla2_plugged_in
-    device_class: plug
-    state_topic: "teslamate/cars/2/plugged_in"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:ev-station
-  - platform: mqtt
-    name: tesla2_charge_port_door_open
-    device_class: opening
-    state_topic: "teslamate/cars/2/charge_port_door_open"
-    payload_on: "true"
-    payload_off: "false"
-    icon: mdi:ev-plug-tesla
 
-group: !include groups.yaml
+
 
 notify:
-  - name: slack
-    platform: slack
-    api_key: !secret slack-api_key
-    default_channel: '#home'
-    username: "Home Assistant"
-    icon: home-assistant
-  - name: discord
-    platform: discord
-    token: !secret discord-token
-
-nest:
-  client_id: !secret nest-client_id
-  client_secret: !secret nest-client_secret
 
 influxdb:
   host: !secret influxdb-host
@@ -542,7 +270,7 @@ proximity:
     devices:
       - device_tracker.jeffsphone
       - device_tracker.jeffs_phone_2
-      - device_tracker.jennifers_xs_max
+      - device_tracker.jens_phone2
       - device_tracker.jennifersxsmax
       - device_tracker.ansleys_xr_2
       - device_tracker.eye_phone
@@ -571,7 +299,7 @@ proximity:
   home_jens_phone:
     zone: home
     devices:
-      - device_tracker.jennifers_xs_max
+      - device_tracker.jensphone
     tolerance: 50
     unit_of_measurement: m
   home_ansleys_phone:
@@ -593,7 +321,6 @@ tts:
     cache: false
     # cache_dir: /tmp/tts
     time_memory: 300
-    base_url: !secret tts_base_url
     service_name: google_say
 
 rest_command:
