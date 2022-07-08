@@ -119,6 +119,12 @@
                                 },
                                 {
                                     "entity": "input_boolean.track_jeff"
+                                },
+                                {
+                                    "entity": "sensor.jeff_phone"
+                                },
+                                {
+                                    "entity": "sensor.jeff_watch"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -143,14 +149,10 @@
                                     "secondary_info": "last-changed"
                                 },
                                 {
-                                    "entity": "device_tracker.jennifers_xs_max",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:satellite-uplink"
+                                    "entity": "device_tracker.jens_phone2"
                                 },
                                 {
-                                    "entity": "device_tracker.jennifersxsmax",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:wifi"
+                                    "entity": "device_tracker.jensphone"
                                 },
                                 {
                                     "entity": "proximity.home_jens_phone",
@@ -167,7 +169,7 @@
                             "state_color": true,
                             "header": {
                                 "type": "graph",
-                                "entity": "sensor.jennifers_xs_max_distance",
+                                "entity": "sensor.jensphone_distance",
                                 "hours_to_show": 24
                             }
                         },
@@ -289,6 +291,24 @@
                                 "service": "rest_command.disable_blocky_5m"
                             },
                             "type": "button"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "switch.front_detect",
+                                    "name": "Detect"
+                                },
+                                {
+                                    "entity": "switch.front_recordings",
+                                    "name": "Recordings"
+                                },
+                                {
+                                    "entity": "switch.front_snapshots",
+                                    "name": "Snapshots"
+                                }
+                            ],
+                            "title": "Front"
                         }
                     ],
                     "icon": "mdi:home-assistant",
@@ -589,122 +609,71 @@
                     "title": "ZWave"
                 },
                 {
-                    "title": "Frigate",
+                    "theme": "Backend-selected",
+                    "title": "frigate",
                     "path": "frigate",
                     "icon": "mdi:cctv",
                     "badges": [],
                     "cards": [
                         {
                             "type": "custom:frigate-card",
-                            "camera_entity": "camera.front"
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "camera_entity": "camera.driveway"
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "camera_entity": "camera.porch"
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "camera_entity": "camera.pool"
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "camera_entity": "camera.basement"
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "camera_entity": "camera.front",
-                            "view": {
-                                "default": "clips"
-                            },
-                            "menu": {
-                                "buttons": {
-                                    "frigate": false,
-                                    "live": false,
-                                    "clips": false,
-                                    "snapshots": false,
-                                    "frigate_ui": false,
-                                    "download": false,
-                                    "fullscreen": false
+                            "cameras": [
+                                {
+                                    "camera_entity": "camera.basement"
+                                },
+                                {
+                                    "camera_entity": "camera.driveway"
+                                },
+                                {
+                                    "camera_entity": "camera.front"
+                                },
+                                {
+                                    "camera_entity": "camera.pool"
+                                },
+                                {
+                                    "camera_entity": "camera.porch"
                                 }
-                            }
+                            ]
                         },
                         {
                             "type": "custom:frigate-card",
-                            "camera_entity": "camera.driveway",
-                            "view": {
-                                "default": "clips"
-                            },
-                            "menu": {
-                                "buttons": {
-                                    "frigate": false,
-                                    "live": false,
-                                    "clips": false,
-                                    "snapshots": false,
-                                    "download": false,
-                                    "frigate_ui": false,
-                                    "fullscreen": false
+                            "cameras": [
+                                {
+                                    "camera_entity": "camera.front"
                                 }
-                            }
+                            ]
                         },
                         {
                             "type": "custom:frigate-card",
-                            "camera_entity": "camera.porch",
-                            "view": {
-                                "default": "clips"
-                            },
-                            "menu": {
-                                "buttons": {
-                                    "frigate": false,
-                                    "live": false,
-                                    "clips": false,
-                                    "image": false,
-                                    "download": false,
-                                    "snapshots": false,
-                                    "frigate_ui": false,
-                                    "fullscreen": false
+                            "cameras": [
+                                {
+                                    "camera_entity": "camera.driveway"
                                 }
-                            }
+                            ]
                         },
                         {
                             "type": "custom:frigate-card",
-                            "camera_entity": "camera.pool",
-                            "view": {
-                                "default": "clips"
-                            },
-                            "menu": {
-                                "buttons": {
-                                    "frigate": false,
-                                    "live": false,
-                                    "snapshots": false,
-                                    "clips": false,
-                                    "download": false,
-                                    "fullscreen": false,
-                                    "frigate_ui": false
+                            "cameras": [
+                                {
+                                    "camera_entity": "camera.porch"
                                 }
-                            }
+                            ]
                         },
                         {
                             "type": "custom:frigate-card",
-                            "camera_entity": "camera.basement",
-                            "view": {
-                                "default": "clips"
-                            },
-                            "menu": {
-                                "buttons": {
-                                    "frigate": false,
-                                    "live": false,
-                                    "clips": false,
-                                    "image": false,
-                                    "download": false,
-                                    "snapshots": false,
-                                    "frigate_ui": false,
-                                    "fullscreen": false
+                            "cameras": [
+                                {
+                                    "camera_entity": "camera.pool"
                                 }
-                            }
+                            ]
+                        },
+                        {
+                            "type": "custom:frigate-card",
+                            "cameras": [
+                                {
+                                    "camera_entity": "camera.basement"
+                                }
+                            ]
                         }
                     ]
                 },
