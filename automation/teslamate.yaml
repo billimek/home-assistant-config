@@ -33,11 +33,11 @@
           ]
 
 - alias: 'Shortcuts Webhook Call Service'
-  initial_state: 'on'
+  initial_state: on
   trigger:
     platform: webhook
     webhook_id: shortcuts_call_service
   action:
-    service_template: '{{ trigger.json.service }}'
+    service: '{{ trigger.json.service }}'
     data_template:
       entity_id: '{{ trigger.json.entity_id }}'
