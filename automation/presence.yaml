@@ -77,53 +77,6 @@
         entity_id: input_select.set_biprofile
         option: 'home'
 
-- alias: Jeff Occupancy On
-  initial_state: on
-#   hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.jeff_s_phone_bluetooth_occupancy_confidence
-      above: 10
-  action:
-    - service: homeassistant.turn_on
-      data:
-        entity_id: input_boolean.jeff_occupancy
-
-- alias: Jeff Occupancy Off
-  initial_state: on
-#   hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.jeff_s_phone_bluetooth_occupancy_confidence
-      below: 10
-  action:
-    - service: homeassistant.turn_off
-      data:
-        entity_id: input_boolean.jeff_occupancy
-
-- alias: Jen Occupancy On
-  initial_state: on
-#   hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.jen_s_phone_bluetooth_occupancy_confidence
-      above: 10
-  action:
-    - service: homeassistant.turn_on
-      data:
-        entity_id: input_boolean.jen_occupancy
-
-- alias: Jen Occupancy Off
-  initial_state: on
-#   hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.jen_s_phone_bluetooth_occupancy_confidence
-      below: 10
-  action:
-    - service: homeassistant.turn_off
-      data:
-        entity_id: input_boolean.jen_occupancy
 
 - alias: Ansley Occupancy On
   initial_state: on
