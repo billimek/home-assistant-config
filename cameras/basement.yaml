@@ -1,9 +1,0 @@
-- platform: mjpeg
-  mjpeg_url: http://10.0.7.13:81/mjpg/basement
-  name: basement
-  username: !secret bi_user
-  password: !secret bi_pass
-  authentication: basic
-- platform: mqtt
-  name: Basement Camera Last Person
-  topic: frigate/basement/person/snapshot
