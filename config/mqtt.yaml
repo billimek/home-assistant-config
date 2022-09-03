@@ -487,3 +487,12 @@ binary_sensor:
     payload_on: "true"
     payload_off: "false"
     icon: mdi:ev-plug-tesla
+
+
+device_tracker:
+  - name: "Jeff Phone"
+    state_topic: "location/espresense_jeffsphone"
+    source_type: bluetooth_le
+  - name: "Jeff Watch"
+    state_topic: "location/espresense_jeffswatch"
+    source_type: bluetooth_le

@@ -1,1773 +1,1794 @@
 {
-    "version": 1,
-    "minor_version": 1,
-    "key": "lovelace",
-    "data": {
-        "config": {
-            "title": "\ud83c\udfe1",
-            "views": [
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace",
+  "data": {
+    "config": {
+      "title": "🏡",
+      "views": [
+        {
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
                 {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.anyone_home",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:home"
-                                },
-                                {
-                                    "entity": "sensor.alarm_panel_display"
-                                },
-                                {
-                                    "entity": "sensor.alarm_status"
-                                },
-                                {
-                                    "entity": "input_select.alarm_mode"
-                                },
-                                {
-                                    "entity": "alarm_control_panel.alarm_panel"
-                                },
-                                {
-                                    "entity": "input_boolean.auto_arm_disarm_alarm_night"
-                                },
-                                {
-                                    "entity": "proximity.home"
-                                },
-                                {
-                                    "entity": "group.family"
-                                },
-                                {
-                                    "entity": "group.parents"
-                                },
-                                {
-                                    "entity": "group.kids"
-                                },
-                                {
-                                    "entity": "input_select.presence"
-                                },
-                                {
-                                    "entity": "binary_sensor.home_away"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Home",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "cover.jeff_garage_door"
-                                },
-                                {
-                                    "entity": "sensor.garage_status"
-                                },
-                                {
-                                    "entity": "sensor.garage_car_present"
-                                },
-                                {
-                                    "entity": "input_boolean.auto_close_garage_door_jeff"
-                                },
-                                {
-                                    "entity": "cover.jen_garage_door"
-                                },
-                                {
-                                    "entity": "sensor.garage2_status"
-                                },
-                                {
-                                    "entity": "sensor.garage2_car_present"
-                                },
-                                {
-                                    "entity": "input_boolean.auto_close_garage_door_jen"
-                                },
-                                {
-                                    "entity": "cover.jens_garage_mqtt"
-                                },
-                                {
-                                    "entity": "cover.jeffs_garage_mqtt"
-                                },
-                                {
-                                    "entity": "input_boolean.auto_garage_doors"
-                                },
-                                {
-                                    "entity": "input_boolean.auto_garage_doors_night"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Garage",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.jeff_home_status",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:home"
-                                },
-                                {
-                                    "entity": "person.jeff_billimek",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "device_tracker.jeffsphone"
-                                },
-                                {
-                                    "entity": "device_tracker.jeffs_phone_2"
-                                },
-                                {
-                                    "entity": "proximity.home_jeffs_phone"
-                                },
-                                {
-                                    "entity": "input_boolean.track_jeff"
-                                },
-                                {
-                                    "entity": "sensor.jeff_phone"
-                                },
-                                {
-                                    "entity": "sensor.jeff_watch"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Jeff Presence",
-                            "type": "entities",
-                            "state_color": true,
-                            "header": {
-                                "type": "graph",
-                                "entity": "sensor.jeffsphone_distance",
-                                "hours_to_show": 24
-                            }
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.jen_home_status",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:home"
-                                },
-                                {
-                                    "entity": "person.jennifer_billimek",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "device_tracker.jens_phone2"
-                                },
-                                {
-                                    "entity": "device_tracker.jensphone"
-                                },
-                                {
-                                    "entity": "proximity.home_jens_phone",
-                                    "name": "Distance to Home",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "input_boolean.track_jen"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Jen Presence",
-                            "type": "entities",
-                            "state_color": true,
-                            "header": {
-                                "type": "graph",
-                                "entity": "sensor.jensphone_distance",
-                                "hours_to_show": 24
-                            }
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.ansley_home_status",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:home"
-                                },
-                                {
-                                    "entity": "person.ansley_billimek",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "device_tracker.ansleys_xr_2",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:satellite-uplink"
-                                },
-                                {
-                                    "entity": "device_tracker.eye_phone",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:wifi"
-                                },
-                                {
-                                    "entity": "proximity.home_ansleys_phone",
-                                    "secondary_info": "last-changed",
-                                    "name": "Distance to Home"
-                                },
-                                {
-                                    "entity": "input_boolean.track_ansley"
-                                }
-                            ],
-                            "title": "Ansley Presence",
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "header": {
-                                "type": "graph",
-                                "entity": "sensor.ansleys_xr_distance",
-                                "hours_to_show": 24
-                            }
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.brinley_home_status",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:home"
-                                },
-                                {
-                                    "entity": "person.brinley",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "device_tracker.brinleythebest_2",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:wifi"
-                                },
-                                {
-                                    "entity": "device_tracker.brinleythebest",
-                                    "secondary_info": "last-changed",
-                                    "icon": "hass:satellite-uplink"
-                                },
-                                {
-                                    "entity": "proximity.home_brinleys_phone",
-                                    "secondary_info": "last-changed",
-                                    "name": "Distance to Home"
-                                },
-                                {
-                                    "entity": "input_boolean.track_brinley"
-                                }
-                            ],
-                            "title": "Brinley Presence",
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "header": {
-                                "type": "graph",
-                                "entity": "sensor.brinleythebest_distance",
-                                "hours_to_show": 24
-                            }
-                        },
-                        {
-                            "entity": "climate.master_bedroom_nest",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entity": "climate.downstairs",
-                            "theme": "default",
-                            "type": "thermostat"
-                        },
-                        {
-                            "entity": "climate.basement",
-                            "type": "thermostat"
-                        },
-                        {
-                            "hold_action": {
-                                "action": "more-info"
-                            },
-                            "name": "Enable Blocky",
-                            "show_icon": true,
-                            "show_name": true,
-                            "tap_action": {
-                                "action": "call-service",
-                                "service": "rest_command.enable_blocky"
-                            },
-                            "type": "button"
-                        },
-                        {
-                            "hold_action": {
-                                "action": "more-info"
-                            },
-                            "name": "Disable Blocky 5 minutes",
-                            "show_icon": true,
-                            "show_name": true,
-                            "tap_action": {
-                                "action": "call-service",
-                                "service": "rest_command.disable_blocky_5m"
-                            },
-                            "type": "button"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "switch.front_detect",
-                                    "name": "Detect"
-                                },
-                                {
-                                    "entity": "switch.front_recordings",
-                                    "name": "Recordings"
-                                },
-                                {
-                                    "entity": "switch.front_snapshots",
-                                    "name": "Snapshots"
-                                }
-                            ],
-                            "title": "Front"
-                        }
-                    ],
-                    "icon": "mdi:home-assistant",
-                    "path": "default_view",
-                    "title": "Home"
+                  "entity": "sensor.anyone_home",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:home"
                 },
                 {
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.camera_front_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_driveway_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_porch_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_pool_notify"
-                                },
-                                {
-                                    "entity": "input_boolean.camera_basement_notify"
-                                }
-                            ],
-                            "title": "Camera Notifications",
-                            "type": "entities"
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.front",
-                                    "show_name": false,
-                                    "show_state": false,
-                                    "camera_view": "live"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.front_camera_last_person",
-                                    "show_name": false,
-                                    "show_state": false
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.driveway",
-                                    "show_name": false,
-                                    "show_state": false,
-                                    "camera_view": "live"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.driveway_camera_last_person",
-                                    "show_name": false,
-                                    "show_state": false
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.porch",
-                                    "show_name": false,
-                                    "show_state": false,
-                                    "camera_view": "live"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.porch_camera_last_person",
-                                    "show_name": false,
-                                    "show_state": false
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.pool",
-                                    "show_name": false,
-                                    "show_state": false,
-                                    "camera_view": "live"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.pool_camera_last_person",
-                                    "show_name": false,
-                                    "show_state": false
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.basement",
-                                    "show_name": false,
-                                    "show_state": false,
-                                    "camera_view": "live"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.basement_camera_last_person",
-                                    "show_name": false,
-                                    "show_state": false
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.front_door",
-                                    "show_name": false
-                                }
-                            ]
-                        },
-                        {
-                            "entities": [
-                                "sensor.blue_iris_profile",
-                                "input_select.set_biprofile"
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Cameras",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "binary_sensor.front_door_ding",
-                                "sensor.front_door_last_activity",
-                                "sensor.front_door_last_ding",
-                                "sensor.front_door_last_motion",
-                                "binary_sensor.front_door_motion",
-                                "sensor.front_door_volume"
-                            ],
-                            "type": "entities"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "switch.wyze_3_h264_rtsp_server"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_ir_filter"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_ir_led"
-                                },
-                                {
-                                    "entity": "sensor.wyze_3_light_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_motion_detection"
-                                },
-                                {
-                                    "entity": "binary_sensor.wyze_3_motion_sensor"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_night_mode"
-                                },
-                                {
-                                    "entity": "switch.wyze_3_night_mode_auto"
-                                }
-                            ]
-                        }
-                    ],
-                    "icon": "mdi:camcorder",
-                    "title": "Cameras"
+                  "entity": "sensor.alarm_panel_display"
                 },
                 {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "group.cabinet_lights"
-                                },
-                                {
-                                    "entity": "switch.outlet_b"
-                                },
-                                {
-                                    "entity": "switch.outlet_c"
-                                },
-                                {
-                                    "entity": "switch.outlet_a"
-                                },
-                                {
-                                    "entity": "switch.garage"
-                                },
-                                {
-                                    "entity": "switch.porch"
-                                },
-                                {
-                                    "entity": "switch.pool"
-                                },
-                                {
-                                    "entity": "light.stairs2"
-                                },
-                                {
-                                    "entity": "sensor.garage_electric_consumed_kwh"
-                                },
-                                {
-                                    "entity": "sensor.porch_electric_consumed_kwh"
-                                },
-                                {
-                                    "entity": "group.sunroom_lights"
-                                },
-                                {
-                                    "entity": "light.outlet_g_2"
-                                },
-                                {
-                                    "entity": "light.outlet_h_2"
-                                },
-                                {
-                                    "entity": "switch.outlet_d"
-                                },
-                                {
-                                    "entity": "switch.outlet_f"
-                                }
-                            ],
-                            "title": "Main Level"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "light.stairs"
-                                },
-                                {
-                                    "entity": "switch.hallway"
-                                },
-                                {
-                                    "entity": "switch.bedroom"
-                                },
-                                {
-                                    "entity": "switch.livingroom"
-                                },
-                                {
-                                    "entity": "binary_sensor.water_sensor_a_water_alarm_water_leak_detected"
-                                },
-                                {
-                                    "entity": "sensor.water_sensor_a_battery_level"
-                                },
-                                {
-                                    "entity": "binary_sensor.water_sensor_a_low_battery_level"
-                                },
-                                {
-                                    "entity": "binary_sensor.water_sensor_b_water_alarm_water_leak_detected"
-                                },
-                                {
-                                    "entity": "sensor.water_sensor_b_battery_level"
-                                },
-                                {
-                                    "entity": "binary_sensor.water_sensor_b_low_battery_level"
-                                }
-                            ],
-                            "title": "Basement"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "switch.outlet_e_2"
-                                },
-                                {
-                                    "entity": "switch.outlet_e"
-                                },
-                                {
-                                    "entity": "light.stairs2"
-                                }
-                            ],
-                            "title": "Upstairs"
-                        },
-                        {
-                            "entity": "light.stairs2",
-                            "type": "light"
-                        },
-                        {
-                            "entity": "light.stairs",
-                            "type": "light"
-                        },
-                        {
-                            "entity": "media_player.office_speaker",
-                            "type": "media-control"
-                        },
-                        {
-                            "entity": "media_player.sun_room_speaker",
-                            "type": "media-control"
-                        },
-                        {
-                            "type": "light",
-                            "entity": "light.outlet_g"
-                        },
-                        {
-                            "type": "light",
-                            "entity": "light.outlet_g_2"
-                        },
-                        {
-                            "type": "light",
-                            "entity": "light.outlet_h"
-                        },
-                        {
-                            "type": "light",
-                            "entity": "light.outlet_h_2"
-                        }
-                    ],
-                    "icon": "mdi:nfc",
-                    "path": "zwave",
-                    "title": "ZWave"
+                  "entity": "sensor.alarm_status"
                 },
                 {
-                    "theme": "Backend-selected",
-                    "title": "frigate",
-                    "path": "frigate",
-                    "icon": "mdi:cctv",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "custom:frigate-card",
-                            "cameras": [
-                                {
-                                    "camera_entity": "camera.basement"
-                                },
-                                {
-                                    "camera_entity": "camera.driveway"
-                                },
-                                {
-                                    "camera_entity": "camera.front"
-                                },
-                                {
-                                    "camera_entity": "camera.pool"
-                                },
-                                {
-                                    "camera_entity": "camera.porch"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "cameras": [
-                                {
-                                    "camera_entity": "camera.front"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "cameras": [
-                                {
-                                    "camera_entity": "camera.driveway"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "cameras": [
-                                {
-                                    "camera_entity": "camera.porch"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "cameras": [
-                                {
-                                    "camera_entity": "camera.pool"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:frigate-card",
-                            "cameras": [
-                                {
-                                    "camera_entity": "camera.basement"
-                                }
-                            ]
-                        }
-                    ]
+                  "entity": "input_select.alarm_mode"
                 },
                 {
-                    "path": "sulaco",
-                    "title": "Sulaco",
-                    "icon": "mdi:car-connected",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.tesla_battery_level",
-                                            "name": "Battery Level"
-                                        },
-                                        {
-                                            "entity": "sensor.tesla_state",
-                                            "name": "Car State"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.tesla_plugged_in",
-                                            "name": "Plugged In"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.tesla_park_brake",
-                                            "name": "Park Brake"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.tesla_sentry_mode",
-                                            "name": "Sentry Mode"
-                                        },
-                                        {
-                                            "entity": "sensor.tesla_speed",
-                                            "name": "Speed"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.tesla_healthy",
-                                            "name": "Car Health"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.tesla_windows_open",
-                                            "name": "Window Status"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "button",
-                                            "entity": "binary_sensor.tesla_locked",
-                                            "name": "Charger Door",
-                                            "show_state": true,
-                                            "state": [
-                                                {
-                                                    "value": "locked",
-                                                    "icon": "mdi:lock",
-                                                    "color": "green",
-                                                    "tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "lock.unlock",
-                                                        "service_data": {
-                                                            "entity_id": "lock.tesla_model_3_charger_door_lock"
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "value": "unlocked",
-                                                    "icon": "mdi:lock-open",
-                                                    "color": "red",
-                                                    "tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "lock.lock",
-                                                        "service_data": {
-                                                            "entity_id": "lock.tesla_model_3_charger_door_lock"
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "button",
-                                            "entity": "lock.sulaco_door_lock",
-                                            "name": "Car Door",
-                                            "show_state": true,
-                                            "state": [
-                                                {
-                                                    "value": "locked",
-                                                    "icon": "mdi:lock",
-                                                    "color": "green",
-                                                    "tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "lock.unlock",
-                                                        "service_data": {
-                                                            "entity_id": "lock.tesla_model_3_door_lock"
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "value": "unlocked",
-                                                    "icon": "mdi:lock-open",
-                                                    "color": "red",
-                                                    "tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "lock.lock",
-                                                        "service_data": {
-                                                            "entity_id": "lock.tesla_model_3_door_lock"
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "map",
-                                    "dark_mode": true,
-                                    "default_zoom": 12,
-                                    "entities": [
-                                        "device_tracker.tesla_location"
-                                    ]
-                                },
-                                {
-                                    "type": "thermostat",
-                                    "entity": "climate.sulaco_hvac_climate_system"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.tesla_display_name",
-                                    "name": "Name"
-                                },
-                                {
-                                    "entity": "sensor.tesla_state",
-                                    "name": "Status"
-                                },
-                                {
-                                    "entity": "sensor.tesla_since",
-                                    "name": "Last Status Change"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_healthy",
-                                    "name": "Logger Healthy"
-                                },
-                                {
-                                    "entity": "sensor.tesla_version",
-                                    "name": "Software Version"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_update_available",
-                                    "name": "Available Update Status"
-                                },
-                                {
-                                    "entity": "sensor.tesla_update_version",
-                                    "name": "Available Update Version"
-                                },
-                                {
-                                    "entity": "sensor.tesla_model",
-                                    "name": "Tesla Model"
-                                },
-                                {
-                                    "entity": "sensor.tesla_trim_badging",
-                                    "name": "Trim Badge"
-                                },
-                                {
-                                    "entity": "sensor.tesla_exterior_color",
-                                    "name": "Exterior Color"
-                                },
-                                {
-                                    "entity": "sensor.tesla_wheel_type",
-                                    "name": "Wheel Type"
-                                },
-                                {
-                                    "entity": "sensor.tesla_spoiler_type",
-                                    "name": "Spoiler Type"
-                                },
-                                {
-                                    "entity": "sensor.tesla_geofence",
-                                    "name": "Geo-fence Name"
-                                },
-                                {
-                                    "entity": "proximity.home_tesla",
-                                    "name": "Distance to Home"
-                                },
-                                {
-                                    "entity": "sensor.tesla_latitude",
-                                    "name": "Latitude"
-                                },
-                                {
-                                    "entity": "sensor.tesla_longitude",
-                                    "name": "Longitude"
-                                },
-                                {
-                                    "entity": "sensor.tesla_shift_state",
-                                    "name": "Shifter State"
-                                },
-                                {
-                                    "entity": "sensor.tesla_speed",
-                                    "name": "Speed"
-                                },
-                                {
-                                    "entity": "sensor.tesla_speed_mph",
-                                    "name": "Speed (MPH)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_heading",
-                                    "name": "Heading"
-                                },
-                                {
-                                    "entity": "sensor.tesla_elevation",
-                                    "name": "Elevation (m)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_elevation_ft",
-                                    "name": "Elevation (ft)"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_locked",
-                                    "name": "Locked"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_sentry_mode",
-                                    "name": "Sentry Mode Enabled"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_windows_open",
-                                    "name": "Windows Open"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_doors_open",
-                                    "name": "Doors Open"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_trunk_open",
-                                    "name": "Trunk Open"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_frunk_open",
-                                    "name": "Frunk Open"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_is_user_present",
-                                    "name": "User Present"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_is_climate_on",
-                                    "name": "Climate On"
-                                },
-                                {
-                                    "entity": "sensor.tesla_inside_temp",
-                                    "name": "Inside Temperature"
-                                },
-                                {
-                                    "entity": "sensor.tesla_outside_temp",
-                                    "name": "Outside Temperature"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_is_preconditioning",
-                                    "name": "Preconditioning"
-                                },
-                                {
-                                    "entity": "sensor.tesla_odometer",
-                                    "name": "Odometer"
-                                },
-                                {
-                                    "entity": "sensor.tesla_odometer_mi",
-                                    "name": "Odometer (miles)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_est_battery_range_km",
-                                    "name": "Battery Range (km)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_est_battery_range_mi",
-                                    "name": "Estimated Battery Range (mi)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_rated_battery_range_km",
-                                    "name": "Rated Battery Range (km)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_rated_battery_range_mi",
-                                    "name": "Rated Battery Range (mi)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_ideal_battery_range_km",
-                                    "name": "Ideal Battery Range (km)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_ideal_battery_range_mi",
-                                    "name": "Ideal Battery Range (mi)"
-                                },
-                                {
-                                    "entity": "sensor.tesla_battery_level",
-                                    "name": "Battery Level"
-                                },
-                                {
-                                    "entity": "sensor.tesla_usable_battery_level",
-                                    "name": "Usable Battery Level"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_plugged_in",
-                                    "name": "Plugged In"
-                                },
-                                {
-                                    "entity": "sensor.tesla_charge_energy_added",
-                                    "name": "Charge Energy Added"
-                                },
-                                {
-                                    "entity": "sensor.tesla_charge_limit_soc",
-                                    "name": "Charge Limit"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla_charge_port_door_open",
-                                    "name": "Charge Port Door Open"
-                                },
-                                {
-                                    "entity": "sensor.tesla_charger_actual_current",
-                                    "name": "Charger Current"
-                                },
-                                {
-                                    "entity": "sensor.tesla_charger_phases",
-                                    "name": "Charger Phases"
-                                },
-                                {
-                                    "entity": "sensor.tesla_charger_power",
-                                    "name": "Charger Power"
-                                },
-                                {
-                                    "entity": "sensor.tesla_charger_voltage",
-                                    "name": "Charger Voltage"
-                                },
-                                {
-                                    "entity": "sensor.tesla_scheduled_charging_start_time",
-                                    "name": "Scheduled Charging Start Time"
-                                },
-                                {
-                                    "entity": "sensor.tesla_time_to_full_charge",
-                                    "name": "Time To Full Charge"
-                                }
-                            ]
-                        }
-                    ]
+                  "entity": "alarm_control_panel.alarm_panel"
                 },
                 {
-                    "path": "karr",
-                    "title": "KARR",
-                    "badges": [],
-                    "icon": "mdi:car-connected",
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.tesla2_battery_level",
-                                            "name": "Battery Level"
-                                        },
-                                        {
-                                            "entity": "sensor.tesla2_state",
-                                            "name": "Car State"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.tesla2_plugged_in",
-                                            "name": "Plugged In"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.tesla2_park_brake",
-                                            "name": "Park Brake"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.tesla2_sentry_mode",
-                                            "name": "Sentry Mode"
-                                        },
-                                        {
-                                            "entity": "sensor.tesla2_speed",
-                                            "name": "Speed"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.tesla2_healthy",
-                                            "name": "Car Health"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.tesla2_windows_open",
-                                            "name": "Window Status"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "button",
-                                            "entity": "binary_sensor.tesla2_locked",
-                                            "name": "Charger Door",
-                                            "show_state": true,
-                                            "state": [
-                                                {
-                                                    "value": "locked",
-                                                    "icon": "mdi:lock",
-                                                    "color": "green",
-                                                    "tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "lock.unlock",
-                                                        "service_data": {
-                                                            "entity_id": "lock.tesla2_model_3_charger_door_lock"
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "value": "unlocked",
-                                                    "icon": "mdi:lock-open",
-                                                    "color": "red",
-                                                    "tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "lock.lock",
-                                                        "service_data": {
-                                                            "entity_id": "lock.tesla2_model_3_charger_door_lock"
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "button",
-                                            "entity": "lock.karr_door_lock",
-                                            "name": "Car Door",
-                                            "show_state": true,
-                                            "state": [
-                                                {
-                                                    "value": "locked",
-                                                    "icon": "mdi:lock",
-                                                    "color": "green",
-                                                    "tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "lock.unlock",
-                                                        "service_data": {
-                                                            "entity_id": "lock.tesla2_model_3_door_lock"
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "value": "unlocked",
-                                                    "icon": "mdi:lock-open",
-                                                    "color": "red",
-                                                    "tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "lock.lock",
-                                                        "service_data": {
-                                                            "entity_id": "lock.tesla2_model_3_door_lock"
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "map",
-                                    "dark_mode": true,
-                                    "default_zoom": 12,
-                                    "entities": [
-                                        "device_tracker.tesla2_location"
-                                    ]
-                                },
-                                {
-                                    "type": "thermostat",
-                                    "entity": "climate.karr_hvac_climate_system"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.tesla2_display_name",
-                                    "name": "Name"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_state",
-                                    "name": "Status"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_since",
-                                    "name": "Last Status Change"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_healthy",
-                                    "name": "Logger Healthy"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_version",
-                                    "name": "Software Version"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_update_available",
-                                    "name": "Available Update Status"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_update_version",
-                                    "name": "Available Update Version"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_model",
-                                    "name": "Tesla Model"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_trim_badging",
-                                    "name": "Trim Badge"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_exterior_color",
-                                    "name": "Exterior Color"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_wheel_type",
-                                    "name": "Wheel Type"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_spoiler_type",
-                                    "name": "Spoiler Type"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_geofence",
-                                    "name": "Geo-fence Name"
-                                },
-                                {
-                                    "entity": "proximity.home_tesla2",
-                                    "name": "Distance to Home"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_latitude",
-                                    "name": "Latitude"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_longitude",
-                                    "name": "Longitude"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_shift_state",
-                                    "name": "Shifter State"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_speed",
-                                    "name": "Speed"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_speed_mph",
-                                    "name": "Speed (MPH)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_heading",
-                                    "name": "Heading"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_elevation",
-                                    "name": "Elevation (m)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_elevation_ft",
-                                    "name": "Elevation (ft)"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_locked",
-                                    "name": "Locked"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_sentry_mode",
-                                    "name": "Sentry Mode Enabled"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_windows_open",
-                                    "name": "Windows Open"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_doors_open",
-                                    "name": "Doors Open"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_trunk_open",
-                                    "name": "Trunk Open"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_frunk_open",
-                                    "name": "Frunk Open"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_is_user_present",
-                                    "name": "User Present"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_is_climate_on",
-                                    "name": "Climate On"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_inside_temp",
-                                    "name": "Inside Temperature"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_outside_temp",
-                                    "name": "Outside Temperature"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_is_preconditioning",
-                                    "name": "Preconditioning"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_odometer",
-                                    "name": "Odometer"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_odometer_mi",
-                                    "name": "Odometer (miles)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_est_battery_range_km",
-                                    "name": "Battery Range (km)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_est_battery_range_mi",
-                                    "name": "Estimated Battery Range (mi)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_rated_battery_range_km",
-                                    "name": "Rated Battery Range (km)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_rated_battery_range_mi",
-                                    "name": "Rated Battery Range (mi)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_ideal_battery_range_km",
-                                    "name": "Ideal Battery Range (km)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_ideal_battery_range_mi",
-                                    "name": "Ideal Battery Range (mi)"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_battery_level",
-                                    "name": "Battery Level"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_usable_battery_level",
-                                    "name": "Usable Battery Level"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_plugged_in",
-                                    "name": "Plugged In"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_charge_energy_added",
-                                    "name": "Charge Energy Added"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_charge_limit_soc",
-                                    "name": "Charge Limit"
-                                },
-                                {
-                                    "entity": "binary_sensor.tesla2_charge_port_door_open",
-                                    "name": "Charge Port Door Open"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_charger_actual_current",
-                                    "name": "Charger Current"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_charger_phases",
-                                    "name": "Charger Phases"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_charger_power",
-                                    "name": "Charger Power"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_charger_voltage",
-                                    "name": "Charger Voltage"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_scheduled_charging_start_time",
-                                    "name": "Scheduled Charging Start Time"
-                                },
-                                {
-                                    "entity": "sensor.tesla2_time_to_full_charge",
-                                    "name": "Time To Full Charge"
-                                }
-                            ]
-                        }
-                    ]
+                  "entity": "input_boolean.auto_arm_disarm_alarm_night"
                 },
                 {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "weather-forecast",
-                            "entity": "weather.dark_sky"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.weather_summary"
-                                },
-                                {
-                                    "entity": "sensor.weather_temperature"
-                                },
-                                {
-                                    "entity": "sensor.weather_wind_speed"
-                                },
-                                {
-                                    "entity": "sensor.weather_nearest_storm_distance"
-                                },
-                                {
-                                    "entity": "sensor.weather_overnight_low_temperature_0d"
-                                },
-                                {
-                                    "entity": "sensor.weather_daytime_high_temperature_0d"
-                                },
-                                {
-                                    "entity": "sensor.weather_daily_summary"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Weather Summary",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.downstairs_thermostat_humidity"
-                                },
-                                {
-                                    "entity": "sensor.downstairs_thermostat_hvac_state"
-                                },
-                                {
-                                    "entity": "sensor.master_bedroom_thermostat_nest_humidity"
-                                },
-                                {
-                                    "entity": "sensor.master_bedroom_thermostat_nest_hvac_state"
-                                },
-                                {
-                                    "entity": "sensor.basement_thermostat_humidity"
-                                },
-                                {
-                                    "entity": "sensor.basement_thermostat_hvac_state"
-                                },
-                                {
-                                    "entity": "sensor.dining_room_nest_protect_smoke_status"
-                                },
-                                {
-                                    "entity": "sensor.dining_room_nest_protect_co_status"
-                                },
-                                {
-                                    "entity": "sensor.downstairs_nest_protect_smoke_status"
-                                },
-                                {
-                                    "entity": "sensor.downstairs_nest_protect_co_status"
-                                },
-                                {
-                                    "entity": "sensor.upstairs_nest_protect_smoke_status"
-                                },
-                                {
-                                    "entity": "sensor.upstairs_nest_protect_co_status"
-                                },
-                                {
-                                    "entity": "input_boolean.auto_run_basement_fan"
-                                },
-                                {
-                                    "entity": "sensor.master_bedroom_thermostat_nest_temperature"
-                                },
-                                {
-                                    "entity": "sensor.downstairs_thermostat_temperature"
-                                },
-                                {
-                                    "entity": "sensor.basement_thermostat_temperature"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Nest Details",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "sensor.weather_humidity",
-                                "sensor.weather_precip_probability",
-                                "sensor.weather_precip_intensity",
-                                "sensor.weather_apparent_temperature",
-                                "sensor.weather_dew_point",
-                                "sensor.weather_wind_bearing",
-                                "sensor.weather_visibility",
-                                "sensor.weather_cloud_coverage",
-                                "sensor.weather_minutely_summary",
-                                "sensor.weather_hourly_summary"
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Weather Details",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "sensor.downstairs_thermostat_temperature",
-                                "sensor.master_bedroom_thermostat_nest_temperature",
-                                "sensor.basement_thermostat_temperature"
-                            ],
-                            "hours_to_show": 168,
-                            "title": "Temperature History",
-                            "type": "history-graph"
-                        }
-                    ],
-                    "icon": "mdi:weather-cloudy",
-                    "path": "climate_view",
-                    "title": "Climate"
+                  "entity": "proximity.home"
                 },
                 {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "automation.alert_when_motion_is_detected_upstairs_and_nobody_home"
-                                },
-                                {
-                                    "entity": "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home"
-                                },
-                                {
-                                    "entity": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
-                                },
-                                {
-                                    "entity": "binary_sensor.front_door_ding"
-                                },
-                                {
-                                    "entity": "binary_sensor.front_door_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.upstairs_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.main_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.basement_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.front_door"
-                                },
-                                {
-                                    "entity": "binary_sensor.garage_door"
-                                },
-                                {
-                                    "entity": "binary_sensor.family_window"
-                                },
-                                {
-                                    "entity": "binary_sensor.living_window"
-                                },
-                                {
-                                    "entity": "binary_sensor.sun_room_door"
-                                },
-                                {
-                                    "entity": "binary_sensor.unknown_door"
-                                },
-                                {
-                                    "entity": "binary_sensor.basement_window"
-                                },
-                                {
-                                    "entity": "binary_sensor.bathroom_window"
-                                },
-                                {
-                                    "entity": "binary_sensor.kitchen_window"
-                                },
-                                {
-                                    "entity": "binary_sensor.unknown_door"
-                                },
-                                {
-                                    "entity": "binary_sensor.laundry_window"
-                                },
-                                {
-                                    "entity": "binary_sensor.basement_door"
-                                },
-                                {
-                                    "entity": "binary_sensor.sliding_door"
-                                },
-                                {
-                                    "entity": "binary_sensor.upstairs_window"
-                                },
-                                {
-                                    "entity": "binary_sensor.hall_smoke"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Alarm Sensors",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "automation.bi_set_profile_when_input_select_changes"
-                                },
-                                {
-                                    "entity": "automation.bi_notify_if_profile_is_unknown"
-                                },
-                                {
-                                    "entity": "automation.bi_alert_night_at_10pm_when_home"
-                                },
-                                {
-                                    "entity": "automation.bi_away_when_we_leave"
-                                },
-                                {
-                                    "entity": "automation.bi_away_when_we_leave_after_sunset"
-                                },
-                                {
-                                    "entity": "automation.bi_home_when_we_get_home"
-                                },
-                                {
-                                    "entity": "automation.bi_night_when_we_get_home_before_10pm"
-                                }
-                            ],
-                            "title": "Camera Toggles",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.auto_arm_alarm_when_gone"
-                                },
-                                {
-                                    "entity": "input_boolean.auto_disarm_alarm_when_home"
-                                },
-                                {
-                                    "entity": "input_boolean.notify_alarm_triggered"
-                                },
-                                {
-                                    "entity": "input_boolean.notify_alarm_armed"
-                                },
-                                {
-                                    "entity": "input_boolean.notify_alarm_disarmed"
-                                },
-                                {
-                                    "entity": "automation.alert_when_door_to_garage_is_opened_for_too_long"
-                                },
-                                {
-                                    "entity": "automation.alert_when_basement_door_is_opened_for_too_long"
-                                },
-                                {
-                                    "entity": "automation.alert_when_front_door_is_opened_for_too_long"
-                                },
-                                {
-                                    "entity": "automation.alert_when_sun_room_door_is_opened_for_too_long"
-                                }
-                            ],
-                            "title": "Alarm Toggles",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "automation.alert_when_motion_is_detected_upstairs_and_nobody_home",
-                                "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home",
-                                "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home",
-                                "automation.alert_when_front_door_is_open_and_nobody_home",
-                                "automation.alert_when_garage_door_is_open_and_nobody_home",
-                                "automation.alert_when_family_window_is_open_and_nobody_home",
-                                "automation.alert_when_living_window_is_open_and_nobody_home",
-                                "automation.alert_when_sun_room_door_is_open_and_nobody_home",
-                                "automation.alert_when_basement_window_is_open_and_nobody_home",
-                                "automation.alert_when_bathroom_window_is_open_and_nobody_home",
-                                "automation.alert_when_kitchen_window_is_open_and_nobody_home",
-                                "automation.alert_when_unknown_door_is_open_and_nobody_home",
-                                "automation.alert_when_laundry_window_is_open_and_nobody_home",
-                                "automation.alert_when_basement_door_is_open_and_nobody_home",
-                                "automation.alert_when_sliding_door_is_open_and_nobody_home",
-                                "automation.alert_when_upstairs_window_is_open_and_nobody_home"
-                            ],
-                            "title": "Alarm Sensor Alert Toggles",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.notify_garage_doors_home"
-                                },
-                                {
-                                    "entity": "input_boolean.notify_garage_doors_away"
-                                }
-                            ],
-                            "title": "Jeff's Garage Toggles",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.notify_garage_doors_home"
-                                },
-                                {
-                                    "entity": "input_boolean.notify_garage_doors_away"
-                                }
-                            ],
-                            "title": "Jen's Garage Toggles",
-                            "type": "entities"
-                        },
-                        {
-                            "entity": "alarm_control_panel.alarm_panel",
-                            "states": [
-                                "arm_night",
-                                "arm_home",
-                                "arm_away"
-                            ],
-                            "type": "alarm-panel"
-                        },
-                        {
-                            "type": "glance",
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.main_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.upstairs_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.basement_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.basement_camera_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.front_camera_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.porch_camera_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.driveway_camera_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.pool_camrea_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.basement_camera_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.ring_front_door_motion"
-                                },
-                                {
-                                    "entity": "sensor.front_door_last_motion"
-                                }
-                            ],
-                            "state_color": true,
-                            "show_icon": true,
-                            "show_name": true,
-                            "show_state": true,
-                            "title": "Motion"
-                        }
-                    ],
-                    "icon": "mdi:shield-home",
-                    "path": "security_view",
-                    "title": "Security"
+                  "entity": "group.family"
+                },
+                {
+                  "entity": "group.parents"
+                },
+                {
+                  "entity": "group.kids"
+                },
+                {
+                  "entity": "input_select.presence"
+                },
+                {
+                  "entity": "binary_sensor.home_away"
                 }
-            ]
+              ],
+              "show_header_toggle": false,
+              "title": "Home",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "cover.jeff_garage_door"
+                },
+                {
+                  "entity": "sensor.garage_status"
+                },
+                {
+                  "entity": "sensor.garage_car_present"
+                },
+                {
+                  "entity": "input_boolean.auto_close_garage_door_jeff"
+                },
+                {
+                  "entity": "cover.jen_garage_door"
+                },
+                {
+                  "entity": "sensor.garage2_status"
+                },
+                {
+                  "entity": "sensor.garage2_car_present"
+                },
+                {
+                  "entity": "input_boolean.auto_close_garage_door_jen"
+                },
+                {
+                  "entity": "cover.jens_garage_mqtt"
+                },
+                {
+                  "entity": "cover.jeffs_garage_mqtt"
+                },
+                {
+                  "entity": "input_boolean.auto_garage_doors"
+                },
+                {
+                  "entity": "input_boolean.auto_garage_doors_night"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Garage",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.jeff_home_status",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:home"
+                },
+                {
+                  "entity": "person.jeff_billimek",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "device_tracker.jeffsphone"
+                },
+                {
+                  "entity": "device_tracker.jeffs_phone_2"
+                },
+                {
+                  "entity": "proximity.home_jeffs_phone"
+                },
+                {
+                  "entity": "input_boolean.track_jeff"
+                },
+                {
+                  "entity": "sensor.jeff_phone"
+                },
+                {
+                  "entity": "sensor.jeff_watch"
+                },
+                {
+                  "entity": "device_tracker.jeff_phone"
+                },
+                {
+                  "entity": "device_tracker.jeff_watch"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Jeff Presence",
+              "type": "entities",
+              "state_color": true,
+              "header": {
+                "type": "graph",
+                "entity": "sensor.jeffsphone_distance",
+                "hours_to_show": 24
+              }
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.jen_home_status",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:home"
+                },
+                {
+                  "entity": "person.jennifer_billimek",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "device_tracker.jens_phone2"
+                },
+                {
+                  "entity": "device_tracker.jensphone"
+                },
+                {
+                  "entity": "proximity.home_jens_phone",
+                  "name": "Distance to Home",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "input_boolean.track_jen"
+                },
+                {
+                  "entity": "sensor.jen_watch"
+                },
+                {
+                  "entity": "sensor.jen_phone"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Jen Presence",
+              "type": "entities",
+              "state_color": true,
+              "header": {
+                "type": "graph",
+                "entity": "sensor.jensphone_distance",
+                "hours_to_show": 24
+              }
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.ansley_home_status",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:home"
+                },
+                {
+                  "entity": "person.ansley_billimek",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "device_tracker.ansleys_xr_2",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:satellite-uplink"
+                },
+                {
+                  "entity": "device_tracker.eye_phone",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:wifi"
+                },
+                {
+                  "entity": "proximity.home_ansleys_phone",
+                  "secondary_info": "last-changed",
+                  "name": "Distance to Home"
+                },
+                {
+                  "entity": "input_boolean.track_ansley"
+                },
+                {
+                  "entity": "sensor.ansley_watch"
+                },
+                {
+                  "entity": "sensor.ansley_phone"
+                }
+              ],
+              "title": "Ansley Presence",
+              "show_header_toggle": false,
+              "state_color": true,
+              "header": {
+                "type": "graph",
+                "entity": "sensor.ansleys_xr_distance",
+                "hours_to_show": 24
+              }
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.brinley_home_status",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:home"
+                },
+                {
+                  "entity": "person.brinley",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "device_tracker.brinleythebest_2",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:wifi"
+                },
+                {
+                  "entity": "device_tracker.brinleythebest",
+                  "secondary_info": "last-changed",
+                  "icon": "hass:satellite-uplink"
+                },
+                {
+                  "entity": "proximity.home_brinleys_phone",
+                  "secondary_info": "last-changed",
+                  "name": "Distance to Home"
+                },
+                {
+                  "entity": "input_boolean.track_brinley"
+                },
+                {
+                  "entity": "sensor.brinley_phone"
+                }
+              ],
+              "title": "Brinley Presence",
+              "show_header_toggle": false,
+              "state_color": true,
+              "header": {
+                "type": "graph",
+                "entity": "sensor.brinleythebest_distance",
+                "hours_to_show": 24
+              }
+            },
+            {
+              "entity": "climate.master_bedroom_nest",
+              "type": "thermostat"
+            },
+            {
+              "entity": "climate.downstairs",
+              "theme": "default",
+              "type": "thermostat"
+            },
+            {
+              "entity": "climate.basement",
+              "type": "thermostat"
+            },
+            {
+              "hold_action": {
+                "action": "more-info"
+              },
+              "name": "Enable Blocky",
+              "show_icon": true,
+              "show_name": true,
+              "tap_action": {
+                "action": "call-service",
+                "service": "rest_command.enable_blocky"
+              },
+              "type": "button"
+            },
+            {
+              "hold_action": {
+                "action": "more-info"
+              },
+              "name": "Disable Blocky 5 minutes",
+              "show_icon": true,
+              "show_name": true,
+              "tap_action": {
+                "action": "call-service",
+                "service": "rest_command.disable_blocky_5m"
+              },
+              "type": "button"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.front_detect",
+                  "name": "Detect"
+                },
+                {
+                  "entity": "switch.front_recordings",
+                  "name": "Recordings"
+                },
+                {
+                  "entity": "switch.front_snapshots",
+                  "name": "Snapshots"
+                }
+              ],
+              "title": "Front"
+            }
+          ],
+          "icon": "mdi:home-assistant",
+          "path": "default_view",
+          "title": "Home"
+        },
+        {
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.camera_front_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_driveway_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_porch_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_pool_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_basement_notify"
+                }
+              ],
+              "title": "Camera Notifications",
+              "type": "entities"
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.front",
+                  "show_name": false,
+                  "show_state": false,
+                  "camera_view": "live"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.front_camera_last_person",
+                  "show_name": false,
+                  "show_state": false
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.driveway",
+                  "show_name": false,
+                  "show_state": false,
+                  "camera_view": "live"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.driveway_camera_last_person",
+                  "show_name": false,
+                  "show_state": false
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.porch",
+                  "show_name": false,
+                  "show_state": false,
+                  "camera_view": "live"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.porch_camera_last_person",
+                  "show_name": false,
+                  "show_state": false
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.pool",
+                  "show_name": false,
+                  "show_state": false,
+                  "camera_view": "live"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.pool_camera_last_person",
+                  "show_name": false,
+                  "show_state": false
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.basement",
+                  "show_name": false,
+                  "show_state": false,
+                  "camera_view": "live"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.basement_camera_last_person",
+                  "show_name": false,
+                  "show_state": false
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.front_door",
+                  "show_name": false
+                }
+              ]
+            },
+            {
+              "entities": [
+                "sensor.blue_iris_profile",
+                "input_select.set_biprofile"
+              ],
+              "show_header_toggle": false,
+              "title": "Cameras",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                "binary_sensor.front_door_ding",
+                "sensor.front_door_last_activity",
+                "sensor.front_door_last_ding",
+                "sensor.front_door_last_motion",
+                "binary_sensor.front_door_motion",
+                "sensor.front_door_volume"
+              ],
+              "type": "entities"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.wyze_3_h264_rtsp_server"
+                },
+                {
+                  "entity": "switch.wyze_3_ir_filter"
+                },
+                {
+                  "entity": "switch.wyze_3_ir_led"
+                },
+                {
+                  "entity": "sensor.wyze_3_light_sensor"
+                },
+                {
+                  "entity": "switch.wyze_3_motion_detection"
+                },
+                {
+                  "entity": "binary_sensor.wyze_3_motion_sensor"
+                },
+                {
+                  "entity": "switch.wyze_3_night_mode"
+                },
+                {
+                  "entity": "switch.wyze_3_night_mode_auto"
+                }
+              ]
+            }
+          ],
+          "icon": "mdi:camcorder",
+          "title": "Cameras"
+        },
+        {
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "group.cabinet_lights"
+                },
+                {
+                  "entity": "switch.outlet_b"
+                },
+                {
+                  "entity": "switch.outlet_c"
+                },
+                {
+                  "entity": "switch.outlet_a"
+                },
+                {
+                  "entity": "switch.garage"
+                },
+                {
+                  "entity": "switch.porch"
+                },
+                {
+                  "entity": "switch.pool"
+                },
+                {
+                  "entity": "light.stairs2"
+                },
+                {
+                  "entity": "sensor.garage_electric_consumed_kwh"
+                },
+                {
+                  "entity": "sensor.porch_electric_consumed_kwh"
+                },
+                {
+                  "entity": "group.sunroom_lights"
+                },
+                {
+                  "entity": "light.outlet_g_2"
+                },
+                {
+                  "entity": "light.outlet_h_2"
+                },
+                {
+                  "entity": "switch.outlet_d"
+                },
+                {
+                  "entity": "switch.outlet_f"
+                }
+              ],
+              "title": "Main Level"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "light.stairs"
+                },
+                {
+                  "entity": "switch.hallway"
+                },
+                {
+                  "entity": "switch.bedroom"
+                },
+                {
+                  "entity": "switch.livingroom"
+                },
+                {
+                  "entity": "binary_sensor.water_sensor_a_water_alarm_water_leak_detected"
+                },
+                {
+                  "entity": "sensor.water_sensor_a_battery_level"
+                },
+                {
+                  "entity": "binary_sensor.water_sensor_a_low_battery_level"
+                },
+                {
+                  "entity": "binary_sensor.water_sensor_b_water_alarm_water_leak_detected"
+                },
+                {
+                  "entity": "sensor.water_sensor_b_battery_level"
+                },
+                {
+                  "entity": "binary_sensor.water_sensor_b_low_battery_level"
+                }
+              ],
+              "title": "Basement"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.outlet_e_2"
+                },
+                {
+                  "entity": "switch.outlet_e"
+                },
+                {
+                  "entity": "light.stairs2"
+                }
+              ],
+              "title": "Upstairs"
+            },
+            {
+              "entity": "light.stairs2",
+              "type": "light"
+            },
+            {
+              "entity": "light.stairs",
+              "type": "light"
+            },
+            {
+              "entity": "media_player.office_speaker",
+              "type": "media-control"
+            },
+            {
+              "entity": "media_player.sun_room_speaker",
+              "type": "media-control"
+            },
+            {
+              "type": "light",
+              "entity": "light.outlet_g"
+            },
+            {
+              "type": "light",
+              "entity": "light.outlet_g_2"
+            },
+            {
+              "type": "light",
+              "entity": "light.outlet_h"
+            },
+            {
+              "type": "light",
+              "entity": "light.outlet_h_2"
+            }
+          ],
+          "icon": "mdi:nfc",
+          "path": "zwave",
+          "title": "ZWave"
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "frigate",
+          "path": "frigate",
+          "icon": "mdi:cctv",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.basement"
+                },
+                {
+                  "camera_entity": "camera.driveway"
+                },
+                {
+                  "camera_entity": "camera.front"
+                },
+                {
+                  "camera_entity": "camera.pool"
+                },
+                {
+                  "camera_entity": "camera.porch"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.front"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.driveway"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.porch"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.pool"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.basement"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "sulaco",
+          "title": "Sulaco",
+          "icon": "mdi:car-connected",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "sensor.tesla_battery_level",
+                      "name": "Battery Level"
+                    },
+                    {
+                      "entity": "sensor.tesla_state",
+                      "name": "Car State"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla_plugged_in",
+                      "name": "Plugged In"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.tesla_park_brake",
+                      "name": "Park Brake"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla_sentry_mode",
+                      "name": "Sentry Mode"
+                    },
+                    {
+                      "entity": "sensor.tesla_speed",
+                      "name": "Speed"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.tesla_healthy",
+                      "name": "Car Health"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla_windows_open",
+                      "name": "Window Status"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "button",
+                      "entity": "binary_sensor.tesla_locked",
+                      "name": "Charger Door",
+                      "show_state": true,
+                      "state": [
+                        {
+                          "value": "locked",
+                          "icon": "mdi:lock",
+                          "color": "green",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "lock.unlock",
+                            "service_data": {
+                              "entity_id": "lock.tesla_model_3_charger_door_lock"
+                            }
+                          }
+                        },
+                        {
+                          "value": "unlocked",
+                          "icon": "mdi:lock-open",
+                          "color": "red",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "lock.lock",
+                            "service_data": {
+                              "entity_id": "lock.tesla_model_3_charger_door_lock"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "button",
+                      "entity": "lock.sulaco_door_lock",
+                      "name": "Car Door",
+                      "show_state": true,
+                      "state": [
+                        {
+                          "value": "locked",
+                          "icon": "mdi:lock",
+                          "color": "green",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "lock.unlock",
+                            "service_data": {
+                              "entity_id": "lock.tesla_model_3_door_lock"
+                            }
+                          }
+                        },
+                        {
+                          "value": "unlocked",
+                          "icon": "mdi:lock-open",
+                          "color": "red",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "lock.lock",
+                            "service_data": {
+                              "entity_id": "lock.tesla_model_3_door_lock"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "map",
+                  "dark_mode": true,
+                  "default_zoom": 12,
+                  "entities": [
+                    "device_tracker.tesla_location"
+                  ]
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.sulaco_hvac_climate_system"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.tesla_display_name",
+                  "name": "Name"
+                },
+                {
+                  "entity": "sensor.tesla_state",
+                  "name": "Status"
+                },
+                {
+                  "entity": "sensor.tesla_since",
+                  "name": "Last Status Change"
+                },
+                {
+                  "entity": "binary_sensor.tesla_healthy",
+                  "name": "Logger Healthy"
+                },
+                {
+                  "entity": "sensor.tesla_version",
+                  "name": "Software Version"
+                },
+                {
+                  "entity": "binary_sensor.tesla_update_available",
+                  "name": "Available Update Status"
+                },
+                {
+                  "entity": "sensor.tesla_update_version",
+                  "name": "Available Update Version"
+                },
+                {
+                  "entity": "sensor.tesla_model",
+                  "name": "Tesla Model"
+                },
+                {
+                  "entity": "sensor.tesla_trim_badging",
+                  "name": "Trim Badge"
+                },
+                {
+                  "entity": "sensor.tesla_exterior_color",
+                  "name": "Exterior Color"
+                },
+                {
+                  "entity": "sensor.tesla_wheel_type",
+                  "name": "Wheel Type"
+                },
+                {
+                  "entity": "sensor.tesla_spoiler_type",
+                  "name": "Spoiler Type"
+                },
+                {
+                  "entity": "sensor.tesla_geofence",
+                  "name": "Geo-fence Name"
+                },
+                {
+                  "entity": "proximity.home_tesla",
+                  "name": "Distance to Home"
+                },
+                {
+                  "entity": "sensor.tesla_latitude",
+                  "name": "Latitude"
+                },
+                {
+                  "entity": "sensor.tesla_longitude",
+                  "name": "Longitude"
+                },
+                {
+                  "entity": "sensor.tesla_shift_state",
+                  "name": "Shifter State"
+                },
+                {
+                  "entity": "sensor.tesla_speed",
+                  "name": "Speed"
+                },
+                {
+                  "entity": "sensor.tesla_speed_mph",
+                  "name": "Speed (MPH)"
+                },
+                {
+                  "entity": "sensor.tesla_heading",
+                  "name": "Heading"
+                },
+                {
+                  "entity": "sensor.tesla_elevation",
+                  "name": "Elevation (m)"
+                },
+                {
+                  "entity": "sensor.tesla_elevation_ft",
+                  "name": "Elevation (ft)"
+                },
+                {
+                  "entity": "binary_sensor.tesla_locked",
+                  "name": "Locked"
+                },
+                {
+                  "entity": "binary_sensor.tesla_sentry_mode",
+                  "name": "Sentry Mode Enabled"
+                },
+                {
+                  "entity": "binary_sensor.tesla_windows_open",
+                  "name": "Windows Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla_doors_open",
+                  "name": "Doors Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla_trunk_open",
+                  "name": "Trunk Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla_frunk_open",
+                  "name": "Frunk Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla_is_user_present",
+                  "name": "User Present"
+                },
+                {
+                  "entity": "binary_sensor.tesla_is_climate_on",
+                  "name": "Climate On"
+                },
+                {
+                  "entity": "sensor.tesla_inside_temp",
+                  "name": "Inside Temperature"
+                },
+                {
+                  "entity": "sensor.tesla_outside_temp",
+                  "name": "Outside Temperature"
+                },
+                {
+                  "entity": "binary_sensor.tesla_is_preconditioning",
+                  "name": "Preconditioning"
+                },
+                {
+                  "entity": "sensor.tesla_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "sensor.tesla_odometer_mi",
+                  "name": "Odometer (miles)"
+                },
+                {
+                  "entity": "sensor.tesla_est_battery_range_km",
+                  "name": "Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla_est_battery_range_mi",
+                  "name": "Estimated Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla_rated_battery_range_km",
+                  "name": "Rated Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla_rated_battery_range_mi",
+                  "name": "Rated Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla_ideal_battery_range_km",
+                  "name": "Ideal Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla_ideal_battery_range_mi",
+                  "name": "Ideal Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla_battery_level",
+                  "name": "Battery Level"
+                },
+                {
+                  "entity": "sensor.tesla_usable_battery_level",
+                  "name": "Usable Battery Level"
+                },
+                {
+                  "entity": "binary_sensor.tesla_plugged_in",
+                  "name": "Plugged In"
+                },
+                {
+                  "entity": "sensor.tesla_charge_energy_added",
+                  "name": "Charge Energy Added"
+                },
+                {
+                  "entity": "sensor.tesla_charge_limit_soc",
+                  "name": "Charge Limit"
+                },
+                {
+                  "entity": "binary_sensor.tesla_charge_port_door_open",
+                  "name": "Charge Port Door Open"
+                },
+                {
+                  "entity": "sensor.tesla_charger_actual_current",
+                  "name": "Charger Current"
+                },
+                {
+                  "entity": "sensor.tesla_charger_phases",
+                  "name": "Charger Phases"
+                },
+                {
+                  "entity": "sensor.tesla_charger_power",
+                  "name": "Charger Power"
+                },
+                {
+                  "entity": "sensor.tesla_charger_voltage",
+                  "name": "Charger Voltage"
+                },
+                {
+                  "entity": "sensor.tesla_scheduled_charging_start_time",
+                  "name": "Scheduled Charging Start Time"
+                },
+                {
+                  "entity": "sensor.tesla_time_to_full_charge",
+                  "name": "Time To Full Charge"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "karr",
+          "title": "KARR",
+          "badges": [],
+          "icon": "mdi:car-connected",
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "sensor.tesla2_battery_level",
+                      "name": "Battery Level"
+                    },
+                    {
+                      "entity": "sensor.tesla2_state",
+                      "name": "Car State"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla2_plugged_in",
+                      "name": "Plugged In"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.tesla2_park_brake",
+                      "name": "Park Brake"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla2_sentry_mode",
+                      "name": "Sentry Mode"
+                    },
+                    {
+                      "entity": "sensor.tesla2_speed",
+                      "name": "Speed"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.tesla2_healthy",
+                      "name": "Car Health"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla2_windows_open",
+                      "name": "Window Status"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "button",
+                      "entity": "binary_sensor.tesla2_locked",
+                      "name": "Charger Door",
+                      "show_state": true,
+                      "state": [
+                        {
+                          "value": "locked",
+                          "icon": "mdi:lock",
+                          "color": "green",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "lock.unlock",
+                            "service_data": {
+                              "entity_id": "lock.tesla2_model_3_charger_door_lock"
+                            }
+                          }
+                        },
+                        {
+                          "value": "unlocked",
+                          "icon": "mdi:lock-open",
+                          "color": "red",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "lock.lock",
+                            "service_data": {
+                              "entity_id": "lock.tesla2_model_3_charger_door_lock"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "button",
+                      "entity": "lock.karr_door_lock",
+                      "name": "Car Door",
+                      "show_state": true,
+                      "state": [
+                        {
+                          "value": "locked",
+                          "icon": "mdi:lock",
+                          "color": "green",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "lock.unlock",
+                            "service_data": {
+                              "entity_id": "lock.tesla2_model_3_door_lock"
+                            }
+                          }
+                        },
+                        {
+                          "value": "unlocked",
+                          "icon": "mdi:lock-open",
+                          "color": "red",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "lock.lock",
+                            "service_data": {
+                              "entity_id": "lock.tesla2_model_3_door_lock"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "map",
+                  "dark_mode": true,
+                  "default_zoom": 12,
+                  "entities": [
+                    "device_tracker.tesla2_location"
+                  ]
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.karr_hvac_climate_system"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.tesla2_display_name",
+                  "name": "Name"
+                },
+                {
+                  "entity": "sensor.tesla2_state",
+                  "name": "Status"
+                },
+                {
+                  "entity": "sensor.tesla2_since",
+                  "name": "Last Status Change"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_healthy",
+                  "name": "Logger Healthy"
+                },
+                {
+                  "entity": "sensor.tesla2_version",
+                  "name": "Software Version"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_update_available",
+                  "name": "Available Update Status"
+                },
+                {
+                  "entity": "sensor.tesla2_update_version",
+                  "name": "Available Update Version"
+                },
+                {
+                  "entity": "sensor.tesla2_model",
+                  "name": "Tesla Model"
+                },
+                {
+                  "entity": "sensor.tesla2_trim_badging",
+                  "name": "Trim Badge"
+                },
+                {
+                  "entity": "sensor.tesla2_exterior_color",
+                  "name": "Exterior Color"
+                },
+                {
+                  "entity": "sensor.tesla2_wheel_type",
+                  "name": "Wheel Type"
+                },
+                {
+                  "entity": "sensor.tesla2_spoiler_type",
+                  "name": "Spoiler Type"
+                },
+                {
+                  "entity": "sensor.tesla2_geofence",
+                  "name": "Geo-fence Name"
+                },
+                {
+                  "entity": "proximity.home_tesla2",
+                  "name": "Distance to Home"
+                },
+                {
+                  "entity": "sensor.tesla2_latitude",
+                  "name": "Latitude"
+                },
+                {
+                  "entity": "sensor.tesla2_longitude",
+                  "name": "Longitude"
+                },
+                {
+                  "entity": "sensor.tesla2_shift_state",
+                  "name": "Shifter State"
+                },
+                {
+                  "entity": "sensor.tesla2_speed",
+                  "name": "Speed"
+                },
+                {
+                  "entity": "sensor.tesla2_speed_mph",
+                  "name": "Speed (MPH)"
+                },
+                {
+                  "entity": "sensor.tesla2_heading",
+                  "name": "Heading"
+                },
+                {
+                  "entity": "sensor.tesla2_elevation",
+                  "name": "Elevation (m)"
+                },
+                {
+                  "entity": "sensor.tesla2_elevation_ft",
+                  "name": "Elevation (ft)"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_locked",
+                  "name": "Locked"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_sentry_mode",
+                  "name": "Sentry Mode Enabled"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_windows_open",
+                  "name": "Windows Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_doors_open",
+                  "name": "Doors Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_trunk_open",
+                  "name": "Trunk Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_frunk_open",
+                  "name": "Frunk Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_is_user_present",
+                  "name": "User Present"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_is_climate_on",
+                  "name": "Climate On"
+                },
+                {
+                  "entity": "sensor.tesla2_inside_temp",
+                  "name": "Inside Temperature"
+                },
+                {
+                  "entity": "sensor.tesla2_outside_temp",
+                  "name": "Outside Temperature"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_is_preconditioning",
+                  "name": "Preconditioning"
+                },
+                {
+                  "entity": "sensor.tesla2_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "sensor.tesla2_odometer_mi",
+                  "name": "Odometer (miles)"
+                },
+                {
+                  "entity": "sensor.tesla2_est_battery_range_km",
+                  "name": "Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla2_est_battery_range_mi",
+                  "name": "Estimated Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla2_rated_battery_range_km",
+                  "name": "Rated Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla2_rated_battery_range_mi",
+                  "name": "Rated Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla2_ideal_battery_range_km",
+                  "name": "Ideal Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla2_ideal_battery_range_mi",
+                  "name": "Ideal Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla2_battery_level",
+                  "name": "Battery Level"
+                },
+                {
+                  "entity": "sensor.tesla2_usable_battery_level",
+                  "name": "Usable Battery Level"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_plugged_in",
+                  "name": "Plugged In"
+                },
+                {
+                  "entity": "sensor.tesla2_charge_energy_added",
+                  "name": "Charge Energy Added"
+                },
+                {
+                  "entity": "sensor.tesla2_charge_limit_soc",
+                  "name": "Charge Limit"
+                },
+                {
+                  "entity": "binary_sensor.tesla2_charge_port_door_open",
+                  "name": "Charge Port Door Open"
+                },
+                {
+                  "entity": "sensor.tesla2_charger_actual_current",
+                  "name": "Charger Current"
+                },
+                {
+                  "entity": "sensor.tesla2_charger_phases",
+                  "name": "Charger Phases"
+                },
+                {
+                  "entity": "sensor.tesla2_charger_power",
+                  "name": "Charger Power"
+                },
+                {
+                  "entity": "sensor.tesla2_charger_voltage",
+                  "name": "Charger Voltage"
+                },
+                {
+                  "entity": "sensor.tesla2_scheduled_charging_start_time",
+                  "name": "Scheduled Charging Start Time"
+                },
+                {
+                  "entity": "sensor.tesla2_time_to_full_charge",
+                  "name": "Time To Full Charge"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "badges": [],
+          "cards": [
+            {
+              "type": "weather-forecast",
+              "entity": "weather.dark_sky"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.weather_summary"
+                },
+                {
+                  "entity": "sensor.weather_temperature"
+                },
+                {
+                  "entity": "sensor.weather_wind_speed"
+                },
+                {
+                  "entity": "sensor.weather_nearest_storm_distance"
+                },
+                {
+                  "entity": "sensor.weather_overnight_low_temperature_0d"
+                },
+                {
+                  "entity": "sensor.weather_daytime_high_temperature_0d"
+                },
+                {
+                  "entity": "sensor.weather_daily_summary"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Weather Summary",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.downstairs_thermostat_humidity"
+                },
+                {
+                  "entity": "sensor.downstairs_thermostat_hvac_state"
+                },
+                {
+                  "entity": "sensor.master_bedroom_thermostat_nest_humidity"
+                },
+                {
+                  "entity": "sensor.master_bedroom_thermostat_nest_hvac_state"
+                },
+                {
+                  "entity": "sensor.basement_thermostat_humidity"
+                },
+                {
+                  "entity": "sensor.basement_thermostat_hvac_state"
+                },
+                {
+                  "entity": "sensor.dining_room_nest_protect_smoke_status"
+                },
+                {
+                  "entity": "sensor.dining_room_nest_protect_co_status"
+                },
+                {
+                  "entity": "sensor.downstairs_nest_protect_smoke_status"
+                },
+                {
+                  "entity": "sensor.downstairs_nest_protect_co_status"
+                },
+                {
+                  "entity": "sensor.upstairs_nest_protect_smoke_status"
+                },
+                {
+                  "entity": "sensor.upstairs_nest_protect_co_status"
+                },
+                {
+                  "entity": "input_boolean.auto_run_basement_fan"
+                },
+                {
+                  "entity": "sensor.master_bedroom_thermostat_nest_temperature"
+                },
+                {
+                  "entity": "sensor.downstairs_thermostat_temperature"
+                },
+                {
+                  "entity": "sensor.basement_thermostat_temperature"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Nest Details",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                "sensor.weather_humidity",
+                "sensor.weather_precip_probability",
+                "sensor.weather_precip_intensity",
+                "sensor.weather_apparent_temperature",
+                "sensor.weather_dew_point",
+                "sensor.weather_wind_bearing",
+                "sensor.weather_visibility",
+                "sensor.weather_cloud_coverage",
+                "sensor.weather_minutely_summary",
+                "sensor.weather_hourly_summary"
+              ],
+              "show_header_toggle": false,
+              "title": "Weather Details",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                "sensor.downstairs_thermostat_temperature",
+                "sensor.master_bedroom_thermostat_nest_temperature",
+                "sensor.basement_thermostat_temperature"
+              ],
+              "hours_to_show": 168,
+              "title": "Temperature History",
+              "type": "history-graph"
+            }
+          ],
+          "icon": "mdi:weather-cloudy",
+          "path": "climate_view",
+          "title": "Climate"
+        },
+        {
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "automation.alert_when_motion_is_detected_upstairs_and_nobody_home"
+                },
+                {
+                  "entity": "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home"
+                },
+                {
+                  "entity": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
+                },
+                {
+                  "entity": "binary_sensor.front_door_ding"
+                },
+                {
+                  "entity": "binary_sensor.front_door_motion"
+                },
+                {
+                  "entity": "binary_sensor.upstairs_motion"
+                },
+                {
+                  "entity": "binary_sensor.main_motion"
+                },
+                {
+                  "entity": "binary_sensor.basement_motion"
+                },
+                {
+                  "entity": "binary_sensor.front_door"
+                },
+                {
+                  "entity": "binary_sensor.garage_door"
+                },
+                {
+                  "entity": "binary_sensor.family_window"
+                },
+                {
+                  "entity": "binary_sensor.living_window"
+                },
+                {
+                  "entity": "binary_sensor.sun_room_door"
+                },
+                {
+                  "entity": "binary_sensor.unknown_door"
+                },
+                {
+                  "entity": "binary_sensor.basement_window"
+                },
+                {
+                  "entity": "binary_sensor.bathroom_window"
+                },
+                {
+                  "entity": "binary_sensor.kitchen_window"
+                },
+                {
+                  "entity": "binary_sensor.unknown_door"
+                },
+                {
+                  "entity": "binary_sensor.laundry_window"
+                },
+                {
+                  "entity": "binary_sensor.basement_door"
+                },
+                {
+                  "entity": "binary_sensor.sliding_door"
+                },
+                {
+                  "entity": "binary_sensor.upstairs_window"
+                },
+                {
+                  "entity": "binary_sensor.hall_smoke"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Alarm Sensors",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "automation.bi_set_profile_when_input_select_changes"
+                },
+                {
+                  "entity": "automation.bi_notify_if_profile_is_unknown"
+                },
+                {
+                  "entity": "automation.bi_alert_night_at_10pm_when_home"
+                },
+                {
+                  "entity": "automation.bi_away_when_we_leave"
+                },
+                {
+                  "entity": "automation.bi_away_when_we_leave_after_sunset"
+                },
+                {
+                  "entity": "automation.bi_home_when_we_get_home"
+                },
+                {
+                  "entity": "automation.bi_night_when_we_get_home_before_10pm"
+                }
+              ],
+              "title": "Camera Toggles",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.auto_arm_alarm_when_gone"
+                },
+                {
+                  "entity": "input_boolean.auto_disarm_alarm_when_home"
+                },
+                {
+                  "entity": "input_boolean.notify_alarm_triggered"
+                },
+                {
+                  "entity": "input_boolean.notify_alarm_armed"
+                },
+                {
+                  "entity": "input_boolean.notify_alarm_disarmed"
+                },
+                {
+                  "entity": "automation.alert_when_door_to_garage_is_opened_for_too_long"
+                },
+                {
+                  "entity": "automation.alert_when_basement_door_is_opened_for_too_long"
+                },
+                {
+                  "entity": "automation.alert_when_front_door_is_opened_for_too_long"
+                },
+                {
+                  "entity": "automation.alert_when_sun_room_door_is_opened_for_too_long"
+                }
+              ],
+              "title": "Alarm Toggles",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                "automation.alert_when_motion_is_detected_upstairs_and_nobody_home",
+                "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home",
+                "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home",
+                "automation.alert_when_front_door_is_open_and_nobody_home",
+                "automation.alert_when_garage_door_is_open_and_nobody_home",
+                "automation.alert_when_family_window_is_open_and_nobody_home",
+                "automation.alert_when_living_window_is_open_and_nobody_home",
+                "automation.alert_when_sun_room_door_is_open_and_nobody_home",
+                "automation.alert_when_basement_window_is_open_and_nobody_home",
+                "automation.alert_when_bathroom_window_is_open_and_nobody_home",
+                "automation.alert_when_kitchen_window_is_open_and_nobody_home",
+                "automation.alert_when_unknown_door_is_open_and_nobody_home",
+                "automation.alert_when_laundry_window_is_open_and_nobody_home",
+                "automation.alert_when_basement_door_is_open_and_nobody_home",
+                "automation.alert_when_sliding_door_is_open_and_nobody_home",
+                "automation.alert_when_upstairs_window_is_open_and_nobody_home"
+              ],
+              "title": "Alarm Sensor Alert Toggles",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.notify_garage_doors_home"
+                },
+                {
+                  "entity": "input_boolean.notify_garage_doors_away"
+                }
+              ],
+              "title": "Jeff's Garage Toggles",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.notify_garage_doors_home"
+                },
+                {
+                  "entity": "input_boolean.notify_garage_doors_away"
+                }
+              ],
+              "title": "Jen's Garage Toggles",
+              "type": "entities"
+            },
+            {
+              "entity": "alarm_control_panel.alarm_panel",
+              "states": [
+                "arm_night",
+                "arm_home",
+                "arm_away"
+              ],
+              "type": "alarm-panel"
+            },
+            {
+              "type": "glance",
+              "entities": [
+                {
+                  "entity": "binary_sensor.main_motion"
+                },
+                {
+                  "entity": "binary_sensor.upstairs_motion"
+                },
+                {
+                  "entity": "binary_sensor.basement_motion"
+                },
+                {
+                  "entity": "binary_sensor.basement_camera_motion"
+                },
+                {
+                  "entity": "binary_sensor.front_camera_motion"
+                },
+                {
+                  "entity": "binary_sensor.porch_camera_motion"
+                },
+                {
+                  "entity": "binary_sensor.driveway_camera_motion"
+                },
+                {
+                  "entity": "binary_sensor.pool_camrea_motion"
+                },
+                {
+                  "entity": "binary_sensor.basement_camera_motion"
+                },
+                {
+                  "entity": "binary_sensor.ring_front_door_motion"
+                },
+                {
+                  "entity": "sensor.front_door_last_motion"
+                }
+              ],
+              "state_color": true,
+              "show_icon": true,
+              "show_name": true,
+              "show_state": true,
+              "title": "Motion"
+            }
+          ],
+          "icon": "mdi:shield-home",
+          "path": "security_view",
+          "title": "Security"
         }
+      ]
     }
+  }
 }

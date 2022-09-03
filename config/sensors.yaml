@@ -225,14 +225,45 @@
 
 # esprescense
   - platform: mqtt_room
-    device_id: "apple:1006:10-7"
+    device_id: "JeffsPhone"
     name: 'Jeff Phone'
     state_topic: 'espresense/rooms'
-    timeout: 60
+    timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
-    device_id: "apple:1005:9-26"
+    device_id: !secret jeff_watch_irk
     name: 'Jeff Watch'
     state_topic: 'espresense/rooms'
-    timeout: 60
+    timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  - platform: mqtt_room
+    device_id: "JensPhone"
+    name: 'Jen Phone'
+    state_topic: 'espresense/rooms'
+    timeout: 30
+    away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  - platform: mqtt_room
+    device_id: !secret jen_watch_irk
+    name: 'Jen Watch'
+    state_topic: 'espresense/rooms'
+    timeout: 30
+    away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  - platform: mqtt_room
+    device_id: "AnsleysPhone"
+    name: 'Ansley Phone'
+    state_topic: 'espresense/rooms'
+    timeout: 30
+    away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  - platform: mqtt_room
+    device_id: !secret ansley_watch_irk
+    name: 'Ansley Watch'
+    state_topic: 'espresense/rooms'
+    timeout: 30
+    away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  - platform: mqtt_room
+    device_id: "BrinleysPhone"
+    name: 'Brinley Phone'
+    state_topic: 'espresense/rooms'
+    timeout: 30
+    away_timeout: 120 # number of seconds after which the enitity will get status not_home
+

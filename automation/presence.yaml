@@ -101,3 +101,49 @@
     - service: homeassistant.turn_off
       data:
         entity_id: input_boolean.ansley_occupancy
+
+
+- alias: "jeff phone espresense"
+  trigger:
+  - platform: state
+    entity_id: sensor.jeff_phone
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.jeff_phone
+        state: 'not_home'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_jeffsphone
+          payload: 'not_home'
+    default:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_jeffsphone
+          payload: 'home'
+
+- alias: "jeff watch espresense"
+  trigger:
+  - platform: state
+    entity_id: sensor.jeff_watch
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.jeff_watch
+        state: 'not_home'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_jeffswatch
+          payload: 'not_home'
+    default:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_jeffswatch
+          payload: 'home'
+
