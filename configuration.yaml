@@ -70,52 +70,6 @@ shell_command: !include shell/shell.yaml
 zone: !include config/zones.yaml
 group: !include groups.yaml
 
-# ios:
-#   push:
-#     categories:
-#       - name: Alarm
-#         identifier: 'alarm'
-#         actions:
-#           - identifier: 'DISARM_ALARM'
-#             title: 'Disarm Alarm'
-#             activationMode: 'background'
-#             authenticationRequired: true
-#             destructive: true
-#       - name: garage
-#         identifier: 'garage'
-#         actions:
-#           - identifier: 'CLOSE_GARAGE'
-#             title: 'Close Jeffs garage door'
-#             activationMode: 'background'
-#             authenticationRequired: true
-#       - name: garage2
-#         identifier: 'garage2'
-#         actions:
-#           - identifier: 'CLOSE_GARAGE2'
-#             title: 'Close Jens garage door'
-#             activationMode: 'background'
-#             authenticationRequired: true
-#       - name: garage_open
-#         identifier: 'garage_open'
-#         actions:
-#           - identifier: 'OPEN_GARAGE'
-#             title: 'Open Jeffs garage door'
-#             activationMode: 'background'
-#             authenticationRequired: true
-#       - name: garage2_open
-#         identifier: 'garage2_open'
-#         actions:
-#           - identifier: 'OPEN_GARAGE2'
-#             title: 'Open Jens garage door'
-#             activationMode: 'background'
-#             authenticationRequired: true
-#       - name: camera
-#         identifier: 'camera'
-#         actions:
-#           - identifier: 'SENDSTILLANDCLIP'
-#             title: 'Send still and video clip'
-#             authenticationRequired: false
-
 input_select:
   set_biprofile:
     name: "Set BI Profile"
@@ -245,8 +199,6 @@ binary_sensor:
             OFF
           {% endif %}
 
-
-
 notify:
 
 influxdb:
@@ -314,7 +266,6 @@ proximity:
       - device_tracker.brinleythebest_2
     tolerance: 50
     unit_of_measurement: m
-
 
 tts:
   - platform: google_translate
