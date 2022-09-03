@@ -78,31 +78,35 @@
         option: 'home'
 
 
-- alias: Ansley Occupancy On
-  initial_state: on
-#   hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.ansley_s_phone_bluetooth_occupancy_confidence
-      above: 10
-  action:
-    - service: homeassistant.turn_on
-      data:
-        entity_id: input_boolean.ansley_occupancy
+# - alias: Ansley Occupancy On
+#   initial_state: on
+# #   hide_entity: true
+#   trigger:
+#     - platform: numeric_state
+#       entity_id: sensor.ansley_s_phone_bluetooth_occupancy_confidence
+#       above: 10
+#   action:
+#     - service: homeassistant.turn_on
+#       data:
+#         entity_id: input_boolean.ansley_occupancy
 
-- alias: Ansley Occupancy Off
-  initial_state: on
-#   hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.ansley_s_phone_bluetooth_occupancy_confidence
-      below: 10
-  action:
-    - service: homeassistant.turn_off
-      data:
-        entity_id: input_boolean.ansley_occupancy
+# - alias: Ansley Occupancy Off
+#   initial_state: on
+# #   hide_entity: true
+#   trigger:
+#     - platform: numeric_state
+#       entity_id: sensor.ansley_s_phone_bluetooth_occupancy_confidence
+#       below: 10
+#   action:
+#     - service: homeassistant.turn_off
+#       data:
+#         entity_id: input_boolean.ansley_occupancy
 
+################################################################################
+## ESPrescense for custom device_trackers
+################################################################################
 
+# jeff
 - alias: "jeff phone espresense"
   trigger:
   - platform: state
@@ -147,3 +151,115 @@
           topic: location/espresense_jeffswatch
           payload: 'home'
 
+# jen
+- alias: "jen phone espresense"
+  trigger:
+  - platform: state
+    entity_id: sensor.jen_phone
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.jen_phone
+        state: 'not_home'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_jensphone
+          payload: 'not_home'
+    default:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_jensphone
+          payload: 'home'
+
+- alias: "jen watch espresense"
+  trigger:
+  - platform: state
+    entity_id: sensor.jen_watch
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.jen_watch
+        state: 'not_home'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_jenswatch
+          payload: 'not_home'
+    default:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_jenswatch
+          payload: 'home'
+
+# ansley
+- alias: "ansley phone espresense"
+  trigger:
+  - platform: state
+    entity_id: sensor.ansley_phone
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.ansley_phone
+        state: 'not_home'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_ansleysphone
+          payload: 'not_home'
+    default:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_ansleysphone
+          payload: 'home'
+
+- alias: "ansley watch espresense"
+  trigger:
+  - platform: state
+    entity_id: sensor.ansley_watch
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.ansley_watch
+        state: 'not_home'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_ansleyswatch
+          payload: 'not_home'
+    default:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_ansleyswatch
+          payload: 'home'
+
+# brinley
+- alias: "brinley phone espresense"
+  trigger:
+  - platform: state
+    entity_id: sensor.brinley_phone
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.brinley_phone
+        state: 'not_home'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_brinleysphone
+          payload: 'not_home'
+    default:
+      - service: mqtt.publish
+        data:
+          topic: location/espresense_brinleysphone
+          payload: 'home'

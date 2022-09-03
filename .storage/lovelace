@@ -112,6 +112,12 @@
                   "entity": "device_tracker.jeffsphone"
                 },
                 {
+                  "entity": "device_tracker.jeff_phone_espresense"
+                },
+                {
+                  "entity": "device_tracker.jeff_watch_espresense"
+                },
+                {
                   "entity": "device_tracker.jeffs_phone_2"
                 },
                 {
@@ -125,12 +131,6 @@
                 },
                 {
                   "entity": "sensor.jeff_watch"
-                },
-                {
-                  "entity": "device_tracker.jeff_phone"
-                },
-                {
-                  "entity": "device_tracker.jeff_watch"
                 }
               ],
               "show_header_toggle": false,
@@ -155,10 +155,16 @@
                   "secondary_info": "last-changed"
                 },
                 {
-                  "entity": "device_tracker.jens_phone2"
+                  "entity": "device_tracker.jensphone"
                 },
                 {
-                  "entity": "device_tracker.jensphone"
+                  "entity": "device_tracker.jen_phone_espresense"
+                },
+                {
+                  "entity": "device_tracker.jen_watch_espresense"
+                },
+                {
+                  "entity": "device_tracker.jens_phone2"
                 },
                 {
                   "entity": "proximity.home_jens_phone",
@@ -169,10 +175,10 @@
                   "entity": "input_boolean.track_jen"
                 },
                 {
-                  "entity": "sensor.jen_watch"
+                  "entity": "sensor.jen_phone"
                 },
                 {
-                  "entity": "sensor.jen_phone"
+                  "entity": "sensor.jen_watch"
                 }
               ],
               "show_header_toggle": false,
@@ -201,6 +207,12 @@
                   "entity": "device_tracker.ansleys_xr_2",
                   "secondary_info": "last-changed",
                   "icon": "hass:satellite-uplink"
+                },
+                {
+                  "entity": "device_tracker.ansley_phone_espresense"
+                },
+                {
+                  "entity": "device_tracker.ansley_watch_espresense"
                 },
                 {
                   "entity": "device_tracker.eye_phone",
@@ -247,6 +259,9 @@
                   "entity": "device_tracker.brinleythebest_2",
                   "secondary_info": "last-changed",
                   "icon": "hass:wifi"
+                },
+                {
+                  "entity": "device_tracker.brinley_phone_espresense"
                 },
                 {
                   "entity": "device_tracker.brinleythebest",
