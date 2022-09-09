@@ -27,7 +27,16 @@ default_config:
 
 logger:
   default: info
-  # logs:
+  logs:
+    homeassistant.components.automation.jeff_phone_espresense: warning
+    homeassistant.components.automation.jeff_watch_espresense: warning
+    homeassistant.components.automation.jen_phone_espresense: warning
+    homeassistant.components.automation.jen_watch_espresense: warning
+    homeassistant.components.automation.ansley_phone_espresense: warning
+    homeassistant.components.automation.ansley_watch_espresense: warning
+    homeassistant.components.automation.brinley_phone_espresense: warning
+    homeassistant.components.automation.update_tesla2_location_as_mqtt_location_updates: warning
+    homeassistant.components.automation.update_tesla_location_as_mqtt_location_updates: warning
   #   homeassistant.components.alarm_control_panel: debug
   #   homeassistant.components.alarmdecoder: debug
   #   homeassistant.components.sensor.alarm_panel_display: debug
