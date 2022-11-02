@@ -162,6 +162,8 @@ input_boolean:
     name: Pool camera notifications
   camera_basement_notify:
     name: Basement camera notifications
+  camera_doorbell_notify:
+    name: Doorbell camera notifications
   notify_alarm_armed:
     name: Notification when alarm is armed
     initial: on

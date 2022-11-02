@@ -369,6 +369,9 @@
                 },
                 {
                   "entity": "input_boolean.camera_basement_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_doorbell_notify"
                 }
               ],
               "title": "Camera Notifications",
@@ -378,6 +381,13 @@
               "type": "vertical-stack",
               "cards": [
                 {
+                  "show_state": false,
+                  "show_name": false,
+                  "camera_view": "auto",
+                  "type": "picture-entity",
+                  "entity": "camera.doorbell_main"
+                },
+                {
                   "type": "picture-entity",
                   "entity": "camera.front",
                   "show_name": false,
@@ -385,10 +395,11 @@
                   "camera_view": "live"
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "camera.front_camera_last_person",
+                  "show_state": false,
                   "show_name": false,
-                  "show_state": false
+                  "camera_view": "auto",
+                  "type": "picture-entity",
+                  "entity": "camera.front_person"
                 },
                 {
                   "type": "picture-entity",
@@ -398,10 +409,11 @@
                   "camera_view": "live"
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "camera.driveway_camera_last_person",
+                  "show_state": false,
                   "show_name": false,
-                  "show_state": false
+                  "camera_view": "auto",
+                  "type": "picture-entity",
+                  "entity": "camera.driveway_person"
                 },
                 {
                   "type": "picture-entity",
@@ -411,10 +423,11 @@
                   "camera_view": "live"
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "camera.porch_camera_last_person",
+                  "show_state": false,
                   "show_name": false,
-                  "show_state": false
+                  "camera_view": "auto",
+                  "type": "picture-entity",
+                  "entity": "camera.porch_person"
                 },
                 {
                   "type": "picture-entity",
@@ -424,10 +437,11 @@
                   "camera_view": "live"
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "camera.pool_camera_last_person",
+                  "show_state": false,
                   "show_name": false,
-                  "show_state": false
+                  "camera_view": "auto",
+                  "type": "picture-entity",
+                  "entity": "camera.pool_person"
                 },
                 {
                   "type": "picture-entity",
@@ -437,15 +451,11 @@
                   "camera_view": "live"
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "camera.basement_camera_last_person",
+                  "show_state": false,
                   "show_name": false,
-                  "show_state": false
-                },
-                {
+                  "camera_view": "auto",
                   "type": "picture-entity",
-                  "entity": "camera.front_door",
-                  "show_name": false
+                  "entity": "camera.basement_person"
                 }
               ]
             },
@@ -456,17 +466,6 @@
               ],
               "show_header_toggle": false,
               "title": "Cameras",
-              "type": "entities"
-            },
-            {
-              "entities": [
-                "binary_sensor.front_door_ding",
-                "sensor.front_door_last_activity",
-                "sensor.front_door_last_ding",
-                "sensor.front_door_last_motion",
-                "binary_sensor.front_door_motion",
-                "sensor.front_door_volume"
-              ],
               "type": "entities"
             },
             {
@@ -495,6 +494,101 @@
                 },
                 {
                   "entity": "switch.wyze_3_night_mode_auto"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "light.doorbell_infrared",
+                  "name": "Infrared"
+                },
+                {
+                  "entity": "light.doorbell_ring_light",
+                  "name": "Ring Light"
+                },
+                {
+                  "entity": "select.doorbell_security_light",
+                  "name": "Security Light"
+                }
+              ],
+              "title": "Doorbell"
+            },
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.doorbell_alarm_local",
+                      "name": "Alarm Local"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_audio_mutation",
+                      "name": "Audio Mutation"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_button_pressed",
+                      "name": "Button Pressed"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_call_no_answered",
+                      "name": "Call No Answered"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_cross_line_alarm",
+                      "name": "Cross Line Alarm"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_cross_region_detection",
+                      "name": "Cross Region Detection"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_door_status",
+                      "name": "Door Status"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_invite",
+                      "name": "Invite"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_motion_alarm",
+                      "name": "Motion Alarm"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_smart_motion_human",
+                      "name": "Smart Motion Human"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_smart_motion_vehicle",
+                      "name": "Smart Motion Vehicle"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_video_blind",
+                      "name": "Video Blind"
+                    },
+                    {
+                      "entity": "binary_sensor.doorbell_video_loss",
+                      "name": "Video Loss"
+                    }
+                  ],
+                  "title": "Doorbell"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.doorbell_main"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.doorbell_sub"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.doorbell_sub_2"
                 }
               ]
             }

@@ -321,6 +321,11 @@ binary_sensor:
     payload_on: "ON"
     payload_off: "OFF"
     device_class: motion
+  - name: "Doorbell Camera Motion"
+    state_topic: BlueIris/alert/doorbell
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
   - name: Front Camera Person
     state_topic: "frigate/front/person"
     device_class: motion
@@ -339,6 +344,10 @@ binary_sensor:
     availability_topic: "frigate/available"
   - name: Basement Camera Person
     state_topic: "frigate/basement/person"
+    device_class: motion
+    availability_topic: "frigate/available"
+  - name: Doorbell Camera Person
+    state_topic: "frigate/doorbell/person"
     device_class: motion
     availability_topic: "frigate/available"
   #### sulaco (teslamate car 1)

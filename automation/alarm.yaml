@@ -15,7 +15,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Door to garage is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
+    - service: notify.mobile_app_jennifers_xs_max
       data_template:
         title: "Alarm Panel"
         message: "Door to garage is opened for more than 5 minutes"
@@ -35,7 +35,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Basement door is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
+    - service: notify.mobile_app_jennifers_xs_max
       data_template:
         title: "Alarm Panel"
         message: "Basement door is opened for more than 5 minutes"
@@ -56,7 +56,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Front door is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
+    - service: notify.mobile_app_jennifers_xs_max
       data_template:
         title: "Alarm Panel"
         message: "Front door is opened for more than 5 minutes"
@@ -75,7 +75,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Sun room door is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
+    - service: notify.mobile_app_jennifers_xs_max
       data_template:
         title: "Alarm Panel"
         message: "Sun room door is opened for more than 5 minutes"
@@ -95,7 +95,7 @@
       data_template:
         title: "Alarm Panel"
         message: "Unknown door is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
+    - service: notify.mobile_app_jennifers_xs_max
       data_template:
         title: "Alarm Panel"
         message: "Unknown door is opened for more than 5 minutes"
