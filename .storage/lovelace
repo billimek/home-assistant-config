@@ -100,11 +100,6 @@
             {
               "entities": [
                 {
-                  "entity": "sensor.jeff_home_status",
-                  "secondary_info": "last-changed",
-                  "icon": "hass:home"
-                },
-                {
                   "entity": "person.jeff_billimek",
                   "secondary_info": "last-changed"
                 },
@@ -145,11 +140,6 @@
             },
             {
               "entities": [
-                {
-                  "entity": "sensor.jen_home_status",
-                  "secondary_info": "last-changed",
-                  "icon": "hass:home"
-                },
                 {
                   "entity": "person.jennifer_billimek",
                   "secondary_info": "last-changed"
@@ -194,11 +184,6 @@
             {
               "type": "entities",
               "entities": [
-                {
-                  "entity": "sensor.ansley_home_status",
-                  "secondary_info": "last-changed",
-                  "icon": "hass:home"
-                },
                 {
                   "entity": "person.ansley_billimek",
                   "secondary_info": "last-changed"
@@ -246,11 +231,6 @@
             {
               "type": "entities",
               "entities": [
-                {
-                  "entity": "sensor.brinley_home_status",
-                  "secondary_info": "last-changed",
-                  "icon": "hass:home"
-                },
                 {
                   "entity": "person.brinley",
                   "secondary_info": "last-changed"
@@ -388,6 +368,13 @@
                   "entity": "camera.doorbell_main"
                 },
                 {
+                  "show_state": false,
+                  "show_name": false,
+                  "camera_view": "auto",
+                  "type": "picture-entity",
+                  "entity": "camera.doorbell_person"
+                },
+                {
                   "type": "picture-entity",
                   "entity": "camera.front",
                   "show_name": false,
@@ -458,62 +445,6 @@
                   "entity": "camera.basement_person"
                 }
               ]
-            },
-            {
-              "entities": [
-                "sensor.blue_iris_profile",
-                "input_select.set_biprofile"
-              ],
-              "show_header_toggle": false,
-              "title": "Cameras",
-              "type": "entities"
-            },
-            {
-              "type": "entities",
-              "entities": [
-                {
-                  "entity": "switch.wyze_3_h264_rtsp_server"
-                },
-                {
-                  "entity": "switch.wyze_3_ir_filter"
-                },
-                {
-                  "entity": "switch.wyze_3_ir_led"
-                },
-                {
-                  "entity": "sensor.wyze_3_light_sensor"
-                },
-                {
-                  "entity": "switch.wyze_3_motion_detection"
-                },
-                {
-                  "entity": "binary_sensor.wyze_3_motion_sensor"
-                },
-                {
-                  "entity": "switch.wyze_3_night_mode"
-                },
-                {
-                  "entity": "switch.wyze_3_night_mode_auto"
-                }
-              ]
-            },
-            {
-              "type": "entities",
-              "entities": [
-                {
-                  "entity": "light.doorbell_infrared",
-                  "name": "Infrared"
-                },
-                {
-                  "entity": "light.doorbell_ring_light",
-                  "name": "Ring Light"
-                },
-                {
-                  "entity": "select.doorbell_security_light",
-                  "name": "Security Light"
-                }
-              ],
-              "title": "Doorbell"
             },
             {
               "type": "grid",
@@ -591,6 +522,62 @@
                   "entity": "camera.doorbell_sub_2"
                 }
               ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "light.doorbell_infrared",
+                  "name": "Infrared"
+                },
+                {
+                  "entity": "light.doorbell_ring_light",
+                  "name": "Ring Light"
+                },
+                {
+                  "entity": "select.doorbell_security_light",
+                  "name": "Security Light"
+                }
+              ],
+              "title": "Doorbell"
+            },
+            {
+              "entities": [
+                "sensor.blue_iris_profile",
+                "input_select.set_biprofile"
+              ],
+              "show_header_toggle": false,
+              "title": "Cameras",
+              "type": "entities"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.wyze_3_h264_rtsp_server"
+                },
+                {
+                  "entity": "switch.wyze_3_ir_filter"
+                },
+                {
+                  "entity": "switch.wyze_3_ir_led"
+                },
+                {
+                  "entity": "sensor.wyze_3_light_sensor"
+                },
+                {
+                  "entity": "switch.wyze_3_motion_detection"
+                },
+                {
+                  "entity": "binary_sensor.wyze_3_motion_sensor"
+                },
+                {
+                  "entity": "switch.wyze_3_night_mode"
+                },
+                {
+                  "entity": "switch.wyze_3_night_mode_auto"
+                }
+              ]
             }
           ],
           "icon": "mdi:camcorder",
@@ -646,6 +633,15 @@
                 },
                 {
                   "entity": "switch.outlet_f"
+                },
+                {
+                  "entity": "switch.outlet_f_2"
+                },
+                {
+                  "entity": "light.outlet_g"
+                },
+                {
+                  "entity": "light.outlet_h"
                 }
               ],
               "title": "Main Level"
@@ -740,79 +736,174 @@
         },
         {
           "theme": "Backend-selected",
-          "title": "frigate",
-          "path": "frigate",
-          "icon": "mdi:cctv",
+          "title": "Elektra",
+          "path": "elektra",
+          "icon": "mdi:ev-plug-tesla",
           "badges": [],
           "cards": [
             {
-              "type": "custom:frigate-card",
-              "cameras": [
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
                 {
-                  "camera_entity": "camera.basement"
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "number.elektra_charge_limit",
+                      "name": "Charge limit"
+                    },
+                    {
+                      "entity": "switch.elektra_charger",
+                      "name": "Charger"
+                    },
+                    {
+                      "entity": "cover.elektra_charger_door",
+                      "name": "Charger door"
+                    },
+                    {
+                      "entity": "number.elektra_charging_amps",
+                      "name": "Charging amps"
+                    },
+                    {
+                      "entity": "lock.elektra_doors",
+                      "name": "Doors"
+                    },
+                    {
+                      "entity": "button.elektra_flash_lights",
+                      "name": "Flash lights"
+                    },
+                    {
+                      "entity": "cover.elektra_frunk",
+                      "name": "Frunk"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_left",
+                      "name": "Heated seat left"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_rear_center",
+                      "name": "Heated seat rear center"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_rear_left",
+                      "name": "Heated seat rear left"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_rear_right",
+                      "name": "Heated seat rear right"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_right",
+                      "name": "Heated seat right"
+                    },
+                    {
+                      "entity": "button.elektra_horn",
+                      "name": "Horn"
+                    },
+                    {
+                      "entity": "switch.elektra_sentry_mode",
+                      "name": "Sentry mode"
+                    },
+                    {
+                      "entity": "cover.elektra_trunk",
+                      "name": "Trunk"
+                    }
+                  ],
+                  "title": "Elektra"
                 },
                 {
-                  "camera_entity": "camera.driveway"
+                  "type": "thermostat",
+                  "entity": "climate.elektra_hvac_climate_system"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.elektra_charger",
+                  "name": "Charger"
                 },
                 {
-                  "camera_entity": "camera.front"
+                  "entity": "sensor.elektra_charger_power",
+                  "name": "Charger power"
                 },
                 {
-                  "camera_entity": "camera.pool"
+                  "entity": "binary_sensor.elektra_charging",
+                  "name": "Charging"
                 },
                 {
-                  "camera_entity": "camera.porch"
+                  "entity": "sensor.elektra_charging_rate",
+                  "name": "Charging rate"
+                },
+                {
+                  "entity": "sensor.elektra_energy_added",
+                  "name": "Energy added"
+                },
+                {
+                  "entity": "sensor.elektra_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "binary_sensor.elektra_online",
+                  "name": "Online"
+                },
+                {
+                  "entity": "binary_sensor.elektra_parking_brake",
+                  "name": "Parking brake"
+                },
+                {
+                  "entity": "sensor.elektra_range",
+                  "name": "Range"
+                },
+                {
+                  "entity": "sensor.elektra_temperature_inside",
+                  "name": "Temperature (inside)"
+                },
+                {
+                  "entity": "sensor.elektra_temperature_outside",
+                  "name": "Temperature (outside)"
                 }
-              ]
+              ],
+              "title": "Elektra"
             },
             {
-              "type": "custom:frigate-card",
-              "cameras": [
+              "type": "entities",
+              "entities": [
                 {
-                  "camera_entity": "camera.front"
+                  "entity": "select.elektra_cabin_overheat_protection",
+                  "name": "Cabin overheat protection"
+                },
+                {
+                  "entity": "update.elektra_software_update",
+                  "name": "Software update"
                 }
-              ]
+              ],
+              "title": "Elektra"
             },
             {
-              "type": "custom:frigate-card",
-              "cameras": [
+              "type": "entities",
+              "entities": [
                 {
-                  "camera_entity": "camera.driveway"
+                  "entity": "button.elektra_force_data_update",
+                  "name": "Force data update"
+                },
+                {
+                  "entity": "device_tracker.elektra_location_tracker",
+                  "name": "Location tracker"
+                },
+                {
+                  "entity": "switch.elektra_polling",
+                  "name": "Polling"
+                },
+                {
+                  "entity": "button.elektra_wake_up",
+                  "name": "Wake up"
                 }
-              ]
+              ],
+              "title": "Elektra"
             },
-            {
-              "type": "custom:frigate-card",
-              "cameras": [
-                {
-                  "camera_entity": "camera.porch"
-                }
-              ]
-            },
-            {
-              "type": "custom:frigate-card",
-              "cameras": [
-                {
-                  "camera_entity": "camera.pool"
-                }
-              ]
-            },
-            {
-              "type": "custom:frigate-card",
-              "cameras": [
-                {
-                  "camera_entity": "camera.basement"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "path": "sulaco",
-          "title": "Sulaco",
-          "icon": "mdi:car-connected",
-          "badges": [],
-          "cards": [
             {
               "type": "vertical-stack",
               "cards": [
@@ -862,75 +953,6 @@
                       "name": "Window Status"
                     }
                   ]
-                },
-                {
-                  "type": "horizontal-stack",
-                  "cards": [
-                    {
-                      "type": "button",
-                      "entity": "binary_sensor.tesla_locked",
-                      "name": "Charger Door",
-                      "show_state": true,
-                      "state": [
-                        {
-                          "value": "locked",
-                          "icon": "mdi:lock",
-                          "color": "green",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "lock.unlock",
-                            "service_data": {
-                              "entity_id": "lock.tesla_model_3_charger_door_lock"
-                            }
-                          }
-                        },
-                        {
-                          "value": "unlocked",
-                          "icon": "mdi:lock-open",
-                          "color": "red",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "lock.lock",
-                            "service_data": {
-                              "entity_id": "lock.tesla_model_3_charger_door_lock"
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "button",
-                      "entity": "lock.sulaco_door_lock",
-                      "name": "Car Door",
-                      "show_state": true,
-                      "state": [
-                        {
-                          "value": "locked",
-                          "icon": "mdi:lock",
-                          "color": "green",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "lock.unlock",
-                            "service_data": {
-                              "entity_id": "lock.tesla_model_3_door_lock"
-                            }
-                          }
-                        },
-                        {
-                          "value": "unlocked",
-                          "icon": "mdi:lock-open",
-                          "color": "red",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "lock.lock",
-                            "service_data": {
-                              "entity_id": "lock.tesla_model_3_door_lock"
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  ]
                 }
               ]
             },
@@ -944,10 +966,6 @@
                   "entities": [
                     "device_tracker.tesla_location"
                   ]
-                },
-                {
-                  "type": "thermostat",
-                  "entity": "climate.sulaco_hvac_climate_system"
                 }
               ]
             },
@@ -1171,11 +1189,174 @@
           ]
         },
         {
-          "path": "karr",
+          "theme": "Backend-selected",
           "title": "KARR",
+          "path": "karr",
+          "icon": "mdi:ev-plug-tesla",
           "badges": [],
-          "icon": "mdi:car-connected",
           "cards": [
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "number.karr_charge_limit",
+                      "name": "Charge limit"
+                    },
+                    {
+                      "entity": "switch.karr_charger",
+                      "name": "Charger"
+                    },
+                    {
+                      "entity": "cover.karr_charger_door",
+                      "name": "Charger door"
+                    },
+                    {
+                      "entity": "number.karr_charging_amps",
+                      "name": "Charging amps"
+                    },
+                    {
+                      "entity": "lock.karr_doors",
+                      "name": "Doors"
+                    },
+                    {
+                      "entity": "button.karr_flash_lights",
+                      "name": "Flash lights"
+                    },
+                    {
+                      "entity": "cover.karr_frunk",
+                      "name": "Frunk"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_left",
+                      "name": "Heated seat left"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_rear_center",
+                      "name": "Heated seat rear center"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_rear_left",
+                      "name": "Heated seat rear left"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_rear_right",
+                      "name": "Heated seat rear right"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_right",
+                      "name": "Heated seat right"
+                    },
+                    {
+                      "entity": "button.karr_horn",
+                      "name": "Horn"
+                    },
+                    {
+                      "entity": "switch.karr_sentry_mode",
+                      "name": "Sentry mode"
+                    },
+                    {
+                      "entity": "cover.karr_trunk",
+                      "name": "Trunk"
+                    }
+                  ],
+                  "title": "KARR"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.karr_hvac_climate_system"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.karr_charger",
+                  "name": "Charger"
+                },
+                {
+                  "entity": "sensor.karr_charger_power",
+                  "name": "Charger power"
+                },
+                {
+                  "entity": "binary_sensor.karr_charging",
+                  "name": "Charging"
+                },
+                {
+                  "entity": "sensor.karr_charging_rate",
+                  "name": "Charging rate"
+                },
+                {
+                  "entity": "sensor.karr_energy_added",
+                  "name": "Energy added"
+                },
+                {
+                  "entity": "sensor.karr_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "binary_sensor.karr_online",
+                  "name": "Online"
+                },
+                {
+                  "entity": "binary_sensor.karr_parking_brake",
+                  "name": "Parking brake"
+                },
+                {
+                  "entity": "sensor.karr_range",
+                  "name": "Range"
+                },
+                {
+                  "entity": "sensor.karr_temperature_inside",
+                  "name": "Temperature (inside)"
+                },
+                {
+                  "entity": "sensor.karr_temperature_outside",
+                  "name": "Temperature (outside)"
+                }
+              ],
+              "title": "KARR"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "select.karr_cabin_overheat_protection",
+                  "name": "Cabin overheat protection"
+                },
+                {
+                  "entity": "update.karr_software_update",
+                  "name": "Software update"
+                }
+              ],
+              "title": "KARR"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "button.karr_force_data_update",
+                  "name": "Force data update"
+                },
+                {
+                  "entity": "device_tracker.karr_location_tracker",
+                  "name": "Location tracker"
+                },
+                {
+                  "entity": "switch.karr_polling",
+                  "name": "Polling"
+                },
+                {
+                  "entity": "button.karr_wake_up",
+                  "name": "Wake up"
+                }
+              ]
+            },
             {
               "type": "vertical-stack",
               "cards": [
@@ -1225,75 +1406,6 @@
                       "name": "Window Status"
                     }
                   ]
-                },
-                {
-                  "type": "horizontal-stack",
-                  "cards": [
-                    {
-                      "type": "button",
-                      "entity": "binary_sensor.tesla2_locked",
-                      "name": "Charger Door",
-                      "show_state": true,
-                      "state": [
-                        {
-                          "value": "locked",
-                          "icon": "mdi:lock",
-                          "color": "green",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "lock.unlock",
-                            "service_data": {
-                              "entity_id": "lock.tesla2_model_3_charger_door_lock"
-                            }
-                          }
-                        },
-                        {
-                          "value": "unlocked",
-                          "icon": "mdi:lock-open",
-                          "color": "red",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "lock.lock",
-                            "service_data": {
-                              "entity_id": "lock.tesla2_model_3_charger_door_lock"
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "button",
-                      "entity": "lock.karr_door_lock",
-                      "name": "Car Door",
-                      "show_state": true,
-                      "state": [
-                        {
-                          "value": "locked",
-                          "icon": "mdi:lock",
-                          "color": "green",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "lock.unlock",
-                            "service_data": {
-                              "entity_id": "lock.tesla2_model_3_door_lock"
-                            }
-                          }
-                        },
-                        {
-                          "value": "unlocked",
-                          "icon": "mdi:lock-open",
-                          "color": "red",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "lock.lock",
-                            "service_data": {
-                              "entity_id": "lock.tesla2_model_3_door_lock"
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  ]
                 }
               ]
             },
@@ -1305,12 +1417,8 @@
                   "dark_mode": true,
                   "default_zoom": 12,
                   "entities": [
-                    "device_tracker.tesla2_location"
+                    "device_tracker.tesla_location"
                   ]
-                },
-                {
-                  "type": "thermostat",
-                  "entity": "climate.karr_hvac_climate_system"
                 }
               ]
             },
@@ -1370,7 +1478,7 @@
                   "name": "Geo-fence Name"
                 },
                 {
-                  "entity": "proximity.home_tesla2",
+                  "entity": "proximity.home_tesla",
                   "name": "Distance to Home"
                 },
                 {
@@ -1528,6 +1636,75 @@
                 {
                   "entity": "sensor.tesla2_time_to_full_charge",
                   "name": "Time To Full Charge"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "frigate",
+          "path": "frigate",
+          "icon": "mdi:cctv",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.basement"
+                },
+                {
+                  "camera_entity": "camera.driveway"
+                },
+                {
+                  "camera_entity": "camera.front"
+                },
+                {
+                  "camera_entity": "camera.pool"
+                },
+                {
+                  "camera_entity": "camera.porch"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.front"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.driveway"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.porch"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.pool"
+                }
+              ]
+            },
+            {
+              "type": "custom:frigate-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.basement"
                 }
               ]
             }
