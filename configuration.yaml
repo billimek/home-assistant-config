@@ -291,3 +291,10 @@ rest_command:
     url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/enable'
   disable_blocky_5m:
     url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/disable?300'
+  wake_wsl:
+      url: 'https://opnsense.eviljungle.com:1443/api/wol/wol/set'
+      method: POST
+      payload: '{"wake":{"interface": "opt3","mac": "d4:5d:64:b4:d8:33"}}'
+      content_type:  'application/json'
+      username: !secret opnsense_user
+      password: !secret opnsense_key

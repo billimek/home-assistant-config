@@ -283,30 +283,20 @@
               "type": "thermostat"
             },
             {
+              "show_name": true,
+              "show_icon": true,
               "hold_action": {
                 "action": "more-info"
               },
-              "name": "Enable Blocky",
-              "show_icon": true,
-              "show_name": true,
+              "name": "Wake wsl (WoL)",
               "tap_action": {
                 "action": "call-service",
-                "service": "rest_command.enable_blocky"
+                "service": "rest_command.wake_wsl",
+                "data": {},
+                "target": {}
               },
-              "type": "button"
-            },
-            {
-              "hold_action": {
-                "action": "more-info"
-              },
-              "name": "Disable Blocky 5 minutes",
-              "show_icon": true,
-              "show_name": true,
-              "tap_action": {
-                "action": "call-service",
-                "service": "rest_command.disable_blocky_5m"
-              },
-              "type": "button"
+              "type": "button",
+              "icon": "mdi:sleep"
             },
             {
               "type": "entities",
