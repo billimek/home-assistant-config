@@ -13,6 +13,7 @@ homeassistant:
   time_zone: America/New_York
 
   external_url: https://hass.eviljungle.com
+  internal_url: https://hass.eviljungle.com
 
   auth_providers:
     - type: homeassistant
