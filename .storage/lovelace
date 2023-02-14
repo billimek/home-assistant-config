@@ -532,15 +532,6 @@
               "title": "Doorbell"
             },
             {
-              "entities": [
-                "sensor.blue_iris_profile",
-                "input_select.set_biprofile"
-              ],
-              "show_header_toggle": false,
-              "title": "Cameras",
-              "type": "entities"
-            },
-            {
               "type": "entities",
               "entities": [
                 {
@@ -1704,38 +1695,6 @@
           "badges": [],
           "cards": [
             {
-              "type": "weather-forecast",
-              "entity": "weather.dark_sky"
-            },
-            {
-              "entities": [
-                {
-                  "entity": "sensor.weather_summary"
-                },
-                {
-                  "entity": "sensor.weather_temperature"
-                },
-                {
-                  "entity": "sensor.weather_wind_speed"
-                },
-                {
-                  "entity": "sensor.weather_nearest_storm_distance"
-                },
-                {
-                  "entity": "sensor.weather_overnight_low_temperature_0d"
-                },
-                {
-                  "entity": "sensor.weather_daytime_high_temperature_0d"
-                },
-                {
-                  "entity": "sensor.weather_daily_summary"
-                }
-              ],
-              "show_header_toggle": false,
-              "title": "Weather Summary",
-              "type": "entities"
-            },
-            {
               "entities": [
                 {
                   "entity": "sensor.downstairs_thermostat_humidity"
@@ -1788,23 +1747,6 @@
               ],
               "show_header_toggle": false,
               "title": "Nest Details",
-              "type": "entities"
-            },
-            {
-              "entities": [
-                "sensor.weather_humidity",
-                "sensor.weather_precip_probability",
-                "sensor.weather_precip_intensity",
-                "sensor.weather_apparent_temperature",
-                "sensor.weather_dew_point",
-                "sensor.weather_wind_bearing",
-                "sensor.weather_visibility",
-                "sensor.weather_cloud_coverage",
-                "sensor.weather_minutely_summary",
-                "sensor.weather_hourly_summary"
-              ],
-              "show_header_toggle": false,
-              "title": "Weather Details",
               "type": "entities"
             },
             {
