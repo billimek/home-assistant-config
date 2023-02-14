@@ -399,4 +399,4 @@
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.alarm_panel
-        code: !secret ALARMCD
+        code: !env_var ALARMCD

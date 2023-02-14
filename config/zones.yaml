@@ -1,23 +1,23 @@
 - name: Home
-  latitude: !secret latitude
-  longitude: !secret longitude
+  latitude: !env_var LATITUDE
+  longitude: !env_var LONGITUDE
   radius: 200
   icon: mdi:home
 
 - name: Work
-  latitude: !secret work_latitude
-  longitude: !secret work_longitude
+  latitude: !env_var WORK_LATITUDE
+  longitude: !env_var WORK_LONGITUDE
   radius: 100
   icon: mdi:office-building
 
 - name: Jens Work
-  latitude: !secret jens_work_latitude
-  longitude: !secret jens_work_longitude
+  latitude: !env_var JENS_WORK_LATITUDE
+  longitude: !env_var JENS_WORK_LONGITUDE
   radius: 100
   icon: mdi:briefcase
 
 - name: SSC
-  latitude: !secret ssc_latitude
-  longitude: !secret ssc_longitude
+  latitude: !env_var SSC_LATITUDE
+  longitude: !env_var SSC_LONGITUDE
   radius: 100
   icon: mdi:office-building

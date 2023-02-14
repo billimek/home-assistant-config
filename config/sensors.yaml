@@ -1,39 +1,3 @@
-  - platform: darksky
-    name: Weather
-    api_key: !secret darksky-api_key
-    forecast:
-      - 0
-    monitored_conditions:
-      - summary
-      - nearest_storm_distance
-      - precip_intensity
-      - precip_probability
-      - temperature
-      - temperature_high
-      - temperature_low
-      - wind_speed
-      - wind_bearing
-      - visibility
-      - apparent_temperature
-      - minutely_summary
-      - hourly_summary
-      - daily_summary
-      - dew_point
-      - cloud_cover
-      - humidity
-  - platform: filter
-    name: "Weather Wind Speed (Filtered)"
-    entity_id: sensor.weather_wind_speed
-    filters:
-        - filter: outlier
-          window_size: 4
-          radius: 6.0
-        - filter: lowpass
-          time_constant: 3
-          precision: 2
-  - platform: command_line
-    name: "Blue Iris Profile"
-    command: "python3 /config/shell/getBIProfile.py"
   - platform: template
     sensors:
       jeff_home_status:
@@ -226,46 +190,46 @@
 # esprescense
   - platform: mqtt_room
     # device_id: "JeffsPhone"
-    device_id: !secret jeff_phone_irk
+    device_id: !env_var JEFF_PHONE_IRK
     name: 'Jeff Phone'
     state_topic: 'espresense/rooms'
     timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
-    device_id: !secret jeff_watch_irk
+    device_id: !env_var JEFF_WATCH_IRK
     name: 'Jeff Watch'
     state_topic: 'espresense/rooms'
     timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
     # device_id: "JensPhone"
-    device_id: !secret jen_phone_irk
+    device_id: !env_var JEN_PHONE_IRK
     name: 'Jen Phone'
     state_topic: 'espresense/rooms'
     timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
-    device_id: !secret jen_watch_irk
+    device_id: !env_var JEN_WATCH_IRK
     name: 'Jen Watch'
     state_topic: 'espresense/rooms'
     timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
     # device_id: "AnsleysPhone"
-    device_id: !secret ansley_phone_irk
+    device_id: !env_var ANSLEY_PHONE_IRK
     name: 'Ansley Phone'
     state_topic: 'espresense/rooms'
     timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
-    device_id: !secret ansley_watch_irk
+    device_id: !env_var ANSLEY_WATCH_IRK
     name: 'Ansley Watch'
     state_topic: 'espresense/rooms'
     timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
     # device_id: "BrinleysPhone"
-    device_id: !secret brinley_phone_irk
+    device_id: !env_var BRINLEY_PHONE_IRK
     name: 'Brinley Phone'
     state_topic: 'espresense/rooms'
     timeout: 30

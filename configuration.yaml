@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: !secret latitude 
-  longitude: !secret longitude 
+  latitude: !env_var LATITUDE
+  longitude: !env_var LONGITUDE
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 318
   # metric for Metric, imperial for Imperial
@@ -12,7 +12,7 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/New_York
 
-  external_url: !secret  tts_base_url
+  external_url: https://hass.eviljungle.com
 
   auth_providers:
     - type: homeassistant
@@ -64,10 +64,9 @@ http:
 # Discover some devices automatically
 discovery:
 
-
 # persist states between restarts
 recorder:
-  db_url: !secret db_url
+  db_url: !env_var HASS_POSTGRES_URL
 
 prometheus:
   namespace: hass
@@ -181,10 +180,6 @@ input_boolean:
     name: Notification when garage doors are open/closed and we are away
     initial: on
 
-weather:
-  - platform: darksky
-    api_key: !secret darksky-api_key
-
 binary_sensor:
   #### sulaco (teslamate car 1)
   - platform: template
@@ -214,13 +209,13 @@ binary_sensor:
 notify:
 
 influxdb:
-  host: !secret influxdb-host
+  host: influxdb.monitoring
   port: 8086
   max_retries: 10
 
 google_assistant:
   project_id: home-assistant-7c48d
-  secure_devices_pin: !secret secure_devices_pin
+  secure_devices_pin: !env_var SECURE_DEVICES_PIN 
   service_account: !include home-assistant-4d8d1f2ca10f.json
   report_state: true
 
@@ -296,5 +291,5 @@ rest_command:
       method: POST
       payload: '{"wake":{"interface": "opt3","mac": "d4:5d:64:b4:d8:33"}}'
       content_type:  'application/json'
-      username: !secret opnsense_user
-      password: !secret opnsense_key
+      username: !env_var OPNSENSE_USER 
+      password: !env_var OPNSENSE_KEY

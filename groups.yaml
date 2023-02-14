@@ -6,15 +6,12 @@ default_view:
     - group.family
     - group.presence
     - group.nest
-    - group.weather_summary
     - group.cameras
 
 climate_view:
   name: Climate
   entities:
     - group.nest_details
-    - group.weather_summary
-    - group.weather_details
 
 security_view:
   name: Security
@@ -154,62 +151,6 @@ alarm_sensors:
     - binary_sensor.sliding_door
     - binary_sensor.upstairs_window
     - binary_sensor.hall_smoke
-
-weather_summary:
-  name: Weather Summary
-  entities:
-    - sensor.weather_summary
-    - sensor.weather_temperature
-    - sensor.weather_wind_speed
-    - sensor.weather_wind_speed_filtered
-    - sensor.weather_nearest_storm_distance
-    - sensor.weather_daily_low_temperature
-    - sensor.weather_daily_high_temperature
-    - sensor.weather_daily_summary
-
-weather_details:
-  name: Weather Details
-  entities:
-    - sensor.weather_humidity
-    - sensor.weather_precip_probability
-    - sensor.weather_precip_intensity
-    - sensor.weather_apparent_temperature
-    - sensor.weather_dew_point
-    - sensor.weather_wind_bearing
-    - sensor.weather_visibility
-    - sensor.weather_cloud_coverage
-    - sensor.weather_minutely_summary
-    - sensor.weather_hourly_summary
-
-cameras:
-  name: "Cameras"
-  entities:
-    - sensor.blue_iris_profile
-    - input_select.set_biprofile
-
-camera_toggles:
-  name: Camera Toggles
-  entities:
-    - automation.sunrise_set_cameras_profile_after_sunrise
-    - automation.sunset_set_cameras_profile_before_sunset
-    - automation.presence_set_bi_day_when_we_get_home
-    - automation.presence_set_bi_day_windy_when_we_get_home_and_it_is_windy
-    - automation.presence_set_bi_alert_night_when_we_leave
-    - automation.presence_set_bi_alert_day_when_we_leave
-    - automation.presence_set_bi_alert_day_windy_when_we_leave_and_it_is_windy
-    - automation.presence_set_bi_alert_night_when_we_get_home_after_10pm
-    - automation.presence_set_bi_night_when_we_get_home_before_10pm
-    - automation.sunrise_set_bi_profile_to_day_at_sunrise_when_home
-    - automation.sunrise_set_bi_profile_to_alert_day_at_sunrise_when_not_home
-    - automation.sunset_set_bi_profile_to_alert_night_at_sunset_when_not_home
-    - automation.sunset_set_bi_profile_to_night_at_sunset_when_home
-    - automation.bi_set_profile_when_input_select_changes
-    - automation.bi_set_to_alert_night_at_10pm_when_home
-    - automation.bi_set_to_alert_day_when_not_home_and_not_windy
-    - automation.bi_set_to_alert_day_windy_when_not_home_and_windy
-    - automation.bi_set_to_day_when_home_and_not_windy
-    - automation.bi_set_to_day_windy_when_home_and_windy
-    - automation.bi_notify_if_profile_is_unknown
 
 nest:
   name: Nest
