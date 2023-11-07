@@ -189,7 +189,7 @@
 
 # esprescense
   - platform: mqtt_room
-    # device_id: "JeffsPhone"
+    # device_id: "jeffsphone"
     device_id: !env_var JEFF_PHONE_IRK
     name: 'Jeff Phone'
     state_topic: 'espresense/rooms'
@@ -215,8 +215,8 @@
     timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
-    # device_id: "AnsleysPhone"
-    device_id: !env_var ANSLEY_PHONE_IRK
+    device_id: "AnsleysPhone"
+    # device_id: !env_var ANSLEY_PHONE_IRK
     name: 'Ansley Phone'
     state_topic: 'espresense/rooms'
     timeout: 30
@@ -228,7 +228,7 @@
     timeout: 30
     away_timeout: 120 # number of seconds after which the enitity will get status not_home
   - platform: mqtt_room
-    # device_id: "BrinleysPhone"
+    # device_id: "BrinleyTheBest"
     device_id: !env_var BRINLEY_PHONE_IRK
     name: 'Brinley Phone'
     state_topic: 'espresense/rooms'

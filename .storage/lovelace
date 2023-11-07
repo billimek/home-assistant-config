@@ -45,9 +45,6 @@
                 },
                 {
                   "entity": "input_select.presence"
-                },
-                {
-                  "entity": "binary_sensor.home_away"
                 }
               ],
               "show_header_toggle": false,
@@ -104,7 +101,10 @@
                   "secondary_info": "last-changed"
                 },
                 {
-                  "entity": "device_tracker.jeffsphone"
+                  "entity": "device_tracker.jeffsphone_3"
+                },
+                {
+                  "entity": "device_tracker.jeffs_iphone"
                 },
                 {
                   "entity": "device_tracker.jeff_phone_espresense"
@@ -113,10 +113,8 @@
                   "entity": "device_tracker.jeff_watch_espresense"
                 },
                 {
-                  "entity": "device_tracker.jeffs_phone_2"
-                },
-                {
-                  "entity": "proximity.home_jeffs_phone"
+                  "entity": "proximity.home_jeffs_phone",
+                  "name": "Distance to Home"
                 },
                 {
                   "entity": "input_boolean.track_jeff"
@@ -145,6 +143,9 @@
                   "secondary_info": "last-changed"
                 },
                 {
+                  "entity": "device_tracker.jensphone_2"
+                },
+                {
                   "entity": "device_tracker.jensphone"
                 },
                 {
@@ -152,9 +153,6 @@
                 },
                 {
                   "entity": "device_tracker.jen_watch_espresense"
-                },
-                {
-                  "entity": "device_tracker.jens_phone2"
                 },
                 {
                   "entity": "proximity.home_jens_phone",
@@ -189,6 +187,9 @@
                   "secondary_info": "last-changed"
                 },
                 {
+                  "entity": "device_tracker.ansleys_iphone"
+                },
+                {
                   "entity": "device_tracker.ansleys_xr_2",
                   "secondary_info": "last-changed",
                   "icon": "hass:satellite-uplink"
@@ -198,11 +199,6 @@
                 },
                 {
                   "entity": "device_tracker.ansley_watch_espresense"
-                },
-                {
-                  "entity": "device_tracker.eye_phone",
-                  "secondary_info": "last-changed",
-                  "icon": "hass:wifi"
                 },
                 {
                   "entity": "proximity.home_ansleys_phone",
@@ -236,17 +232,13 @@
                   "secondary_info": "last-changed"
                 },
                 {
-                  "entity": "device_tracker.brinleythebest_2",
-                  "secondary_info": "last-changed",
-                  "icon": "hass:wifi"
+                  "entity": "device_tracker.brinleythebest"
+                },
+                {
+                  "entity": "device_tracker.brinleythebest2"
                 },
                 {
                   "entity": "device_tracker.brinley_phone_espresense"
-                },
-                {
-                  "entity": "device_tracker.brinleythebest",
-                  "secondary_info": "last-changed",
-                  "icon": "hass:satellite-uplink"
                 },
                 {
                   "entity": "proximity.home_brinleys_phone",
@@ -270,33 +262,54 @@
               }
             },
             {
-              "entity": "climate.master_bedroom_nest",
-              "type": "thermostat"
+              "type": "thermostat",
+              "entity": "climate.upstairs"
             },
             {
-              "entity": "climate.downstairs",
-              "theme": "default",
-              "type": "thermostat"
+              "type": "thermostat",
+              "entity": "climate.downstairs"
             },
             {
-              "entity": "climate.basement",
-              "type": "thermostat"
+              "type": "thermostat",
+              "entity": "climate.basement"
             },
             {
-              "show_name": true,
-              "show_icon": true,
-              "hold_action": {
-                "action": "more-info"
-              },
-              "name": "Wake wsl (WoL)",
-              "tap_action": {
-                "action": "call-service",
-                "service": "rest_command.wake_wsl",
-                "data": {},
-                "target": {}
-              },
-              "type": "button",
-              "icon": "mdi:sleep"
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.upstairs_humidity",
+                  "name": "Humidity"
+                },
+                {
+                  "entity": "binary_sensor.upstairs_occupancy",
+                  "name": "Occupancy"
+                },
+                {
+                  "entity": "sensor.upstairs_temperature",
+                  "name": "Temperature"
+                }
+              ],
+              "title": "Upstairs"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.bedroom_occupancy"
+                },
+                {
+                  "entity": "binary_sensor.upstairs_occupancy"
+                },
+                {
+                  "entity": "binary_sensor.office_occupancy"
+                },
+                {
+                  "entity": "sensor.bedroom_temperature"
+                },
+                {
+                  "entity": "sensor.office_temperature"
+                }
+              ]
             },
             {
               "type": "entities",
@@ -315,6 +328,54 @@
                 }
               ],
               "title": "Front"
+            },
+            {
+              "show_name": true,
+              "show_icon": true,
+              "hold_action": {
+                "action": "more-info"
+              },
+              "name": "Wake wsl (WoL)",
+              "tap_action": {
+                "action": "call-service",
+                "service": "rest_command.wake_wsl",
+                "data": {},
+                "target": {}
+              },
+              "type": "button",
+              "icon": "mdi:sleep"
+            },
+            {
+              "type": "media-control",
+              "entity": "media_player.office_speaker"
+            },
+            {
+              "type": "custom:mushroom-alarm-control-panel-card",
+              "entity": "alarm_control_panel.alarm_panel",
+              "states": [
+                "armed_home",
+                "armed_away",
+                "armed_night"
+              ]
+            },
+            {
+              "type": "custom:mushroom-person-card",
+              "entity": "person.jeff_billimek",
+              "icon_type": "entity-picture"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "sensor.average_daily_cost",
+                "sensor.average_daily_usage",
+                "sensor.higher_projected_monthly_cost",
+                "sensor.higher_projected_monthly_usage",
+                "sensor.lower_projected_monthly_cost",
+                "sensor.lower_projected_monthly_usage",
+                "sensor.monthly_consumption",
+                "sensor.monthly_cost"
+              ],
+              "title": "GA Power"
             }
           ],
           "icon": "mdi:home-assistant",
@@ -1703,10 +1764,7 @@
                   "entity": "sensor.downstairs_thermostat_hvac_state"
                 },
                 {
-                  "entity": "sensor.master_bedroom_thermostat_nest_humidity"
-                },
-                {
-                  "entity": "sensor.master_bedroom_thermostat_nest_hvac_state"
+                  "entity": "sensor.upstairs_humidity"
                 },
                 {
                   "entity": "sensor.basement_thermostat_humidity"
@@ -1736,24 +1794,42 @@
                   "entity": "input_boolean.auto_run_basement_fan"
                 },
                 {
-                  "entity": "sensor.master_bedroom_thermostat_nest_temperature"
+                  "entity": "weather.upstairs"
                 },
                 {
                   "entity": "sensor.downstairs_thermostat_temperature"
                 },
                 {
                   "entity": "sensor.basement_thermostat_temperature"
+                },
+                {
+                  "entity": "sensor.bedroom_temperature"
+                },
+                {
+                  "entity": "sensor.office_temperature"
                 }
               ],
               "show_header_toggle": false,
-              "title": "Nest Details",
+              "title": "HVAC Details",
               "type": "entities"
             },
             {
               "entities": [
-                "sensor.downstairs_thermostat_temperature",
-                "sensor.master_bedroom_thermostat_nest_temperature",
-                "sensor.basement_thermostat_temperature"
+                {
+                  "entity": "sensor.downstairs_thermostat_temperature"
+                },
+                {
+                  "entity": "sensor.bedroom_temperature"
+                },
+                {
+                  "entity": "sensor.basement_thermostat_temperature"
+                },
+                {
+                  "entity": "sensor.office_temperature"
+                },
+                {
+                  "entity": "sensor.upstairs_temperature"
+                }
               ],
               "hours_to_show": 168,
               "title": "Temperature History",

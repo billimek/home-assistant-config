@@ -63,7 +63,7 @@ http:
 
 
 # Discover some devices automatically
-discovery:
+# discovery:
 
 # persist states between restarts
 recorder:
@@ -228,14 +228,10 @@ proximity:
       - SSC
       - Jens Work
     devices:
-      - device_tracker.jeffsphone
-      - device_tracker.jeffs_phone_2
-      - device_tracker.jens_phone2
-      - device_tracker.jennifersxsmax
+      - device_tracker.jeffs_iphone
+      - device_tracker.jensphone
       - device_tracker.ansleys_xr_2
-      - device_tracker.eye_phone
-      - device_tracker.brinleythebest
-      - device_tracker.brinleythebest_2
+      - device_tracker.brinleythebest2
     tolerance: 50
     unit_of_measurement: m
   home_tesla:
@@ -253,7 +249,7 @@ proximity:
   home_jeffs_phone:
     zone: home
     devices:
-      - device_tracker.jeffsphone
+      - device_tracker.jeffs_iphone
     tolerance: 50
     unit_of_measurement: m
   home_jens_phone:
@@ -271,7 +267,7 @@ proximity:
   home_brinleys_phone:
     zone: home
     devices:
-      - device_tracker.brinleythebest_2
+      - device_tracker.brinleythebest2
     tolerance: 50
     unit_of_measurement: m
 
