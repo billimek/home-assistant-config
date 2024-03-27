@@ -7,8 +7,9 @@ homeassistant:
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 318
   # metric for Metric, imperial for Imperial
-  unit_system: imperial
+  unit_system: us_customary
   country: US
+  currency: USD
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/New_York
 
@@ -70,12 +71,15 @@ recorder:
   db_url: !env_var HASS_POSTGRES_URL
 
 prometheus:
-  namespace: hass
+ namespace: hass
 
 mqtt: !include config/mqtt.yaml
 script: !include_dir_merge_named scripts
 sensor: !include config/sensors.yaml
-automation: !include_dir_merge_list automation
+# My own handmade automations
+automation manual: !include_dir_merge_list automation/
+# Automations I create in the UI
+automation ui: !include automations.yaml
 shell_command: !include shell/shell.yaml
 zone: !include config/zones.yaml
 group: !include groups.yaml
@@ -208,6 +212,11 @@ binary_sensor:
           {% endif %}
 
 notify:
+  - name: ALL_DEVICES
+    platform: group
+    services:
+      - service: mobile_app_jeffsphone
+      - service: mobile_app_jensphone
 
 influxdb:
   host: influxdb.monitoring
@@ -220,56 +229,56 @@ google_assistant:
   service_account: !include home-assistant-4d8d1f2ca10f.json
   report_state: true
 
-proximity:
-  home:
-    zone: home
-    ignored_zones:
-      - Work
-      - SSC
-      - Jens Work
-    devices:
-      - device_tracker.jeffs_iphone
-      - device_tracker.jensphone
-      - device_tracker.ansleys_xr_2
-      - device_tracker.brinleythebest2
-    tolerance: 50
-    unit_of_measurement: m
-  home_tesla:
-    zone: home
-    devices:
-      - device_tracker.tesla_location
-    tolerance: 50
-    unit_of_measurement: m
-  home_tesla2:
-    zone: home
-    devices:
-      - device_tracker.tesla2_location
-    tolerance: 50
-    unit_of_measurement: m
-  home_jeffs_phone:
-    zone: home
-    devices:
-      - device_tracker.jeffs_iphone
-    tolerance: 50
-    unit_of_measurement: m
-  home_jens_phone:
-    zone: home
-    devices:
-      - device_tracker.jensphone
-    tolerance: 50
-    unit_of_measurement: m
-  home_ansleys_phone:
-    zone: home
-    devices:
-      - device_tracker.ansleys_xr_2
-    tolerance: 50
-    unit_of_measurement: m
-  home_brinleys_phone:
-    zone: home
-    devices:
-      - device_tracker.brinleythebest2
-    tolerance: 50
-    unit_of_measurement: m
+# proximity:
+#   home:
+#     zone: home
+#     ignored_zones:
+#       - Work
+#       - SSC
+#       - Jens Work
+#     devices:
+#       - device_tracker.jeffs_iphone
+#       - device_tracker.jensphone
+#       - device_tracker.ansleys_iphone_2
+#       - device_tracker.brinleythebest2
+#     tolerance: 50
+#     unit_of_measurement: m
+#   home_tesla:
+#     zone: home
+#     devices:
+#       - device_tracker.tesla_location
+#     tolerance: 50
+#     unit_of_measurement: m
+#   home_tesla2:
+#     zone: home
+#     devices:
+#       - device_tracker.tesla2_location
+#     tolerance: 50
+#     unit_of_measurement: m
+#   home_jeffs_phone:
+#     zone: home
+#     devices:
+#       - device_tracker.jeffs_iphone
+#     tolerance: 50
+#     unit_of_measurement: m
+#   home_jens_phone:
+#     zone: home
+#     devices:
+#       - device_tracker.jensphone
+#     tolerance: 50
+#     unit_of_measurement: m
+#   home_ansleys_phone:
+#     zone: home
+#     devices:
+#       - device_tracker.ansleys_iphone_2
+#     tolerance: 50
+#     unit_of_measurement: m
+#   home_brinleys_phone:
+#     zone: home
+#     devices:
+#       - device_tracker.brinleythebest2
+#     tolerance: 50
+#     unit_of_measurement: m
 
 tts:
   - platform: google_translate

@@ -1,23 +1,23 @@
-  - platform: template
-    sensors:
-      jeff_home_status:
-        friendly_name: 'Jeff Home Status'
-        value_template: "{{is_state('device_tracker.jeffs_xs_tracker','home') or (is_state('device_tracker.jeffsphone','home') and is_state('device_tracker.jeffs_phone_2','home'))}}"
-  - platform: template
-    sensors:
-      jen_home_status:
-        friendly_name: 'Jen Home Status'
-        value_template: "{{is_state('device_tracker.jennifers_xs_max_tracker','home') or (is_state('device_tracker.jennifers_xs_max','home') and is_state('device_tracker.jennifersxsmax','home'))}}"
-  - platform: template
-    sensors:
-      ansley_home_status:
-        friendly_name: 'Ansley Home Status'
-        value_template: "{{is_state('device_tracker.ansleys_xr_tracker','home') or (is_state('device_tracker.eye_phone','home') and is_state('device_tracker.ansleys_xr_2','home'))}}"
-  - platform: template
-    sensors:
-      brinley_home_status:
-        friendly_name: 'Brinley Home Status'
-        value_template: "{{(is_state('device_tracker.brinleythebest','home') and is_state('device_tracker.brinleythebest_2','home'))}}"
+  # - platform: template
+  #   sensors:
+  #     jeff_home_status:
+  #       friendly_name: 'Jeff Home Status'
+  #       value_template: "{{is_state('device_tracker.jeffs_xs_tracker','home') or (is_state('device_tracker.jeffsphone','home') and is_state('device_tracker.jeffs_phone_2','home'))}}"
+  # - platform: template
+  #   sensors:
+  #     jen_home_status:
+  #       friendly_name: 'Jen Home Status'
+  #       value_template: "{{is_state('device_tracker.jennifers_xs_max_tracker','home') or (is_state('device_tracker.jennifers_xs_max','home') and is_state('device_tracker.jennifersxsmax','home'))}}"
+  # - platform: template
+  #   sensors:
+  #     ansley_home_status:
+  #       friendly_name: 'Ansley Home Status'
+  #       value_template: "{{is_state('device_tracker.ansleys_xr_tracker','home') or (is_state('device_tracker.eye_phone','home') and is_state('device_tracker.ansleys_xr_2','home'))}}"
+  # - platform: template
+  #   sensors:
+  #     brinley_home_status:
+  #       friendly_name: 'Brinley Home Status'
+  #       value_template: "{{(is_state('device_tracker.brinleythebest','home') and is_state('device_tracker.brinleythebest_2','home'))}}"
   - platform: template
     sensors:
       anyone_home:
@@ -188,50 +188,50 @@
           {{ (states('sensor.tesla2_elevation') | float * 3.2808 ) | round(2) }}
 
 # esprescense
-  - platform: mqtt_room
-    # device_id: "jeffsphone"
-    device_id: !env_var JEFF_PHONE_IRK
-    name: 'Jeff Phone'
-    state_topic: 'espresense/rooms'
-    timeout: 30
-    away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  - platform: mqtt_room
-    device_id: !env_var JEFF_WATCH_IRK
-    name: 'Jeff Watch'
-    state_topic: 'espresense/rooms'
-    timeout: 30
-    away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  - platform: mqtt_room
-    # device_id: "JensPhone"
-    device_id: !env_var JEN_PHONE_IRK
-    name: 'Jen Phone'
-    state_topic: 'espresense/rooms'
-    timeout: 30
-    away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  - platform: mqtt_room
-    device_id: !env_var JEN_WATCH_IRK
-    name: 'Jen Watch'
-    state_topic: 'espresense/rooms'
-    timeout: 30
-    away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  - platform: mqtt_room
-    device_id: "AnsleysPhone"
-    # device_id: !env_var ANSLEY_PHONE_IRK
-    name: 'Ansley Phone'
-    state_topic: 'espresense/rooms'
-    timeout: 30
-    away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  - platform: mqtt_room
-    device_id: !env_var ANSLEY_WATCH_IRK
-    name: 'Ansley Watch'
-    state_topic: 'espresense/rooms'
-    timeout: 30
-    away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  - platform: mqtt_room
-    # device_id: "BrinleyTheBest"
-    device_id: !env_var BRINLEY_PHONE_IRK
-    name: 'Brinley Phone'
-    state_topic: 'espresense/rooms'
-    timeout: 30
-    away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  # - platform: mqtt_room
+  #   # device_id: "jeffsphone"
+  #   device_id: !env_var JEFF_PHONE_IRK
+  #   name: 'Jeff Phone'
+  #   state_topic: 'espresense/rooms'
+  #   timeout: 30
+  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  # - platform: mqtt_room
+  #   device_id: !env_var JEFF_WATCH_IRK
+  #   name: 'Jeff Watch'
+  #   state_topic: 'espresense/rooms'
+  #   timeout: 30
+  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  # - platform: mqtt_room
+  #   # device_id: "JensPhone"
+  #   device_id: !env_var JEN_PHONE_IRK
+  #   name: 'Jen Phone'
+  #   state_topic: 'espresense/rooms'
+  #   timeout: 30
+  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  # - platform: mqtt_room
+  #   device_id: !env_var JEN_WATCH_IRK
+  #   name: 'Jen Watch'
+  #   state_topic: 'espresense/rooms'
+  #   timeout: 30
+  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  # - platform: mqtt_room
+  #   device_id: "AnsleysPhone"
+  #   # device_id: !env_var ANSLEY_PHONE_IRK
+  #   name: 'Ansley Phone'
+  #   state_topic: 'espresense/rooms'
+  #   timeout: 30
+  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  # - platform: mqtt_room
+  #   device_id: !env_var ANSLEY_WATCH_IRK
+  #   name: 'Ansley Watch'
+  #   state_topic: 'espresense/rooms'
+  #   timeout: 30
+  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  # - platform: mqtt_room
+  #   # device_id: "BrinleyTheBest"
+  #   device_id: !env_var BRINLEY_PHONE_IRK
+  #   name: 'Brinley Phone'
+  #   state_topic: 'espresense/rooms'
+  #   timeout: 30
+  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
