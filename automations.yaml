@@ -1,0 +1,217 @@
+- id: '1706749818643'
+  alias: porch - not home
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.porch
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      disable_times: []
+      message: '{{ label }} detected - {{ camera_name }}'
+      presence_filter: group.family
+      state_filter: true
+      state_entity: input_boolean.camera_porch_notify
+      state_filter_states:
+      - 'on'
+- id: '1706755390591'
+  alias: basement
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.basement
+      disable_times: []
+      message: '{{ label }} detected - {{ camera_name }}'
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      state_filter: true
+      state_entity: input_boolean.camera_basement_notify
+      state_filter_states:
+      - 'on'
+- id: '1706755435959'
+  alias: doorbell
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.doorbell
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      disable_times: []
+      message: '{{ label }} detected - {{ camera_name }}'
+      state_filter: true
+      state_entity: input_boolean.camera_doorbell_notify
+      state_filter_states:
+      - 'on'
+- id: '1706755452977'
+  alias: driveway
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.driveway
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      disable_times:
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      message: '{{ label }} detected - {{ camera_name }}'
+      state_filter: true
+      state_entity: input_boolean.camera_driveway_notify
+      state_filter_states:
+      - 'on'
+- id: '1706755468710'
+  alias: front
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.front
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      disable_times:
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      message: '{{ label }} detected - {{ camera_name }}'
+      state_filter: true
+      state_entity: input_boolean.camera_front_notify
+      state_filter_states:
+      - 'on'
+- id: '1706755509478'
+  alias: pool
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.pool
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      disable_times:
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      message: '{{ label }} detected - {{ camera_name }}'
+      state_filter: true
+      state_entity: input_boolean.camera_pool_notify
+      state_filter_states:
+      - 'on'
+- id: '1706820625839'
+  alias: pool - not home
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.pool
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      disable_times: []
+      message: '{{ label }} detected - {{ camera_name }}'
+      presence_filter: group.family
+      state_filter: true
+      state_entity: input_boolean.camera_pool_notify
+      state_filter_states:
+      - 'on'
+- id: '1706821037958'
+  alias: driveway - not home
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.driveway
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      message: '{{ label }} detected - {{ camera_name }}'
+      presence_filter: group.family
+      state_filter: true
+      state_entity: input_boolean.camera_driveway_notify
+      state_filter_states:
+      - 'on'
+- id: '1706821133056'
+  alias: front - not home
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.front
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      disable_times: []
+      message: '{{ label }} detected - {{ camera_name }}'
+      presence_filter: group.family
+      state_filter: true
+      state_entity: input_boolean.camera_front_notify
+      state_filter_states:
+      - 'on'
+- id: '1707590445295'
+  alias: porch
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Beta.yaml
+    input:
+      camera: camera.porch
+      notify_group: ALL_DEVICES
+      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      disable_times:
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      message: '{{ label }} detected - {{ camera_name }}'
+      state_filter: true
+      state_entity: input_boolean.camera_porch_notify
+      state_filter_states:
+      - 'on'
