@@ -94,7 +94,7 @@
     sensors:
       alarm_status:
         friendly_name: 'Alarm Status'
-        value_template: "{% if is_state('sensor.alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.alarm_panel_display', 'ARMED ***STAY***                ') or is_state('sensor.alarm_panel_display', '***NIGHT-STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
+        value_template: "{% if is_state('sensor.ser2sock_10000_alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.ser2sock_10000_alarm_panel_display', 'ARMED ***STAY***                ') or is_state('sensor.ser2sock_10000_alarm_panel_display', '***NIGHT-STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
 
 ### teslamate
 #### sulaco (car 1)
@@ -235,3 +235,14 @@
   #   timeout: 30
   #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
+# weekday sensor
+  - platform: template
+    sensors:
+      weekday:
+        friendly_name: "Weekday"
+        value_template: >-
+          {% if (now().weekday() < 5) %}
+            Weekday
+          {% else %}
+            Weekend
+          {% endif %}

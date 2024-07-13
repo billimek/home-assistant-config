@@ -5,7 +5,7 @@
   alias: 'Alert when door to garage is opened for too long'
   trigger:
     platform: state
-    entity_id: binary_sensor.garage_door
+    entity_id: binary_sensor.ser2sock_10000_garage_door
     from: 'off'
     to: 'on'
     for:
@@ -25,7 +25,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.basement_door
+    entity_id: binary_sensor.ser2sock_10000_basement_door
     from: 'off'
     to: 'on'
     for:
@@ -46,7 +46,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.front_door
+    entity_id: binary_sensor.ser2sock_10000_front_door
     from: 'off'
     to: 'on'
     for:
@@ -65,7 +65,7 @@
   alias: 'Alert when sun room door is opened for too long'
   trigger:
     platform: state
-    entity_id: binary_sensor.sun_room_door
+    entity_id: binary_sensor.ser2sock_10000_sun_room_door
     from: 'off'
     to: 'on'
     for:
@@ -85,7 +85,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.unknown_door
+    entity_id: binary_sensor.ser2sock_10000_unknown_door
     from: 'off'
     to: 'on'
     for:
@@ -107,7 +107,7 @@
   alias: 'Alert when motion is detected upstairs and nobody home'
   trigger:
     platform: state
-    entity_id: binary_sensor.upstairs_motion
+    entity_id: binary_sensor.ser2sock_10000_upstairs_motion
     from: 'off'
     to: 'on'
   condition:
@@ -124,7 +124,7 @@
   alias: 'Alert when motion is detected on the main level and nobody home'
   trigger:
     platform: state
-    entity_id: binary_sensor.main_motion
+    entity_id: binary_sensor.ser2sock_10000_main_motion
     from: 'off'
     to: 'on'
   condition:
@@ -141,7 +141,7 @@
   alias: 'Alert when motion is detected in the basement and nobody home'
   trigger:
     platform: state
-    entity_id: binary_sensor.basement_motion
+    entity_id: binary_sensor.ser2sock_10000_basement_motion
     from: 'off'
     to: 'on'
   condition:
@@ -159,7 +159,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.front_door
+    entity_id: binary_sensor.ser2sock_10000_front_door
     from: 'off'
     to: 'on'
   condition:
@@ -177,7 +177,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.garage_door
+    entity_id: binary_sensor.ser2sock_10000_garage_door
     from: 'off'
     to: 'on'
   condition:
@@ -195,7 +195,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.family_window
+    entity_id: binary_sensor.ser2sock_10000_family_window
     from: 'off'
     to: 'on'
   condition:
@@ -213,7 +213,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.living_window
+    entity_id: binary_sensor.ser2sock_10000_living_window
     from: 'off'
     to: 'on'
   condition:
@@ -231,7 +231,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.sun_room_door
+    entity_id: binary_sensor.ser2sock_10000_sun_room_door
     from: 'off'
     to: 'on'
   condition:
@@ -244,30 +244,30 @@
         title: "Alarm Panel"
         message: "Sun Room Door open"
 
-- id: alert_when_basement_window_open
-  alias: 'Alert when basement window is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.basement_window
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data_template:
-        title: "Alarm Panel"
-        message: "Basement Window open"
+# - id: alert_when_basement_window_open
+#   alias: 'Alert when basement window is open and nobody home'
+#   initial_state: on
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.ser2sock_10000_basement_window
+#     from: 'off'
+#     to: 'on'
+#   condition:
+#       condition: state
+#       entity_id: sensor.anyone_home
+#       state: 'not_home'
+#   action:
+#     - service: notify.mobile_app_jeffsphone
+#       data_template:
+#         title: "Alarm Panel"
+#         message: "Basement Window open"
 
 - id: alert_when_bathroom_window_open
   alias: 'Alert when bathroom window is open and nobody home'
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.bathroom_window
+    entity_id: binary_sensor.ser2sock_10000_bathroom_window
     from: 'off'
     to: 'on'
   condition:
@@ -285,7 +285,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.kitchen_window
+    entity_id: binary_sensor.ser2sock_10000_kitchen_window
     from: 'off'
     to: 'on'
   condition:
@@ -303,7 +303,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.unknown_door
+    entity_id: binary_sensor.ser2sock_10000_unknown_door
     from: 'off'
     to: 'on'
   condition:
@@ -321,7 +321,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.laundry_window
+    entity_id: binary_sensor.ser2sock_10000_laundry_window
     from: 'off'
     to: 'on'
   condition:
@@ -339,7 +339,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.basement_door
+    entity_id: binary_sensor.ser2sock_10000_basement_door
     from: 'off'
     to: 'on'
   condition:
@@ -356,7 +356,7 @@
   alias: 'Alert when sliding door is open and nobody home'
   trigger:
     platform: state
-    entity_id: binary_sensor.sliding_door
+    entity_id: binary_sensor.ser2sock_10000_sliding_door
     from: 'off'
     to: 'on'
   condition:
@@ -374,7 +374,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.upstairs_window
+    entity_id: binary_sensor.ser2sock_10000_upstairs_window
     from: 'off'
     to: 'on'
   condition:
@@ -396,7 +396,7 @@
       event_data:
         actionName: DISARM_ALARM
   action:
-    - service: alarm_control_panel.alarm_disarm
+    - service: alarm_control_panel.ser2sock_10000_alarm_disarm
       data:
-        entity_id: alarm_control_panel.alarm_panel
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
         code: !env_var ALARMCD

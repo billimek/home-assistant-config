@@ -17,7 +17,7 @@
                   "icon": "hass:home"
                 },
                 {
-                  "entity": "sensor.alarm_panel_display"
+                  "entity": "sensor.ser2sock_10000_alarm_panel_display"
                 },
                 {
                   "entity": "sensor.alarm_status"
@@ -26,7 +26,7 @@
                   "entity": "input_select.alarm_mode"
                 },
                 {
-                  "entity": "alarm_control_panel.alarm_panel"
+                  "entity": "alarm_control_panel.ser2sock_10000_alarm_panel"
                 },
                 {
                   "entity": "input_boolean.auto_arm_disarm_alarm_night"
@@ -300,7 +300,7 @@
             },
             {
               "type": "custom:mushroom-alarm-control-panel-card",
-              "entity": "alarm_control_panel.alarm_panel",
+              "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
               "states": [
                 "armed_home",
                 "armed_away",
@@ -1710,58 +1710,55 @@
                   "entity": "binary_sensor.front_door_motion"
                 },
                 {
-                  "entity": "binary_sensor.upstairs_motion"
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_motion"
                 },
                 {
-                  "entity": "binary_sensor.main_motion"
+                  "entity": "binary_sensor.ser2sock_10000_main_motion"
                 },
                 {
-                  "entity": "binary_sensor.basement_motion"
+                  "entity": "binary_sensor.ser2sock_10000_basement_motion"
                 },
                 {
-                  "entity": "binary_sensor.front_door"
+                  "entity": "binary_sensor.ser2sock_10000_front_door"
                 },
                 {
-                  "entity": "binary_sensor.garage_door"
+                  "entity": "binary_sensor.ser2sock_10000_garage_door"
                 },
                 {
-                  "entity": "binary_sensor.family_window"
+                  "entity": "binary_sensor.ser2sock_10000_family_window"
                 },
                 {
-                  "entity": "binary_sensor.living_window"
+                  "entity": "binary_sensor.ser2sock_10000_living_window"
                 },
                 {
-                  "entity": "binary_sensor.sun_room_door"
+                  "entity": "binary_sensor.ser2sock_10000_sun_room_door"
                 },
                 {
-                  "entity": "binary_sensor.unknown_door"
+                  "entity": "binary_sensor.ser2sock_10000_unknown_door"
                 },
                 {
-                  "entity": "binary_sensor.basement_window"
+                  "entity": "binary_sensor.ser2sock_10000_basement_window"
                 },
                 {
-                  "entity": "binary_sensor.bathroom_window"
+                  "entity": "binary_sensor.ser2sock_10000_bathroom_window"
                 },
                 {
-                  "entity": "binary_sensor.kitchen_window"
+                  "entity": "binary_sensor.ser2sock_10000_kitchen_window"
                 },
                 {
-                  "entity": "binary_sensor.unknown_door"
+                  "entity": "binary_sensor.ser2sock_10000_laundry_window"
                 },
                 {
-                  "entity": "binary_sensor.laundry_window"
+                  "entity": "binary_sensor.ser2sock_10000_basement_door"
                 },
                 {
-                  "entity": "binary_sensor.basement_door"
+                  "entity": "binary_sensor.ser2sock_10000_sliding_door"
                 },
                 {
-                  "entity": "binary_sensor.sliding_door"
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_window"
                 },
                 {
-                  "entity": "binary_sensor.upstairs_window"
-                },
-                {
-                  "entity": "binary_sensor.hall_smoke"
+                  "entity": "binary_sensor.ser2sock_10000_hall_smoke"
                 }
               ],
               "show_header_toggle": false,
@@ -1875,25 +1872,25 @@
               "type": "entities"
             },
             {
-              "entity": "alarm_control_panel.alarm_panel",
               "states": [
-                "arm_night",
                 "arm_home",
-                "arm_away"
+                "arm_away",
+                "arm_night"
               ],
+              "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
               "type": "alarm-panel"
             },
             {
               "type": "glance",
               "entities": [
                 {
-                  "entity": "binary_sensor.main_motion"
+                  "entity": "binary_sensor.ser2sock_10000_main_motion"
                 },
                 {
-                  "entity": "binary_sensor.upstairs_motion"
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_motion"
                 },
                 {
-                  "entity": "binary_sensor.basement_motion"
+                  "entity": "binary_sensor.ser2sock_10000_basement_motion"
                 },
                 {
                   "entity": "binary_sensor.basement_camera_motion"

@@ -87,9 +87,9 @@ presence:
 alarm_panel:
   name: Alarm Panel
   entities:
-    - alarm_control_panel.alarm_panel
-    - sensor.alarm_panel_display
-    - sensor.alarm_status
+    - alarm_control_panel.ser2sock_10000_alarm_panel
+    - sensor.ser2sock_10000_alarm_panel_display
+    - sensor.ser2sock_10000_alarm_status
     - input_select.alarm_mode
 
 alarm_toggles:
@@ -133,24 +133,24 @@ alarm_sensors:
     - automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home
     - binary_sensor.ring_front_door_ding
     - binary_sensor.ring_front_door_motion
-    - binary_sensor.upstairs_motion
-    - binary_sensor.main_motion
-    - binary_sensor.basement_motion
-    - binary_sensor.front_door
-    - binary_sensor.garage_door
-    - binary_sensor.family_window
-    - binary_sensor.living_window
-    - binary_sensor.sun_room_door
-    - binary_sensor.unknown_door
-    - binary_sensor.basement_window
-    - binary_sensor.bathroom_window
-    - binary_sensor.kitchen_window
-    - binary_sensor.back_door
-    - binary_sensor.laundry_window
-    - binary_sensor.basement_door
-    - binary_sensor.sliding_door
-    - binary_sensor.upstairs_window
-    - binary_sensor.hall_smoke
+    - binary_sensor.ser2sock_10000_upstairs_motion
+    - binary_sensor.ser2sock_10000_main_motion
+    - binary_sensor.ser2sock_10000_basement_motion
+    - binary_sensor.ser2sock_10000_front_door
+    - binary_sensor.ser2sock_10000_garage_door
+    - binary_sensor.ser2sock_10000_family_window
+    - binary_sensor.ser2sock_10000_living_window
+    - binary_sensor.ser2sock_10000_sun_room_door
+    - binary_sensor.ser2sock_10000_unknown_door
+    - binary_sensor.ser2sock_10000_basement_window
+    - binary_sensor.ser2sock_10000_bathroom_window
+    - binary_sensor.ser2sock_10000_kitchen_window
+    - binary_sensor.ser2sock_10000_back_door
+    - binary_sensor.ser2sock_10000_laundry_window
+    - binary_sensor.ser2sock_10000_basement_door
+    - binary_sensor.ser2sock_10000_sliding_door
+    - binary_sensor.ser2sock_10000_upstairs_window
+    - binary_sensor.ser2sock_10000_hall_smoke
 
 nest:
   name: Nest
