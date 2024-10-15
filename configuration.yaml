@@ -68,10 +68,19 @@ http:
 
 # persist states between restarts
 recorder:
-  db_url: !env_var HASS_POSTGRES_URL
+  auto_purge: true
+  purge_keep_days: 90
+
+  exclude:
+    entities:
+      - sensor.date
+      - sensor.date_time
+      - sensor.time
+      - sensor.time_utc
+      - sensor.system_time_of_day_detailed
 
 prometheus:
- namespace: hass
+  namespace: hass
 
 mqtt: !include config/mqtt.yaml
 script: !include_dir_merge_named scripts
