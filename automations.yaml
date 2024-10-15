@@ -59,6 +59,8 @@
       state_entity: input_boolean.camera_driveway_notify
       state_filter_states:
       - 'on'
+      mqtt_topic: frigate/reviews
+      custom_filter: '{{ is_state("sensor.weekday", "true") }}'
 - id: '1706755468710'
   alias: front
   description: ''
@@ -68,28 +70,13 @@
       camera: camera.front
       notify_group: ALL_DEVICES
       notify_device: a0fab1a761aa00b42a1ed08cd626bb94
-      disable_times:
-      - '6'
-      - '7'
-      - '8'
-      - '9'
-      - '10'
-      - '11'
-      - '12'
-      - '13'
-      - '14'
-      - '15'
-      - '16'
-      - '17'
-      - '18'
-      - '19'
-      - '20'
-      - '21'
+      disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
       state_filter: true
       state_entity: input_boolean.camera_front_notify
       state_filter_states:
       - 'on'
+      custom_filter: '{{ is_state("sensor.weekday", "true") }}'
 - id: '1706755509478'
   alias: pool
   description: ''
