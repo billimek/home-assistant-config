@@ -241,8 +241,4 @@
       weekday:
         friendly_name: "Weekday"
         value_template: >-
-          {% if (now().weekday() < 5) %}
-            Weekday
-          {% else %}
-            Weekend
-          {% endif %}
+          {{ now().weekday() < 5 }}
