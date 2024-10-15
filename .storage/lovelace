@@ -98,7 +98,7 @@
                   "secondary_info": "last-changed"
                 },
                 {
-                  "entity": "device_tracker.jeffsphone_3"
+                  "entity": "device_tracker.jeffsphone"
                 },
                 {
                   "entity": "device_tracker.jeffs_iphone"
@@ -178,7 +178,7 @@
                   "entity": "input_boolean.track_ansley"
                 },
                 {
-                  "entity": "device_tracker.ansleys_phone"
+                  "entity": "device_tracker.ansleys_phone_2"
                 }
               ],
               "title": "Ansley Presence",
@@ -207,7 +207,7 @@
                   "entity": "input_boolean.track_brinley"
                 },
                 {
-                  "entity": "device_tracker.brinleys_phone"
+                  "entity": "device_tracker.brinleys_phone_brinleys_phone_2"
                 }
               ],
               "title": "Brinley Presence",
@@ -306,6 +306,113 @@
                 "armed_away",
                 "armed_night"
               ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "select.lv142781_convertable_drawer_mode",
+                "water_heater.lv142781_freezer",
+                "water_heater.lv142781_fridge",
+                "switch.lv142781_fridge_ice_boost",
+                "switch.lv142781_ice_maker_control",
+                "light.lv142781_interior_light",
+                "switch.lv142781_sabbath_mode",
+                "switch.lv142781_turbo_freeze_status"
+              ],
+              "title": "GE Fridge LV142781"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "sensor.lv142781_door_status",
+                "binary_sensor.lv142781_door_status_any_open",
+                "sensor.lv142781_fridge_model_info",
+                "sensor.lv142781_ice_maker_bucket_status",
+                "sensor.lv142781_ice_maker_bucket_status_state_full_freezer",
+                "binary_sensor.lv142781_ice_maker_control_status_freezer",
+                "sensor.lv142781_water_filter_status"
+              ],
+              "title": "GE Fridge LV142781"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.dishwasher_door",
+                  "name": "Door"
+                },
+                {
+                  "entity": "sensor.dishwasher_duration",
+                  "name": "Duration"
+                },
+                {
+                  "entity": "sensor.dishwasher_operation_state",
+                  "name": "Operation State"
+                },
+                {
+                  "entity": "sensor.dishwasher_program_progress",
+                  "name": "Program Progress"
+                },
+                {
+                  "entity": "sensor.dishwasher_remaining_program_time",
+                  "name": "Remaining Program Time"
+                },
+                {
+                  "entity": "binary_sensor.dishwasher_remote_control",
+                  "name": "Remote Control"
+                },
+                {
+                  "entity": "binary_sensor.dishwasher_remote_start",
+                  "name": "Remote Start"
+                }
+              ],
+              "title": "Dishwasher"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.dishwasher_childlock",
+                  "name": "ChildLock"
+                },
+                {
+                  "entity": "switch.dishwasher_power",
+                  "name": "Power"
+                },
+                {
+                  "entity": "switch.dishwasher_program_auto2",
+                  "name": "Program Auto2"
+                },
+                {
+                  "entity": "switch.dishwasher_program_eco50",
+                  "name": "Program Eco50"
+                },
+                {
+                  "entity": "switch.dishwasher_program_glas40",
+                  "name": "Program Glas40"
+                },
+                {
+                  "entity": "switch.dishwasher_program_intensiv70",
+                  "name": "Program Intensiv70"
+                },
+                {
+                  "entity": "switch.dishwasher_program_machinecare",
+                  "name": "Program MachineCare"
+                },
+                {
+                  "entity": "switch.dishwasher_program_prerinse",
+                  "name": "Program PreRinse"
+                },
+                {
+                  "entity": "switch.dishwasher_program_quick45",
+                  "name": "Program Quick45"
+                },
+                {
+                  "entity": "switch.dishwasher_program_quick65",
+                  "name": "Program Quick65"
+                }
+              ],
+              "title": "Dishwasher"
             }
           ],
           "icon": "mdi:home-assistant",
@@ -624,7 +731,7 @@
               "type": "custom:frigate-card",
               "cameras": [
                 {
-                  "camera_entity": "camera.basement"
+                  "camera_entity": "camera.porch"
                 }
               ]
             },
@@ -640,7 +747,7 @@
               "type": "custom:frigate-card",
               "cameras": [
                 {
-                  "camera_entity": "camera.porch"
+                  "camera_entity": "camera.basement"
                 }
               ]
             },
@@ -1683,6 +1790,178 @@
               "hours_to_show": 168,
               "title": "Temperature History",
               "type": "history-graph"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.st_00161537_air_density",
+                  "name": "Air density"
+                },
+                {
+                  "entity": "sensor.st_00161537_air_pressure",
+                  "name": "Air pressure"
+                },
+                {
+                  "entity": "sensor.st_00161537_dew_point",
+                  "name": "Dew point"
+                },
+                {
+                  "entity": "sensor.st_00161537_feels_like",
+                  "name": "Feels like"
+                },
+                {
+                  "entity": "sensor.st_00161537_humidity",
+                  "name": "Humidity"
+                },
+                {
+                  "entity": "sensor.st_00161537_illuminance",
+                  "name": "Illuminance"
+                },
+                {
+                  "entity": "sensor.st_00161537_irradiance",
+                  "name": "Irradiance"
+                },
+                {
+                  "entity": "sensor.st_00161537_lightning_average_distance",
+                  "name": "Lightning average distance"
+                },
+                {
+                  "entity": "sensor.st_00161537_lightning_count",
+                  "name": "Lightning count"
+                },
+                {
+                  "entity": "sensor.st_00161537_precipitation",
+                  "name": "Precipitation"
+                },
+                {
+                  "entity": "sensor.st_00161537_precipitation_intensity",
+                  "name": "Precipitation intensity"
+                },
+                {
+                  "entity": "sensor.st_00161537_precipitation_type",
+                  "name": "Precipitation type"
+                },
+                {
+                  "entity": "sensor.st_00161537_temperature",
+                  "name": "Temperature"
+                },
+                {
+                  "entity": "sensor.st_00161537_uv_index",
+                  "name": "UV index"
+                },
+                {
+                  "entity": "sensor.st_00161537_vapor_pressure",
+                  "name": "Vapor pressure"
+                },
+                {
+                  "entity": "sensor.st_00161537_wet_bulb_temperature",
+                  "name": "Wet bulb temperature"
+                },
+                {
+                  "entity": "sensor.st_00161537_wind_direction",
+                  "name": "Wind direction"
+                },
+                {
+                  "entity": "sensor.st_00161537_wind_direction_average",
+                  "name": "Wind direction average"
+                },
+                {
+                  "entity": "sensor.st_00161537_wind_gust",
+                  "name": "Wind gust"
+                },
+                {
+                  "entity": "sensor.st_00161537_wind_lull",
+                  "name": "Wind lull"
+                },
+                {
+                  "entity": "sensor.st_00161537_wind_speed",
+                  "name": "Wind speed"
+                },
+                {
+                  "entity": "sensor.st_00161537_wind_speed_average",
+                  "name": "Wind speed average"
+                }
+              ],
+              "title": "ST-00161537"
+            },
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.air_density",
+                      "name": "Air density"
+                    },
+                    {
+                      "entity": "sensor.dew_point",
+                      "name": "Dew point"
+                    },
+                    {
+                      "entity": "sensor.feels_like",
+                      "name": "Feels like"
+                    },
+                    {
+                      "entity": "sensor.heat_index",
+                      "name": "Heat index"
+                    },
+                    {
+                      "entity": "sensor.lightning_count",
+                      "name": "Lightning count"
+                    },
+                    {
+                      "entity": "sensor.lightning_count_last_1_hr",
+                      "name": "Lightning count last 1 hr"
+                    },
+                    {
+                      "entity": "sensor.lightning_count_last_3_hr",
+                      "name": "Lightning count last 3 hr"
+                    },
+                    {
+                      "entity": "sensor.lightning_last_distance",
+                      "name": "Lightning last distance"
+                    },
+                    {
+                      "entity": "sensor.lightning_last_strike",
+                      "name": "Lightning last strike"
+                    },
+                    {
+                      "entity": "sensor.pressure_barometric",
+                      "name": "Pressure barometric"
+                    },
+                    {
+                      "entity": "sensor.pressure_sea_level",
+                      "name": "Pressure sea level"
+                    },
+                    {
+                      "entity": "sensor.temperature",
+                      "name": "Temperature"
+                    },
+                    {
+                      "entity": "sensor.wet_bulb_globe_temperature",
+                      "name": "Wet bulb globe temperature"
+                    },
+                    {
+                      "entity": "sensor.wet_bulb_temperature",
+                      "name": "Wet bulb temperature"
+                    },
+                    {
+                      "entity": "sensor.wind_chill",
+                      "name": "Wind chill"
+                    }
+                  ],
+                  "title": "🦖"
+                },
+                {
+                  "type": "weather-forecast",
+                  "entity": "weather.unknown",
+                  "show_forecast": false
+                }
+              ]
             }
           ],
           "icon": "mdi:weather-cloudy",
