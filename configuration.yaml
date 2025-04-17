@@ -252,57 +252,6 @@ google_assistant:
   service_account: !include home-assistant-4d8d1f2ca10f.json
   report_state: true
 
-# proximity:
-#   home:
-#     zone: home
-#     ignored_zones:
-#       - Work
-#       - SSC
-#       - Jens Work
-#     devices:
-#       - device_tracker.jeffs_iphone
-#       - device_tracker.jensphone
-#       - device_tracker.ansleys_iphone_2
-#       - device_tracker.brinleythebest2
-#     tolerance: 50
-#     unit_of_measurement: m
-#   home_tesla:
-#     zone: home
-#     devices:
-#       - device_tracker.tesla_location
-#     tolerance: 50
-#     unit_of_measurement: m
-#   home_tesla2:
-#     zone: home
-#     devices:
-#       - device_tracker.tesla2_location
-#     tolerance: 50
-#     unit_of_measurement: m
-#   home_jeffs_phone:
-#     zone: home
-#     devices:
-#       - device_tracker.jeffs_iphone
-#     tolerance: 50
-#     unit_of_measurement: m
-#   home_jens_phone:
-#     zone: home
-#     devices:
-#       - device_tracker.jensphone
-#     tolerance: 50
-#     unit_of_measurement: m
-#   home_ansleys_phone:
-#     zone: home
-#     devices:
-#       - device_tracker.ansleys_iphone_2
-#     tolerance: 50
-#     unit_of_measurement: m
-#   home_brinleys_phone:
-#     zone: home
-#     devices:
-#       - device_tracker.brinleythebest2
-#     tolerance: 50
-#     unit_of_measurement: m
-
 tts:
   - platform: google_translate
     cache: false

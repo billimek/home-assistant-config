@@ -232,54 +232,6 @@
         value_template: >
           {{ (states('sensor.tesla3_elevation') | float * 3.2808 ) | round(2) }}
 
-# esprescense
-  # - platform: mqtt_room
-  #   # device_id: "jeffsphone"
-  #   device_id: !env_var JEFF_PHONE_IRK
-  #   name: 'Jeff Phone'
-  #   state_topic: 'espresense/rooms'
-  #   timeout: 30
-  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  # - platform: mqtt_room
-  #   device_id: !env_var JEFF_WATCH_IRK
-  #   name: 'Jeff Watch'
-  #   state_topic: 'espresense/rooms'
-  #   timeout: 30
-  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  # - platform: mqtt_room
-  #   # device_id: "JensPhone"
-  #   device_id: !env_var JEN_PHONE_IRK
-  #   name: 'Jen Phone'
-  #   state_topic: 'espresense/rooms'
-  #   timeout: 30
-  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  # - platform: mqtt_room
-  #   device_id: !env_var JEN_WATCH_IRK
-  #   name: 'Jen Watch'
-  #   state_topic: 'espresense/rooms'
-  #   timeout: 30
-  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  # - platform: mqtt_room
-  #   device_id: "AnsleysPhone"
-  #   # device_id: !env_var ANSLEY_PHONE_IRK
-  #   name: 'Ansley Phone'
-  #   state_topic: 'espresense/rooms'
-  #   timeout: 30
-  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  # - platform: mqtt_room
-  #   device_id: !env_var ANSLEY_WATCH_IRK
-  #   name: 'Ansley Watch'
-  #   state_topic: 'espresense/rooms'
-  #   timeout: 30
-  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
-  # - platform: mqtt_room
-  #   # device_id: "BrinleyTheBest"
-  #   device_id: !env_var BRINLEY_PHONE_IRK
-  #   name: 'Brinley Phone'
-  #   state_topic: 'espresense/rooms'
-  #   timeout: 30
-  #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
-
 # weekday sensor
   - platform: template
     sensors:

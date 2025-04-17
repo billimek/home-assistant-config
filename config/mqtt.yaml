@@ -688,35 +688,3 @@ binary_sensor:
     payload_on: "true"
     payload_off: "false"
     icon: mdi:ev-plug-tesla
-
-# ESPrescene device trackers (uses automation)
-# device_tracker:
-#   - name: "Jeff's Phone (btle)"
-#     object_id: jeff_phone_espresense
-#     state_topic: "location/espresense_jeffsphone"
-#     source_type: bluetooth_le
-#   - name: "Jeff's Watch (btle)"
-#     object_id: jeff_watch_espresense
-#     state_topic: "location/espresense_jeffswatch"
-#     source_type: bluetooth_le
-#   - name: "Jen's Phone (btle)"
-#     object_id: jen_phone_espresense
-#     state_topic: "location/espresense_jensphone"
-#     source_type: bluetooth_le
-#   - name: "Jen's Watch (btle)"
-#     object_id: jen_watch_espresense
-#     state_topic: "location/espresense_jenswatch"
-#     source_type: bluetooth_le
-#   - name: "Ansley's Phone (btle)"
-#     object_id: ansley_phone_espresense
-#     state_topic: "location/espresense_ansleysphone"
-#     source_type: bluetooth_le
-#   - name: "Ansley's Watch (btle)"
-#     object_id: ansley_watch_espresense
-#     state_topic: "location/espresense_ansleyswatch"
-#     source_type: bluetooth_le
-#   - name: "Brinley's Phone (btle)"
-#     object_id: brinley_phone_espresense
-#     state_topic: "location/espresense_brinleysphone"
-#     source_type: bluetooth_le
-
