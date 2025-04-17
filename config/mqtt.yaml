@@ -21,7 +21,7 @@ cover:
     device_class: "garage"
 
 sensor:
-#### sulaco (car 1)
+#### elektra (car 1)
   - name: tesla_display_name
     state_topic: "teslamate/cars/1/display_name"
     icon: mdi:car
@@ -283,6 +283,137 @@ sensor:
     unit_of_measurement: h
     icon: mdi:clock-outline
 
+#### Orion (car 3)
+  - name: tesla3_display_name
+    state_topic: "teslamate/cars/3/display_name"
+    icon: mdi:car
+  - name: tesla3_state
+    state_topic: "teslamate/cars/3/state"
+    icon: mdi:car-connected
+  - name: tesla3_since
+    state_topic: "teslamate/cars/3/since"
+    device_class: timestamp
+    icon: mdi:clock-outline
+  - name: tesla3_version
+    state_topic: "teslamate/cars/3/version"
+    icon: mdi:alphabetical
+  - name: tesla3_update_version
+    state_topic: "teslamate/cars/3/update_version"
+    icon: mdi:alphabetical
+  - name: tesla3_model
+    state_topic: "teslamate/cars/3/model"
+  - name: tesla3_trim_badging
+    state_topic: "teslamate/cars/3/trim_badging"
+    icon: mdi:shield-star-outline
+  - name: tesla3_exterior_color
+    state_topic: "teslamate/cars/3/exterior_color"
+    icon: mdi:palette
+  - name: tesla3_wheel_type
+    state_topic: "teslamate/cars/3/wheel_type"
+  - name: tesla3_spoiler_type
+    state_topic: "teslamate/cars/3/spoiler_type"
+    icon: mdi:car-sports
+  - name: tesla3_geofence
+    state_topic: "teslamate/cars/3/geofence"
+    icon: mdi:earth
+  - name: tesla3_latitude
+    state_topic: "teslamate/cars/3/latitude"
+    unit_of_measurement: °
+    icon: mdi:crosshairs-gps
+  - name: tesla3_longitude
+    state_topic: "teslamate/cars/3/longitude"
+    unit_of_measurement: °
+    icon: mdi:crosshairs-gps
+  - name: tesla3_shift_state
+    state_topic: "teslamate/cars/3/shift_state"
+    icon: mdi:car-shift-pattern
+  - name: tesla3_power
+    state_topic: "teslamate/cars/3/power"
+    device_class: power
+    unit_of_measurement: W
+    icon: mdi:flash
+  - name: tesla3_speed
+    state_topic: "teslamate/cars/3/speed"
+    unit_of_measurement: "km/h"
+    icon: mdi:speedometer
+  - name: tesla3_heading
+    state_topic: "teslamate/cars/3/heading"
+    unit_of_measurement: °
+    icon: mdi:compass
+  - name: tesla3_elevation
+    state_topic: "teslamate/cars/3/elevation"
+    unit_of_measurement: m
+    icon: mdi:image-filter-hdr
+  - name: tesla3_inside_temp
+    state_topic: "teslamate/cars/3/inside_temp"
+    device_class: temperature
+    unit_of_measurement: °C
+    icon: mdi:thermometer-lines
+  - name: tesla3_outside_temp
+    state_topic: "teslamate/cars/3/outside_temp"
+    device_class: temperature
+    unit_of_measurement: °C
+    icon: mdi:thermometer-lines
+  - name: tesla3_odometer
+    state_topic: "teslamate/cars/3/odometer"
+    unit_of_measurement: km
+    icon: mdi:counter
+  - name: tesla3_est_battery_range_km
+    state_topic: "teslamate/cars/3/est_battery_range_km"
+    unit_of_measurement: km
+    icon: mdi:gauge
+  - name: tesla3_rated_battery_range_km
+    state_topic: "teslamate/cars/3/rated_battery_range_km"
+    unit_of_measurement: km
+    icon: mdi:gauge
+  - name: tesla3_ideal_battery_range_km
+    state_topic: "teslamate/cars/3/ideal_battery_range_km"
+    unit_of_measurement: km
+    icon: mdi:gauge
+  - name: tesla3_battery_level
+    state_topic: "teslamate/cars/3/battery_level"
+    device_class: battery
+    unit_of_measurement: "%"
+    icon: mdi:battery-80
+  - name: tesla3_usable_battery_level
+    state_topic: "teslamate/cars/3/usable_battery_level"
+    unit_of_measurement: "%"
+    icon: mdi:battery-80
+  - name: tesla3_charge_energy_added
+    state_topic: "teslamate/cars/3/charge_energy_added"
+    device_class: energy
+    unit_of_measurement: kWh
+    icon: mdi:battery-charging
+  - name: tesla3_charge_limit_soc
+    state_topic: "teslamate/cars/3/charge_limit_soc"
+    unit_of_measurement: "%"
+    icon: mdi:battery-charging-100
+  - name: tesla3_charger_actual_current
+    state_topic: "teslamate/cars/3/charger_actual_current"
+    device_class: current
+    unit_of_measurement: A
+    icon: mdi:lightning-bolt
+  - name: tesla3_charger_phases
+    state_topic: "teslamate/cars/3/charger_phases"
+    icon: mdi:sine-wave
+  - name: tesla3_charger_power
+    state_topic: "teslamate/cars/3/charger_power"
+    device_class: power
+    unit_of_measurement: kW
+    icon: mdi:lightning-bolt
+  - name: tesla3_charger_voltage
+    state_topic: "teslamate/cars/3/charger_voltage"
+    device_class: voltage
+    unit_of_measurement: V
+    icon: mdi:lightning-bolt
+  - name: tesla3_scheduled_charging_start_time
+    state_topic: "teslamate/cars/3/scheduled_charging_start_time"
+    icon: mdi:clock-outline
+  - name: tesla3_time_to_full_charge
+    state_topic: "teslamate/cars/3/time_to_full_charge"
+    unit_of_measurement: h
+    icon: mdi:clock-outline
+
 binary_sensor:
   - name: "Front Camera Motion"
     state_topic: BlueIris/alert/front
@@ -338,7 +469,7 @@ binary_sensor:
     state_topic: "frigate/doorbell/person"
     device_class: motion
     availability_topic: "frigate/available"
-  #### sulaco (teslamate car 1)
+  #### Elektra (teslamate car 1)
   - name: tesla_healthy
     state_topic: "teslamate/cars/1/healthy"
     payload_on: "true"
@@ -481,6 +612,79 @@ binary_sensor:
   - name: tesla2_charge_port_door_open
     device_class: opening
     state_topic: "teslamate/cars/2/charge_port_door_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:ev-plug-tesla
+  #### Orion (teslamate car 3)
+  - name: tesla3_healthy
+    state_topic: "teslamate/cars/3/healthy"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:heart-pulse
+  - name: tesla3_update_available
+    state_topic: "teslamate/cars/3/update_available"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:alarm
+  - name: tesla3_locked
+    device_class: lock
+    state_topic: "teslamate/cars/3/locked"
+    payload_on: "false"
+    payload_off: "true"
+  - name: tesla3_sentry_mode
+    state_topic: "teslamate/cars/3/sentry_mode"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:cctv
+  - name: tesla3_windows_open
+    device_class: window
+    state_topic: "teslamate/cars/3/windows_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-door
+  - name: tesla3_doors_open
+    device_class: door
+    state_topic: "teslamate/cars/3/doors_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-door
+  - name: tesla3_trunk_open
+    device_class: opening
+    state_topic: "teslamate/cars/3/trunk_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-side
+  - name: tesla3_frunk_open
+    device_class: opening
+    state_topic: "teslamate/cars/3/frunk_open"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:car-side
+  - name: tesla3_is_user_present
+    device_class: presence
+    state_topic: "teslamate/cars/3/is_user_present"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:human-greeting
+  - name: tesla3_is_climate_on
+    state_topic: "teslamate/cars/3/is_climate_on"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:fan
+  - name: tesla3_is_preconditioning
+    state_topic: "teslamate/cars/3/is_preconditioning"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:fan
+  - name: tesla3_plugged_in
+    device_class: plug
+    state_topic: "teslamate/cars/3/plugged_in"
+    payload_on: "true"
+    payload_off: "false"
+    icon: mdi:ev-station
+  - name: tesla3_charge_port_door_open
+    device_class: opening
+    state_topic: "teslamate/cars/3/charge_port_door_open"
     payload_on: "true"
     payload_off: "false"
     icon: mdi:ev-plug-tesla

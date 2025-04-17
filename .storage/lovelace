@@ -337,80 +337,37 @@
             {
               "type": "entities",
               "entities": [
-                {
-                  "entity": "binary_sensor.dishwasher_door",
-                  "name": "Door"
-                },
-                {
-                  "entity": "sensor.dishwasher_duration",
-                  "name": "Duration"
-                },
-                {
-                  "entity": "sensor.dishwasher_operation_state",
-                  "name": "Operation State"
-                },
-                {
-                  "entity": "sensor.dishwasher_program_progress",
-                  "name": "Program Progress"
-                },
-                {
-                  "entity": "sensor.dishwasher_remaining_program_time",
-                  "name": "Remaining Program Time"
-                },
-                {
-                  "entity": "binary_sensor.dishwasher_remote_control",
-                  "name": "Remote Control"
-                },
-                {
-                  "entity": "binary_sensor.dishwasher_remote_start",
-                  "name": "Remote Start"
-                }
+                "switch.014040536224170472_dishcare_dishwasher_option_zeolitedry",
+                "switch.014040536224170472_dishcare_dishwasher_option_intensivzone",
+                "switch.014040536224170472_dishcare_dishwasher_option_halfload",
+                "switch.014040536224170472_bsh_common_setting_powerstate",
+                "select.014040536224170472_programs",
+                "switch.014040536224170472_dishcare_dishwasher_option_hygieneplus",
+                "button.014040536224170472_start_pause",
+                "select.014040536224170472_bsh_common_option_startinrelative",
+                "button.014040536224170472_stop"
               ],
               "title": "Dishwasher"
             },
             {
               "type": "entities",
               "entities": [
-                {
-                  "entity": "switch.dishwasher_childlock",
-                  "name": "ChildLock"
-                },
-                {
-                  "entity": "switch.dishwasher_power",
-                  "name": "Power"
-                },
-                {
-                  "entity": "switch.dishwasher_program_auto2",
-                  "name": "Program Auto2"
-                },
-                {
-                  "entity": "switch.dishwasher_program_eco50",
-                  "name": "Program Eco50"
-                },
-                {
-                  "entity": "switch.dishwasher_program_glas40",
-                  "name": "Program Glas40"
-                },
-                {
-                  "entity": "switch.dishwasher_program_intensiv70",
-                  "name": "Program Intensiv70"
-                },
-                {
-                  "entity": "switch.dishwasher_program_machinecare",
-                  "name": "Program MachineCare"
-                },
-                {
-                  "entity": "switch.dishwasher_program_prerinse",
-                  "name": "Program PreRinse"
-                },
-                {
-                  "entity": "switch.dishwasher_program_quick45",
-                  "name": "Program Quick45"
-                },
-                {
-                  "entity": "switch.dishwasher_program_quick65",
-                  "name": "Program Quick65"
-                }
+                "binary_sensor.014040536224170472_connected",
+                "binary_sensor.014040536224170472_dishcare_dishwasher_option_zeolitedry",
+                "binary_sensor.014040536224170472_bsh_common_status_doorstate",
+                "sensor.014040536224170472_bsh_common_option_energyforecast",
+                "binary_sensor.014040536224170472_bsh_common_option_remainingprogramtimeisestimated",
+                "binary_sensor.014040536224170472_dishcare_dishwasher_option_intensivzone",
+                "binary_sensor.014040536224170472_dishcare_dishwasher_option_halfload",
+                "sensor.014040536224170472_bsh_common_status_operationstate",
+                "sensor.014040536224170472_bsh_common_setting_powerstate",
+                "sensor.014040536224170472_bsh_common_option_remainingprogramtime",
+                "binary_sensor.014040536224170472_bsh_common_status_remotecontrolactive",
+                "binary_sensor.014040536224170472_bsh_common_status_remotecontrolstartallowed",
+                "binary_sensor.014040536224170472_dishcare_dishwasher_option_hygieneplus",
+                "sensor.014040536224170472_selected_program",
+                "sensor.014040536224170472_bsh_common_option_startinrelative",
+                "sensor.014040536224170472_bsh_common_option_waterforecast"
               ],
               "title": "Dishwasher"
             }
@@ -1738,6 +1695,461 @@
                 },
                 {
                   "entity": "sensor.tesla2_time_to_full_charge",
+                  "name": "Time To Full Charge"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Orion",
+          "path": "Orion",
+          "icon": "mdi:ev-plug-tesla",
+          "badges": [],
+          "cards": [
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "number.orion_charge_limit",
+                      "name": "Charge limit"
+                    },
+                    {
+                      "entity": "switch.orion_charger",
+                      "name": "Charger"
+                    },
+                    {
+                      "entity": "cover.orion_charger_door",
+                      "name": "Charger door"
+                    },
+                    {
+                      "entity": "number.orion_charging_amps",
+                      "name": "Charging amps"
+                    },
+                    {
+                      "entity": "lock.orion_doors",
+                      "name": "Doors"
+                    },
+                    {
+                      "entity": "button.orion_flash_lights",
+                      "name": "Flash lights"
+                    },
+                    {
+                      "entity": "cover.orion_frunk",
+                      "name": "Frunk"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_left",
+                      "name": "Heated seat left"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_rear_center",
+                      "name": "Heated seat rear center"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_rear_left",
+                      "name": "Heated seat rear left"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_rear_right",
+                      "name": "Heated seat rear right"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_right",
+                      "name": "Heated seat right"
+                    },
+                    {
+                      "entity": "button.orion_horn",
+                      "name": "Horn"
+                    },
+                    {
+                      "entity": "switch.orion_sentry_mode",
+                      "name": "Sentry mode"
+                    },
+                    {
+                      "entity": "cover.orion_trunk",
+                      "name": "Trunk"
+                    }
+                  ],
+                  "title": "Orion"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.orion_hvac_climate_system"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.orion_charger",
+                  "name": "Charger"
+                },
+                {
+                  "entity": "sensor.orion_charger_power",
+                  "name": "Charger power"
+                },
+                {
+                  "entity": "binary_sensor.orion_charging",
+                  "name": "Charging"
+                },
+                {
+                  "entity": "sensor.orion_charging_rate",
+                  "name": "Charging rate"
+                },
+                {
+                  "entity": "sensor.orion_energy_added",
+                  "name": "Energy added"
+                },
+                {
+                  "entity": "sensor.orion_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "binary_sensor.orion_online",
+                  "name": "Online"
+                },
+                {
+                  "entity": "binary_sensor.orion_parking_brake",
+                  "name": "Parking brake"
+                },
+                {
+                  "entity": "sensor.orion_range",
+                  "name": "Range"
+                },
+                {
+                  "entity": "sensor.orion_temperature_inside",
+                  "name": "Temperature (inside)"
+                },
+                {
+                  "entity": "sensor.orion_temperature_outside",
+                  "name": "Temperature (outside)"
+                }
+              ],
+              "title": "Orion"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "select.orion_cabin_overheat_protection",
+                  "name": "Cabin overheat protection"
+                },
+                {
+                  "entity": "update.orion_software_update",
+                  "name": "Software update"
+                }
+              ],
+              "title": "Orion"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "button.orion_force_data_update",
+                  "name": "Force data update"
+                },
+                {
+                  "entity": "device_tracker.orion_location_tracker",
+                  "name": "Location tracker"
+                },
+                {
+                  "entity": "switch.orion_polling",
+                  "name": "Polling"
+                },
+                {
+                  "entity": "button.orion_wake_up",
+                  "name": "Wake up"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "sensor.tesla3_battery_level",
+                      "name": "Battery Level"
+                    },
+                    {
+                      "entity": "sensor.tesla3_state",
+                      "name": "Car State"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla3_plugged_in",
+                      "name": "Plugged In"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.tesla3_park_brake",
+                      "name": "Park Brake"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla3_sentry_mode",
+                      "name": "Sentry Mode"
+                    },
+                    {
+                      "entity": "sensor.tesla3_speed",
+                      "name": "Speed"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.tesla3_healthy",
+                      "name": "Car Health"
+                    },
+                    {
+                      "entity": "binary_sensor.tesla3_windows_open",
+                      "name": "Window Status"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "map",
+                  "dark_mode": true,
+                  "default_zoom": 12,
+                  "entities": [
+                    {
+                      "entity": "device_tracker.tesla3_location"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.tesla3_display_name",
+                  "name": "Name"
+                },
+                {
+                  "entity": "sensor.tesla3_state",
+                  "name": "Status"
+                },
+                {
+                  "entity": "sensor.tesla3_since",
+                  "name": "Last Status Change"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_healthy",
+                  "name": "Logger Healthy"
+                },
+                {
+                  "entity": "sensor.tesla3_version",
+                  "name": "Software Version"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_update_available",
+                  "name": "Available Update Status"
+                },
+                {
+                  "entity": "sensor.tesla3_update_version",
+                  "name": "Available Update Version"
+                },
+                {
+                  "entity": "sensor.tesla3_model",
+                  "name": "Tesla Model"
+                },
+                {
+                  "entity": "sensor.tesla3_trim_badging",
+                  "name": "Trim Badge"
+                },
+                {
+                  "entity": "sensor.tesla3_exterior_color",
+                  "name": "Exterior Color"
+                },
+                {
+                  "entity": "sensor.tesla3_wheel_type",
+                  "name": "Wheel Type"
+                },
+                {
+                  "entity": "sensor.tesla3_spoiler_type",
+                  "name": "Spoiler Type"
+                },
+                {
+                  "entity": "sensor.tesla3_geofence",
+                  "name": "Geo-fence Name"
+                },
+                {
+                  "entity": "proximity.home_tesla",
+                  "name": "Distance to Home"
+                },
+                {
+                  "entity": "sensor.tesla3_latitude",
+                  "name": "Latitude"
+                },
+                {
+                  "entity": "sensor.tesla3_longitude",
+                  "name": "Longitude"
+                },
+                {
+                  "entity": "sensor.tesla3_shift_state",
+                  "name": "Shifter State"
+                },
+                {
+                  "entity": "sensor.tesla3_speed",
+                  "name": "Speed"
+                },
+                {
+                  "entity": "sensor.tesla3_speed_mph",
+                  "name": "Speed (MPH)"
+                },
+                {
+                  "entity": "sensor.tesla3_heading",
+                  "name": "Heading"
+                },
+                {
+                  "entity": "sensor.tesla3_elevation",
+                  "name": "Elevation (m)"
+                },
+                {
+                  "entity": "sensor.tesla3_elevation_ft",
+                  "name": "Elevation (ft)"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_locked",
+                  "name": "Locked"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_sentry_mode",
+                  "name": "Sentry Mode Enabled"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_windows_open",
+                  "name": "Windows Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_doors_open",
+                  "name": "Doors Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_trunk_open",
+                  "name": "Trunk Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_frunk_open",
+                  "name": "Frunk Open"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_is_user_present",
+                  "name": "User Present"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_is_climate_on",
+                  "name": "Climate On"
+                },
+                {
+                  "entity": "sensor.tesla3_inside_temp",
+                  "name": "Inside Temperature"
+                },
+                {
+                  "entity": "sensor.tesla3_outside_temp",
+                  "name": "Outside Temperature"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_is_preconditioning",
+                  "name": "Preconditioning"
+                },
+                {
+                  "entity": "sensor.tesla3_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "sensor.tesla3_odometer_mi",
+                  "name": "Odometer (miles)"
+                },
+                {
+                  "entity": "sensor.tesla3_est_battery_range_km",
+                  "name": "Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla3_est_battery_range_mi",
+                  "name": "Estimated Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla3_rated_battery_range_km",
+                  "name": "Rated Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla3_rated_battery_range_mi",
+                  "name": "Rated Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla3_ideal_battery_range_km",
+                  "name": "Ideal Battery Range (km)"
+                },
+                {
+                  "entity": "sensor.tesla3_ideal_battery_range_mi",
+                  "name": "Ideal Battery Range (mi)"
+                },
+                {
+                  "entity": "sensor.tesla3_battery_level",
+                  "name": "Battery Level"
+                },
+                {
+                  "entity": "sensor.tesla3_usable_battery_level",
+                  "name": "Usable Battery Level"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_plugged_in",
+                  "name": "Plugged In"
+                },
+                {
+                  "entity": "sensor.tesla3_charge_energy_added",
+                  "name": "Charge Energy Added"
+                },
+                {
+                  "entity": "sensor.tesla3_charge_limit_soc",
+                  "name": "Charge Limit"
+                },
+                {
+                  "entity": "binary_sensor.tesla3_charge_port_door_open",
+                  "name": "Charge Port Door Open"
+                },
+                {
+                  "entity": "sensor.tesla3_charger_actual_current",
+                  "name": "Charger Current"
+                },
+                {
+                  "entity": "sensor.tesla3_charger_phases",
+                  "name": "Charger Phases"
+                },
+                {
+                  "entity": "sensor.tesla3_charger_power",
+                  "name": "Charger Power"
+                },
+                {
+                  "entity": "sensor.tesla3_charger_voltage",
+                  "name": "Charger Voltage"
+                },
+                {
+                  "entity": "sensor.tesla3_scheduled_charging_start_time",
+                  "name": "Scheduled Charging Start Time"
+                },
+                {
+                  "entity": "sensor.tesla3_time_to_full_charge",
                   "name": "Time To Full Charge"
                 }
               ]

@@ -97,7 +97,7 @@
         value_template: "{% if is_state('sensor.ser2sock_10000_alarm_panel_display', 'ARMED ***AWAY***** ALL SECURE **') or is_state('sensor.ser2sock_10000_alarm_panel_display', 'ARMED ***STAY***                ') or is_state('sensor.ser2sock_10000_alarm_panel_display', '***NIGHT-STAY***                ') %}Armed{%else%}Disarmed{% endif %}"
 
 ### teslamate
-#### sulaco (car 1)
+#### Elektra (car 1)
   - platform: template
     sensors:
       tesla_est_battery_range_mi:
@@ -186,6 +186,51 @@
         icon_template: mdi:image-filter-hdr
         value_template: >
           {{ (states('sensor.tesla2_elevation') | float * 3.2808 ) | round(2) }}
+
+#### Orion (car 3)
+  - platform: template
+    sensors:
+      tesla3_est_battery_range_mi:
+        friendly_name: Estimated Range (mi)
+        unit_of_measurement: mi
+        icon_template: mdi:gauge
+        value_template: >
+          {{ (states('sensor.tesla3_est_battery_range_km') | float / 1.609) | round(2) }}
+
+      tesla3_rated_battery_range_mi:
+        friendly_name: Rated Range (mi)
+        unit_of_measurement: mi
+        icon_template: mdi:gauge
+        value_template: >
+          {{ (states('sensor.tesla3_rated_battery_range_km') | float / 1.609) | round(2) }}
+
+      tesla3_ideal_battery_range_mi:
+        friendly_name: Ideal Range (mi)
+        unit_of_measurement: mi
+        icon_template: mdi:gauge
+        value_template: >
+          {{ (states('sensor.tesla3_ideal_battery_range_km') | float / 1.609) | round(2) }}
+
+      tesla3_odometer_mi:
+        friendly_name: Odometer (mi)
+        unit_of_measurement: mi
+        icon_template: mdi:counter
+        value_template: >
+          {{ (states('sensor.tesla3_odometer') | float / 1.609) | round(2) }}
+
+      tesla3_speed_mph:
+        friendly_name: Speed (MPH)
+        unit_of_measurement: mph
+        icon_template: mdi:speedometer
+        value_template: >
+          {{ (states('sensor.tesla3_speed') | float / 1.609) | round(2) }}
+
+      tesla3_elevation_ft:
+        friendly_name: Elevation (ft)
+        unit_of_measurement: ft
+        icon_template: mdi:image-filter-hdr
+        value_template: >
+          {{ (states('sensor.tesla3_elevation') | float * 3.2808 ) | round(2) }}
 
 # esprescense
   # - platform: mqtt_room

@@ -38,6 +38,7 @@ logger:
     homeassistant.components.automation.ansley_phone_espresense: warning
     homeassistant.components.automation.ansley_watch_espresense: warning
     homeassistant.components.automation.brinley_phone_espresense: warning
+    homeassistant.components.automation.update_tesla3_location_as_mqtt_location_updates: warning
     homeassistant.components.automation.update_tesla2_location_as_mqtt_location_updates: warning
     homeassistant.components.automation.update_tesla_location_as_mqtt_location_updates: warning
   #   homeassistant.components.alarm_control_panel: debug
@@ -61,6 +62,7 @@ http:
     - 10.0.7.0/24
     - 10.0.6.0/24
     - 10.0.2.0/24
+    - 10.244.0.0/16
 
 
 # Discover some devices automatically
@@ -195,7 +197,7 @@ input_boolean:
     initial: on
 
 binary_sensor:
-  #### sulaco (teslamate car 1)
+  #### Elektra (teslamate car 1)
   - platform: template
     sensors:
       tesla_park_brake:
@@ -215,6 +217,18 @@ binary_sensor:
         icon_template: mdi:car-brake-parking
         value_template: >-
           {% if is_state('sensor.tesla2_shift_state', 'P') %}
+            ON
+          {% else %}
+            OFF
+          {% endif %}
+  #### Orion (teslamate car 3)
+  - platform: template
+    sensors:
+      tesla3_park_brake:
+        friendly_name: Parking Brake
+        icon_template: mdi:car-brake-parking
+        value_template: >-
+          {% if is_state('sensor.tesla3_shift_state', 'P') %}
             ON
           {% else %}
             OFF
