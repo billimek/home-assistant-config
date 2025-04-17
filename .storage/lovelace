@@ -32,7 +32,7 @@
                   "entity": "input_boolean.auto_arm_disarm_alarm_night"
                 },
                 {
-                  "entity": "proximity.home"
+                  "entity": "sensor.home_nearest_device"
                 },
                 {
                   "entity": "group.family"
@@ -1083,7 +1083,7 @@
                   "name": "Geo-fence Name"
                 },
                 {
-                  "entity": "proximity.home_tesla",
+                  "entity": "sensor.home_tesla_location_distance",
                   "name": "Distance to Home"
                 },
                 {
@@ -1538,7 +1538,7 @@
                   "name": "Geo-fence Name"
                 },
                 {
-                  "entity": "proximity.home_tesla",
+                  "entity": "sensor.home_tesla2_location_distance",
                   "name": "Distance to Home"
                 },
                 {
@@ -1993,7 +1993,7 @@
                   "name": "Geo-fence Name"
                 },
                 {
-                  "entity": "proximity.home_tesla",
+                  "entity": "sensor.home_tesla3_location_distance",
                   "name": "Distance to Home"
                 },
                 {
