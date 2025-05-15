@@ -31,13 +31,13 @@ default_config:
 logger:
   default: info
   logs:
-    homeassistant.components.automation.jeff_phone_espresense: warning
-    homeassistant.components.automation.jeff_watch_espresense: warning
-    homeassistant.components.automation.jen_phone_espresense: warning
-    homeassistant.components.automation.jen_watch_espresense: warning
-    homeassistant.components.automation.ansley_phone_espresense: warning
-    homeassistant.components.automation.ansley_watch_espresense: warning
-    homeassistant.components.automation.brinley_phone_espresense: warning
+    # homeassistant.components.automation.jeff_phone_espresense: warning
+    # homeassistant.components.automation.jeff_watch_espresense: warning
+    # homeassistant.components.automation.jen_phone_espresense: warning
+    # homeassistant.components.automation.jen_watch_espresense: warning
+    # homeassistant.components.automation.ansley_phone_espresense: warning
+    # homeassistant.components.automation.ansley_watch_espresense: warning
+    # homeassistant.components.automation.brinley_phone_espresense: warning
     homeassistant.components.automation.update_tesla3_location_as_mqtt_location_updates: warning
     homeassistant.components.automation.update_tesla2_location_as_mqtt_location_updates: warning
     homeassistant.components.automation.update_tesla_location_as_mqtt_location_updates: warning
@@ -71,7 +71,7 @@ http:
 # persist states between restarts
 recorder:
   auto_purge: true
-  purge_keep_days: 90
+  purge_keep_days: 30
 
   exclude:
     entities:
@@ -260,10 +260,10 @@ tts:
     service_name: google_say
 
 rest_command:
-  enable_blocky:
-    url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/enable'
-  disable_blocky_5m:
-    url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/disable?300'
+  # enable_blocky:
+  #   url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/enable'
+  # disable_blocky_5m:
+  #   url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/disable?300'
   wake_wsl:
       url: 'https://opnsense.eviljungle.com:1443/api/wol/wol/set'
       method: POST

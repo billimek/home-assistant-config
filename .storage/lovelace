@@ -109,12 +109,6 @@
                 },
                 {
                   "entity": "input_boolean.track_jeff"
-                },
-                {
-                  "entity": "device_tracker.jeffs_phone_2"
-                },
-                {
-                  "entity": "device_tracker.jeffs_watch"
                 }
               ],
               "show_header_toggle": false,
@@ -141,12 +135,6 @@
                 },
                 {
                   "entity": "input_boolean.track_jen"
-                },
-                {
-                  "entity": "device_tracker.jens_phone_2"
-                },
-                {
-                  "entity": "device_tracker.jens_watch"
                 }
               ],
               "show_header_toggle": false,
@@ -176,9 +164,6 @@
                 },
                 {
                   "entity": "input_boolean.track_ansley"
-                },
-                {
-                  "entity": "device_tracker.ansleys_phone_2"
                 }
               ],
               "title": "Ansley Presence",
@@ -205,9 +190,6 @@
                 },
                 {
                   "entity": "input_boolean.track_brinley"
-                },
-                {
-                  "entity": "device_tracker.brinleys_phone_brinleys_phone_2"
                 }
               ],
               "title": "Brinley Presence",
