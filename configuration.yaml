@@ -72,7 +72,6 @@ http:
 recorder:
   auto_purge: true
   purge_keep_days: 30
-
   exclude:
     entities:
       - sensor.date
@@ -80,6 +79,14 @@ recorder:
       - sensor.time
       - sensor.time_utc
       - sensor.system_time_of_day_detailed
+      - sensor.network_traffic
+    entity_globs:
+      - sensor.tx_*
+      - sensor.*_tx
+      - sensor.*_tx_*
+      - sensor.rx_*
+      - sensor.*_rx
+      - sensor.*_rx_*
 
 prometheus:
   namespace: hass
