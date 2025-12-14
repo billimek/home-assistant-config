@@ -1,0 +1,44 @@
+# yamllint configuration for Home Assistant
+# This config is tailored for HA YAML files which have specific requirements
+
+extends: default
+
+rules:
+  # Allow long lines (common in HA templates)
+  line-length:
+    max: 200
+    level: warning
+  
+  # Allow duplicate keys (HA uses this for multiple triggers/conditions)
+  key-duplicates:
+    forbid-duplicated-merge-keys: true
+  
+  # Indentation should be 2 spaces (HA standard)
+  indentation:
+    spaces: 2
+    indent-sequences: true
+  
+  # Allow inline mappings (common in HA)
+  braces:
+    max-spaces-inside: 1
+  
+  # Allow empty values (HA uses these)
+  empty-values:
+    forbid-in-block-mappings: false
+    forbid-in-flow-mappings: false
+  
+  # Be lenient with comments
+  comments:
+    min-spaces-from-content: 1
+  
+  # Allow truthy values (on/off are common in HA)
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off']
+
+# Ignore certain files/directories
+ignore: |
+  .storage/
+  blueprints/
+  deps/
+  tts/
+  www/
