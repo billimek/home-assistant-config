@@ -31,25 +31,9 @@ default_config:
 logger:
   default: info
   logs:
-    # homeassistant.components.automation.jeff_phone_espresense: warning
-    # homeassistant.components.automation.jeff_watch_espresense: warning
-    # homeassistant.components.automation.jen_phone_espresense: warning
-    # homeassistant.components.automation.jen_watch_espresense: warning
-    # homeassistant.components.automation.ansley_phone_espresense: warning
-    # homeassistant.components.automation.ansley_watch_espresense: warning
-    # homeassistant.components.automation.brinley_phone_espresense: warning
     homeassistant.components.automation.update_tesla3_location_as_mqtt_location_updates: warning
     homeassistant.components.automation.update_tesla2_location_as_mqtt_location_updates: warning
     homeassistant.components.automation.update_tesla_location_as_mqtt_location_updates: warning
-  #   homeassistant.components.alarm_control_panel: debug
-  #   homeassistant.components.alarmdecoder: debug
-  #   homeassistant.components.sensor.alarm_panel_display: debug
-  #   alarmdecoder: debug
-  #   homeassistant.components.mqtt: debug
-  #   hacs: debug
-  #   aiogithubapi: debug
-  #   homeassistant.components.websocket_api: debug
-  #   homeassistant.core: debug
 
 http:
   ip_ban_enabled: false
@@ -203,44 +187,6 @@ input_boolean:
     name: Notification when garage doors are open/closed and we are away
     initial: on
 
-binary_sensor:
-  #### Elektra (teslamate car 1)
-  - platform: template
-    sensors:
-      tesla_park_brake:
-        friendly_name: Parking Brake
-        icon_template: mdi:car-brake-parking
-        value_template: >-
-          {% if is_state('sensor.tesla_shift_state', 'P') %}
-            ON
-          {% else %}
-            OFF
-          {% endif %}
-  #### KARR (teslamate car 2)
-  - platform: template
-    sensors:
-      tesla2_park_brake:
-        friendly_name: Parking Brake
-        icon_template: mdi:car-brake-parking
-        value_template: >-
-          {% if is_state('sensor.tesla2_shift_state', 'P') %}
-            ON
-          {% else %}
-            OFF
-          {% endif %}
-  #### Orion (teslamate car 3)
-  - platform: template
-    sensors:
-      tesla3_park_brake:
-        friendly_name: Parking Brake
-        icon_template: mdi:car-brake-parking
-        value_template: >-
-          {% if is_state('sensor.tesla3_shift_state', 'P') %}
-            ON
-          {% else %}
-            OFF
-          {% endif %}
-
 notify:
   - name: ALL_DEVICES
     platform: group
@@ -267,10 +213,6 @@ tts:
     service_name: google_say
 
 rest_command:
-  # enable_blocky:
-  #   url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/enable'
-  # disable_blocky_5m:
-  #   url: 'http://blocky.default.svc.cluster.local:4000/api/blocking/disable?300'
   wake_wsl:
       url: 'https://opnsense.eviljungle.com:1443/api/wol/wol/set'
       method: POST
@@ -285,3 +227,55 @@ o365:
       alt_auth_method: True
       client_secret: !env_var O365_CLIENT_SECRET
       client_id: !env_var O365_APP_ID
+
+template:
+### garage status
+  - sensor:
+    - default_entity_id: sensor.anyone_home
+      name: Home Status
+      state: '{% if is_state(''group.family'', ''home'')-%}home{%else%}not_home{% endif %}'
+  - sensor:
+    - default_entity_id: sensor.garage_status
+      name: Jeff's garage door status
+      state: '{% if states.cover.jeff_garage_door %} {% if states.cover.jeff_garage_door.state
+        == "open" %} Open {% elif states.cover.jeff_garage_door.state == "closed" %}
+        Closed {% elif states.cover.jeff_garage_door.state == "opening" %} Opening {%
+        elif states.cover.jeff_garage_door.state == "closing" %} Closing {% elif states.cover.jeff_garage_door.state
+        == "offline" %} Offline {% else %} Unknown {% endif %} {% else %} n/a {% endif  %}'
+  - sensor:
+    - default_entity_id: sensor.garage_car_present
+      name: Jeff's car in garage
+      state: '{% if states.cover.jeff_garage_door %} {% if states.cover.jeff_garage_door.state
+        == "open" %} n/a {% elif states.binary_sensor.og_jeff_vehicle.state == "on"
+        %} Yes {% else %} No {% endif %} {% else %} n/a {% endif %}'
+  - sensor:
+    - default_entity_id: sensor.garage2_status
+      name: Jen's garage door status
+      state: '{% if states.cover.jen_garage_door %} {% if states.cover.jen_garage_door.state
+        == "open" %} Open {% elif states.cover.jen_garage_door.state == "closed" %}
+        Closed {% elif states.cover.jen_garage_door.state == "opening" %} Opening {%
+        elif states.cover.jen_garage_door.state == "closing" %} Closing {% elif states.cover.jen_garage_door.state
+        == "offline" %} Offline {% else %} Unknown {% endif %} {% else %} n/a {% endif
+        %}'
+  - sensor:
+    - default_entity_id: sensor.garage2_car_present
+      name: Jen's car in garage
+      state: '{% if states.cover.jen_garage_door %} {% if states.cover.jen_garage_door.state
+        == "open" %} n/a {% elif states.binary_sensor.og_jen_vehicle.state == "on" %}
+        Yes {% else %} No {% endif %} {% else %} n/a {% endif %}'
+
+### alarm panel
+  - sensor:
+    - default_entity_id: sensor.alarm_status
+      name: Alarm Status
+      state: '{% if is_state(''sensor.ser2sock_10000_alarm_panel_display'', ''ARMED
+        ***AWAY***** ALL SECURE **'') or is_state(''sensor.ser2sock_10000_alarm_panel_display'',
+        ''ARMED ***STAY***                '') or is_state(''sensor.ser2sock_10000_alarm_panel_display'',
+        ''***NIGHT-STAY***                '') %}Armed{%else%}Disarmed{% endif %}'
+
+### weekday
+  - sensor:
+    - default_entity_id: sensor.weekday
+      name: Weekday
+      state: '{{ now().weekday() < 5 }}'
+
