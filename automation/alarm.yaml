@@ -392,9 +392,9 @@
   initial_state: on
   trigger:
     - platform: event
-      event_type: ios.notification_action_fired
+      event_type: mobile_app_notification_action
       event_data:
-        actionName: DISARM_ALARM
+        action: DISARM_ALARM
   action:
     - service: alarm_control_panel.ser2sock_10000_alarm_disarm
       data:

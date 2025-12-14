@@ -6,9 +6,9 @@
   initial_state: on
   trigger:
     - platform: event
-      event_type: ios.notification_action_fired
+      event_type: mobile_app_notification_action
       event_data:
-        actionName: CLOSE_GARAGE
+        action: CLOSE_GARAGE
   action:
     service: cover.close_cover
     entity_id: cover.jeff_garage_door
@@ -18,9 +18,9 @@
   initial_state: on
   trigger:
     - platform: event
-      event_type: ios.notification_action_fired
+      event_type: mobile_app_notification_action
       event_data:
-        actionName: OPEN_GARAGE
+        action: OPEN_GARAGE
   action:
     service: cover.open_cover
     entity_id: cover.jeff_garage_door
@@ -30,9 +30,9 @@
   initial_state: on
   trigger:
     - platform: event
-      event_type: ios.notification_action_fired
+      event_type: mobile_app_notification_action
       event_data:
-        actionName: CLOSE_GARAGE2
+        action: CLOSE_GARAGE2
   action:
     service: cover.close_cover
     entity_id: cover.jen_garage_door
@@ -42,9 +42,9 @@
   initial_state: on
   trigger:
     - platform: event
-      event_type: ios.notification_action_fired
+      event_type: mobile_app_notification_action
       event_data:
-        actionName: OPEN_GARAGE2
+        action: OPEN_GARAGE2
   action:
     service: cover.open_cover
     entity_id: cover.jen_garage_door
