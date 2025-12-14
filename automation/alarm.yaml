@@ -12,11 +12,11 @@
       seconds: 300
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Door to garage is opened for more than 5 minutes"
     - service: notify.mobile_app_jensphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Door to garage is opened for more than 5 minutes"
 
@@ -32,11 +32,11 @@
       seconds: 300
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Basement door is opened for more than 5 minutes"
     - service: notify.mobile_app_jensphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Basement door is opened for more than 5 minutes"
 
@@ -53,11 +53,11 @@
       seconds: 300
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Front door is opened for more than 5 minutes"
     - service: notify.mobile_app_jensphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Front door is opened for more than 5 minutes"
 
@@ -72,11 +72,11 @@
       seconds: 300
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Sun room door is opened for more than 5 minutes"
     - service: notify.mobile_app_jensphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Sun room door is opened for more than 5 minutes"
 
@@ -92,11 +92,11 @@
       seconds: 300
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Unknown door is opened for more than 5 minutes"
     - service: notify.mobile_app_jensphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Unknown door is opened for more than 5 minutes"
 
@@ -116,7 +116,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Upstairs motion detected"
 
@@ -133,7 +133,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Main level motion detected"
 
@@ -150,7 +150,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Basement motion detected"
 
@@ -168,7 +168,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Front door open"
 
@@ -186,7 +186,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Garage door open"
 
@@ -204,7 +204,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Family window open"
 
@@ -222,7 +222,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Living window open"
 
@@ -240,7 +240,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Sun Room Door open"
 
@@ -258,7 +258,7 @@
 #       state: 'not_home'
 #   action:
 #     - service: notify.mobile_app_jeffsphone
-#       data_template:
+#       data:
 #         title: "Alarm Panel"
 #         message: "Basement Window open"
 
@@ -276,7 +276,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Bathroom Window open"
 
@@ -294,7 +294,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Kitchen Window open"
 
@@ -312,7 +312,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Unknown Door open"
 
@@ -330,7 +330,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Laundry Window open"
 
@@ -348,7 +348,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Basement Door open"
 
@@ -365,7 +365,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Sliding Door open"
 
@@ -383,7 +383,7 @@
       state: 'not_home'
   action:
     - service: notify.mobile_app_jeffsphone
-      data_template:
+      data:
         title: "Alarm Panel"
         message: "Upstairs Window open"
 

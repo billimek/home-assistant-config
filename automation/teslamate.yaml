@@ -7,7 +7,7 @@
       topic: teslamate/cars/1/longitude
   action:
     - service: device_tracker.see
-      data_template:
+      data:
         dev_id: tesla_location
         gps:
           [
@@ -24,7 +24,7 @@
       topic: teslamate/cars/2/longitude
   action:
     - service: device_tracker.see
-      data_template:
+      data:
         dev_id: tesla2_location
         gps:
           [
@@ -41,7 +41,7 @@
       topic: teslamate/cars/3/longitude
   action:
     - service: device_tracker.see
-      data_template:
+      data:
         dev_id: tesla3_location
         gps:
           [
@@ -56,5 +56,5 @@
     webhook_id: shortcuts_call_service
   action:
     service: '{{ trigger.json.service }}'
-    data_template:
+    data:
       entity_id: '{{ trigger.json.entity_id }}'
