@@ -232,6 +232,7 @@ template:
   ## Home presence
   - sensor:
     - name: "Home Status"
+      unique_id: home_status
       state: >
         {% if is_state('group.family', 'home') %}
           home
@@ -242,6 +243,7 @@ template:
   ## Jeff's garage
   - sensor:
     - name: "Jeff Garage Door Status"
+      unique_id: jeff_garage_door_status
       state: >
         {% set door_state = states('cover.jeff_garage_door') %}
         {% if door_state in ['unknown', 'unavailable'] %}
@@ -251,6 +253,7 @@ template:
         {% endif %}
 
     - name: "Jeff Car in Garage"
+      unique_id: jeff_car_in_garage
       state: >
         {% set door_state = states('cover.jeff_garage_door') %}
         {% set vehicle = states('binary_sensor.og_jeff_vehicle') %}
@@ -267,6 +270,7 @@ template:
   ## Jen's garage
   - sensor:
     - name: "Jen Garage Door Status"
+      unique_id: jen_garage_door_status
       state: >
         {% set door_state = states('cover.jen_garage_door') %}
         {% if door_state in ['unknown', 'unavailable'] %}
@@ -276,6 +280,7 @@ template:
         {% endif %}
 
     - name: "Jen Car in Garage"
+      unique_id: jen_car_in_garage
       state: >
         {% set door_state = states('cover.jen_garage_door') %}
         {% set vehicle = states('binary_sensor.og_jen_vehicle') %}
@@ -292,6 +297,7 @@ template:
   ## Alarm panel
   - sensor:
     - name: "Alarm Status"
+      unique_id: alarm_status
       state: >
         {% set display = states('sensor.ser2sock_10000_alarm_panel_display') %}
         {% if display in ['ARMED ***AWAY***** ALL SECURE **', 
@@ -305,5 +311,6 @@ template:
   ## Weekday
   - sensor:
     - name: "Weekday"
+      unique_id: weekday
       state: "{{ now().weekday() < 5 }}"
 
