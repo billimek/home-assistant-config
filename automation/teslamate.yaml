@@ -1,53 +1,58 @@
-- alias: Update Tesla location as MQTT location updates
-  initial_state: on
-  trigger:
-    - platform: mqtt
-      topic: teslamate/cars/1/latitude
-    - platform: mqtt
-      topic: teslamate/cars/1/longitude
-  action:
-    - service: device_tracker.see
-      data:
-        dev_id: tesla_location
-        gps:
-          [
-            "{{ states.sensor.tesla_latitude.state }}",
-            "{{ states.sensor.tesla_longitude.state }}",
-          ]
+# DEPRECATED: These automations used device_tracker.see service which is deprecated
+# Tesla locations are now tracked via MQTT device trackers in config/mqtt.yaml
+# The device trackers automatically update from teslamate MQTT topics
+# Keeping these commented for reference during transition
 
-- alias: Update Tesla2 location as MQTT location updates
-  initial_state: on
-  trigger:
-    - platform: mqtt
-      topic: teslamate/cars/2/latitude
-    - platform: mqtt
-      topic: teslamate/cars/2/longitude
-  action:
-    - service: device_tracker.see
-      data:
-        dev_id: tesla2_location
-        gps:
-          [
-            "{{ states.sensor.tesla2_latitude.state }}",
-            "{{ states.sensor.tesla2_longitude.state }}",
-          ]
+# - alias: Update Tesla location as MQTT location updates
+#   initial_state: on
+#   trigger:
+#     - platform: mqtt
+#       topic: teslamate/cars/1/latitude
+#     - platform: mqtt
+#       topic: teslamate/cars/1/longitude
+#   action:
+#     - service: device_tracker.see
+#       data:
+#         dev_id: tesla_location
+#         gps:
+#           [
+#             "{{ states.sensor.tesla_latitude.state }}",
+#             "{{ states.sensor.tesla_longitude.state }}",
+#           ]
 
-- alias: Update Tesla3 location as MQTT location updates
-  initial_state: on
-  trigger:
-    - platform: mqtt
-      topic: teslamate/cars/3/latitude
-    - platform: mqtt
-      topic: teslamate/cars/3/longitude
-  action:
-    - service: device_tracker.see
-      data:
-        dev_id: tesla3_location
-        gps:
-          [
-            "{{ states.sensor.tesla3_latitude.state }}",
-            "{{ states.sensor.tesla3_longitude.state }}",
-          ]
+# - alias: Update Tesla2 location as MQTT location updates
+#   initial_state: on
+#   trigger:
+#     - platform: mqtt
+#       topic: teslamate/cars/2/latitude
+#     - platform: mqtt
+#       topic: teslamate/cars/2/longitude
+#   action:
+#     - service: device_tracker.see
+#       data:
+#         dev_id: tesla2_location
+#         gps:
+#           [
+#             "{{ states.sensor.tesla2_latitude.state }}",
+#             "{{ states.sensor.tesla2_longitude.state }}",
+#           ]
+
+# - alias: Update Tesla3 location as MQTT location updates
+#   initial_state: on
+#   trigger:
+#     - platform: mqtt
+#       topic: teslamate/cars/3/latitude
+#     - platform: mqtt
+#       topic: teslamate/cars/3/longitude
+#   action:
+#     - service: device_tracker.see
+#       data:
+#         dev_id: tesla3_location
+#         gps:
+#           [
+#             "{{ states.sensor.tesla3_latitude.state }}",
+#             "{{ states.sensor.tesla3_longitude.state }}",
+#           ]
 
 - alias: 'Shortcuts Webhook Call Service'
   initial_state: on
