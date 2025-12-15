@@ -229,53 +229,81 @@ o365:
       client_id: !env_var O365_APP_ID
 
 template:
-### garage status
+  ## Home presence
   - sensor:
-    - default_entity_id: sensor.anyone_home
-      name: Home Status
-      state: '{% if is_state(''group.family'', ''home'')-%}home{%else%}not_home{% endif %}'
-  - sensor:
-    - default_entity_id: sensor.garage_status
-      name: Jeff's garage door status
-      state: '{% if states.cover.jeff_garage_door %} {% if states.cover.jeff_garage_door.state
-        == "open" %} Open {% elif states.cover.jeff_garage_door.state == "closed" %}
-        Closed {% elif states.cover.jeff_garage_door.state == "opening" %} Opening {%
-        elif states.cover.jeff_garage_door.state == "closing" %} Closing {% elif states.cover.jeff_garage_door.state
-        == "offline" %} Offline {% else %} Unknown {% endif %} {% else %} n/a {% endif  %}'
-  - sensor:
-    - default_entity_id: sensor.garage_car_present
-      name: Jeff's car in garage
-      state: '{% if states.cover.jeff_garage_door %} {% if states.cover.jeff_garage_door.state
-        == "open" %} n/a {% elif states.binary_sensor.og_jeff_vehicle.state == "on"
-        %} Yes {% else %} No {% endif %} {% else %} n/a {% endif %}'
-  - sensor:
-    - default_entity_id: sensor.garage2_status
-      name: Jen's garage door status
-      state: '{% if states.cover.jen_garage_door %} {% if states.cover.jen_garage_door.state
-        == "open" %} Open {% elif states.cover.jen_garage_door.state == "closed" %}
-        Closed {% elif states.cover.jen_garage_door.state == "opening" %} Opening {%
-        elif states.cover.jen_garage_door.state == "closing" %} Closing {% elif states.cover.jen_garage_door.state
-        == "offline" %} Offline {% else %} Unknown {% endif %} {% else %} n/a {% endif
-        %}'
-  - sensor:
-    - default_entity_id: sensor.garage2_car_present
-      name: Jen's car in garage
-      state: '{% if states.cover.jen_garage_door %} {% if states.cover.jen_garage_door.state
-        == "open" %} n/a {% elif states.binary_sensor.og_jen_vehicle.state == "on" %}
-        Yes {% else %} No {% endif %} {% else %} n/a {% endif %}'
+    - name: "Home Status"
+      state: >
+        {% if is_state('group.family', 'home') %}
+          home
+        {% else %}
+          not_home
+        {% endif %}
 
-### alarm panel
+  ## Jeff's garage
   - sensor:
-    - default_entity_id: sensor.alarm_status
-      name: Alarm Status
-      state: '{% if is_state(''sensor.ser2sock_10000_alarm_panel_display'', ''ARMED
-        ***AWAY***** ALL SECURE **'') or is_state(''sensor.ser2sock_10000_alarm_panel_display'',
-        ''ARMED ***STAY***                '') or is_state(''sensor.ser2sock_10000_alarm_panel_display'',
-        ''***NIGHT-STAY***                '') %}Armed{%else%}Disarmed{% endif %}'
+    - name: "Jeff's Garage Door Status"
+      state: >
+        {% set door_state = states('cover.jeff_garage_door') %}
+        {% if door_state in ['unknown', 'unavailable'] %}
+          n/a
+        {% else %}
+          {{ door_state | title }}
+        {% endif %}
 
-### weekday
+    - name: "Jeff's Car in Garage"
+      state: >
+        {% set door_state = states('cover.jeff_garage_door') %}
+        {% set vehicle = states('binary_sensor.og_jeff_vehicle') %}
+        {% if door_state in ['unknown', 'unavailable'] %}
+          n/a
+        {% elif door_state == 'open' %}
+          n/a
+        {% elif vehicle == 'on' %}
+          Yes
+        {% else %}
+          No
+        {% endif %}
+
+  ## Jen's garage
   - sensor:
-    - default_entity_id: sensor.weekday
-      name: Weekday
-      state: '{{ now().weekday() < 5 }}'
+    - name: "Jen's Garage Door Status"
+      state: >
+        {% set door_state = states('cover.jen_garage_door') %}
+        {% if door_state in ['unknown', 'unavailable'] %}
+          n/a
+        {% else %}
+          {{ door_state | title }}
+        {% endif %}
+
+    - name: "Jen's Car in Garage"
+      state: >
+        {% set door_state = states('cover.jen_garage_door') %}
+        {% set vehicle = states('binary_sensor.og_jen_vehicle') %}
+        {% if door_state in ['unknown', 'unavailable'] %}
+          n/a
+        {% elif door_state == 'open' %}
+          n/a
+        {% elif vehicle == 'on' %}
+          Yes
+        {% else %}
+          No
+        {% endif %}
+
+  ## Alarm panel
+  - sensor:
+    - name: "Alarm Status"
+      state: >
+        {% set display = states('sensor.ser2sock_10000_alarm_panel_display') %}
+        {% if display in ['ARMED ***AWAY***** ALL SECURE **', 
+                         'ARMED ***STAY***                ',
+                         '***NIGHT-STAY***                '] %}
+          Armed
+        {% else %}
+          Disarmed
+        {% endif %}
+
+  ## Weekday
+  - sensor:
+    - name: "Weekday"
+      state: "{{ now().weekday() < 5 }}"
 
