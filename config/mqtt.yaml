@@ -20,43 +20,6 @@ cover:
     state_closed: "CLOSED"
     device_class: "garage"
 
-device_tracker:
-  # Tesla location tracking via Teslamate MQTT
-  # These replace the deprecated device_tracker.see service calls
-  - name: "Tesla Location"
-    unique_id: "teslamate_car_1_location"
-    state_topic: "teslamate/cars/1/latitude"
-    json_attributes_topic: "teslamate/cars/1/latitude"
-    json_attributes_template: >
-      {
-        "latitude": {{ states('sensor.tesla_latitude') | float(0) }},
-        "longitude": {{ states('sensor.tesla_longitude') | float(0) }},
-        "gps_accuracy": 50,
-        "source_type": "gps"
-      }
-  
-  - name: "Tesla2 Location"
-    unique_id: "teslamate_car_2_location"
-    state_topic: "teslamate/cars/2/latitude"
-    json_attributes_template: >
-      {
-        "latitude": {{ states('sensor.tesla2_latitude') | float(0) }},
-        "longitude": {{ states('sensor.tesla2_longitude') | float(0) }},
-        "gps_accuracy": 50,
-        "source_type": "gps"
-      }
-  
-  - name: "Tesla3 Location"
-    unique_id: "teslamate_car_3_location"
-    state_topic: "teslamate/cars/3/latitude"
-    json_attributes_template: >
-      {
-        "latitude": {{ states('sensor.tesla3_latitude') | float(0) }},
-        "longitude": {{ states('sensor.tesla3_longitude') | float(0) }},
-        "gps_accuracy": 50,
-        "source_type": "gps"
-      }
-
 sensor:
 #### elektra (car 1)
   - name: tesla_display_name
