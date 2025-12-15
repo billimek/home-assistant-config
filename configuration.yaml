@@ -241,7 +241,7 @@ template:
 
   ## Jeff's garage
   - sensor:
-    - name: "Jeff's Garage Door Status"
+    - name: "Jeff Garage Door Status"
       state: >
         {% set door_state = states('cover.jeff_garage_door') %}
         {% if door_state in ['unknown', 'unavailable'] %}
@@ -250,7 +250,7 @@ template:
           {{ door_state | title }}
         {% endif %}
 
-    - name: "Jeff's Car in Garage"
+    - name: "Jeff Car in Garage"
       state: >
         {% set door_state = states('cover.jeff_garage_door') %}
         {% set vehicle = states('binary_sensor.og_jeff_vehicle') %}
@@ -266,7 +266,7 @@ template:
 
   ## Jen's garage
   - sensor:
-    - name: "Jen's Garage Door Status"
+    - name: "Jen Garage Door Status"
       state: >
         {% set door_state = states('cover.jen_garage_door') %}
         {% if door_state in ['unknown', 'unavailable'] %}
@@ -275,7 +275,7 @@ template:
           {{ door_state | title }}
         {% endif %}
 
-    - name: "Jen's Car in Garage"
+    - name: "Jen Car in Garage"
       state: >
         {% set door_state = states('cover.jen_garage_door') %}
         {% set vehicle = states('binary_sensor.og_jen_vehicle') %}
