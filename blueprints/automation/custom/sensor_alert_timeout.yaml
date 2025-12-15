@@ -1,0 +1,71 @@
+blueprint:
+  name: Sensor Alert Timeout
+  description: Send notification when a sensor (door/window) stays open for too long
+  domain: automation
+  input:
+    sensor_entity:
+      name: Sensor Entity
+      description: The binary sensor to monitor (door or window sensor)
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+    sensor_name:
+      name: Sensor Friendly Name
+      description: Human-readable name for the sensor (e.g., "Door to garage", "Basement door")
+      selector:
+        text:
+    timeout_seconds:
+      name: Timeout Duration
+      description: How long the sensor can stay open before alerting (in seconds)
+      default: 300
+      selector:
+        number:
+          min: 60
+          max: 3600
+          unit_of_measurement: seconds
+    notify_jeff:
+      name: Notify Jeff
+      description: Send notification to Jeff's phone
+      default: true
+      selector:
+        boolean:
+    notify_jen:
+      name: Notify Jen
+      description: Send notification to Jen's phone
+      default: true
+      selector:
+        boolean:
+
+trigger:
+  - platform: state
+    entity_id: !input sensor_entity
+    from: 'off'
+    to: 'on'
+    for:
+      seconds: !input timeout_seconds
+
+action:
+  - variables:
+      sensor_name: !input sensor_name
+      timeout_seconds: !input timeout_seconds
+      notify_jeff: !input notify_jeff
+      notify_jen: !input notify_jen
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ notify_jeff }}"
+        sequence:
+          - service: notify.mobile_app_jeffsphone
+            data:
+              title: "Alarm Panel"
+              message: "{{ sensor_name }} is opened for more than {{ (timeout_seconds / 60) | int }} minutes"
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ notify_jen }}"
+        sequence:
+          - service: notify.mobile_app_jensphone
+            data:
+              title: "Alarm Panel"
+              message: "{{ sensor_name }} is opened for more than {{ (timeout_seconds / 60) | int }} minutes"

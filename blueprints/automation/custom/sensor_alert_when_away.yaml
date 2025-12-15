@@ -1,0 +1,50 @@
+blueprint:
+  name: Sensor Alert When Away
+  description: Send notification when a sensor (door/window/motion) is triggered and nobody is home
+  domain: automation
+  input:
+    sensor_entity:
+      name: Sensor Entity
+      description: The binary sensor to monitor (door, window, or motion sensor)
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+    sensor_name:
+      name: Sensor Friendly Name
+      description: Human-readable name for the sensor (e.g., "Front door", "Kitchen Window")
+      selector:
+        text:
+    presence_sensor:
+      name: Presence Sensor
+      description: Sensor that tracks if anyone is home
+      default: sensor.home_status
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+    notify_service:
+      name: Notification Service
+      description: The notification service to use
+      default: notify.mobile_app_jeffsphone
+      selector:
+        text:
+
+trigger:
+  - platform: state
+    entity_id: !input sensor_entity
+    from: 'off'
+    to: 'on'
+
+condition:
+  - condition: state
+    entity_id: !input presence_sensor
+    state: 'not_home'
+
+action:
+  - variables:
+      sensor_name: !input sensor_name
+  - service: !input notify_service
+    data:
+      title: "Alarm Panel"
+      message: "{{ sensor_name }} open"
