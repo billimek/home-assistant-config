@@ -36,22 +36,14 @@ garage:
 jeff_garage_toggles:
   name: 'Jeff''s Garage Toggles'
   entities:
-    - automation.notify_when_jeffs_garage_door_opens
-    - automation.notify_when_jeffs_garage_door_opens_and_no_one_is_home
-    - automation.notify_when_jeffs_garage_door_closes
-    - automation.notify_when_jeffs_garage_door_closes_and_no_one_is_home
-    - automation.notify_when_jeffs_garage_door_remains_open
-    - automation.auto_close_jeffs_garage_door_after_10pm
+    - automation.ios_action_open_garage
+    - automation.ios_action_close_garage
 
 jen_garage_toggles:
   name: 'Jen''s Garage Toggles'
   entities:
-    - automation.notify_when_jens_garage_door_opens
-    - automation.notify_when_jens_garage_door_opens_and_no_one_is_home
-    - automation.notify_when_jens_garage_door_closes
-    - automation.notify_when_jens_garage_door_closes_and_no_one_is_home
-    - automation.alert_when_jens_garage_door_remains_open
-    - automation.auto_close_jens_garage_door_after_10pm
+    - automation.ios_action_open_garage2
+    - automation.ios_action_close_garage2
 family:
   name: Family
   entities:
@@ -116,7 +108,6 @@ alarm_sensor_toggles:
     - automation.alert_when_family_window_is_open_and_nobody_home
     - automation.alert_when_living_window_is_open_and_nobody_home
     - automation.alert_when_sun_room_door_is_open_and_nobody_home
-    - automation.alert_when_basement_window_is_open_and_nobody_home
     - automation.alert_when_bathroom_window_is_open_and_nobody_home
     - automation.alert_when_kitchen_window_is_open_and_nobody_home
     - automation.alert_when_unknown_door_is_open_and_nobody_home
