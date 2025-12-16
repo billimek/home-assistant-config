@@ -24,3 +24,30 @@ Security View
 * Home-Assistant is running within a kubernetes cluster running the the [home-assistant helm chart](https://github.com/k8s-at-home/charts/tree/master/charts/stable/home-assistant)
 * Automations are mostly performed via [node-red](https://nodered.org/) with the node-red configuration hosted in [this repo](https://github.com/billimek/node-red-config)
 * In addition to use git to control the configuration, an [embeded](https://github.com/billimek/k8s-gitops/blob/master/default/home-assistant/home-assistant.yaml#L67-L82) instance of the [VSCode server](https://github.com/cdr/code-server) using the [home-assistant config helper extension](https://marketplace.visualstudio.com/items?itemName=keesschollaart.vscode-home-assistant) is leveraged to make live changes to the configuration files
+
+## Recent Refactoring (December 2024)
+
+This configuration underwent a major refactoring to modernize deprecated syntax and reduce code duplication through blueprints.
+
+### Key Improvements
+
+**Code Reduction:**
+- `automation/alarm.yaml`: 403 → 229 lines (43% reduction)
+- `config/mqtt.yaml`: 690 → 199 lines (71% reduction)
+- Overall ~45% reduction in targeted files
+
+**Modernizations:**
+- Removed all deprecated `data_template` syntax (30 instances)
+- Migrated from deprecated iOS notification actions to `mobile_app` events
+- Modernized template sensors with unique IDs and null-safe checks
+- Created custom blueprints for reusable automation patterns
+
+**New Features:**
+- Custom blueprints in `blueprints/automation/custom/`:
+  - `sensor_alert_when_away.yaml` - Alerts when sensors trigger while nobody home
+  - `sensor_alert_timeout.yaml` - Alerts when sensors stay open too long
+- Better organization of Tesla MQTT sensors (grouped by category vs by car)
+
+**Rollback:** Git tag `pre-refactor-20241214` marks the pre-refactoring state for easy rollback if needed.
+
+See [CHANGELOG.md](CHANGELOG.md) for detailed changes by phase.
