@@ -202,7 +202,7 @@ influxdb:
 google_assistant:
   project_id: home-assistant-7c48d
   secure_devices_pin: !env_var SECURE_DEVICES_PIN 
-  service_account: !include home-assistant-4d8d1f2ca10f.json
+  service_account: !include home-assistant-7c48d-e078848c9fb0.json
   report_state: true
 
 tts:
