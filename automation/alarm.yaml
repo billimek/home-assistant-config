@@ -1,392 +1,219 @@
 ################################################
-## Custom alerts
+## Sensor timeout alerts (using blueprint)
 ################################################
-- id: alert_when_door_open_for_too_long
+## Replaces 5 automations with blueprint instances
+- id: timeout_door_to_garage
   alias: 'Alert when door to garage is opened for too long'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_garage_door
-    from: 'off'
-    to: 'on'
-    for:
-      seconds: 300
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Door to garage is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
-      data:
-        title: "Alarm Panel"
-        message: "Door to garage is opened for more than 5 minutes"
+  use_blueprint:
+    path: custom/sensor_alert_timeout.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_garage_door
+      sensor_name: "Door to garage"
+      timeout_seconds: 300
+      notify_jeff: true
+      notify_jen: true
 
-- id: alert_when_basement_door_open_for_too_long
+- id: timeout_basement_door
   alias: 'Alert when basement door is opened for too long'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_basement_door
-    from: 'off'
-    to: 'on'
-    for:
-      seconds: 300
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Basement door is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
-      data:
-        title: "Alarm Panel"
-        message: "Basement door is opened for more than 5 minutes"
+  use_blueprint:
+    path: custom/sensor_alert_timeout.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_basement_door
+      sensor_name: "Basement door"
+      timeout_seconds: 300
+      notify_jeff: true
+      notify_jen: true
 
-
-- id: alert_when_front_door_open_for_too_long
+- id: timeout_front_door
   alias: 'Alert when front door is opened for too long'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_front_door
-    from: 'off'
-    to: 'on'
-    for:
-      seconds: 300
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Front door is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
-      data:
-        title: "Alarm Panel"
-        message: "Front door is opened for more than 5 minutes"
+  use_blueprint:
+    path: custom/sensor_alert_timeout.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_front_door
+      sensor_name: "Front door"
+      timeout_seconds: 300
+      notify_jeff: true
+      notify_jen: true
 
-- id: alert_when_sun_room_door_open_for_too_long
+- id: timeout_sun_room_door
   alias: 'Alert when sun room door is opened for too long'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_sun_room_door
-    from: 'off'
-    to: 'on'
-    for:
-      seconds: 300
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Sun room door is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
-      data:
-        title: "Alarm Panel"
-        message: "Sun room door is opened for more than 5 minutes"
+  use_blueprint:
+    path: custom/sensor_alert_timeout.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_sun_room_door
+      sensor_name: "Sun room door"
+      timeout_seconds: 300
+      notify_jeff: true
+      notify_jen: true
 
-- id: alert_when_unknown_door_open_for_too_long
+- id: timeout_unknown_door
   alias: 'Alert when unknown door is opened for too long'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_unknown_door
-    from: 'off'
-    to: 'on'
-    for:
-      seconds: 300
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Unknown door is opened for more than 5 minutes"
-    - service: notify.mobile_app_jensphone
-      data:
-        title: "Alarm Panel"
-        message: "Unknown door is opened for more than 5 minutes"
+  use_blueprint:
+    path: custom/sensor_alert_timeout.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_unknown_door
+      sensor_name: "Unknown door"
+      timeout_seconds: 300
+      notify_jeff: true
+      notify_jen: true
 
 ################################################
-## All door/window sensors
+## Sensor alerts when away (using blueprint)
 ################################################
-- id: alert_when_upstairs_motion
+## Replaces 15 automations with blueprint instances
+- id: away_upstairs_motion
   alias: 'Alert when motion is detected upstairs and nobody home'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_upstairs_motion
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Upstairs motion detected"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_upstairs_motion
+      sensor_name: "Upstairs motion detected"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_main_motion
+- id: away_main_motion
   alias: 'Alert when motion is detected on the main level and nobody home'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_main_motion
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Main level motion detected"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_main_motion
+      sensor_name: "Main level motion detected"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_basement_motion
+- id: away_basement_motion
   alias: 'Alert when motion is detected in the basement and nobody home'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_basement_motion
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Basement motion detected"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_basement_motion
+      sensor_name: "Basement motion detected"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_front_door_open
+- id: away_front_door
   alias: 'Alert when front door is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_front_door
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Front door open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_front_door
+      sensor_name: "Front door"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_garage_door_open
+- id: away_garage_door
   alias: 'Alert when garage door is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_garage_door
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Garage door open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_garage_door
+      sensor_name: "Garage door"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_family_window_open
+- id: away_family_window
   alias: 'Alert when family window is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_family_window
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Family window open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_family_window
+      sensor_name: "Family window"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_living_window_open
+- id: away_living_window
   alias: 'Alert when living window is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_living_window
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Living window open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_living_window
+      sensor_name: "Living window"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_sun_room_door_open
+- id: away_sun_room_door
   alias: 'Alert when sun room door is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_sun_room_door
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Sun Room Door open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_sun_room_door
+      sensor_name: "Sun Room Door"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-# - id: alert_when_basement_window_open
-#   alias: 'Alert when basement window is open and nobody home'
-#   initial_state: on
-#   trigger:
-#     platform: state
-#     entity_id: binary_sensor.ser2sock_10000_basement_window
-#     from: 'off'
-#     to: 'on'
-#   condition:
-#       condition: state
-#       entity_id: sensor.anyone_home
-#       state: 'not_home'
-#   action:
-#     - service: notify.mobile_app_jeffsphone
-#       data:
-#         title: "Alarm Panel"
-#         message: "Basement Window open"
-
-- id: alert_when_bathroom_window_open
+- id: away_bathroom_window
   alias: 'Alert when bathroom window is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_bathroom_window
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Bathroom Window open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_bathroom_window
+      sensor_name: "Bathroom Window"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_kitchen_window_open
+- id: away_kitchen_window
   alias: 'Alert when kitchen window is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_kitchen_window
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Kitchen Window open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_kitchen_window
+      sensor_name: "Kitchen Window"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_unknown_door_open
+- id: away_unknown_door
   alias: 'Alert when unknown door is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_unknown_door
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Unknown Door open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_unknown_door
+      sensor_name: "Unknown Door"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_laundry_window_open
+- id: away_laundry_window
   alias: 'Alert when laundry window is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_laundry_window
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Laundry Window open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_laundry_window
+      sensor_name: "Laundry Window"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_basement_door_open
+- id: away_basement_door
   alias: 'Alert when basement door is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_basement_door
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Basement Door open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_basement_door
+      sensor_name: "Basement Door"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_sliding_door_open
+- id: away_sliding_door
   alias: 'Alert when sliding door is open and nobody home'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_sliding_door
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Sliding Door open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_sliding_door
+      sensor_name: "Sliding Door"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
-- id: alert_when_upstairs_window_open
+- id: away_upstairs_window
   alias: 'Alert when upstairs window is open and nobody home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.ser2sock_10000_upstairs_window
-    from: 'off'
-    to: 'on'
-  condition:
-      condition: state
-      entity_id: sensor.anyone_home
-      state: 'not_home'
-  action:
-    - service: notify.mobile_app_jeffsphone
-      data:
-        title: "Alarm Panel"
-        message: "Upstairs Window open"
+  use_blueprint:
+    path: custom/sensor_alert_when_away.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_upstairs_window
+      sensor_name: "Upstairs Window"
+      presence_sensor: sensor.anyone_home
+      notify_service: notify.mobile_app_jeffsphone
 
+################################################
+## iOS/Mobile app actions
+################################################
 - id: ios_action_disarm_alarm
   alias: 'iOS action to disarm alarm'
   initial_state: on
