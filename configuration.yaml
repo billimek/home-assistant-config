@@ -221,13 +221,6 @@ rest_command:
       username: !env_var OPNSENSE_USER 
       password: !env_var OPNSENSE_KEY
 
-o365:
-  accounts:
-    - account_name: Account1
-      alt_auth_method: True
-      client_secret: !env_var O365_CLIENT_SECRET
-      client_id: !env_var O365_APP_ID
-
 template:
   ## Home presence
   - sensor:
