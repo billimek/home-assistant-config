@@ -27,11 +27,11 @@ garage:
   name: Garage
   entities:
     - cover.jeff_garage_door
-    - sensor.jeff_garage_door_status
-    - sensor.jeff_car_in_garage
+    - sensor.garage_status
+    - sensor.garage_car_present
     - cover.jen_garage_door
-    - sensor.jen_garage_door_status
-    - sensor.jen_car_in_garage
+    - sensor.garage2_status
+    - sensor.garage2_car_present
 
 jeff_garage_toggles:
   name: 'Jeff''s Garage Toggles'

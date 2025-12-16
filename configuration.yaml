@@ -231,8 +231,8 @@ o365:
 template:
   ## Home presence
   - sensor:
-    - name: "Home Status"
-      unique_id: home_status
+    - name: "Anyone Home"
+      unique_id: anyone_home
       state: >
         {% if is_state('group.family', 'home') %}
           home
@@ -242,8 +242,8 @@ template:
 
   ## Jeff's garage
   - sensor:
-    - name: "Jeff Garage Door Status"
-      unique_id: jeff_garage_door_status
+    - name: "Garage Status"
+      unique_id: garage_status
       state: >
         {% set door_state = states('cover.jeff_garage_door') %}
         {% if door_state in ['unknown', 'unavailable'] %}
@@ -252,8 +252,8 @@ template:
           {{ door_state | title }}
         {% endif %}
 
-    - name: "Jeff Car in Garage"
-      unique_id: jeff_car_in_garage
+    - name: "Garage Car Present"
+      unique_id: garage_car_present
       state: >
         {% set door_state = states('cover.jeff_garage_door') %}
         {% set vehicle = states('binary_sensor.og_jeff_vehicle') %}
@@ -269,8 +269,8 @@ template:
 
   ## Jen's garage
   - sensor:
-    - name: "Jen Garage Door Status"
-      unique_id: jen_garage_door_status
+    - name: "Garage2 Status"
+      unique_id: garage2_status
       state: >
         {% set door_state = states('cover.jen_garage_door') %}
         {% if door_state in ['unknown', 'unavailable'] %}
@@ -279,8 +279,8 @@ template:
           {{ door_state | title }}
         {% endif %}
 
-    - name: "Jen Car in Garage"
-      unique_id: jen_car_in_garage
+    - name: "Garage2 Car Present"
+      unique_id: garage2_car_present
       state: >
         {% set door_state = states('cover.jen_garage_door') %}
         {% set vehicle = states('binary_sensor.og_jen_vehicle') %}
