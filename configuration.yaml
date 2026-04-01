@@ -194,10 +194,10 @@ notify:
       - service: mobile_app_jeffsphone
       - service: mobile_app_jensphone
 
-influxdb:
-  host: influxdb.monitoring
-  port: 8086
-  max_retries: 10
+# influxdb:
+#   host: influxdb.monitoring
+#   port: 8086
+#   max_retries: 10
 
 google_assistant:
   project_id: home-assistant-7c48d
