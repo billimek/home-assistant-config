@@ -18,7 +18,7 @@ blueprint:
     presence_sensor:
       name: Presence Sensor
       description: Sensor that tracks if anyone is home
-      default: sensor.home_status
+      default: sensor.anyone_home
       selector:
         entity:
           filter:

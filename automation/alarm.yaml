@@ -2,7 +2,7 @@
 ## Sensor timeout alerts (using blueprint)
 ################################################
 ## Replaces 5 automations with blueprint instances
-- id: timeout_door_to_garage
+- id: alert_when_door_open_for_too_long
   alias: 'Alert when door to garage is opened for too long'
   use_blueprint:
     path: custom/sensor_alert_timeout.yaml
@@ -13,7 +13,7 @@
       notify_jeff: true
       notify_jen: true
 
-- id: timeout_basement_door
+- id: alert_when_basement_door_open_for_too_long
   alias: 'Alert when basement door is opened for too long'
   use_blueprint:
     path: custom/sensor_alert_timeout.yaml
@@ -24,7 +24,7 @@
       notify_jeff: true
       notify_jen: true
 
-- id: timeout_front_door
+- id: alert_when_front_door_open_for_too_long
   alias: 'Alert when front door is opened for too long'
   use_blueprint:
     path: custom/sensor_alert_timeout.yaml
@@ -35,7 +35,7 @@
       notify_jeff: true
       notify_jen: true
 
-- id: timeout_sun_room_door
+- id: alert_when_sun_room_door_open_for_too_long
   alias: 'Alert when sun room door is opened for too long'
   use_blueprint:
     path: custom/sensor_alert_timeout.yaml
@@ -46,7 +46,7 @@
       notify_jeff: true
       notify_jen: true
 
-- id: timeout_unknown_door
+- id: alert_when_unknown_door_open_for_too_long
   alias: 'Alert when unknown door is opened for too long'
   use_blueprint:
     path: custom/sensor_alert_timeout.yaml
@@ -61,7 +61,7 @@
 ## Sensor alerts when away (using blueprint)
 ################################################
 ## Replaces 15 automations with blueprint instances
-- id: away_upstairs_motion
+- id: alert_when_upstairs_motion
   alias: 'Alert when motion is detected upstairs and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -71,7 +71,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_main_motion
+- id: alert_when_main_motion
   alias: 'Alert when motion is detected on the main level and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -81,7 +81,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_basement_motion
+- id: alert_when_basement_motion
   alias: 'Alert when motion is detected in the basement and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -91,7 +91,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_front_door
+- id: alert_when_front_door_open
   alias: 'Alert when front door is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -101,7 +101,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_garage_door
+- id: alert_when_garage_door_open
   alias: 'Alert when garage door is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -111,7 +111,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_family_window
+- id: alert_when_family_window_open
   alias: 'Alert when family window is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -121,7 +121,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_living_window
+- id: alert_when_living_window_open
   alias: 'Alert when living window is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -131,7 +131,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_sun_room_door
+- id: alert_when_sun_room_door_open
   alias: 'Alert when sun room door is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -141,7 +141,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_bathroom_window
+- id: alert_when_bathroom_window_open
   alias: 'Alert when bathroom window is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -151,7 +151,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_kitchen_window
+- id: alert_when_kitchen_window_open
   alias: 'Alert when kitchen window is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -161,7 +161,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_unknown_door
+- id: alert_when_unknown_door_open
   alias: 'Alert when unknown door is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -171,7 +171,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_laundry_window
+- id: alert_when_laundry_window_open
   alias: 'Alert when laundry window is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -181,7 +181,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_basement_door
+- id: alert_when_basement_door_open
   alias: 'Alert when basement door is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -191,7 +191,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_sliding_door
+- id: alert_when_sliding_door_open
   alias: 'Alert when sliding door is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
@@ -201,7 +201,7 @@
       presence_sensor: sensor.anyone_home
       notify_service: notify.mobile_app_jeffsphone
 
-- id: away_upstairs_window
+- id: alert_when_upstairs_window_open
   alias: 'Alert when upstairs window is open and nobody home'
   use_blueprint:
     path: custom/sensor_alert_when_away.yaml
