@@ -227,3 +227,34 @@
       data:
         entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
         code: !env_var ALARMCD
+
+################################################
+## AlarmDecoder connection watchdog
+################################################
+## The alarmdecoder integration silently freezes when the ser2net pod restarts
+## (home-assistant/core#176746: the alarmdecoder lib's reader thread dies on an
+## uncaught ValueError, so HA's built-in reconnect never fires). Entities never go
+## unavailable - they just stop updating. The alarm panel entity reports on every
+## panel message, so a stale last_reported means the connection is dead.
+- id: alarmdecoder_connection_watchdog
+  alias: 'Reload AlarmDecoder when the panel stops reporting'
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: time_pattern
+      minutes: '/5'
+  condition:
+    - condition: template
+      value_template: >
+        {% set panel = states.alarm_control_panel.ser2sock_10000_alarm_panel %}
+        {{ panel is not none
+           and (now() - panel.last_reported).total_seconds() > 900 }}
+  action:
+    - service: homeassistant.reload_config_entry
+      target:
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+    - service: notify.mobile_app_jeffsphone
+      data:
+        title: 'AlarmDecoder reconnected'
+        message: >
+          Alarm panel stopped reporting; reloaded the AlarmDecoder integration.
