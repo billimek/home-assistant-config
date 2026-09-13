@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_resources",
+  "data": {
+    "items": [
+      {
+        "id": "c13ef482b5a14ceeb9f4aaf63cd31a22",
+        "type": "module",
+        "url": "/community_plugin/button-card/button-card.js"
+      },
+      {
+        "id": "31d1225d31c042c8b0ecead2c5e0bd68",
+        "type": "module",
+        "url": "/community_plugin/mini-graph-card/mini-graph-card-bundle.js"
+      },
+      {
+        "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js?hacstag=1512800620130",
+        "type": "module",
+        "id": "66185432d07a4590963bd8ddf770339c"
+      },
+      {
+        "url": "/hacsfiles/button-card/button-card.js?hacstag=146194325701",
+        "type": "module",
+        "id": "6934c7f4d55c410c9b95081e5cd8187d"
+      },
+      {
+        "url": "/hacsfiles/frigate-hass-card/frigate-hass-card.js?hacstag=394082552612",
+        "type": "module",
+        "id": "13c9913a345f43dfa9d657d867d48409"
+      },
+      {
+        "id": "74d17610c7084b6db60d96ad466ad372",
+        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375523",
+        "type": "module"
+      },
+      {
+        "id": "5e22b0c999e7406e9aa581f408627567",
+        "url": "/hacsfiles/Bubble-Card/bubble-card.js?hacstag=680112919330",
+        "type": "module"
+      },
+      {
+        "id": "7ae77eddc63e4213b6cda609901f5434",
+        "url": "/hacsfiles/advanced-camera-card/advanced-camera-card.js?hacstag=394082552810",
+        "type": "module"
+      }
+    ]
+  }
+}

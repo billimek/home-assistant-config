@@ -18,4 +18,6 @@ secrets.yaml
 known_devices.yaml
 entity_registry.yaml
 !.storage
-!.storage/lovelace
+!.storage/lovelace.lovelace
+!.storage/lovelace_dashboards
+!.storage/lovelace_resources
