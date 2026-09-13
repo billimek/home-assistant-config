@@ -30,24 +30,6 @@ default_config:
 
 logger:
   default: info
-  logs:
-    homeassistant.components.automation.update_tesla3_location_as_mqtt_location_updates: warning
-    homeassistant.components.automation.update_tesla2_location_as_mqtt_location_updates: warning
-    homeassistant.components.automation.update_tesla_location_as_mqtt_location_updates: warning
-
-http:
-  ip_ban_enabled: false
-  login_attempts_threshold: 5
-  use_x_forwarded_for: true
-  trusted_proxies:
-    - 10.2.0.0/24
-    - 10.42.0.0/16
-    - 10.43.0.0/16
-    - 10.0.7.0/24
-    - 10.0.6.0/24
-    - 10.0.2.0/24
-    - 10.244.0.0/16
-
 
 # Discover some devices automatically
 # discovery:
@@ -167,8 +149,6 @@ input_boolean:
     name: Porch camera notifications
   camera_pool_notify:
     name: Pool camera notifications
-  camera_basement_notify:
-    name: Basement camera notifications
   camera_doorbell_notify:
     name: Doorbell camera notifications
   notify_alarm_armed:
