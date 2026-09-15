@@ -281,3 +281,21 @@ template:
       unique_id: weekday
       state: "{{ now().weekday() < 5 }}"
 
+  ## Tesla location tracking (replaces deprecated device_tracker.see calls)
+  - device_tracker:
+      - name: "Tesla Location"
+        unique_id: tesla_location
+        availability: "{{ states('sensor.tesla_latitude') not in ['unknown', 'unavailable'] }}"
+        latitude: "{{ states('sensor.tesla_latitude') }}"
+        longitude: "{{ states('sensor.tesla_longitude') }}"
+      - name: "Tesla2 Location"
+        unique_id: tesla2_location
+        availability: "{{ states('sensor.tesla2_latitude') not in ['unknown', 'unavailable'] }}"
+        latitude: "{{ states('sensor.tesla2_latitude') }}"
+        longitude: "{{ states('sensor.tesla2_longitude') }}"
+      - name: "Tesla3 Location"
+        unique_id: tesla3_location
+        availability: "{{ states('sensor.tesla3_latitude') not in ['unknown', 'unavailable'] }}"
+        latitude: "{{ states('sensor.tesla3_latitude') }}"
+        longitude: "{{ states('sensor.tesla3_longitude') }}"
+
