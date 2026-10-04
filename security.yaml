@@ -1,8 +1,0 @@
-input_select:
-  alarm_mode:
-    name: Alarm mode
-    options:
-     - automatic
-     - standby
-     - night only
-    icon: mdi:security-home

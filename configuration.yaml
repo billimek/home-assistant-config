@@ -16,23 +16,7 @@ homeassistant:
   external_url: https://hass.eviljungle.com
   internal_url: https://hass.eviljungle.com
 
-  auth_providers:
-    - type: homeassistant
-
-# Packages
-  packages:
-    security: !include security.yaml
-
-  allowlist_external_dirs:
-    - /config/www/camera
-
 default_config:
-
-logger:
-  default: info
-
-# Discover some devices automatically
-# discovery:
 
 # persist states between restarts
 recorder:
@@ -67,78 +51,36 @@ shell_command: !include shell/shell.yaml
 zone: !include config/zones.yaml
 group: !include groups.yaml
 
+## Alarm mode (read by the Node-RED Alarm flow)
 input_select:
-  set_biprofile:
-    name: "Set BI Profile"
-    initial: "-"
+  alarm_mode:
+    name: Alarm mode
     options:
-      - "-"
-      - "home"
-      - "away"
-  presence:
-    name: "People to track"
-    initial: "family"
-    options:
-      - "family"
-      - "parents"
-      - "kids"
+      - automatic
+      - standby
+      - night only
+    icon: mdi:security-home
 
+## Toggles read by the Node-RED flows (no initial: so the last state survives restarts)
 input_boolean:
   # garage stuff
-  previous_garage_open:
-    name: Track if the garage was previously open
-    initial: on
-  previous_garage2_open:
-    name: Track if the garage2 was previously open
-    initial: on
-  previous_garage_closed:
-    name: Track if the garage was previously closed
-    initial: on
-  previous_garage2_closed:
-    name: Track if the garage2 was previously closed
-    initial: on
   auto_garage_doors:
     name: Automatically open/close garage doors
-    initial: on
   auto_garage_doors_night:
     name: Automatically close garage doors at night
-    initial: on
-
-  # people
-  jeff_occupancy:
-    name: Jeff is home (bluetooth)
-  jen_occupancy:
-    name: Jen is home (bluetooth)
-  ansley_occupancy:
-    name: Ansley is home (bluetooth)
-  brinley_occupancy:
-    name: Brinley is home (bluetooth)
-  track_ansley:
-      name: Track Ansley Presence
-  track_brinley:
-      name: Track Brinley Presence
-  track_jen:
-      name: Track Jen Presence
-  track_jeff:
-      name: Track Jeff Presence
 
   # auto-run stuff
-  auto_run_basement_fan:
-    name: Auto-run basement fan at noon, daily
-    initial: on
   auto_arm_disarm_alarm_night:
     name: Arm alarm at midnight and disarm at 5am
   auto_close_garage_door_jen:
-    name: Automatically close Jen's Garage Door if open for 30 mins
+    name: Automatically close Jen's Garage Door if open for 2 hours
   auto_close_garage_door_jeff:
-    name: Automatically close Jeff's Garage Door if open for 30 mins
+    name: Automatically close Jeff's Garage Door if open for 2 hours
   auto_arm_alarm_when_gone:
     name: Automatically arm alarm when no one is home
-    initial: on
   auto_disarm_alarm_when_home:
     name: Automatically disarm alarm when someone comes home
-    initial: on
-  
+
   # notifications
   camera_front_notify:
     name: Front camera notifications
@@ -152,19 +94,14 @@ input_boolean:
     name: Doorbell camera notifications
   notify_alarm_armed:
     name: Notification when alarm is armed
-    initial: on
   notify_alarm_disarmed:
     name: Notification when alarm is disarmed
-    initial: on
   notify_alarm_triggered:
     name: Notification when alarm is triggered
-    initial: on
   notify_garage_doors_home:
     name: Notification when garage doors are open/closed and we are home
-    initial: on
   notify_garage_doors_away:
     name: Notification when garage doors are open/closed and we are away
-    initial: on
 
 notify:
   - name: ALL_DEVICES
@@ -200,12 +137,10 @@ template:
   - sensor:
     - name: "Anyone Home"
       unique_id: anyone_home
-      state: >
-        {% if is_state('group.family', 'home') %}
-          home
-        {% else %}
-          not_home
-        {% endif %}
+      # unavailable (not "not_home") while the group is unknown, e.g. at startup,
+      # so the away alerts can't fire from a restart
+      availability: "{{ states('group.family') not in ['unknown', 'unavailable'] }}"
+      state: "{{ 'home' if is_state('group.family', 'home') else 'not_home' }}"
 
   ## Jeff's garage
   - sensor:
@@ -265,15 +200,8 @@ template:
   - sensor:
     - name: "Alarm Status"
       unique_id: alarm_status
-      state: >
-        {% set display = states('sensor.ser2sock_10000_alarm_panel_display') %}
-        {% if display in ['ARMED ***AWAY***** ALL SECURE **', 
-                         'ARMED ***STAY***                ',
-                         '***NIGHT-STAY***                '] %}
-          Armed
-        {% else %}
-          Disarmed
-        {% endif %}
+      availability: "{{ states('alarm_control_panel.ser2sock_10000_alarm_panel') not in ['unknown', 'unavailable'] }}"
+      state: "{{ 'Armed' if states('alarm_control_panel.ser2sock_10000_alarm_panel').startswith('armed') else 'Disarmed' }}"
 
   ## Weekday
   - sensor:

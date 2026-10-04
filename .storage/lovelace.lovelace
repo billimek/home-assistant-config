@@ -44,9 +44,6 @@
                   "entity": "group.kids"
                 },
                 {
-                  "entity": "input_select.presence"
-                },
-                {
                   "entity": "zone.home"
                 }
               ],
@@ -107,9 +104,6 @@
                 {
                   "entity": "sensor.home_jeffs_phone_gps_distance",
                   "name": "Distance to Home"
-                },
-                {
-                  "entity": "input_boolean.track_jeff"
                 }
               ],
               "show_header_toggle": false,
@@ -132,9 +126,6 @@
                   "entity": "sensor.home_jen_s_phone_gps_distance",
                   "name": "Distance to Home",
                   "secondary_info": "last-changed"
-                },
-                {
-                  "entity": "input_boolean.track_jen"
                 }
               ],
               "show_header_toggle": false,
@@ -161,9 +152,6 @@
                   "entity": "sensor.home_ansley_s_phone_gps_distance_2",
                   "secondary_info": "last-changed",
                   "name": "Distance to Home"
-                },
-                {
-                  "entity": "input_boolean.track_ansley"
                 }
               ],
               "title": "Ansley Presence",
@@ -187,9 +175,6 @@
                   "entity": "sensor.home_brinley_s_phone_gps_distance",
                   "secondary_info": "last-changed",
                   "name": "Distance to Home"
-                },
-                {
-                  "entity": "input_boolean.track_brinley"
                 }
               ],
               "title": "Brinley Presence",
@@ -2115,9 +2100,6 @@
                   "entity": "sensor.upstairs_humidity"
                 },
                 {
-                  "entity": "input_boolean.auto_run_basement_fan"
-                },
-                {
                   "entity": "weather.upstairs"
                 },
                 {
@@ -2407,29 +2389,7 @@
               "type": "entities"
             },
             {
-              "entities": [
-                {
-                  "entity": "automation.bi_set_profile_when_input_select_changes"
-                },
-                {
-                  "entity": "automation.bi_notify_if_profile_is_unknown"
-                },
-                {
-                  "entity": "automation.bi_alert_night_at_10pm_when_home"
-                },
-                {
-                  "entity": "automation.bi_away_when_we_leave"
-                },
-                {
-                  "entity": "automation.bi_away_when_we_leave_after_sunset"
-                },
-                {
-                  "entity": "automation.bi_home_when_we_get_home"
-                },
-                {
-                  "entity": "automation.bi_night_when_we_get_home_before_10pm"
-                }
-              ],
+              "entities": [],
               "title": "Camera Toggles",
               "type": "entities"
             },
@@ -2476,7 +2436,6 @@
                 "automation.alert_when_family_window_is_open_and_nobody_home",
                 "automation.alert_when_living_window_is_open_and_nobody_home",
                 "automation.alert_when_sun_room_door_is_open_and_nobody_home",
-                "automation.alert_when_basement_window_is_open_and_nobody_home",
                 "automation.alert_when_bathroom_window_is_open_and_nobody_home",
                 "automation.alert_when_kitchen_window_is_open_and_nobody_home",
                 "automation.alert_when_unknown_door_is_open_and_nobody_home",
@@ -2550,9 +2509,6 @@
                 },
                 {
                   "entity": "binary_sensor.basement_camera_motion"
-                },
-                {
-                  "entity": "binary_sensor.ring_front_door_motion"
                 },
                 {
                   "entity": "sensor.front_door_last_motion"

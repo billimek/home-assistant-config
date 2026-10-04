@@ -45,7 +45,7 @@
       state_filter_states:
       - 'on'
       mqtt_topic: frigate/reviews
-      custom_filter: '{{ is_state("sensor.weekday", "true") }}'
+      custom_filter: '{{ now().weekday() < 5 }}'
 - id: '1706755468710'
   alias: front
   description: ''
@@ -61,7 +61,7 @@
       state_entity: input_boolean.camera_front_notify
       state_filter_states:
       - 'on'
-      custom_filter: '{{ is_state("sensor.weekday", "true") }}'
+      custom_filter: '{{ now().weekday() < 5 }}'
 - id: '1706755509478'
   alias: pool
   description: ''
