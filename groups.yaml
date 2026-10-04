@@ -68,11 +68,10 @@ presence:
   entities:
     - device_tracker.juniosantos
     - device_tracker.sync_xr6ecyt7
-    - device_tracker.jeff_phone_wifi
     - automation.alert_when_everyone_leaves_home
     - automation.alert_when_anyone_comes_home
-    - sensor.jeffs_7_battery_level
-    - sensor.jeffs_7_battery_state
+    - sensor.jeffsphone_battery_level
+    - sensor.jeffsphone_battery_state
     - sensor.jennifers_6s_battery_level
     - sensor.jennifers_6s_battery_state
 

@@ -92,19 +92,20 @@
               "type": "entities"
             },
             {
+              "color": "state",
               "entities": [
                 {
                   "entity": "person.jeff_billimek",
-                  "secondary_info": "last-changed"
+                  "secondary_info": "last_changed"
                 },
                 {
                   "entity": "device_tracker.jeffsphone"
                 },
                 {
-                  "entity": "device_tracker.jeffs_iphone"
+                  "entity": "device_tracker.jeffsphone_2"
                 },
                 {
-                  "entity": "sensor.home_jeff_s_phone_gps_distance",
+                  "entity": "sensor.home_jeffs_phone_gps_distance",
                   "name": "Distance to Home"
                 },
                 {
@@ -113,8 +114,7 @@
               ],
               "show_header_toggle": false,
               "title": "Jeff Presence",
-              "type": "entities",
-              "state_color": true
+              "type": "entities"
             },
             {
               "entities": [
