@@ -518,9 +518,6 @@
                   "entity": "input_boolean.camera_pool_notify"
                 },
                 {
-                  "entity": "input_boolean.camera_basement_notify"
-                },
-                {
                   "entity": "input_boolean.camera_doorbell_notify"
                 }
               ],
@@ -543,10 +540,6 @@
                 {
                   "type": "picture-entity",
                   "entity": "camera.driveway"
-                },
-                {
-                  "type": "picture-entity",
-                  "entity": "camera.basement"
                 },
                 {
                   "type": "picture-entity",
@@ -686,14 +679,6 @@
               "type": "custom:frigate-card",
               "cameras": [
                 {
-                  "camera_entity": "camera.basement"
-                }
-              ]
-            },
-            {
-              "type": "custom:frigate-card",
-              "cameras": [
-                {
                   "camera_entity": "camera.doorbell"
                 }
               ],
@@ -727,23 +712,6 @@
                 "default": "snapshots",
                 "camera_select": "snapshots",
                 "update_cycle_camera": true
-              }
-            },
-            {
-              "type": "custom:frigate-card",
-              "cameras": [
-                {
-                  "camera_entity": "camera.basement"
-                }
-              ],
-              "view": {
-                "default": "snapshots"
-              },
-              "performance": {
-                "profile": "high"
-              },
-              "timeline": {
-                "style": "ribbon"
               }
             },
             {
