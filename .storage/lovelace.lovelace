@@ -621,7 +621,7 @@
           "badges": [],
           "cards": [
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.doorbell"
@@ -629,7 +629,7 @@
               ]
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.front"
@@ -637,7 +637,7 @@
               ]
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.driveway"
@@ -645,7 +645,7 @@
               ]
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.porch"
@@ -653,7 +653,7 @@
               ]
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.pool"
@@ -661,7 +661,7 @@
               ]
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.doorbell"
@@ -674,7 +674,7 @@
               }
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.front"
@@ -687,7 +687,7 @@
               }
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.driveway"
@@ -700,7 +700,7 @@
               }
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.pool"
@@ -713,7 +713,7 @@
               }
             },
             {
-              "type": "custom:frigate-card",
+              "type": "custom:advanced-camera-card",
               "cameras": [
                 {
                   "camera_entity": "camera.porch"
