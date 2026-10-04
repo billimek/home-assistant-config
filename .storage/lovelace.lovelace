@@ -14,7 +14,7 @@
                 {
                   "entity": "sensor.anyone_home",
                   "secondary_info": "last-changed",
-                  "icon": "hass:home"
+                  "icon": "mdi:home"
                 },
                 {
                   "entity": "sensor.ser2sock_10000_alarm_panel_display"
@@ -30,9 +30,6 @@
                 },
                 {
                   "entity": "input_boolean.auto_arm_disarm_alarm_night"
-                },
-                {
-                  "entity": "sensor.home_nearest_device"
                 },
                 {
                   "entity": "group.family"
@@ -144,11 +141,6 @@
                   "entity": "device_tracker.iphone_ansleys_iphone"
                 },
                 {
-                  "entity": "device_tracker.ansleys_iphone_2",
-                  "secondary_info": "last-changed",
-                  "icon": "hass:satellite-uplink"
-                },
-                {
                   "entity": "sensor.home_ansley_s_phone_gps_distance_2",
                   "secondary_info": "last-changed",
                   "name": "Distance to Home"
@@ -164,9 +156,6 @@
                 {
                   "entity": "person.brinley",
                   "secondary_info": "last-changed"
-                },
-                {
-                  "entity": "device_tracker.brinleythebest"
                 },
                 {
                   "entity": "device_tracker.brinleythebest2"
@@ -204,10 +193,6 @@
             {
               "type": "thermostat",
               "entity": "climate.downstairs"
-            },
-            {
-              "type": "thermostat",
-              "entity": "climate.basement"
             },
             {
               "type": "entities",
@@ -611,7 +596,8 @@
             }
           ],
           "icon": "mdi:camcorder",
-          "title": "Cameras"
+          "title": "Cameras",
+          "path": "cameras"
         },
         {
           "theme": "Backend-selected",
@@ -921,10 +907,6 @@
                   "type": "glance",
                   "entities": [
                     {
-                      "entity": "binary_sensor.tesla_park_brake",
-                      "name": "Park Brake"
-                    },
-                    {
                       "entity": "binary_sensor.tesla_sentry_mode",
                       "name": "Sentry Mode"
                     },
@@ -1038,20 +1020,12 @@
                   "name": "Speed"
                 },
                 {
-                  "entity": "sensor.tesla_speed_mph",
-                  "name": "Speed (MPH)"
-                },
-                {
                   "entity": "sensor.tesla_heading",
                   "name": "Heading"
                 },
                 {
                   "entity": "sensor.tesla_elevation",
                   "name": "Elevation (m)"
-                },
-                {
-                  "entity": "sensor.tesla_elevation_ft",
-                  "name": "Elevation (ft)"
                 },
                 {
                   "entity": "binary_sensor.tesla_locked",
@@ -1102,32 +1076,16 @@
                   "name": "Odometer"
                 },
                 {
-                  "entity": "sensor.tesla_odometer_mi",
-                  "name": "Odometer (miles)"
-                },
-                {
                   "entity": "sensor.tesla_est_battery_range_km",
                   "name": "Battery Range (km)"
-                },
-                {
-                  "entity": "sensor.tesla_est_battery_range_mi",
-                  "name": "Estimated Battery Range (mi)"
                 },
                 {
                   "entity": "sensor.tesla_rated_battery_range_km",
                   "name": "Rated Battery Range (km)"
                 },
                 {
-                  "entity": "sensor.tesla_rated_battery_range_mi",
-                  "name": "Rated Battery Range (mi)"
-                },
-                {
                   "entity": "sensor.tesla_ideal_battery_range_km",
                   "name": "Ideal Battery Range (km)"
-                },
-                {
-                  "entity": "sensor.tesla_ideal_battery_range_mi",
-                  "name": "Ideal Battery Range (mi)"
                 },
                 {
                   "entity": "sensor.tesla_battery_level",
@@ -1374,10 +1332,6 @@
                   "type": "glance",
                   "entities": [
                     {
-                      "entity": "binary_sensor.tesla2_park_brake",
-                      "name": "Park Brake"
-                    },
-                    {
                       "entity": "binary_sensor.tesla2_sentry_mode",
                       "name": "Sentry Mode"
                     },
@@ -1493,20 +1447,12 @@
                   "name": "Speed"
                 },
                 {
-                  "entity": "sensor.tesla2_speed_mph",
-                  "name": "Speed (MPH)"
-                },
-                {
                   "entity": "sensor.tesla2_heading",
                   "name": "Heading"
                 },
                 {
                   "entity": "sensor.tesla2_elevation",
                   "name": "Elevation (m)"
-                },
-                {
-                  "entity": "sensor.tesla2_elevation_ft",
-                  "name": "Elevation (ft)"
                 },
                 {
                   "entity": "binary_sensor.tesla2_locked",
@@ -1557,32 +1503,16 @@
                   "name": "Odometer"
                 },
                 {
-                  "entity": "sensor.tesla2_odometer_mi",
-                  "name": "Odometer (miles)"
-                },
-                {
                   "entity": "sensor.tesla2_est_battery_range_km",
                   "name": "Battery Range (km)"
-                },
-                {
-                  "entity": "sensor.tesla2_est_battery_range_mi",
-                  "name": "Estimated Battery Range (mi)"
                 },
                 {
                   "entity": "sensor.tesla2_rated_battery_range_km",
                   "name": "Rated Battery Range (km)"
                 },
                 {
-                  "entity": "sensor.tesla2_rated_battery_range_mi",
-                  "name": "Rated Battery Range (mi)"
-                },
-                {
                   "entity": "sensor.tesla2_ideal_battery_range_km",
                   "name": "Ideal Battery Range (km)"
-                },
-                {
-                  "entity": "sensor.tesla2_ideal_battery_range_mi",
-                  "name": "Ideal Battery Range (mi)"
                 },
                 {
                   "entity": "sensor.tesla2_battery_level",
@@ -1829,10 +1759,6 @@
                   "type": "glance",
                   "entities": [
                     {
-                      "entity": "binary_sensor.tesla3_park_brake",
-                      "name": "Park Brake"
-                    },
-                    {
                       "entity": "binary_sensor.tesla3_sentry_mode",
                       "name": "Sentry Mode"
                     },
@@ -1948,20 +1874,12 @@
                   "name": "Speed"
                 },
                 {
-                  "entity": "sensor.tesla3_speed_mph",
-                  "name": "Speed (MPH)"
-                },
-                {
                   "entity": "sensor.tesla3_heading",
                   "name": "Heading"
                 },
                 {
                   "entity": "sensor.tesla3_elevation",
                   "name": "Elevation (m)"
-                },
-                {
-                  "entity": "sensor.tesla3_elevation_ft",
-                  "name": "Elevation (ft)"
                 },
                 {
                   "entity": "binary_sensor.tesla3_locked",
@@ -2012,32 +1930,16 @@
                   "name": "Odometer"
                 },
                 {
-                  "entity": "sensor.tesla3_odometer_mi",
-                  "name": "Odometer (miles)"
-                },
-                {
                   "entity": "sensor.tesla3_est_battery_range_km",
                   "name": "Battery Range (km)"
-                },
-                {
-                  "entity": "sensor.tesla3_est_battery_range_mi",
-                  "name": "Estimated Battery Range (mi)"
                 },
                 {
                   "entity": "sensor.tesla3_rated_battery_range_km",
                   "name": "Rated Battery Range (km)"
                 },
                 {
-                  "entity": "sensor.tesla3_rated_battery_range_mi",
-                  "name": "Rated Battery Range (mi)"
-                },
-                {
                   "entity": "sensor.tesla3_ideal_battery_range_km",
                   "name": "Ideal Battery Range (km)"
-                },
-                {
-                  "entity": "sensor.tesla3_ideal_battery_range_mi",
-                  "name": "Ideal Battery Range (mi)"
                 },
                 {
                   "entity": "sensor.tesla3_battery_level",
@@ -2116,13 +2018,7 @@
             {
               "entities": [
                 {
-                  "entity": "sensor.downstairs_thermostat_temperature"
-                },
-                {
                   "entity": "sensor.bedroom_temperature"
-                },
-                {
-                  "entity": "sensor.basement_thermostat_temperature"
                 },
                 {
                   "entity": "sensor.office_temperature"
@@ -2134,100 +2030,6 @@
               "hours_to_show": 168,
               "title": "Temperature History",
               "type": "history-graph"
-            },
-            {
-              "type": "entities",
-              "entities": [
-                {
-                  "entity": "sensor.st_00161537_air_density",
-                  "name": "Air density"
-                },
-                {
-                  "entity": "sensor.st_00161537_air_pressure",
-                  "name": "Air pressure"
-                },
-                {
-                  "entity": "sensor.st_00161537_dew_point",
-                  "name": "Dew point"
-                },
-                {
-                  "entity": "sensor.st_00161537_feels_like",
-                  "name": "Feels like"
-                },
-                {
-                  "entity": "sensor.st_00161537_humidity",
-                  "name": "Humidity"
-                },
-                {
-                  "entity": "sensor.st_00161537_illuminance",
-                  "name": "Illuminance"
-                },
-                {
-                  "entity": "sensor.st_00161537_irradiance",
-                  "name": "Irradiance"
-                },
-                {
-                  "entity": "sensor.st_00161537_lightning_average_distance",
-                  "name": "Lightning average distance"
-                },
-                {
-                  "entity": "sensor.st_00161537_lightning_count",
-                  "name": "Lightning count"
-                },
-                {
-                  "entity": "sensor.st_00161537_precipitation",
-                  "name": "Precipitation"
-                },
-                {
-                  "entity": "sensor.st_00161537_precipitation_intensity",
-                  "name": "Precipitation intensity"
-                },
-                {
-                  "entity": "sensor.st_00161537_precipitation_type",
-                  "name": "Precipitation type"
-                },
-                {
-                  "entity": "sensor.st_00161537_temperature",
-                  "name": "Temperature"
-                },
-                {
-                  "entity": "sensor.st_00161537_uv_index",
-                  "name": "UV index"
-                },
-                {
-                  "entity": "sensor.st_00161537_vapor_pressure",
-                  "name": "Vapor pressure"
-                },
-                {
-                  "entity": "sensor.st_00161537_wet_bulb_temperature",
-                  "name": "Wet bulb temperature"
-                },
-                {
-                  "entity": "sensor.st_00161537_wind_direction",
-                  "name": "Wind direction"
-                },
-                {
-                  "entity": "sensor.st_00161537_wind_direction_average",
-                  "name": "Wind direction average"
-                },
-                {
-                  "entity": "sensor.st_00161537_wind_gust",
-                  "name": "Wind gust"
-                },
-                {
-                  "entity": "sensor.st_00161537_wind_lull",
-                  "name": "Wind lull"
-                },
-                {
-                  "entity": "sensor.st_00161537_wind_speed",
-                  "name": "Wind speed"
-                },
-                {
-                  "entity": "sensor.st_00161537_wind_speed_average",
-                  "name": "Wind speed average"
-                }
-              ],
-              "title": "ST-00161537"
             },
             {
               "type": "grid",
@@ -2327,12 +2129,6 @@
                   "entity": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
                 },
                 {
-                  "entity": "binary_sensor.front_door_ding"
-                },
-                {
-                  "entity": "binary_sensor.front_door_motion"
-                },
-                {
                   "entity": "binary_sensor.ser2sock_10000_upstairs_motion"
                 },
                 {
@@ -2389,11 +2185,6 @@
               "type": "entities"
             },
             {
-              "entities": [],
-              "title": "Camera Toggles",
-              "type": "entities"
-            },
-            {
               "entities": [
                 {
                   "entity": "input_boolean.auto_arm_alarm_when_gone"
@@ -2441,7 +2232,6 @@
                 "automation.alert_when_unknown_door_is_open_and_nobody_home",
                 "automation.alert_when_laundry_window_is_open_and_nobody_home",
                 "automation.alert_when_basement_door_is_open_and_nobody_home",
-                "automation.alert_when_sliding_door_is_open_and_nobody_home",
                 "automation.alert_when_upstairs_window_is_open_and_nobody_home"
               ],
               "title": "Alarm Sensor Alert Toggles",
@@ -2491,27 +2281,6 @@
                 },
                 {
                   "entity": "binary_sensor.ser2sock_10000_basement_motion"
-                },
-                {
-                  "entity": "binary_sensor.basement_camera_motion"
-                },
-                {
-                  "entity": "binary_sensor.front_camera_motion"
-                },
-                {
-                  "entity": "binary_sensor.porch_camera_motion"
-                },
-                {
-                  "entity": "binary_sensor.driveway_camera_motion"
-                },
-                {
-                  "entity": "binary_sensor.pool_camrea_motion"
-                },
-                {
-                  "entity": "binary_sensor.basement_camera_motion"
-                },
-                {
-                  "entity": "sensor.front_door_last_motion"
                 }
               ],
               "state_color": true,

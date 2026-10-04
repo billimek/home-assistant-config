@@ -5,16 +5,6 @@
   "data": {
     "items": [
       {
-        "id": "c13ef482b5a14ceeb9f4aaf63cd31a22",
-        "type": "module",
-        "url": "/community_plugin/button-card/button-card.js"
-      },
-      {
-        "id": "31d1225d31c042c8b0ecead2c5e0bd68",
-        "type": "module",
-        "url": "/community_plugin/mini-graph-card/mini-graph-card-bundle.js"
-      },
-      {
         "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js?hacstag=1512800620130",
         "type": "module",
         "id": "66185432d07a4590963bd8ddf770339c"
