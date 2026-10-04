@@ -6,7 +6,7 @@
     input:
       camera: camera.porch
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
       presence_filter: group.family
@@ -22,7 +22,7 @@
     input:
       camera: camera.doorbell
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
       state_filter: true
@@ -37,7 +37,7 @@
     input:
       camera: camera.driveway
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
       state_filter: true
@@ -54,7 +54,7 @@
     input:
       camera: camera.front
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
       state_filter: true
@@ -70,7 +70,7 @@
     input:
       camera: camera.pool
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       disable_times:
       - '6'
       - '7'
@@ -101,7 +101,7 @@
     input:
       camera: camera.pool
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
       presence_filter: group.family
@@ -117,7 +117,7 @@
     input:
       camera: camera.driveway
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       message: '{{ label }} detected - {{ camera_name }}'
       presence_filter: group.family
       state_filter: true
@@ -132,7 +132,7 @@
     input:
       camera: camera.front
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
       presence_filter: group.family
@@ -148,7 +148,7 @@
     input:
       camera: camera.porch
       notify_group: ALL_DEVICES
-      notify_device: a0fab1a761aa00b42a1ed08cd626bb94
+      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       disable_times:
       - '6'
       - '7'
