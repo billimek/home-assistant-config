@@ -1,0 +1,81 @@
+################################################
+## Doorbell
+################################################
+## Replaces the Node-RED "doorbell ring" flow.
+## Frigate person/object detections at the doorbell are handled separately
+## by the SgtBatten blueprint automation 'doorbell' in automations.yaml.
+- id: doorbell_ring_notify
+  alias: 'Notify when the doorbell is rung'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: event.porch_front_door_doorbell
+    - platform: state
+      entity_id: binary_sensor.front_door_button_pressed
+      to: 'on'
+      from: 'off'
+    - platform: event
+      event_type: dahua_event_received
+      event_data:
+        Code: PhoneCallDetect
+        Action: Start
+  condition:
+    # state triggers: ignore restarts / integration reloads (an unknown -> timestamp change is a real first ring)
+    - condition: template
+      value_template: >
+        {{ trigger.platform != 'state' or
+           (trigger.from_state.state != 'unavailable'
+            and trigger.to_state.state not in ['unavailable', 'unknown']) }}
+  action:
+    - action: notify.mobile_app_jeffsphone
+      data:
+        title: Doorbell
+        message: Someone rang the doorbell!
+        data:
+          image: /api/camera_proxy/camera.doorbell
+          push:
+            interruption-level: time-sensitive
+    - action: notify.mobile_app_jensphone
+      data:
+        title: Doorbell
+        message: Someone rang the doorbell!
+        data:
+          image: /api/camera_proxy/camera.doorbell
+          push:
+            interruption-level: time-sensitive
+    # cooldown: both Dahua entities can fire for one press; mode: single drops the second
+    - delay: '00:00:30'
+
+## Dahua listener watchdog: the dahua event listener has silently stopped once
+## (fix: reload the Dahua "Front Door" config entry). Records the last event and
+## alerts once per outage when nothing has arrived for 6 hours.
+- id: dahua_listener_watchdog
+  alias: 'Dahua doorbell listener quiet for 6 hours'
+  mode: queued
+  trigger:
+    - platform: event
+      event_type: dahua_event_received
+      id: seen
+    - platform: template
+      id: stale
+      value_template: >
+        {% set last = states('input_datetime.dahua_last_event') | as_datetime %}
+        {{ last is not none and now() - (last | as_local) > timedelta(hours=6) }}
+      for: '00:05:00'
+  action:
+    - choose:
+        - conditions: "{{ trigger.id == 'seen' }}"
+          sequence:
+            - action: input_datetime.set_datetime
+              target:
+                entity_id: input_datetime.dahua_last_event
+              data:
+                datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+        - conditions: "{{ trigger.id == 'stale' }}"
+          sequence:
+            - action: notify.mobile_app_jeffsphone
+              data:
+                title: Doorbell listener stopped
+                message: >
+                  No Dahua events received for 6+ hours. Reload the Dahua
+                  "Front Door" config entry (disable, then enable).

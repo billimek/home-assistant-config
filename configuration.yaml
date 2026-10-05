@@ -60,6 +60,13 @@ input_select:
       - night only
     icon: mdi:security-home
 
+## Last time the Dahua doorbell listener delivered an event (see automation/doorbell.yaml watchdog)
+input_datetime:
+  dahua_last_event:
+    name: Dahua last event received
+    has_date: true
+    has_time: true
+
 ## Toggles read by the Node-RED flows (no initial: so the last state survives restarts)
 input_boolean:
   # garage stuff
