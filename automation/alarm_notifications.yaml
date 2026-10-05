@@ -1,0 +1,104 @@
+################################################
+## Alarm notifications
+################################################
+## Replaces the Node-RED alarm armed / disarmed / triggered notification flows.
+## Gated by the input_boolean.notify_alarm_* toggles.
+## Slack is no longer used; Discord only fires for a triggered alarm.
+
+- id: alarm_triggered_notify
+  alias: 'Notify when the alarm is triggered'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      to: 'triggered'
+  condition:
+    - condition: state
+      entity_id: input_boolean.notify_alarm_triggered
+      state: 'on'
+  action:
+    - parallel:
+        - action: notify.mobile_app_jeffsphone
+          continue_on_error: true
+          data:
+            title: "🚨 ALARM TRIGGERED! 🚨"
+            message: "THE ALARM HAS TRIGGERED! OMG WTFBBQ!!!!111 🔥 \n{{ trigger.to_state.state }}"
+            data:
+              push:
+                category: alarm
+                sound:
+                  name: ct-error.caf
+                  critical: 1
+                  volume: 1.0
+        # TODO(jen): re-add notify.mobile_app_jensphone with the same data as the Jeff action after testing
+        - action: notify.discord
+          continue_on_error: true
+          data:
+            message: "<@65851793686405120> 🚨 ALARM HAS TRIGGERED 🚨\n{{ trigger.to_state.state }} \n OMG WTFBBQ!!!!!11 :fire:"
+            target:
+              - '782247274029776937'
+              - '65851793686405120'
+
+- id: alarm_armed_notify
+  alias: 'Notify when the alarm is armed'
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      to:
+        - armed_away
+        - armed_home
+        - armed_night
+        - armed_vacation
+        - armed_custom_bypass
+  condition:
+    - condition: state
+      entity_id: input_boolean.notify_alarm_armed
+      state: 'on'
+  action:
+    - action: notify.mobile_app_jeffsphone
+      continue_on_error: true
+      data: &alarm_status_ios
+        title: Alarm System
+        message: "Alarm is now {{ trigger.to_state.state }}"
+        data:
+          push:
+            category: alarm
+    # TODO(jen): re-add notify.mobile_app_jensphone (data: *alarm_status_ios) after testing
+
+- id: alarm_disarmed_notify
+  alias: 'Notify when the alarm is disarmed'
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      to: 'disarmed'
+  condition:
+    - condition: state
+      entity_id: input_boolean.notify_alarm_disarmed
+      state: 'on'
+  action:
+    - action: notify.mobile_app_jeffsphone
+      continue_on_error: true
+      data: *alarm_status_ios
+    # TODO(jen): re-add notify.mobile_app_jensphone (data: *alarm_status_ios) after testing
+
+- id: alarm_suspicious_disarm_notify
+  alias: 'Notify when the alarm is disarmed between midnight and 5am'
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      to: 'disarmed'
+  condition:
+    - condition: time
+      after: '00:00:00'
+      before: '05:00:00'
+  action:
+    - action: notify.mobile_app_jeffsphone
+      data:
+        title: Suspicious Activity
+        message: "Someone disarmed the alarm at {{ now().strftime('%m/%d/%Y %H:%M:%S') }}"
+        data:
+          push:
+            category: alarm
