@@ -69,5 +69,11 @@ These entity IDs are referenced by Node-RED flows, Lovelace dashboards, and mult
 - `sensor.garage_car_present`, `sensor.garage2_car_present` - Car presence sensors
 - `input_boolean.auto_garage_doors_night` - Node-RED garage auto-close control
 - `input_boolean.auto_garage_doors` - Node-RED garage automation control
-- `device_tracker.teslamate_*` - Tesla location tracking (used by Node-RED distance calculations)
-- All Tesla MQTT sensors (`sensor.tesla_*`, `sensor.tesla2_*`, `sensor.tesla3_*`) - used by Node-RED flows
+- `device_tracker.tesla_location`, `device_tracker.tesla2_location`, `device_tracker.tesla3_location` - template trackers (configuration.yaml) fed by TeslaMate's discovered `device_tracker.elektra/karr/orion`. The Proximity integration ("Home" entry) tracks them to produce the distance sensors below. **Keep these ids.**
+- `sensor.home_tesla2_location_distance`, `sensor.home_tesla3_location_distance` - Proximity distance (ft) for KARR and Orion; Node-RED's garage auto close/open triggers on these crossing 200 ft. Keep ids, numeric state and ft units. (`sensor.home_tesla_location_distance` for Elektra is only shown on the dashboard.)
+
+## Tesla / TeslaMate
+- Tesla telemetry comes from TeslaMate's MQTT discovery (`MQTT_DISCOVERY=true` in the k8s config): devices Elektra (car 1), KARR (car 2), Orion (car 3), entity ids like `sensor.elektra_battery`. There are no hand-written Tesla MQTT sensors any more.
+- `tesla_custom` provides the car controls (buttons, locks, charge limit, seat heaters, climate). Its 11 telemetry entities per car that collide with TeslaMate names were renamed `*_tc_*` and disabled so the discovered entities own the clean ids.
+- Node-RED only consumes the three tracker ids and two distance sensors above (verified against flows.json); it reads no `sensor.tesla*` entities and no `teslamate/` MQTT topics.
+- `config/mqtt.yaml` still has raw `sensor.tesla*_latitude/longitude` as a temporary fallback for the location trackers; remove after a real drive confirms the discovered trackers update correctly.
