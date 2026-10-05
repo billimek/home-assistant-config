@@ -1,0 +1,24 @@
+################################################
+## Network
+################################################
+## Replaces the Node-RED "entity events" -> notify flow on the Home Assistant tab.
+## Any newly created device_tracker entity is treated as a new WiFi device
+## (same as Node-RED, so trackers from other integrations also alert).
+- id: new_device_tracker_notify
+  alias: 'Notify when a new device joins the WiFi network'
+  mode: queued
+  trigger:
+    - platform: event
+      event_type: entity_registry_updated
+      event_data:
+        action: create
+  condition:
+    - condition: template
+      value_template: "{{ trigger.event.data.entity_id.startswith('device_tracker.') }}"
+  action:
+    - action: notify.mobile_app_jeffsphone
+      data:
+        title: New Device Detected
+        message: >
+          A new device has joined the WiFi network:
+          {{ trigger.event.data.entity_id | replace('device_tracker.', '') }}

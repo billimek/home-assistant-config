@@ -1,0 +1,62 @@
+################################################
+## Presence
+################################################
+## Replaces the Node-RED Presence tab flows (arrival push + Ecobee away/home).
+## zone.home's state is the number of people home (same signal Node-RED used).
+## Dropped as dead in Node-RED: "Jeff came home" push (never wired), the
+## "Everyone has left home" push (unreachable branch) and the Tesla TEST pushes.
+
+- id: presence_someone_came_home
+  alias: 'Someone came home'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: zone.home
+      above: 0
+  action:
+    - action: notify.mobile_app_jeffsphone
+      continue_on_error: true
+      data:
+        title: Presence
+        message: Someone came home
+    - action: ecobee.resume_program
+      continue_on_error: true
+      target:
+        entity_id: climate.upstairs
+      data:
+        resume_all: true
+
+- id: presence_everyone_left
+  alias: 'Everyone left home'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: zone.home
+      below: 1
+  action:
+    # Node-RED sent "Away" (capitalised); the Ecobee integration now exposes
+    # lowercase presets (away, home, sleep, away_indefinitely)
+    - action: climate.set_preset_mode
+      target:
+        entity_id: climate.upstairs
+      data:
+        preset_mode: away
+
+- id: presence_jen_came_home
+  alias: 'Jen came home'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: person.jennifer_billimek
+      to: 'home'
+      not_from:
+        - unavailable
+        - unknown
+  action:
+    - action: notify.mobile_app_jeffsphone
+      data:
+        title: Presence
+        message: Jen came home
+        data:
+          push:
+            sound: US-EN-Morgan-Freeman-Wife-Is-Arriving.wav
