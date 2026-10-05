@@ -20,7 +20,7 @@
     - parallel:
         - action: notify.mobile_app_jeffsphone
           continue_on_error: true
-          data:
+          data: &triggered_ios
             title: "🚨 ALARM TRIGGERED! 🚨"
             message: "THE ALARM HAS TRIGGERED! OMG WTFBBQ!!!!111 🔥 \n{{ trigger.to_state.state }}"
             data:
@@ -30,7 +30,9 @@
                   name: ct-error.caf
                   critical: 1
                   volume: 1.0
-        # TODO(jen): re-add notify.mobile_app_jensphone with the same data as the Jeff action after testing
+        - action: notify.mobile_app_jensphone
+          continue_on_error: true
+          data: *triggered_ios
         - action: notify.discord
           continue_on_error: true
           data:
@@ -64,7 +66,9 @@
         data:
           push:
             category: alarm
-    # TODO(jen): re-add notify.mobile_app_jensphone (data: *alarm_status_ios) after testing
+    - action: notify.mobile_app_jensphone
+      continue_on_error: true
+      data: *alarm_status_ios
 
 - id: alarm_disarmed_notify
   alias: 'Notify when the alarm is disarmed'
@@ -81,7 +85,9 @@
     - action: notify.mobile_app_jeffsphone
       continue_on_error: true
       data: *alarm_status_ios
-    # TODO(jen): re-add notify.mobile_app_jensphone (data: *alarm_status_ios) after testing
+    - action: notify.mobile_app_jensphone
+      continue_on_error: true
+      data: *alarm_status_ios
 
 - id: alarm_suspicious_disarm_notify
   alias: 'Notify when the alarm is disarmed between midnight and 5am'
