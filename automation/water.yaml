@@ -1,0 +1,82 @@
+################################################
+## Water leak alerts
+################################################
+## Replaces the Node-RED "basement water" and "sump pump water" flows.
+## Node-RED rate-limited to 1 alert per 5 minutes across BOTH sensors (so one
+## sensor could mute the other); here each sensor has its own 5 minute window
+## (mode: single + trailing delay drops re-triggers).
+## Slack is gone; the old Slack @channel alert goes to the Discord channel instead.
+
+- id: water_leak_basement
+  alias: 'Alert when water is detected in the basement'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.water_sensor_a_water_alarm_water_leak_detected
+      to: 'on'
+  variables:
+    where: the basement
+  action:
+    - parallel:
+        - action: notify.mobile_app_jeffsphone
+          continue_on_error: true
+          data: &water_ios
+            title: "💦 WATER DETECTED! 💦"
+            message: "Water detected in {{ where }}! 🌊"
+            data:
+              push:
+                sound:
+                  name: US-EN-Morgan-Freeman-Water-Detected-In-Basement.wav
+                  critical: 1
+                  volume: 1.0
+        - action: notify.mobile_app_jensphone
+          continue_on_error: true
+          data: *water_ios
+        - action: notify.discord
+          continue_on_error: true
+          data:
+            message: "💦 WATER DETECTED IN {{ where | upper }}! 💦"
+            target:
+              - '782247274029776937'
+    - delay: '00:05:00'
+
+- id: water_leak_sump_pump
+  alias: 'Alert when water is detected at the sump pump'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.water_sensor_b_water_alarm_water_leak_detected
+      to: 'on'
+  variables:
+    where: the sump pump
+  action:
+    - parallel:
+        - action: notify.mobile_app_jeffsphone
+          continue_on_error: true
+          data:
+            title: "💦 WATER DETECTED! 💦"
+            message: "Water detected at {{ where }}! 🌊"
+            data:
+              push:
+                sound:
+                  name: US-EN-Morgan-Freeman-Water-Detected-In-Basement.wav
+                  critical: 1
+                  volume: 1.0
+        - action: notify.mobile_app_jensphone
+          continue_on_error: true
+          data:
+            title: "💦 WATER DETECTED! 💦"
+            message: "Water detected at {{ where }}! 🌊"
+            data:
+              push:
+                sound:
+                  name: US-EN-Morgan-Freeman-Water-Detected-In-Basement.wav
+                  critical: 1
+                  volume: 1.0
+        - action: notify.discord
+          continue_on_error: true
+          data:
+            message: "💦 WATER DETECTED AT {{ where | upper }}! 💦"
+            target:
+              - '782247274029776937'
+    - delay: '00:05:00'
