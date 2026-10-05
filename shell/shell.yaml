@@ -1,5 +1,0 @@
-#
-# SHELL COMMANDS
-
-sleep_teslamate: curl -X PUT http://teslamate:4000/api/car/1/logging/suspend
-wake_teslamate: curl -X PUT http://teslamate:4000/api/car/1/logging/resume
