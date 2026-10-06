@@ -234,6 +234,23 @@ template:
           {{ d | replace('*', ' ') | regex_replace('\s+', ' ') | trim }}
         {% endif %}
 
+    # What is open or tripped right now, for the dashboard (Home status pill and Security tab)
+    - name: "Alarm Zones Active"
+      unique_id: alarm_zones_active
+      state: >
+        {% set z = states.binary_sensor | selectattr('entity_id', 'search', '^binary_sensor\.ser2sock_10000_') | selectattr('state', 'eq', 'on') | list %}
+        {% set motion = z | selectattr('attributes.device_class', 'eq', 'motion') | map(attribute='name') | list %}
+        {% set opened = z | selectattr('attributes.device_class', 'in', ['door', 'window']) | map(attribute='name') | list %}
+        {% set smoke = z | selectattr('attributes.device_class', 'eq', 'smoke') | map(attribute='name') | list %}
+        {% set parts = [] %}
+        {% if smoke %}{% set parts = parts + ['Smoke: ' ~ smoke | join(', ')] %}{% endif %}
+        {% if opened %}{% set parts = parts + ['Open: ' ~ opened | join(', ')] %}{% endif %}
+        {% if motion %}{% set parts = parts + ['Motion: ' ~ motion | join(', ')] %}{% endif %}
+        {{ parts | join(' · ') if parts else 'All zones closed' }}
+      attributes:
+        active: >
+          {{ states.binary_sensor | selectattr('entity_id', 'search', '^binary_sensor\.ser2sock_10000_') | selectattr('state', 'eq', 'on') | list | count }}
+
   ## Weekday
   - sensor:
     - name: "Weekday"

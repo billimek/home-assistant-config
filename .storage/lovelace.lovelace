@@ -26,12 +26,13 @@
               "triggers_update": [
                 "cover.jeff_garage_door",
                 "cover.jen_garage_door",
-                "alarm_control_panel.ser2sock_10000_alarm_panel"
+                "alarm_control_panel.ser2sock_10000_alarm_panel",
+                "sensor.alarm_zones_active"
               ],
               "custom_fields": {
                 "date": "[[[ return new Date().toLocaleDateString([], {weekday: 'long', month: 'long', day: 'numeric'}); ]]]",
                 "greeting": "[[[ const h = new Date().getHours(); return 'Good ' + (h < 12 ? 'morning' : h < 18 ? 'afternoon' : 'evening') + ', Jeff'; ]]]",
-                "status": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].filter(e => states[e] && states[e].state !== 'closed'); const a = (states['alarm_control_panel.ser2sock_10000_alarm_panel'] || {state: 'unknown'}).state.replace(/_/g, ' '); const dot = '<span style=\"display:inline-block;width:8px;height:8px;border-radius:4px;background:currentColor;margin-right:10px;vertical-align:middle\"></span>'; return dot + (g.length ? 'Garage open: ' + g.map(e => states[e].attributes.friendly_name).join(', ') : 'All quiet: garages closed, alarm ' + a); ]]]"
+                "status": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].filter(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; const a = (states['alarm_control_panel.ser2sock_10000_alarm_panel'] || {state: 'unknown'}).state.replace(/_/g, ' '); const dot = '<span style=\"display:inline-block;width:8px;height:8px;border-radius:4px;background:currentColor;margin-right:10px;vertical-align:middle\"></span>'; return dot + (g.length ? 'Garage open: ' + g.map(e => states[e].attributes.friendly_name).join(', ') : zn > 0 ? z.state : 'All quiet: garages closed, alarm ' + a); ]]]"
               },
               "styles": {
                 "card": [
@@ -111,10 +112,10 @@
                       "font-weight": "600"
                     },
                     {
-                      "background": "[[[ const open = ['cover.jeff_garage_door','cover.jen_garage_door'].some(e => states[e] && states[e].state !== 'closed'); return open ? 'rgba(255,184,77,0.16)' : 'rgba(79,209,160,0.16)'; ]]]"
+                      "background": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].some(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; return (g || zn > 0) ? 'rgba(255,184,77,0.16)' : 'rgba(79,209,160,0.16)'; ]]]"
                     },
                     {
-                      "color": "[[[ const open = ['cover.jeff_garage_door','cover.jen_garage_door'].some(e => states[e] && states[e].state !== 'closed'); return open ? 'var(--amber-color)' : 'var(--green-color)'; ]]]"
+                      "color": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].some(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; return (g || zn > 0) ? 'var(--amber-color)' : 'var(--green-color)'; ]]]"
                     }
                   ]
                 }
@@ -580,6 +581,18 @@
                   "color": "blue",
                   "tap_action": {
                     "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alarm_zones_active",
+                  "name": "Zones",
+                  "icon": "mdi:shield-search",
+                  "tap_action": {
+                    "action": "none"
                   },
                   "grid_options": {
                     "columns": "full"
@@ -1624,9 +1637,22 @@
                   }
                 },
                 {
+                  "type": "tile",
+                  "entity": "sensor.alarm_zones_active",
+                  "name": "Zones",
+                  "icon": "mdi:shield-search",
+                  "tap_action": {
+                    "action": "none"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
                   "type": "heading",
                   "heading": "Motion alerts (nobody home)",
-                  "heading_style": "subtitle"
+                  "heading_style": "subtitle",
+                  "icon": "mdi:motion-sensor"
                 },
                 {
                   "type": "tile",
@@ -1638,7 +1664,8 @@
                   },
                   "grid_options": {
                     "columns": 12
-                  }
+                  },
+                  "icon": "mdi:motion-sensor"
                 },
                 {
                   "type": "tile",
@@ -1650,7 +1677,8 @@
                   },
                   "grid_options": {
                     "columns": 12
-                  }
+                  },
+                  "icon": "mdi:motion-sensor"
                 },
                 {
                   "type": "tile",
@@ -1662,7 +1690,8 @@
                   },
                   "grid_options": {
                     "columns": 12
-                  }
+                  },
+                  "icon": "mdi:motion-sensor"
                 }
               ]
             },
@@ -1684,7 +1713,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:door"
                 },
                 {
                   "type": "tile",
@@ -1696,7 +1726,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:garage-variant"
                 },
                 {
                   "type": "tile",
@@ -1708,7 +1739,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:door-sliding"
                 },
                 {
                   "type": "tile",
@@ -1720,7 +1752,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:stairs-down"
                 },
                 {
                   "type": "tile",
@@ -1732,7 +1765,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:door-closed-lock"
                 },
                 {
                   "type": "tile",
@@ -1744,7 +1778,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:window-closed-variant"
                 },
                 {
                   "type": "tile",
@@ -1756,7 +1791,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:window-closed-variant"
                 },
                 {
                   "type": "tile",
@@ -1768,7 +1804,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:window-closed-variant"
                 },
                 {
                   "type": "tile",
@@ -1780,7 +1817,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:window-closed-variant"
                 },
                 {
                   "type": "tile",
@@ -1792,7 +1830,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:window-closed-variant"
                 },
                 {
                   "type": "tile",
@@ -1804,7 +1843,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:window-closed-variant"
                 }
               ]
             },
@@ -1826,7 +1866,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:garage-open-variant"
                 },
                 {
                   "type": "tile",
@@ -1838,7 +1879,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:stairs-down"
                 },
                 {
                   "type": "tile",
@@ -1850,7 +1892,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:door-open"
                 },
                 {
                   "type": "tile",
@@ -1862,7 +1905,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:door-sliding-open"
                 },
                 {
                   "type": "heading",
@@ -1879,7 +1923,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:bell-alert"
                 },
                 {
                   "type": "tile",
@@ -1891,7 +1936,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:shield-lock"
                 },
                 {
                   "type": "tile",
@@ -1903,7 +1949,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:shield-off"
                 },
                 {
                   "type": "tile",
@@ -1915,7 +1962,8 @@
                   },
                   "grid_options": {
                     "columns": 6
-                  }
+                  },
+                  "icon": "mdi:home-circle"
                 },
                 {
                   "type": "tile",
@@ -1925,6 +1973,258 @@
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "grid_options": {
+                    "columns": 6
+                  },
+                  "icon": "mdi:garage-alert-variant"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Live sensors",
+                  "icon": "mdi:radar"
+                },
+                {
+                  "type": "heading",
+                  "heading": "Motion",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_motion",
+                  "name": "Upstairs",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_main_motion",
+                  "name": "Main level",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_basement_motion",
+                  "name": "Basement",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Doors",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_front_door",
+                  "name": "Front door",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_garage_door",
+                  "name": "Garage door",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_sun_room_door",
+                  "name": "Sun room door",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_sliding_door",
+                  "name": "Sliding door",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_basement_door",
+                  "name": "Basement door",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_unknown_door",
+                  "name": "Unknown door",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Windows",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_family_window",
+                  "name": "Family",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_living_window",
+                  "name": "Living",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_kitchen_window",
+                  "name": "Kitchen",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_bathroom_window",
+                  "name": "Bathroom",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_laundry_window",
+                  "name": "Laundry",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_basement_window",
+                  "name": "Basement",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_window",
+                  "name": "Upstairs",
+                  "color": "amber",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Smoke",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_hall_smoke",
+                  "name": "Hall smoke",
+                  "color": "red",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
                   "grid_options": {
                     "columns": 6
                   }
