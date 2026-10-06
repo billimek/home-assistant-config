@@ -1,0 +1,127 @@
+################################################
+## Motion / event triggered lights
+################################################
+## Replaces the Node-RED zwave-tab garage, deck, desk and stairs light flows.
+## All use mode: restart so a new trigger extends the timer (the Node-RED
+## "trigger" nodes had extend=true). Like Node-RED, timers are in memory only:
+## a Home Assistant restart while a light is waiting to turn off leaves it on.
+
+## Garage lights: 15 minutes when the door to the garage or either garage door opens.
+- id: lights_garage_on_open
+  alias: 'Garage lights on when a garage door opens'
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ser2sock_10000_garage_door
+      to: 'on'
+    - platform: state
+      entity_id:
+        - cover.jeff_garage_door
+        - cover.jen_garage_door
+      to:
+        - opening
+        - open
+  action:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.garage
+    - delay: '00:15:00'
+    - action: switch.turn_off
+      target:
+        entity_id: switch.garage
+
+## Deck lights: sliding door opened, or a person is detected on the porch while
+## the deck lights are already on (Frigate keeps them on). Only when dark
+## (sun below 6 deg) in the morning (05:00-11:00) or evening (17:00-24:00).
+## On time: 15 min morning; evening 60 min Sun-Thu, 90 min Fri-Sat.
+- id: lights_deck_on_activity
+  alias: 'Deck lights on for sliding door / person on porch'
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ser2sock_10000_sliding_door
+      to: 'on'
+      id: door
+    - platform: state
+      entity_id: binary_sensor.porch_person_occupancy
+      to: 'on'
+      id: person
+  condition:
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: 6
+    - condition: or
+      conditions:
+        - condition: time
+          after: '05:00:00'
+          before: '11:00:00'
+        - condition: time
+          after: '17:00:00'
+          before: '23:59:59'
+    # a person on the porch only extends the lights, it doesn't switch them on
+    - condition: or
+      conditions:
+        - condition: trigger
+          id: door
+        - condition: state
+          entity_id: switch.outlet_a
+          state: 'on'
+  variables:
+    minutes: >
+      {% if now().hour < 12 %}15
+      {% elif now().weekday() in [4, 5] %}90
+      {% else %}60{% endif %}
+  action:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.outlet_a
+    - delay:
+        minutes: "{{ minutes | int }}"
+    - action: switch.turn_off
+      target:
+        entity_id: switch.outlet_a
+
+## Desk lights: on when the Wyze camera reports motion; off 10 minutes after
+## the last motion message (each message restarts the timer).
+- id: lights_desk_wyze_motion
+  alias: 'Desk lights follow Wyze camera motion'
+  mode: restart
+  trigger:
+    - platform: mqtt
+      topic: camera/wyze-3/motion
+  action:
+    - if:
+        - condition: template
+          value_template: "{{ trigger.payload == 'ON' }}"
+      then:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.outlet_e
+    - delay: '00:10:00'
+    - action: switch.turn_off
+      target:
+        entity_id: switch.outlet_e
+
+## Stairs light: 5 minutes on main-level or upstairs motion, but not 22:00-07:00.
+- id: lights_stairs_on_motion
+  alias: 'Stairs light on motion (daytime only)'
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.ser2sock_10000_main_motion
+        - binary_sensor.ser2sock_10000_upstairs_motion
+      to: 'on'
+  condition:
+    - condition: time
+      after: '07:00:00'
+      before: '22:00:00'
+  action:
+    - action: light.turn_on
+      target:
+        entity_id: light.stairs2
+    - delay: '00:05:00'
+    - action: light.turn_off
+      target:
+        entity_id: light.stairs2

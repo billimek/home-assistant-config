@@ -1,0 +1,162 @@
+################################################
+## Scheduled / dusk lights
+################################################
+## Replaces the Node-RED zwave-tab "dark?" light-scheduler flows and the
+## "5am every day" / "7am-9:30pm" bigtimers.
+## "Dark" = sun elevation below a threshold (6 deg porch, 10 deg interior).
+
+## Porch light follows the sun: on below 6 deg, off above. Also evaluated at
+## startup so it recovers after a restart (Node-RED did the same).
+- id: lights_porch_dusk
+  alias: 'Porch light on when dark'
+  mode: restart
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: 6
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 6
+    - platform: homeassistant
+      event: start
+  action:
+    - if:
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: elevation
+          below: 6
+      then:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.porch
+      else:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.porch
+
+## Sunroom / foyer / tree lights: on when dark (elevation < 10 deg) between
+## 05:30 and midnight, off at sunrise or midnight. Also turned on (with the
+## cabinet lights) at 05:00 and when someone arrives home between 15:00 and
+## midnight while it is dark. All "on" paths require someone to be home.
+## Unlike Node-RED, "off" does not require someone to be home, so lights are
+## not left on all day when the house is empty at sunrise.
+## light.outlet_g is currently unplugged; continue_on_error keeps the rest working.
+- id: lights_evening_group
+  alias: 'Sunroom, foyer and tree lights follow the sun'
+  mode: queued
+  max: 5
+  variables:
+    evening_lights:
+      - group.sunroom_lights
+      - light.outlet_g
+      - light.outlet_h
+      - switch.outlet_f
+      - switch.outlet_f_2
+    cabinet_lights:
+      - group.cabinet_lights
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: 10
+      id: dusk
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 10
+      id: dawn
+    - platform: time
+      at: '05:30:00'
+      id: window_open
+    - platform: time
+      at: '00:00:00'
+      id: window_close
+    - platform: time
+      at: '05:00:00'
+      id: early
+    - platform: numeric_state
+      entity_id: zone.home
+      above: 0
+      id: arrive
+  action:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: [dawn, window_close]
+          sequence:
+            - action: homeassistant.turn_off
+              continue_on_error: true
+              target:
+                entity_id: "{{ evening_lights }}"
+        - conditions:
+            - condition: trigger
+              id: [dusk, window_open]
+            - condition: numeric_state
+              entity_id: zone.home
+              above: 0
+            - condition: numeric_state
+              entity_id: sun.sun
+              attribute: elevation
+              below: 10
+          sequence:
+            - action: homeassistant.turn_on
+              continue_on_error: true
+              target:
+                entity_id: "{{ evening_lights }}"
+        - conditions:
+            - condition: trigger
+              id: early
+            - condition: numeric_state
+              entity_id: zone.home
+              above: 0
+          sequence:
+            - action: homeassistant.turn_on
+              continue_on_error: true
+              target:
+                entity_id: "{{ evening_lights + cabinet_lights }}"
+        - conditions:
+            - condition: trigger
+              id: arrive
+            - condition: time
+              after: '15:00:00'
+              before: '23:59:59'
+            - condition: numeric_state
+              entity_id: sun.sun
+              attribute: elevation
+              below: 10
+          sequence:
+            - action: homeassistant.turn_on
+              continue_on_error: true
+              target:
+                entity_id: "{{ evening_lights + cabinet_lights }}"
+
+## Plant lights on from 09:00 to 21:30. The start trigger restores the right
+## state after a restart (Node-RED's bigtimer "atstart"). switch.outlet_d is
+## currently unplugged.
+- id: lights_plant_schedule
+  alias: 'Plant lights 09:00 - 21:30'
+  mode: restart
+  trigger:
+    - platform: time
+      at: '09:00:00'
+    - platform: time
+      at: '21:30:00'
+    - platform: homeassistant
+      event: start
+  action:
+    - if:
+        - condition: time
+          after: '09:00:00'
+          before: '21:30:00'
+      then:
+        - action: switch.turn_on
+          continue_on_error: true
+          target:
+            entity_id: switch.outlet_d
+      else:
+        - action: switch.turn_off
+          continue_on_error: true
+          target:
+            entity_id: switch.outlet_d
