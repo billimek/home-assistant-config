@@ -46,6 +46,8 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 | `automation/network.yaml` | new WiFi device alert |
 | `scripts/lights_off.yaml` | `script.lights_off`, used at midnight |
 | `scripts/notify.yaml` | `script.notify_phones` (central iOS push: audience, level, tag, group, url, action buttons) and `script.notify_clear`. New pushes should use it, not `notify.mobile_app_*` directly. While `input_boolean.notify_test_mode` is on, everything goes to Jeff's phone only |
+| `docs/notifications.md` | catalog of every push (trigger, who, level, buttons), the avatar table, the action-id convention, and how to add or test a notification |
+| `scripts/camera_notifications.yaml` | `script.mute_camera_notifications` (dashboard "Mute 1 hour"): turns off each camera toggle that is on and starts its `timer.camera_<name>_mute` |
 | `automation/notification_actions.yaml` | single handler for iOS action buttons; action ids are `KIND\|arg\|arg` (disarm, garage open/close/snooze, sensor snooze, camera mute, water silence). Snoozes and mutes use the restoring `timer.*` helpers |
 | `automations.yaml` | the 5 Frigate camera pushes (SgtBatten blueprint, one per camera: person/dog/cat only, `custom_filter` carries the weekday/overnight/nobody-home rules, "Mute 1 h" button). They bypass `notify_phones` (so `notify_test_mode` does not apply); `notify_group` is `ALL_DEVICES`, set it to `mobile_app_jeffsphone` to test |
 

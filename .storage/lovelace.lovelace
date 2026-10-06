@@ -1798,6 +1798,18 @@
                   "grid_options": {
                     "columns": "full"
                   }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Snoozed alerts",
+                  "icon": "mdi:bell-sleep"
+                },
+                {
+                  "type": "markdown",
+                  "content": "{% set t = states.timer | selectattr('state', 'eq', 'active') | selectattr('entity_id', 'search', 'snooze|mute') | list %}{% if t %}{% for x in t %}- **{{ x.name }}**: {{ (((as_timestamp(x.attributes.finishes_at) - now().timestamp()) / 60) | round(0) | int) }} min left\n{% endfor %}{% else %}Nothing snoozed or muted.{% endif %}",
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 }
               ]
             },

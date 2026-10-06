@@ -14,7 +14,10 @@
       camera: camera.porch
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      message: '{{ label }} detected - {{ camera_name }}'
+      title: '{{ camera_name }}'
+      message: '{{ label }} detected'
+      icon: "mdi:{{ 'account' if label == 'Person' else 'dog' if label == 'Dog' else 'cat' if label == 'Cat' else 'cctv' }}"
+      color: '#00897B'
       labels: [person, dog, cat]
       interruption_level: time-sensitive
       alert_once: true
@@ -35,7 +38,10 @@
       camera: camera.doorbell
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      message: '{{ label }} detected - {{ camera_name }}'
+      title: '{{ camera_name }}'
+      message: '{{ label }} detected'
+      icon: "mdi:{{ 'account' if label == 'Person' else 'dog' if label == 'Dog' else 'cat' if label == 'Cat' else 'cctv' }}"
+      color: '#00897B'
       labels: [person, dog, cat]
       interruption_level: time-sensitive
       alert_once: true
@@ -55,7 +61,10 @@
       camera: camera.driveway
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      message: '{{ label }} detected - {{ camera_name }}'
+      title: '{{ camera_name }}'
+      message: '{{ label }} detected'
+      icon: "mdi:{{ 'account' if label == 'Person' else 'dog' if label == 'Dog' else 'cat' if label == 'Cat' else 'cctv' }}"
+      color: '#00897B'
       labels: [person, dog, cat]
       cooldown: 120
       alert_once: true
@@ -76,7 +85,10 @@
       camera: camera.front
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      message: '{{ label }} detected - {{ camera_name }}'
+      title: '{{ camera_name }}'
+      message: '{{ label }} detected'
+      icon: "mdi:{{ 'account' if label == 'Person' else 'dog' if label == 'Dog' else 'cat' if label == 'Cat' else 'cctv' }}"
+      color: '#00897B'
       labels: [person, dog, cat]
       cooldown: 120
       alert_once: true
@@ -97,7 +109,10 @@
       camera: camera.pool
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      message: '{{ label }} detected - {{ camera_name }}'
+      title: '{{ camera_name }}'
+      message: '{{ label }} detected'
+      icon: "mdi:{{ 'account' if label == 'Person' else 'dog' if label == 'Dog' else 'cat' if label == 'Cat' else 'cctv' }}"
+      color: '#00897B'
       labels: [person, dog, cat]
       interruption_level: time-sensitive
       alert_once: true

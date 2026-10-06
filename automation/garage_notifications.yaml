@@ -43,7 +43,7 @@
     - action: script.notify_phones
       data:
         audience: "{{ 'jeff' if home else 'all' }}"
-        title: "{{ door.title }}"
+        title: "🚗 {{ door.title }}"
         message: "{{ door.title }} is open{{ '' if home else ' and no one is home!' }}"
         level: "{{ 'active' if home else 'time-sensitive' }}"
         sound: US-EN-Morgan-Freeman-Garage-Door-Opened.wav
@@ -96,7 +96,7 @@
             then:
               - action: script.notify_phones
                 data:
-                  title: "{{ repeat.item.title }}"
+                  title: "🚗 {{ repeat.item.title }}"
                   message: "{{ repeat.item.title }} is still open and no one is home!"
                   level: time-sensitive
                   sound: US-EN-Morgan-Freeman-Garage-Door-Opened.wav
@@ -148,7 +148,7 @@
             then:
               - action: script.notify_phones
                 data:
-                  title: "{{ door.title }}"
+                  title: "🚗 {{ door.title }}"
                   message: >
                     {{ door.title }} has remained open for about
                     {{ 2 + 3 * (repeat.index - 1) }} hours
@@ -207,7 +207,7 @@
             then:
               - action: script.notify_phones
                 data:
-                  title: "{{ repeat.item.title }}"
+                  title: "🚗 {{ repeat.item.title }}"
                   message: "Automatically closing {{ repeat.item.title }}"
                   level: time-sensitive
                   tag: "garage_{{ repeat.item.key }}_night"

@@ -77,7 +77,7 @@ action:
           - action: script.notify_phones
             data:
               audience: "{{ audience }}"
-              title: "{{ sensor_name }} left open"
+              title: "{{ '🪟 ' if 'window' in key else '🚪 ' }}{{ sensor_name }} left open"
               message: "{{ sensor_name }} has been open for more than {{ (timeout_seconds / 60) | int }} minutes."
               level: time-sensitive
               icon: 'mdi:door-open'

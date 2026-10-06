@@ -1,24 +1,30 @@
 ## Mute the camera push notifications for an hour, then restore only the ones that were on.
 ## Used by the "Mute 1 hour" button on the home-new dashboard Cameras view.
-## Like the automation timers, the wait lives in memory: an HA restart during the hour leaves them off.
+## Each muted camera gets its own restoring timer.camera_<name>_mute (the same one the "Mute 1 h"
+## notification button uses); automation camera_mute_finished (notification_actions.yaml) turns
+## the toggle back on when it ends, so a restart during the hour cannot leave a camera off.
 mute_camera_notifications:
   alias: 'Mute camera notifications for 1 hour'
   icon: mdi:bell-off
-  mode: restart
+  mode: single
   sequence:
-    - variables:
-        was_on: >-
-          {{ expand(['input_boolean.camera_front_notify',
-                     'input_boolean.camera_driveway_notify',
-                     'input_boolean.camera_porch_notify',
-                     'input_boolean.camera_pool_notify',
-                     'input_boolean.camera_doorbell_notify'])
-             | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list }}
-    - action: input_boolean.turn_off
-      target:
-        entity_id: "{{ was_on }}"
-    - delay:
-        hours: 1
-    - action: input_boolean.turn_on
-      target:
-        entity_id: "{{ was_on }}"
+    - repeat:
+        for_each:
+          - porch
+          - doorbell
+          - driveway
+          - front
+          - pool
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ is_state('input_boolean.camera_' ~ repeat.item ~ '_notify', 'on') }}"
+            then:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id: "input_boolean.camera_{{ repeat.item }}_notify"
+              - action: timer.start
+                target:
+                  entity_id: "timer.camera_{{ repeat.item }}_mute"
+                data:
+                  duration: '01:00:00'

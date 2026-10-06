@@ -70,7 +70,7 @@ action:
           - action: script.notify_phones
             data:
               audience: "{{ audience }}"
-              title: "{{ 'Motion detected' if motion else sensor_name ~ ' opened' }}"
+              title: "{{ '🏃 Motion detected' if motion else ('🪟 ' if 'window' in key else '🚪 ') ~ sensor_name ~ ' opened' }}"
               message: >-
                 {{ sensor_name }}{{ '' if motion else ' opened' }} while nobody is home.
               level: time-sensitive
