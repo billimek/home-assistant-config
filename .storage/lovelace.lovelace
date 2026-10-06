@@ -2738,6 +2738,191 @@
               ]
             }
           ]
+        },
+        {
+          "title": "Doorbell",
+          "path": "camera-doorbell",
+          "icon": "mdi:cctv",
+          "type": "sections",
+          "max_columns": 1,
+          "theme": "home_new",
+          "subview": true,
+          "back_path": "/lovelace/cameras",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Doorbell",
+                  "icon": "mdi:cctv"
+                },
+                {
+                  "type": "custom:advanced-camera-card",
+                  "cameras": [
+                    {
+                      "camera_entity": "camera.doorbell",
+                      "title": "Doorbell"
+                    }
+                  ],
+                  "view": {
+                    "default": "live"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Front",
+          "path": "camera-front",
+          "icon": "mdi:cctv",
+          "type": "sections",
+          "max_columns": 1,
+          "theme": "home_new",
+          "subview": true,
+          "back_path": "/lovelace/cameras",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Front",
+                  "icon": "mdi:cctv"
+                },
+                {
+                  "type": "custom:advanced-camera-card",
+                  "cameras": [
+                    {
+                      "camera_entity": "camera.front",
+                      "title": "Front"
+                    }
+                  ],
+                  "view": {
+                    "default": "live"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Driveway",
+          "path": "camera-driveway",
+          "icon": "mdi:cctv",
+          "type": "sections",
+          "max_columns": 1,
+          "theme": "home_new",
+          "subview": true,
+          "back_path": "/lovelace/cameras",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Driveway",
+                  "icon": "mdi:cctv"
+                },
+                {
+                  "type": "custom:advanced-camera-card",
+                  "cameras": [
+                    {
+                      "camera_entity": "camera.driveway",
+                      "title": "Driveway"
+                    }
+                  ],
+                  "view": {
+                    "default": "live"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Porch",
+          "path": "camera-porch",
+          "icon": "mdi:cctv",
+          "type": "sections",
+          "max_columns": 1,
+          "theme": "home_new",
+          "subview": true,
+          "back_path": "/lovelace/cameras",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Porch",
+                  "icon": "mdi:cctv"
+                },
+                {
+                  "type": "custom:advanced-camera-card",
+                  "cameras": [
+                    {
+                      "camera_entity": "camera.porch",
+                      "title": "Porch"
+                    }
+                  ],
+                  "view": {
+                    "default": "live"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Pool",
+          "path": "camera-pool",
+          "icon": "mdi:cctv",
+          "type": "sections",
+          "max_columns": 1,
+          "theme": "home_new",
+          "subview": true,
+          "back_path": "/lovelace/cameras",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Pool",
+                  "icon": "mdi:cctv"
+                },
+                {
+                  "type": "custom:advanced-camera-card",
+                  "cameras": [
+                    {
+                      "camera_entity": "camera.pool",
+                      "title": "Pool"
+                    }
+                  ],
+                  "view": {
+                    "default": "live"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ],
       "button_card_templates": {
