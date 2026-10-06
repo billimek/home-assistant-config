@@ -136,7 +136,8 @@
 ## state after a restart (Node-RED's bigtimer "atstart"). switch.outlet_d is
 ## currently unplugged.
 - id: lights_plant_schedule
-  alias: 'Plant lights 09:00 - 21:30'
+  alias: 'Plant lights on a daily schedule'
+  description: 'Plant lights on from 09:00 to 21:30; re-applies the correct state on HA start.'
   mode: restart
   trigger:
     - platform: time

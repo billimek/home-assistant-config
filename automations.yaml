@@ -1,6 +1,6 @@
 - id: '1706749818643'
-  alias: porch - not home
-  description: ''
+  alias: 'Camera alerts: porch (only when nobody home)'
+  description: 'Frigate push for the porch camera, only while the family group is away. Gated by input_boolean.camera_porch_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -15,8 +15,8 @@
       state_filter_states:
       - 'on'
 - id: '1706755435959'
-  alias: doorbell
-  description: ''
+  alias: 'Camera alerts: doorbell'
+  description: 'Frigate push for the doorbell camera at any time. Gated by input_boolean.camera_doorbell_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -30,8 +30,8 @@
       state_filter_states:
       - 'on'
 - id: '1706755452977'
-  alias: driveway
-  description: ''
+  alias: 'Camera alerts: driveway (weekdays)'
+  description: 'Frigate push for the driveway camera on weekdays only (Mon-Fri, via custom_filter). Gated by input_boolean.camera_driveway_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -47,8 +47,8 @@
       mqtt_topic: frigate/reviews
       custom_filter: '{{ now().weekday() < 5 }}'
 - id: '1706755468710'
-  alias: front
-  description: ''
+  alias: 'Camera alerts: front (weekdays)'
+  description: 'Frigate push for the front camera on weekdays only (Mon-Fri, via custom_filter). Gated by input_boolean.camera_front_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -63,8 +63,8 @@
       - 'on'
       custom_filter: '{{ now().weekday() < 5 }}'
 - id: '1706755509478'
-  alias: pool
-  description: ''
+  alias: 'Camera alerts: pool (overnight only)'
+  description: 'Frigate push for the pool camera only from 22:00 to 05:59 (hours 6-21 are suppressed). Gated by input_boolean.camera_pool_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -94,8 +94,8 @@
       state_filter_states:
       - 'on'
 - id: '1706820625839'
-  alias: pool - not home
-  description: ''
+  alias: 'Camera alerts: pool (only when nobody home)'
+  description: 'Frigate push for the pool camera, only while the family group is away. Gated by input_boolean.camera_pool_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -110,8 +110,8 @@
       state_filter_states:
       - 'on'
 - id: '1706821037958'
-  alias: driveway - not home
-  description: ''
+  alias: 'Camera alerts: driveway (only when nobody home)'
+  description: 'Frigate push for the driveway camera, only while the family group is away. Gated by input_boolean.camera_driveway_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -125,8 +125,8 @@
       state_filter_states:
       - 'on'
 - id: '1706821133056'
-  alias: front - not home
-  description: ''
+  alias: 'Camera alerts: front (only when nobody home)'
+  description: 'Frigate push for the front camera, only while the family group is away. Gated by input_boolean.camera_front_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -141,8 +141,8 @@
       state_filter_states:
       - 'on'
 - id: '1707590445295'
-  alias: porch
-  description: ''
+  alias: 'Camera alerts: porch (overnight only)'
+  description: 'Frigate push for the porch camera only from 22:00 to 05:59 (hours 6-21 are suppressed). Gated by input_boolean.camera_porch_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:

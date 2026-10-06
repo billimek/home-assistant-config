@@ -105,6 +105,7 @@
 ## closes the door if that door's auto-close toggle is on.
 - id: garage_door_open_nag
   alias: 'Nag when a garage door has been open for 2 hours'
+  description: "Weekday push to both phones after a door is open 2 hours, repeated every 3 hours; auto-closes if that door's auto-close toggle is on."
   mode: parallel
   max: 2
   trigger:
@@ -164,6 +165,7 @@
 ## Node-RED also spoke the message with tts.google_say; that is dropped.
 - id: garage_close_at_10pm
   alias: 'Close open garage doors at 10pm'
+  description: 'Closes any open garage door at 10pm when input_boolean.auto_garage_doors_night is on.'
   mode: single
   trigger:
     - platform: time

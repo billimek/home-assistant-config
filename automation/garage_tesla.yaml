@@ -18,6 +18,7 @@
 
 - id: garage_tesla_karr
   alias: 'Garage door follows KARR (Jeff)'
+  description: "Closes Jeff's garage door when KARR leaves the 200 ft geofence; opens it on arrival if the bay is empty. Gated by input_boolean.auto_garage_doors, 2 min cooldown."
   mode: single
   trigger:
     - platform: numeric_state
@@ -63,6 +64,7 @@
 
 - id: garage_tesla_orion
   alias: 'Garage door follows Orion (Jen)'
+  description: "Closes Jen's garage door when Orion leaves the 200 ft geofence; opens it on arrival if the bay is empty. Gated by input_boolean.auto_garage_doors, 2 min cooldown."
   mode: single
   trigger:
     - platform: numeric_state

@@ -17,6 +17,7 @@
 ## and the red state is not limited to weekdays (same as Node-RED's LED flow).
 - id: garage_led_indicator
   alias: 'Garage door state on Inovelli LEDs'
+  description: "Shows garage door state on the Inovelli LED bars via zwave_js config parameters (porch/garage switch param 8, stairs dimmers params 13/14)."
   mode: queued
   max: 5
   trigger:

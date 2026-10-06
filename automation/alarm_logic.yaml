@@ -9,6 +9,7 @@
 ## Midnight: turn the lights off, then arm the alarm if the night toggle is on.
 - id: alarm_midnight
   alias: 'Midnight lights off and arm alarm'
+  description: 'At midnight runs script.lights_off, then arms the alarm (home) if input_boolean.auto_arm_disarm_alarm_night is on and it is disarmed.'
   mode: single
   trigger:
     - platform: time
@@ -32,6 +33,7 @@
 ## 05:00: disarm if the night toggle is on and the alarm is not already disarmed.
 - id: alarm_morning_disarm
   alias: 'Disarm alarm at 5am'
+  description: 'At 05:00 disarms the alarm if input_boolean.auto_arm_disarm_alarm_night is on and it is armed.'
   mode: single
   trigger:
     - platform: time
