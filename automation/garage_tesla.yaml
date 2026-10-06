@@ -1,0 +1,143 @@
+################################################
+## Tesla geofence: auto close / open the garage doors
+################################################
+## Replaces the Node-RED Garage tab Tesla flows.
+##   KARR  (sensor.home_tesla2_location_distance) -> Jeff's door
+##   Orion (sensor.home_tesla3_location_distance) -> Jen's door
+## (Elektra parks in the driveway and is not used.) Distance is the Proximity
+## integration's distance in feet from home.
+##   Leaving (crosses above 200 ft): close the door if it is open.
+##   Arriving (crosses to 200 ft or less): open the door if it is closed and that
+##     car's bay sensor says the car is not in the garage.
+## Both are gated by input_boolean.auto_garage_doors (the kill switch).
+## Guards Node-RED lacked: an unavailable/unknown previous reading is ignored (a
+## GPS dropout must not look like a crossing), and each car has a 2 minute
+## cooldown (mode: single + trailing delay) so a flapping reading at the 200 ft
+## boundary cannot repeatedly toggle a door. Jeff gets a push for now (Node-RED
+## formatted these messages but never sent them); Jen is left out until Jeff says so (TODO(jen)).
+
+- id: garage_tesla_karr
+  alias: 'Garage door follows KARR (Jeff)'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_tesla2_location_distance
+      above: 200
+      id: leave
+    - platform: numeric_state
+      entity_id: sensor.home_tesla2_location_distance
+      below: 200.01
+      id: arrive
+  condition:
+    - condition: state
+      entity_id: input_boolean.auto_garage_doors
+      state: 'on'
+    - condition: template
+      value_template: "{{ trigger.from_state is not none and trigger.from_state.state not in ['unavailable', 'unknown'] }}"
+  action:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: leave
+            - condition: state
+              entity_id: cover.jeff_garage_door
+              state: 'open'
+          sequence:
+            - action: notify.mobile_app_jeffsphone
+              continue_on_error: true
+              data:
+                title: AUTO GARAGE
+                message: "Closing Jeff's Garage Door!"
+                data:
+                  push:
+                    category: garage
+            # TODO(jen): also notify notify.mobile_app_jensphone (same data) once Jeff says so
+            - action: cover.close_cover
+              target:
+                entity_id: cover.jeff_garage_door
+        - conditions:
+            - condition: trigger
+              id: arrive
+            - condition: state
+              entity_id: cover.jeff_garage_door
+              state: 'closed'
+            - condition: state
+              entity_id: binary_sensor.og_jeff_vehicle
+              state: 'off'
+          sequence:
+            - action: notify.mobile_app_jeffsphone
+              continue_on_error: true
+              data:
+                title: AUTO GARAGE
+                message: "Opening Jeff's Garage Door!"
+                data:
+                  push:
+                    category: garage_open
+            # TODO(jen): also notify notify.mobile_app_jensphone (same data) once Jeff says so
+            - action: cover.open_cover
+              target:
+                entity_id: cover.jeff_garage_door
+    - delay: '00:02:00'
+
+- id: garage_tesla_orion
+  alias: 'Garage door follows Orion (Jen)'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_tesla3_location_distance
+      above: 200
+      id: leave
+    - platform: numeric_state
+      entity_id: sensor.home_tesla3_location_distance
+      below: 200.01
+      id: arrive
+  condition:
+    - condition: state
+      entity_id: input_boolean.auto_garage_doors
+      state: 'on'
+    - condition: template
+      value_template: "{{ trigger.from_state is not none and trigger.from_state.state not in ['unavailable', 'unknown'] }}"
+  action:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: leave
+            - condition: state
+              entity_id: cover.jen_garage_door
+              state: 'open'
+          sequence:
+            - action: notify.mobile_app_jeffsphone
+              continue_on_error: true
+              data:
+                title: AUTO GARAGE
+                message: "Closing Jen's Garage Door!"
+                data:
+                  push:
+                    category: garage2
+            # TODO(jen): also notify notify.mobile_app_jensphone (same data) once Jeff says so
+            - action: cover.close_cover
+              target:
+                entity_id: cover.jen_garage_door
+        - conditions:
+            - condition: trigger
+              id: arrive
+            - condition: state
+              entity_id: cover.jen_garage_door
+              state: 'closed'
+            - condition: state
+              entity_id: binary_sensor.og_jen_vehicle
+              state: 'off'
+          sequence:
+            - action: notify.mobile_app_jeffsphone
+              continue_on_error: true
+              data:
+                title: AUTO GARAGE
+                message: "Opening Jen's Garage Door!"
+                data:
+                  push:
+                    category: garage_open
+            # TODO(jen): also notify notify.mobile_app_jensphone (same data) once Jeff says so
+            - action: cover.open_cover
+              target:
+                entity_id: cover.jen_garage_door
+    - delay: '00:02:00'
