@@ -1,0 +1,57 @@
+################################################
+## Guest mode
+################################################
+## input_boolean.guest_mode is for when guests are staying. It:
+##  - blocks automatic alarm arming (alarm_logic.yaml)
+##  - makes sensor.anyone_home read "home", so the away-only door/motion alerts stay quiet (configuration.yaml)
+##  - mutes the porch and pool camera pushes (custom_filter in automations.yaml)
+## It turns itself off after timer.guest_mode (72 h) in case it gets forgotten.
+
+- id: guest_mode_on
+  alias: 'Guest mode: start the auto-off timer'
+  description: 'Starts timer.guest_mode when guest mode is turned on.'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: input_boolean.guest_mode
+      to: 'on'
+  action:
+    - action: timer.start
+      target:
+        entity_id: timer.guest_mode
+
+- id: guest_mode_off
+  alias: 'Guest mode: cancel the auto-off timer'
+  description: 'Cancels timer.guest_mode when guest mode is turned off by hand.'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: input_boolean.guest_mode
+      to: 'off'
+  action:
+    - action: timer.cancel
+      target:
+        entity_id: timer.guest_mode
+
+- id: guest_mode_auto_off
+  alias: 'Guest mode: auto-off'
+  description: 'Turns guest mode off when the timer runs out and tells Jeff.'
+  mode: single
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.guest_mode
+  action:
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.guest_mode
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "Guest mode turned off"
+        message: "Guest mode reached its 72 h limit and was turned off automatically."
+        level: passive
+        icon: 'mdi:account-multiple-remove'
+        tag: guest_mode
+        group: security

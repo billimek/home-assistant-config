@@ -27,12 +27,13 @@
                 "cover.jeff_garage_door",
                 "cover.jen_garage_door",
                 "alarm_control_panel.ser2sock_10000_alarm_panel",
-                "sensor.alarm_zones_active"
+                "sensor.alarm_zones_active",
+                "input_boolean.guest_mode"
               ],
               "custom_fields": {
                 "date": "[[[ return new Date().toLocaleDateString([], {weekday: 'long', month: 'long', day: 'numeric'}); ]]]",
                 "greeting": "[[[ const h = new Date().getHours(); return 'Good ' + (h < 12 ? 'morning' : h < 18 ? 'afternoon' : 'evening') + ', Jeff'; ]]]",
-                "status": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].filter(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; const a = (states['alarm_control_panel.ser2sock_10000_alarm_panel'] || {state: 'unknown'}).state.replace(/_/g, ' '); const dot = '<span style=\"display:inline-block;width:8px;height:8px;border-radius:4px;background:currentColor;margin-right:10px;vertical-align:middle\"></span>'; return dot + (g.length ? 'Garage open: ' + g.map(e => states[e].attributes.friendly_name).join(', ') : zn > 0 ? z.state : 'All quiet: garages closed, alarm ' + a); ]]]"
+                "status": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].filter(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; const a = (states['alarm_control_panel.ser2sock_10000_alarm_panel'] || {state: 'unknown'}).state.replace(/_/g, ' '); const dot = '<span style=\"display:inline-block;width:8px;height:8px;border-radius:4px;background:currentColor;margin-right:10px;vertical-align:middle\"></span>'; return dot + (g.length ? 'Garage open: ' + g.map(e => states[e].attributes.friendly_name).join(', ') : zn > 0 ? z.state : 'All quiet: garages closed, alarm ' + a) + (states['input_boolean.guest_mode'] && states['input_boolean.guest_mode'].state === 'on' ? ' · Guest mode on' : ''); ]]]"
               },
               "styles": {
                 "card": [
@@ -112,10 +113,10 @@
                       "font-weight": "600"
                     },
                     {
-                      "background": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].some(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; return (g || zn > 0) ? 'rgba(255,184,77,0.16)' : 'rgba(79,209,160,0.16)'; ]]]"
+                      "background": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].some(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; return (g || zn > 0) ? 'rgba(255,184,77,0.16)' : (states['input_boolean.guest_mode'] && states['input_boolean.guest_mode'].state === 'on') ? 'rgba(77,163,255,0.16)' : 'rgba(79,209,160,0.16)'; ]]]"
                     },
                     {
-                      "color": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].some(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; return (g || zn > 0) ? 'var(--amber-color)' : 'var(--green-color)'; ]]]"
+                      "color": "[[[ const g = ['cover.jeff_garage_door','cover.jen_garage_door'].some(e => states[e] && states[e].state !== 'closed'); const z = states['sensor.alarm_zones_active']; const zn = z ? Number(z.attributes.active || 0) : 0; return (g || zn > 0) ? 'var(--amber-color)' : (states['input_boolean.guest_mode'] && states['input_boolean.guest_mode'].state === 'on') ? 'var(--blue-color)' : 'var(--green-color)'; ]]]"
                     }
                   ]
                 }
@@ -1794,6 +1795,23 @@
                   "icon": "mdi:shield-search",
                   "tap_action": {
                     "action": "none"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.guest_mode",
+                  "name": "Guest mode",
+                  "icon": "mdi:account-multiple",
+                  "color": "orange",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info",
+                    "entity": "timer.guest_mode"
                   },
                   "grid_options": {
                     "columns": "full"

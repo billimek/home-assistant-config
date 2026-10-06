@@ -3,6 +3,7 @@
 ## only notifies for person / dog / cat, and has a "Mute 1 h" action button (CAMERA_MUTE|<name>|60,
 ## handled in automation/notification_actions.yaml). The weekday / overnight / nobody-home rules
 ## are a custom_filter template; group.family is 'home' while anyone in it is home.
+## Guest mode (input_boolean.guest_mode) mutes the porch and pool cameras.
 ## notify_group ALL_DEVICES (both phones). These bypass script.notify_phones, so notify_test_mode does
 ## not apply; to test, set notify_group to mobile_app_jeffsphone.
 - id: '1707590445295'
@@ -24,7 +25,7 @@
       button_3: Mute 1 h
       url_3: CAMERA_MUTE|porch|60
       icon_3: sfsymbols:bell.slash
-      custom_filter: "{{ now().hour >= 22 or now().hour < 6 or not is_state('group.family', 'home') }}"
+      custom_filter: "{{ is_state('input_boolean.guest_mode', 'off') and (now().hour >= 22 or now().hour < 6 or not is_state('group.family', 'home')) }}"
       state_filter: true
       state_entity: input_boolean.camera_porch_notify
       state_filter_states:
@@ -119,7 +120,7 @@
       button_3: Mute 1 h
       url_3: CAMERA_MUTE|pool|60
       icon_3: sfsymbols:bell.slash
-      custom_filter: "{{ now().hour >= 22 or now().hour < 6 or not is_state('group.family', 'home') }}"
+      custom_filter: "{{ is_state('input_boolean.guest_mode', 'off') and (now().hour >= 22 or now().hour < 6 or not is_state('group.family', 'home')) }}"
       state_filter: true
       state_entity: input_boolean.camera_pool_notify
       state_filter_states:

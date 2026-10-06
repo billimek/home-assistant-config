@@ -29,6 +29,8 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 
 **Camera rules** (one automation per camera, all gated by `input_boolean.camera_<name>_notify`): porch and pool notify 22:00-05:59 or when nobody is home; driveway and front notify on weekdays or when nobody is home, with a 2 min cooldown; the doorbell camera always notifies.
 
+**Guest mode** (`input_boolean.guest_mode`, auto-off after 72 h via `timer.guest_mode`): `sensor.anyone_home` reads `home`, so the "opened/motion while nobody is home" pushes don't fire; the porch and pool camera pushes are muted; automatic alarm arming is blocked. Left on in guest mode: the "left open" timeout pushes, the alarm armed/disarmed/triggered pushes, the other cameras. It sends a passive "Guest mode turned off" push to Jeff when the timer expires.
+
 ## Look
 
 `script.notify_phones` picks an avatar (mdi icon and color) from the push's `group`; a caller can override `icon` or `color`. iOS shows it as a messaging-style notification, with the title as the sender.

@@ -35,6 +35,7 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 | `automation/alarm_logic.yaml` | midnight lights-off + arm, 05:00 disarm, disarm on arrival, arm when everyone leaves (gated by `input_boolean.auto_arm_disarm_alarm_night`, `auto_disarm_alarm_when_home`, `auto_arm_alarm_when_gone` and `input_select.alarm_mode`) |
 | `automation/alarm_notifications.yaml` | armed / disarmed / triggered / suspicious-disarm pushes + Discord for a triggered alarm (gated by `input_boolean.notify_alarm_*`) |
 | `automation/alarm.yaml` | sensor alerts (blueprints), iOS DISARM_ALARM action, AlarmDecoder watchdog |
+| `automation/guest_mode.yaml` | `input_boolean.guest_mode` auto-off (72 h `timer.guest_mode`). While on: no automatic alarm arming (`alarm_logic.yaml`), `sensor.anyone_home` reads `home` (silences the away sensor alerts), porch and pool camera pushes muted (`custom_filter` in `automations.yaml`) |
 | `automation/doorbell.yaml` | doorbell ring push (Dahua AD410) + watchdog that alerts if the Dahua listener goes quiet for 6 h (`input_datetime.dahua_last_event`) |
 | `automation/garage.yaml` | iOS open/close garage actions |
 | `automation/garage_notifications.yaml` | door-opened push, still-open-when-leaving, 2 h weekday nag (+ optional auto-close), 10 pm close (`input_boolean.auto_garage_doors_night`) |

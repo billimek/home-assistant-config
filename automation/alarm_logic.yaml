@@ -6,6 +6,9 @@
 ## The cleaning-calendar checks from Node-RED are dropped (the calendar feed is
 ## gone); revisit when an iCloud calendar integration exists.
 
+## Guest mode (input_boolean.guest_mode) blocks both automatic arms (midnight and
+## everyone-leaves) so guests never deal with the alarm; disarming is unaffected.
+
 ## Midnight: turn the lights off, then arm the alarm if the night toggle is on.
 - id: alarm_midnight
   alias: 'Midnight lights off and arm alarm'
@@ -20,6 +23,9 @@
         - condition: state
           entity_id: input_boolean.auto_arm_disarm_alarm_night
           state: 'on'
+        - condition: state
+          entity_id: input_boolean.guest_mode
+          state: 'off'
         - condition: state
           entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
           state: 'disarmed'
@@ -94,6 +100,9 @@
     - condition: state
       entity_id: input_boolean.auto_arm_alarm_when_gone
       state: 'on'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
     - condition: state
       entity_id: input_select.alarm_mode
       state: automatic

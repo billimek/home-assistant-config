@@ -91,6 +91,11 @@ input_boolean:
   auto_disarm_alarm_when_home:
     name: Automatically disarm alarm when someone comes home
 
+  # guests staying over (automation/guest_mode.yaml)
+  guest_mode:
+    name: Guest mode
+    icon: mdi:account-multiple
+
   # notifications
   camera_front_notify:
     name: Front camera notifications
@@ -130,6 +135,12 @@ timer:
   water_alert_snooze:
     name: Silence repeating water alerts
     icon: mdi:bell-sleep
+    restore: true
+  ## Auto-off for input_boolean.guest_mode (automation/guest_mode.yaml)
+  guest_mode:
+    name: Guest mode auto-off
+    icon: mdi:account-clock
+    duration: '72:00:00'
     restore: true
 
   ## Camera "Mute 1 h" action buttons (see automation/notification_actions.yaml)
@@ -254,7 +265,10 @@ template:
       # unavailable (not "not_home") while the group is unknown, e.g. at startup,
       # so the away alerts can't fire from a restart
       availability: "{{ states('group.family') not in ['unknown', 'unavailable'] }}"
-      state: "{{ 'home' if is_state('group.family', 'home') else 'not_home' }}"
+      # guest mode reads as "home" so the away-only sensor alerts stay quiet
+      state: >
+        {{ 'home' if is_state('group.family', 'home')
+           or is_state('input_boolean.guest_mode', 'on') else 'not_home' }}
 
   ## Jeff's garage
   - sensor:
