@@ -25,7 +25,7 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 | 🏠 Someone came home | `zone.home` goes above 0 | Jeff | passive | none | |
 | 🏠 Jen came home | Jen's person entity becomes `home` | Jeff | active | none | |
 | New device detected | a new `device_tracker` entity appears | Jeff | passive | none | |
-| Camera detections | Frigate person, dog or cat on one of 5 cameras (rules below) | both | time-sensitive (porch, doorbell, pool) / active (driveway, front) | View Clip, View Snapshot, **Mute 1 h** | |
+| Camera detections | Frigate person, dog or cat on one of 5 cameras (rules below) | both | time-sensitive (porch, doorbell, pool) / active (driveway, front) | Mute 1 h; tapping opens that camera's live view (`/lovelace/camera-<name>`) | |
 
 **Camera rules** (one automation per camera, all gated by `input_boolean.camera_<name>_notify`): porch and pool notify 22:00-05:59 or when nobody is home; driveway and front notify on weekdays or when nobody is home, with a 2 min cooldown; the doorbell camera always notifies.
 
