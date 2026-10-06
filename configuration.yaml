@@ -238,7 +238,7 @@ template:
     - name: "Alarm Zones Active"
       unique_id: alarm_zones_active
       state: >
-        {% set z = states.binary_sensor | selectattr('entity_id', 'search', '^binary_sensor\.ser2sock_10000_') | selectattr('state', 'eq', 'on') | list %}
+        {% set z = states.binary_sensor | selectattr('entity_id', 'search', '^binary_sensor\.ser2sock_10000_') | rejectattr('entity_id', 'eq', 'binary_sensor.ser2sock_10000_basement_window') | selectattr('state', 'eq', 'on') | list %}
         {% set motion = z | selectattr('attributes.device_class', 'eq', 'motion') | map(attribute='name') | list %}
         {% set opened = z | selectattr('attributes.device_class', 'in', ['door', 'window']) | map(attribute='name') | list %}
         {% set smoke = z | selectattr('attributes.device_class', 'eq', 'smoke') | map(attribute='name') | list %}
@@ -249,7 +249,7 @@ template:
         {{ parts | join(' · ') if parts else 'All zones closed' }}
       attributes:
         active: >
-          {{ states.binary_sensor | selectattr('entity_id', 'search', '^binary_sensor\.ser2sock_10000_') | selectattr('state', 'eq', 'on') | list | count }}
+          {{ states.binary_sensor | selectattr('entity_id', 'search', '^binary_sensor\.ser2sock_10000_') | rejectattr('entity_id', 'eq', 'binary_sensor.ser2sock_10000_basement_window') | selectattr('state', 'eq', 'on') | list | count }}
 
   ## Weekday
   - sensor:

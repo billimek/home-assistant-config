@@ -944,6 +944,12 @@
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
                   "grid_options": {
                     "columns": 6
                   }
@@ -956,6 +962,12 @@
                   "color": "amber",
                   "tap_action": {
                     "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
                   },
                   "grid_options": {
                     "columns": 6
@@ -970,6 +982,12 @@
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
                   "grid_options": {
                     "columns": 6
                   }
@@ -982,6 +1000,12 @@
                   "color": "amber",
                   "tap_action": {
                     "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
                   },
                   "grid_options": {
                     "columns": 6
@@ -1006,6 +1030,12 @@
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
                   "grid_options": {
                     "columns": 6
                   }
@@ -1018,6 +1048,12 @@
                   "color": "amber",
                   "tap_action": {
                     "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
                   },
                   "grid_options": {
                     "columns": 6
@@ -1035,19 +1071,6 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "switch.outlet_f_2",
-                  "name": "Foyer lights",
-                  "icon": "mdi:ceiling-light",
-                  "color": "amber",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
                   "entity": "switch.outlet_f",
                   "name": "Foyer tree lights",
                   "icon": "mdi:pine-tree",
@@ -1055,18 +1078,68 @@
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
                   "grid_options": {
                     "columns": 6
                   }
                 },
                 {
                   "type": "tile",
-                  "entity": "light.stairs2",
-                  "name": "Foyer stairs",
-                  "icon": "mdi:stairs",
+                  "entity": "switch.outlet_f_2",
+                  "name": "Foyer lights",
+                  "icon": "mdi:ceiling-light",
                   "color": "amber",
                   "tap_action": {
                     "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.outlet_h",
+                  "name": "Sunroom lights",
+                  "icon": "mdi:lightbulb-group",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.outlet_h_2",
+                  "name": "Sunroom lights 2",
+                  "icon": "mdi:lightbulb",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
                   },
                   "grid_options": {
                     "columns": 6
@@ -1081,63 +1154,30 @@
                   "tap_action": {
                     "action": "toggle"
                   },
-                  "grid_options": {
-                    "columns": 6
+                  "icon_tap_action": {
+                    "action": "more-info"
                   },
                   "hold_action": {
                     "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
                   }
                 },
                 {
                   "type": "tile",
-                  "entity": "group.sunroom_lights",
-                  "name": "Sunroom lights",
-                  "icon": "mdi:lightbulb-group",
+                  "entity": "light.stairs2",
+                  "name": "Foyer stairs",
+                  "icon": "mdi:stairs",
                   "color": "amber",
                   "tap_action": {
                     "action": "toggle"
                   },
-                  "grid_options": {
-                    "columns": 6
+                  "icon_tap_action": {
+                    "action": "more-info"
                   },
                   "hold_action": {
                     "action": "more-info"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "light.outlet_g",
-                  "name": "Sunroom tree lights",
-                  "icon": "mdi:pine-tree",
-                  "color": "amber",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "light.outlet_h",
-                  "name": "Outlet H",
-                  "icon": "mdi:power-socket-us",
-                  "color": "amber",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "switch.outlet_d",
-                  "name": "Outlet D",
-                  "icon": "mdi:power-socket-us",
-                  "color": "amber",
-                  "tap_action": {
-                    "action": "toggle"
                   },
                   "grid_options": {
                     "columns": 6
@@ -1176,9 +1216,16 @@
                   "type": "tile",
                   "entity": "light.stairs",
                   "name": "Stairs",
+                  "icon": "mdi:stairs-down",
                   "color": "amber",
                   "tap_action": {
                     "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
                   },
                   "grid_options": {
                     "columns": 6
@@ -1193,6 +1240,12 @@
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
                   "grid_options": {
                     "columns": 6
                   }
@@ -1206,6 +1259,12 @@
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
                   "grid_options": {
                     "columns": 6
                   }
@@ -1218,6 +1277,98 @@
                   "color": "amber",
                   "tap_action": {
                     "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Offline / unused",
+                  "icon": "mdi:power-plug-off"
+                },
+                {
+                  "type": "tile",
+                  "entity": "group.sunroom_lights",
+                  "name": "Sunroom group (old)",
+                  "icon": "mdi:lightbulb-group",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.outlet_g",
+                  "name": "Sunroom tree lights",
+                  "icon": "mdi:pine-tree",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.outlet_g_2",
+                  "name": "Sunroom light 1",
+                  "icon": "mdi:lightbulb",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.outlet_d",
+                  "name": "Outlet D",
+                  "icon": "mdi:power-socket-us",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
                   },
                   "grid_options": {
                     "columns": 6
@@ -1647,51 +1798,6 @@
                   "grid_options": {
                     "columns": "full"
                   }
-                },
-                {
-                  "type": "heading",
-                  "heading": "Motion alerts (nobody home)",
-                  "heading_style": "subtitle",
-                  "icon": "mdi:motion-sensor"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.alert_when_motion_is_detected_upstairs_and_nobody_home",
-                  "name": "Upstairs",
-                  "color": "blue",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  },
-                  "icon": "mdi:motion-sensor"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home",
-                  "name": "Main level",
-                  "color": "blue",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  },
-                  "icon": "mdi:motion-sensor"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home",
-                  "name": "Basement",
-                  "color": "blue",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  },
-                  "icon": "mdi:motion-sensor"
                 }
               ]
             },
@@ -1700,151 +1806,376 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Door & window alerts (away)",
-                  "icon": "mdi:door-open"
+                  "heading": "Zones",
+                  "icon": "mdi:radar"
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_front_door_is_open_and_nobody_home",
-                  "name": "Front door",
-                  "color": "blue",
+                  "type": "heading",
+                  "heading": "Tap a tile to switch its away-alert on/off · tap the icon for history",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "heading",
+                  "heading": "Motion",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_motion",
+                  "variables": {
+                    "label": "Upstairs",
+                    "automation": "automation.alert_when_motion_is_detected_upstairs_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_motion_is_detected_upstairs_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_motion_is_detected_upstairs_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:door"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_garage_door_is_open_and_nobody_home",
-                  "name": "Garage door",
-                  "color": "blue",
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_main_motion",
+                  "variables": {
+                    "label": "Main level",
+                    "automation": "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:garage-variant"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_sun_room_door_is_open_and_nobody_home",
-                  "name": "Sun room door",
-                  "color": "blue",
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_basement_motion",
+                  "variables": {
+                    "label": "Basement",
+                    "automation": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:door-sliding"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_basement_door_is_open_and_nobody_home",
-                  "name": "Basement door",
-                  "color": "blue",
+                  "type": "heading",
+                  "heading": "Doors",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_front_door",
+                  "variables": {
+                    "label": "Front door",
+                    "automation": "automation.alert_when_front_door_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_front_door_is_open_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_front_door_is_open_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:stairs-down"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_unknown_door_is_open_and_nobody_home",
-                  "name": "Unknown door",
-                  "color": "blue",
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_garage_door",
+                  "variables": {
+                    "label": "Garage door",
+                    "automation": "automation.alert_when_garage_door_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_garage_door_is_open_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_garage_door_is_open_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:door-closed-lock"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_family_window_is_open_and_nobody_home",
-                  "name": "Family window",
-                  "color": "blue",
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_sun_room_door",
+                  "variables": {
+                    "label": "Sun room door",
+                    "automation": "automation.alert_when_sun_room_door_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_sun_room_door_is_open_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_sun_room_door_is_open_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:window-closed-variant"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_living_window_is_open_and_nobody_home",
-                  "name": "Living window",
-                  "color": "blue",
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_basement_door",
+                  "variables": {
+                    "label": "Basement door",
+                    "automation": "automation.alert_when_basement_door_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_basement_door_is_open_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_basement_door_is_open_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:window-closed-variant"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_kitchen_window_is_open_and_nobody_home",
-                  "name": "Kitchen window",
-                  "color": "blue",
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_unknown_door",
+                  "variables": {
+                    "label": "Unknown door",
+                    "automation": "automation.alert_when_unknown_door_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_unknown_door_is_open_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_unknown_door_is_open_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:window-closed-variant"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_bathroom_window_is_open_and_nobody_home",
-                  "name": "Bathroom window",
-                  "color": "blue",
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_sliding_door",
+                  "variables": {
+                    "label": "Sliding door",
+                    "automation": "automation.alert_when_sliding_door_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_sliding_door_is_open_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_sliding_door_is_open_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:window-closed-variant"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_laundry_window_is_open_and_nobody_home",
-                  "name": "Laundry window",
-                  "color": "blue",
+                  "type": "heading",
+                  "heading": "Windows",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_family_window",
+                  "variables": {
+                    "label": "Family window",
+                    "automation": "automation.alert_when_family_window_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_family_window_is_open_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_family_window_is_open_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
-                  },
-                  "icon": "mdi:window-closed-variant"
+                  }
                 },
                 {
-                  "type": "tile",
-                  "entity": "automation.alert_when_upstairs_window_is_open_and_nobody_home",
-                  "name": "Upstairs window",
-                  "color": "blue",
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_living_window",
+                  "variables": {
+                    "label": "Living window",
+                    "automation": "automation.alert_when_living_window_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_living_window_is_open_and_nobody_home"
+                  ],
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_living_window_is_open_and_nobody_home"
+                    }
                   },
                   "grid_options": {
                     "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_kitchen_window",
+                  "variables": {
+                    "label": "Kitchen window",
+                    "automation": "automation.alert_when_kitchen_window_is_open_and_nobody_home"
                   },
-                  "icon": "mdi:window-closed-variant"
+                  "triggers_update": [
+                    "automation.alert_when_kitchen_window_is_open_and_nobody_home"
+                  ],
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_kitchen_window_is_open_and_nobody_home"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_bathroom_window",
+                  "variables": {
+                    "label": "Bathroom window",
+                    "automation": "automation.alert_when_bathroom_window_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_bathroom_window_is_open_and_nobody_home"
+                  ],
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_bathroom_window_is_open_and_nobody_home"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_laundry_window",
+                  "variables": {
+                    "label": "Laundry window",
+                    "automation": "automation.alert_when_laundry_window_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_laundry_window_is_open_and_nobody_home"
+                  ],
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_laundry_window_is_open_and_nobody_home"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "zone",
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_window",
+                  "variables": {
+                    "label": "Upstairs window",
+                    "automation": "automation.alert_when_upstairs_window_is_open_and_nobody_home"
+                  },
+                  "triggers_update": [
+                    "automation.alert_when_upstairs_window_is_open_and_nobody_home"
+                  ],
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "automation.toggle",
+                    "service_data": {
+                      "entity_id": "automation.alert_when_upstairs_window_is_open_and_nobody_home"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Smoke",
+                  "heading_style": "subtitle"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.ser2sock_10000_hall_smoke",
+                  "name": "Hall smoke",
+                  "color": "red",
+                  "state_content": [
+                    "state",
+                    "last_changed"
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
                 }
               ]
             },
@@ -1867,7 +2198,11 @@
                   "grid_options": {
                     "columns": 6
                   },
-                  "icon": "mdi:garage-open-variant"
+                  "icon": "mdi:garage-open-variant",
+                  "icon_tap_action": {
+                    "action": "more-info",
+                    "entity": "binary_sensor.ser2sock_10000_garage_door"
+                  }
                 },
                 {
                   "type": "tile",
@@ -1880,7 +2215,11 @@
                   "grid_options": {
                     "columns": 6
                   },
-                  "icon": "mdi:stairs-down"
+                  "icon": "mdi:stairs-down",
+                  "icon_tap_action": {
+                    "action": "more-info",
+                    "entity": "binary_sensor.ser2sock_10000_basement_door"
+                  }
                 },
                 {
                   "type": "tile",
@@ -1893,7 +2232,11 @@
                   "grid_options": {
                     "columns": 6
                   },
-                  "icon": "mdi:door-open"
+                  "icon": "mdi:door-open",
+                  "icon_tap_action": {
+                    "action": "more-info",
+                    "entity": "binary_sensor.ser2sock_10000_front_door"
+                  }
                 },
                 {
                   "type": "tile",
@@ -1906,7 +2249,28 @@
                   "grid_options": {
                     "columns": 6
                   },
-                  "icon": "mdi:door-sliding-open"
+                  "icon": "mdi:door-sliding-open",
+                  "icon_tap_action": {
+                    "action": "more-info",
+                    "entity": "binary_sensor.ser2sock_10000_sun_room_door"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.alert_when_sliding_door_is_opened_for_too_long",
+                  "name": "Sliding door",
+                  "color": "blue",
+                  "icon": "mdi:door-sliding-open",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "icon_tap_action": {
+                    "action": "more-info",
+                    "entity": "binary_sensor.ser2sock_10000_sliding_door"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
                 },
                 {
                   "type": "heading",
@@ -1977,257 +2341,6 @@
                     "columns": 6
                   },
                   "icon": "mdi:garage-alert-variant"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Live sensors",
-                  "icon": "mdi:radar"
-                },
-                {
-                  "type": "heading",
-                  "heading": "Motion",
-                  "heading_style": "subtitle"
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_upstairs_motion",
-                  "name": "Upstairs",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_main_motion",
-                  "name": "Main level",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_basement_motion",
-                  "name": "Basement",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "heading",
-                  "heading": "Doors",
-                  "heading_style": "subtitle"
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_front_door",
-                  "name": "Front door",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_garage_door",
-                  "name": "Garage door",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_sun_room_door",
-                  "name": "Sun room door",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_sliding_door",
-                  "name": "Sliding door",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_basement_door",
-                  "name": "Basement door",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_unknown_door",
-                  "name": "Unknown door",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "heading",
-                  "heading": "Windows",
-                  "heading_style": "subtitle"
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_family_window",
-                  "name": "Family",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_living_window",
-                  "name": "Living",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_kitchen_window",
-                  "name": "Kitchen",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_bathroom_window",
-                  "name": "Bathroom",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_laundry_window",
-                  "name": "Laundry",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_basement_window",
-                  "name": "Basement",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_upstairs_window",
-                  "name": "Upstairs",
-                  "color": "amber",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "heading",
-                  "heading": "Smoke",
-                  "heading_style": "subtitle"
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_hall_smoke",
-                  "name": "Hall smoke",
-                  "color": "red",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
-                  "grid_options": {
-                    "columns": 6
-                  }
                 }
               ]
             }
@@ -2596,7 +2709,77 @@
             }
           ]
         }
-      ]
+      ],
+      "button_card_templates": {
+        "zone": {
+          "show_name": true,
+          "show_icon": true,
+          "show_state": false,
+          "show_label": true,
+          "name": "[[[ return variables.label; ]]]",
+          "label": "[[[ const s = entity; const dc = s.attributes.device_class; const on = s.state === 'on'; const t = dc === 'motion' ? (on ? 'Motion' : 'Clear') : (on ? 'Open' : 'Closed'); const au = states[variables.automation]; const ae = au && au.state === 'on'; return t + ' · <span style=\"font-weight:600;color:' + (ae ? 'var(--green-color)' : 'var(--secondary-text-color)') + '\">Alert ' + (ae ? 'on' : 'off') + '</span>'; ]]]",
+          "icon_tap_action": {
+            "action": "more-info"
+          },
+          "styles": {
+            "card": [
+              {
+                "border-radius": "18px"
+              },
+              {
+                "padding": "8px 12px"
+              },
+              {
+                "height": "60px"
+              },
+              {
+                "background": "[[[ return entity.state === 'on' ? 'rgba(255,184,77,0.16)' : 'var(--card-background-color)'; ]]]"
+              }
+            ],
+            "grid": [
+              {
+                "grid-template-areas": "\"i n\" \"i l\""
+              },
+              {
+                "grid-template-columns": "36px 1fr"
+              },
+              {
+                "grid-template-rows": "auto auto"
+              },
+              {
+                "column-gap": "10px"
+              }
+            ],
+            "icon": [
+              {
+                "width": "26px"
+              },
+              {
+                "color": "[[[ return entity.state === 'on' ? 'var(--amber-color)' : 'var(--secondary-text-color)'; ]]]"
+              }
+            ],
+            "name": [
+              {
+                "justify-self": "start"
+              },
+              {
+                "font-size": "15px"
+              },
+              {
+                "font-weight": "600"
+              }
+            ],
+            "label": [
+              {
+                "justify-self": "start"
+              },
+              {
+                "font-size": "12px"
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }

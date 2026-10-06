@@ -57,6 +57,17 @@
       notify_jeff: true
       notify_jen: true
 
+- id: alert_when_sliding_door_open_for_too_long
+  alias: 'Alert when sliding door is opened for too long'
+  use_blueprint:
+    path: custom/sensor_alert_timeout.yaml
+    input:
+      sensor_entity: binary_sensor.ser2sock_10000_sliding_door
+      sensor_name: "Sliding door"
+      timeout_seconds: 300
+      notify_jeff: true
+      notify_jen: true
+
 ################################################
 ## Sensor alerts when away (using blueprint)
 ################################################
