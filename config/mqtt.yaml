@@ -26,20 +26,9 @@ cover:
 
 ################################################
 ## Tesla
-## All Tesla telemetry now comes from TeslaMate's built-in MQTT discovery
+## All Tesla telemetry comes from TeslaMate's built-in MQTT discovery
 ## (MQTT_DISCOVERY=true): devices Elektra (car 1), KARR (car 2), Orion (car 3).
-## Do not re-add hand-written sensors here.
-##
-## TEMPORARY FALLBACK: the location templates in configuration.yaml
-## (device_tracker.tesla{,2,3}_location) now read the discovered
-## device_tracker.elektra/karr/orion. These raw lat/lon sensors are kept only so
-## the old wiring can be restored quickly if discovery's location updates ever
-## misbehave while driving. Remove them once a real drive has been verified.
+## Do not re-add hand-written sensors here. The location trackers in
+## configuration.yaml (device_tracker.tesla{,2,3}_location) read the discovered
+## device_tracker.elektra/karr/orion.
 ################################################
-sensor:
-  - { name: tesla_latitude, state_topic: "teslamate/cars/1/latitude", unit_of_measurement: "°", icon: "mdi:crosshairs-gps" }
-  - { name: tesla2_latitude, state_topic: "teslamate/cars/2/latitude", unit_of_measurement: "°", icon: "mdi:crosshairs-gps" }
-  - { name: tesla3_latitude, state_topic: "teslamate/cars/3/latitude", unit_of_measurement: "°", icon: "mdi:crosshairs-gps" }
-  - { name: tesla_longitude, state_topic: "teslamate/cars/1/longitude", unit_of_measurement: "°", icon: "mdi:crosshairs-gps" }
-  - { name: tesla2_longitude, state_topic: "teslamate/cars/2/longitude", unit_of_measurement: "°", icon: "mdi:crosshairs-gps" }
-  - { name: tesla3_longitude, state_topic: "teslamate/cars/3/longitude", unit_of_measurement: "°", icon: "mdi:crosshairs-gps" }
