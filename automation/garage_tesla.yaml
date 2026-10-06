@@ -13,8 +13,8 @@
 ## Guards Node-RED lacked: an unavailable/unknown previous reading is ignored (a
 ## GPS dropout must not look like a crossing), and each car has a 2 minute
 ## cooldown (mode: single + trailing delay) so a flapping reading at the 200 ft
-## boundary cannot repeatedly toggle a door. Jeff gets a push for now (Node-RED
-## formatted these messages but never sent them); Jen is left out until Jeff says so (TODO(jen)).
+## boundary cannot repeatedly toggle a door. Jeff and Jen both get a push (Node-RED
+## formatted these messages but never sent them).
 
 - id: garage_tesla_karr
   alias: 'Garage door follows KARR (Jeff)'
@@ -45,13 +45,15 @@
           sequence:
             - action: notify.mobile_app_jeffsphone
               continue_on_error: true
-              data:
+              data: &tesla_close_jeff
                 title: AUTO GARAGE
                 message: "Closing Jeff's Garage Door!"
                 data:
                   push:
                     category: garage
-            # TODO(jen): also notify notify.mobile_app_jensphone (same data) once Jeff says so
+            - action: notify.mobile_app_jensphone
+              continue_on_error: true
+              data: *tesla_close_jeff
             - action: cover.close_cover
               target:
                 entity_id: cover.jeff_garage_door
@@ -67,13 +69,15 @@
           sequence:
             - action: notify.mobile_app_jeffsphone
               continue_on_error: true
-              data:
+              data: &tesla_open_jeff
                 title: AUTO GARAGE
                 message: "Opening Jeff's Garage Door!"
                 data:
                   push:
                     category: garage_open
-            # TODO(jen): also notify notify.mobile_app_jensphone (same data) once Jeff says so
+            - action: notify.mobile_app_jensphone
+              continue_on_error: true
+              data: *tesla_open_jeff
             - action: cover.open_cover
               target:
                 entity_id: cover.jeff_garage_door
@@ -108,13 +112,15 @@
           sequence:
             - action: notify.mobile_app_jeffsphone
               continue_on_error: true
-              data:
+              data: &tesla_close_jen
                 title: AUTO GARAGE
                 message: "Closing Jen's Garage Door!"
                 data:
                   push:
                     category: garage2
-            # TODO(jen): also notify notify.mobile_app_jensphone (same data) once Jeff says so
+            - action: notify.mobile_app_jensphone
+              continue_on_error: true
+              data: *tesla_close_jen
             - action: cover.close_cover
               target:
                 entity_id: cover.jen_garage_door
@@ -130,13 +136,15 @@
           sequence:
             - action: notify.mobile_app_jeffsphone
               continue_on_error: true
-              data:
+              data: &tesla_open_jen
                 title: AUTO GARAGE
                 message: "Opening Jen's Garage Door!"
                 data:
                   push:
                     category: garage_open
-            # TODO(jen): also notify notify.mobile_app_jensphone (same data) once Jeff says so
+            - action: notify.mobile_app_jensphone
+              continue_on_error: true
+              data: *tesla_open_jen
             - action: cover.open_cover
               target:
                 entity_id: cover.jen_garage_door
