@@ -939,7 +939,7 @@
                   "dark_mode": true,
                   "default_zoom": 12,
                   "entities": [
-                    "device_tracker.tesla_location"
+                    "device_tracker.elektra"
                   ]
                 }
               ]
@@ -964,7 +964,7 @@
                   "name": "Geo-fence Name"
                 },
                 {
-                  "entity": "sensor.home_tesla_location_distance",
+                  "entity": "sensor.home_elektra_distance",
                   "name": "Distance to Home"
                 },
                 {
@@ -1321,7 +1321,7 @@
                   "default_zoom": 12,
                   "entities": [
                     {
-                      "entity": "device_tracker.tesla2_location"
+                      "entity": "device_tracker.karr"
                     }
                   ]
                 }
@@ -1347,7 +1347,7 @@
                   "name": "Geo-fence Name"
                 },
                 {
-                  "entity": "sensor.home_tesla2_location_distance",
+                  "entity": "sensor.home_karr_distance",
                   "name": "Distance to Home"
                 },
                 {
@@ -1704,7 +1704,7 @@
                   "default_zoom": 12,
                   "entities": [
                     {
-                      "entity": "device_tracker.tesla3_location"
+                      "entity": "device_tracker.orion"
                     }
                   ]
                 }
@@ -1730,7 +1730,7 @@
                   "name": "Geo-fence Name"
                 },
                 {
-                  "entity": "sensor.home_tesla3_location_distance",
+                  "entity": "sensor.home_orion_distance",
                   "name": "Distance to Home"
                 },
                 {
