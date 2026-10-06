@@ -223,9 +223,11 @@
       event_data:
         action: DISARM_ALARM
   action:
-    - service: alarm_control_panel.ser2sock_10000_alarm_disarm
-      data:
+    # was alarm_control_panel.ser2sock_10000_alarm_disarm, a service that does not exist
+    - action: alarm_control_panel.alarm_disarm
+      target:
         entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      data:
         code: !env_var ALARMCD
 
 ################################################

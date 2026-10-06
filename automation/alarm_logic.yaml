@@ -1,0 +1,106 @@
+################################################
+## Alarm arm / disarm logic
+################################################
+## Replaces the Node-RED Alarm tab arm/disarm flows. Notifications for the
+## resulting state changes live in alarm_notifications.yaml.
+## The cleaning-calendar checks from Node-RED are dropped (the calendar feed is
+## gone); revisit when an iCloud calendar integration exists.
+
+## Midnight: turn the lights off, then arm the alarm if the night toggle is on.
+- id: alarm_midnight
+  alias: 'Midnight lights off and arm alarm'
+  mode: single
+  trigger:
+    - platform: time
+      at: '00:00:00'
+  action:
+    - action: script.lights_off
+    - if:
+        - condition: state
+          entity_id: input_boolean.auto_arm_disarm_alarm_night
+          state: 'on'
+        - condition: state
+          entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+          state: 'disarmed'
+      then:
+        - action: alarm_control_panel.alarm_arm_home
+          target:
+            entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+          data:
+            code: !env_var ALARMCD
+
+## 05:00: disarm if the night toggle is on and the alarm is not already disarmed.
+- id: alarm_morning_disarm
+  alias: 'Disarm alarm at 5am'
+  mode: single
+  trigger:
+    - platform: time
+      at: '05:00:00'
+  condition:
+    - condition: state
+      entity_id: input_boolean.auto_arm_disarm_alarm_night
+      state: 'on'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+          state: 'disarmed'
+  action:
+    - action: alarm_control_panel.alarm_disarm
+      target:
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      data:
+        code: !env_var ALARMCD
+
+## Someone arrives home (zone.home goes from 0 to more than 0): disarm.
+- id: alarm_disarm_on_arrival
+  alias: 'Disarm alarm when someone arrives home'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: zone.home
+      above: 0
+  condition:
+    - condition: state
+      entity_id: input_boolean.auto_disarm_alarm_when_home
+      state: 'on'
+    - condition: state
+      entity_id: input_select.alarm_mode
+      state: automatic
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+          state: 'disarmed'
+  action:
+    - action: alarm_control_panel.alarm_disarm
+      target:
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      data:
+        code: !env_var ALARMCD
+
+## Everyone leaves (zone.home drops to 0): arm. Node-RED only did this outside
+## 06:31-14:00 to avoid arming when the cleaners were due; now it arms at any hour.
+- id: alarm_arm_on_leave
+  alias: 'Arm alarm when everyone leaves'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: zone.home
+      below: 1
+  condition:
+    - condition: state
+      entity_id: input_boolean.auto_arm_alarm_when_gone
+      state: 'on'
+    - condition: state
+      entity_id: input_select.alarm_mode
+      state: automatic
+    - condition: state
+      entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      state: 'disarmed'
+  action:
+    - action: alarm_control_panel.alarm_arm_home
+      target:
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      data:
+        code: !env_var ALARMCD

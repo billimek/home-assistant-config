@@ -1,0 +1,23 @@
+## Turns off the interior/exterior lights that are left on overnight.
+## Replaces the Node-RED "lights off" subflow called at midnight.
+lights_off:
+  alias: 'Lights off'
+  icon: mdi:lightbulb-off
+  sequence:
+    - action: homeassistant.turn_off
+      continue_on_error: true
+      target:
+        entity_id:
+          - group.cabinet_lights
+          - switch.pool
+          - switch.outlet_a        # deck lights
+          - switch.garage
+          - switch.bedroom         # basement bedroom
+          - switch.livingroom      # basement living room
+          - switch.hallway         # basement hallway
+          - light.stairs           # basement stairs
+          - light.stairs2          # foyer stairs
+          - switch.outlet_e        # desk lights
+          - switch.outlet_e_2      # camera lights
+          - light.outlet_g         # sunroom tree lights (currently unplugged)
+          - group.sunroom_lights
