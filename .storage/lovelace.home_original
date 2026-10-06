@@ -1,0 +1,2168 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.home_original",
+  "data": {
+    "config": {
+      "title": "🏡",
+      "views": [
+        {
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "sensor.anyone_home",
+                  "secondary_info": "last-changed",
+                  "icon": "mdi:home"
+                },
+                {
+                  "entity": "sensor.ser2sock_10000_alarm_panel_display"
+                },
+                {
+                  "entity": "sensor.alarm_status"
+                },
+                {
+                  "entity": "input_select.alarm_mode"
+                },
+                {
+                  "entity": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                },
+                {
+                  "entity": "input_boolean.auto_arm_disarm_alarm_night"
+                },
+                {
+                  "entity": "group.family"
+                },
+                {
+                  "entity": "group.parents"
+                },
+                {
+                  "entity": "group.kids"
+                },
+                {
+                  "entity": "zone.home"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Home",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "cover.jeff_garage_door"
+                },
+                {
+                  "entity": "sensor.garage_status"
+                },
+                {
+                  "entity": "sensor.garage_car_present"
+                },
+                {
+                  "entity": "input_boolean.auto_close_garage_door_jeff"
+                },
+                {
+                  "entity": "cover.jen_garage_door"
+                },
+                {
+                  "entity": "sensor.garage2_status"
+                },
+                {
+                  "entity": "sensor.garage2_car_present"
+                },
+                {
+                  "entity": "input_boolean.auto_close_garage_door_jen"
+                },
+                {
+                  "entity": "input_boolean.auto_garage_doors"
+                },
+                {
+                  "entity": "input_boolean.auto_garage_doors_night"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Garage",
+              "type": "entities"
+            },
+            {
+              "color": "state",
+              "entities": [
+                {
+                  "entity": "person.jeff_billimek",
+                  "secondary_info": "last_changed"
+                },
+                {
+                  "entity": "device_tracker.jeffsphone"
+                },
+                {
+                  "entity": "device_tracker.jeffsphone_2"
+                },
+                {
+                  "entity": "sensor.home_jeffs_phone_gps_distance",
+                  "name": "Distance to Home"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Jeff Presence",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "person.jennifer_billimek",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "device_tracker.jensphone_2"
+                },
+                {
+                  "entity": "device_tracker.jensphone"
+                },
+                {
+                  "entity": "sensor.home_jen_s_phone_gps_distance",
+                  "name": "Distance to Home",
+                  "secondary_info": "last-changed"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Jen Presence",
+              "type": "entities",
+              "state_color": true
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "person.ansley_billimek",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "device_tracker.iphone_ansleys_iphone"
+                },
+                {
+                  "entity": "sensor.home_ansley_s_phone_gps_distance_2",
+                  "secondary_info": "last-changed",
+                  "name": "Distance to Home"
+                }
+              ],
+              "title": "Ansley Presence",
+              "show_header_toggle": false,
+              "state_color": true
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "person.brinley",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "device_tracker.brinleythebest2"
+                },
+                {
+                  "entity": "sensor.home_brinley_s_phone_gps_distance",
+                  "secondary_info": "last-changed",
+                  "name": "Distance to Home"
+                }
+              ],
+              "title": "Brinley Presence",
+              "show_header_toggle": false,
+              "state_color": true
+            },
+            {
+              "show_name": true,
+              "show_icon": true,
+              "hold_action": {
+                "action": "more-info"
+              },
+              "name": "Wake wsl (WoL)",
+              "tap_action": {
+                "action": "call-service",
+                "service": "rest_command.wake_wsl",
+                "data": {},
+                "target": {}
+              },
+              "type": "button",
+              "icon": "mdi:sleep"
+            },
+            {
+              "type": "thermostat",
+              "entity": "climate.upstairs"
+            },
+            {
+              "type": "thermostat",
+              "entity": "climate.downstairs"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.upstairs_humidity",
+                  "name": "Humidity"
+                },
+                {
+                  "entity": "binary_sensor.upstairs_occupancy",
+                  "name": "Occupancy"
+                },
+                {
+                  "entity": "sensor.upstairs_temperature",
+                  "name": "Temperature"
+                }
+              ],
+              "title": "Upstairs"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.bedroom_occupancy"
+                },
+                {
+                  "entity": "binary_sensor.upstairs_occupancy"
+                },
+                {
+                  "entity": "binary_sensor.office_occupancy"
+                },
+                {
+                  "entity": "sensor.bedroom_temperature"
+                },
+                {
+                  "entity": "sensor.office_temperature"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.front_detect",
+                  "name": "Detect"
+                },
+                {
+                  "entity": "switch.front_recordings",
+                  "name": "Recordings"
+                },
+                {
+                  "entity": "switch.front_snapshots",
+                  "name": "Snapshots"
+                }
+              ],
+              "title": "Front"
+            },
+            {
+              "type": "custom:mushroom-alarm-control-panel-card",
+              "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
+              "states": [
+                "armed_home",
+                "armed_away",
+                "armed_night"
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "select.lv142781_convertable_drawer_mode",
+                "water_heater.lv142781_freezer",
+                "water_heater.lv142781_fridge",
+                "switch.lv142781_fridge_ice_boost",
+                "switch.lv142781_ice_maker_control",
+                "light.lv142781_interior_light",
+                "switch.lv142781_sabbath_mode",
+                "switch.lv142781_turbo_freeze_status"
+              ],
+              "title": "GE Fridge LV142781"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "sensor.lv142781_door_status",
+                "binary_sensor.lv142781_door_status_any_open",
+                "sensor.lv142781_fridge_model_info",
+                "sensor.lv142781_ice_maker_bucket_status",
+                "sensor.lv142781_ice_maker_bucket_status_state_full_freezer",
+                "binary_sensor.lv142781_ice_maker_control_status_freezer",
+                "sensor.lv142781_water_filter_status"
+              ],
+              "title": "GE Fridge LV142781"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "switch.014040536224170472_dishcare_dishwasher_option_zeolitedry",
+                "switch.014040536224170472_dishcare_dishwasher_option_intensivzone",
+                "switch.014040536224170472_dishcare_dishwasher_option_halfload",
+                "switch.014040536224170472_bsh_common_setting_powerstate",
+                "select.014040536224170472_programs",
+                "switch.014040536224170472_dishcare_dishwasher_option_hygieneplus",
+                "button.014040536224170472_start_pause",
+                "select.014040536224170472_bsh_common_option_startinrelative",
+                "button.014040536224170472_stop"
+              ],
+              "title": "Dishwasher"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "binary_sensor.014040536224170472_connected",
+                "binary_sensor.014040536224170472_dishcare_dishwasher_option_zeolitedry",
+                "binary_sensor.014040536224170472_bsh_common_status_doorstate",
+                "sensor.014040536224170472_bsh_common_option_energyforecast",
+                "binary_sensor.014040536224170472_bsh_common_option_remainingprogramtimeisestimated",
+                "binary_sensor.014040536224170472_dishcare_dishwasher_option_intensivzone",
+                "binary_sensor.014040536224170472_dishcare_dishwasher_option_halfload",
+                "sensor.014040536224170472_bsh_common_status_operationstate",
+                "sensor.014040536224170472_bsh_common_setting_powerstate",
+                "sensor.014040536224170472_bsh_common_option_remainingprogramtime",
+                "binary_sensor.014040536224170472_bsh_common_status_remotecontrolactive",
+                "binary_sensor.014040536224170472_bsh_common_status_remotecontrolstartallowed",
+                "binary_sensor.014040536224170472_dishcare_dishwasher_option_hygieneplus",
+                "sensor.014040536224170472_selected_program",
+                "sensor.014040536224170472_bsh_common_option_startinrelative",
+                "sensor.014040536224170472_bsh_common_option_waterforecast"
+              ],
+              "title": "Dishwasher"
+            }
+          ],
+          "icon": "mdi:home-assistant",
+          "path": "default_view",
+          "title": "Home"
+        },
+        {
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.outlet_e_2"
+                },
+                {
+                  "entity": "switch.outlet_e"
+                },
+                {
+                  "entity": "light.stairs2"
+                }
+              ],
+              "title": "Upstairs"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "group.cabinet_lights"
+                },
+                {
+                  "entity": "switch.outlet_b"
+                },
+                {
+                  "entity": "switch.outlet_c"
+                },
+                {
+                  "entity": "switch.outlet_a"
+                },
+                {
+                  "entity": "switch.garage"
+                },
+                {
+                  "entity": "switch.porch"
+                },
+                {
+                  "entity": "switch.pool"
+                },
+                {
+                  "entity": "light.stairs2"
+                },
+                {
+                  "entity": "sensor.garage_electric_consumed_kwh"
+                },
+                {
+                  "entity": "sensor.porch_electric_consumed_kwh"
+                },
+                {
+                  "entity": "group.sunroom_lights"
+                },
+                {
+                  "entity": "light.outlet_g_2"
+                },
+                {
+                  "entity": "light.outlet_h_2"
+                },
+                {
+                  "entity": "switch.outlet_d"
+                },
+                {
+                  "entity": "switch.outlet_f"
+                },
+                {
+                  "entity": "switch.outlet_f_2"
+                },
+                {
+                  "entity": "light.outlet_g"
+                },
+                {
+                  "entity": "light.outlet_h"
+                }
+              ],
+              "title": "Main Level"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "light.stairs"
+                },
+                {
+                  "entity": "switch.hallway"
+                },
+                {
+                  "entity": "switch.bedroom"
+                },
+                {
+                  "entity": "switch.livingroom"
+                },
+                {
+                  "entity": "binary_sensor.water_sensor_a_water_alarm_water_leak_detected"
+                },
+                {
+                  "entity": "sensor.water_sensor_a_battery_level"
+                },
+                {
+                  "entity": "binary_sensor.water_sensor_a_low_battery_level"
+                },
+                {
+                  "entity": "binary_sensor.water_sensor_b_water_alarm_water_leak_detected"
+                },
+                {
+                  "entity": "sensor.water_sensor_b_battery_level"
+                },
+                {
+                  "entity": "binary_sensor.water_sensor_b_low_battery_level"
+                }
+              ],
+              "title": "Basement"
+            },
+            {
+              "entity": "light.stairs2",
+              "type": "light"
+            },
+            {
+              "entity": "light.stairs",
+              "type": "light"
+            },
+            {
+              "type": "light",
+              "entity": "light.outlet_g"
+            },
+            {
+              "type": "light",
+              "entity": "light.outlet_g_2"
+            },
+            {
+              "type": "light",
+              "entity": "light.outlet_h"
+            },
+            {
+              "type": "light",
+              "entity": "light.outlet_h_2"
+            }
+          ],
+          "icon": "mdi:nfc",
+          "path": "zwave",
+          "title": "ZWave"
+        },
+        {
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.camera_front_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_driveway_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_porch_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_pool_notify"
+                },
+                {
+                  "entity": "input_boolean.camera_doorbell_notify"
+                }
+              ],
+              "title": "Camera Notifications",
+              "type": "entities"
+            },
+            {
+              "type": "picture-entity",
+              "entity": "camera.doorbell"
+            },
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.front"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.driveway"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.pool"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.porch"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.front_door_alarm_local",
+                      "name": "Alarm Local"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_audio_mutation",
+                      "name": "Audio Mutation"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_button_pressed",
+                      "name": "Button Pressed"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_call_no_answered",
+                      "name": "Call No Answered"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_cross_line_alarm",
+                      "name": "Cross Line Alarm"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_cross_region_detection",
+                      "name": "Cross Region Detection"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_door_status",
+                      "name": "Door Status"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_invite",
+                      "name": "Invite"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_motion_alarm",
+                      "name": "Motion Alarm"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_smart_motion_human",
+                      "name": "Smart Motion Human"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_smart_motion_vehicle",
+                      "name": "Smart Motion Vehicle"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_video_blind",
+                      "name": "Video Blind"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_video_loss",
+                      "name": "Video Loss"
+                    }
+                  ],
+                  "title": "Front Door"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.front_door_main"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.front_door_sub"
+                }
+              ]
+            }
+          ],
+          "icon": "mdi:camcorder",
+          "title": "Cameras",
+          "path": "cameras"
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "frigate",
+          "path": "frigate",
+          "icon": "mdi:cctv",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.doorbell"
+                }
+              ]
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.front"
+                }
+              ]
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.driveway"
+                }
+              ]
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.porch"
+                }
+              ]
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.pool"
+                }
+              ]
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.doorbell"
+                }
+              ],
+              "view": {
+                "default": "snapshots",
+                "camera_select": "snapshots",
+                "update_cycle_camera": true
+              }
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.front"
+                }
+              ],
+              "view": {
+                "default": "snapshots",
+                "camera_select": "snapshots",
+                "update_cycle_camera": true
+              }
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.driveway"
+                }
+              ],
+              "view": {
+                "default": "snapshots",
+                "camera_select": "snapshots",
+                "update_cycle_camera": true
+              }
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.pool"
+                }
+              ],
+              "view": {
+                "default": "snapshots",
+                "camera_select": "snapshots",
+                "update_cycle_camera": true
+              }
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.porch"
+                }
+              ],
+              "view": {
+                "default": "snapshots",
+                "camera_select": "snapshots",
+                "update_cycle_camera": true
+              }
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Elektra",
+          "path": "elektra",
+          "icon": "mdi:ev-plug-tesla",
+          "badges": [],
+          "cards": [
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "number.elektra_charge_limit",
+                      "name": "Charge limit"
+                    },
+                    {
+                      "entity": "switch.elektra_charger",
+                      "name": "Charger"
+                    },
+                    {
+                      "entity": "cover.elektra_charger_door",
+                      "name": "Charger door"
+                    },
+                    {
+                      "entity": "number.elektra_charging_amps",
+                      "name": "Charging amps"
+                    },
+                    {
+                      "entity": "lock.elektra_doors",
+                      "name": "Doors"
+                    },
+                    {
+                      "entity": "button.elektra_flash_lights",
+                      "name": "Flash lights"
+                    },
+                    {
+                      "entity": "cover.elektra_frunk",
+                      "name": "Frunk"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_left",
+                      "name": "Heated seat left"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_rear_center",
+                      "name": "Heated seat rear center"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_rear_left",
+                      "name": "Heated seat rear left"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_rear_right",
+                      "name": "Heated seat rear right"
+                    },
+                    {
+                      "entity": "select.elektra_heated_seat_right",
+                      "name": "Heated seat right"
+                    },
+                    {
+                      "entity": "button.elektra_horn",
+                      "name": "Horn"
+                    },
+                    {
+                      "entity": "switch.elektra_sentry_mode",
+                      "name": "Sentry mode"
+                    },
+                    {
+                      "entity": "cover.elektra_trunk",
+                      "name": "Trunk"
+                    }
+                  ],
+                  "title": "Elektra"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.elektra_hvac_climate_system"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.elektra_charger",
+                  "name": "Charger"
+                },
+                {
+                  "entity": "sensor.elektra_charger_power",
+                  "name": "Charger power"
+                },
+                {
+                  "entity": "binary_sensor.elektra_charging",
+                  "name": "Charging"
+                },
+                {
+                  "entity": "sensor.elektra_charging_rate",
+                  "name": "Charging rate"
+                },
+                {
+                  "entity": "sensor.elektra_energy_added",
+                  "name": "Energy added"
+                },
+                {
+                  "entity": "sensor.elektra_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "binary_sensor.elektra_online",
+                  "name": "Online"
+                },
+                {
+                  "entity": "binary_sensor.elektra_parking_brake",
+                  "name": "Parking brake"
+                },
+                {
+                  "entity": "sensor.elektra_range",
+                  "name": "Range"
+                },
+                {
+                  "entity": "sensor.elektra_temperature_inside",
+                  "name": "Temperature (inside)"
+                },
+                {
+                  "entity": "sensor.elektra_temperature_outside",
+                  "name": "Temperature (outside)"
+                }
+              ],
+              "title": "Elektra"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "select.elektra_cabin_overheat_protection",
+                  "name": "Cabin overheat protection"
+                },
+                {
+                  "entity": "update.elektra_software_update",
+                  "name": "Software update"
+                }
+              ],
+              "title": "Elektra"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "button.elektra_force_data_update",
+                  "name": "Force data update"
+                },
+                {
+                  "entity": "device_tracker.elektra_location_tracker",
+                  "name": "Location tracker"
+                },
+                {
+                  "entity": "switch.elektra_polling",
+                  "name": "Polling"
+                },
+                {
+                  "entity": "button.elektra_wake_up",
+                  "name": "Wake up"
+                }
+              ],
+              "title": "Elektra"
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "sensor.elektra_battery",
+                      "name": "Battery Level"
+                    },
+                    {
+                      "entity": "sensor.elektra_state",
+                      "name": "Car State"
+                    },
+                    {
+                      "entity": "binary_sensor.elektra_plug",
+                      "name": "Plugged In"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.elektra_sentry_mode",
+                      "name": "Sentry Mode"
+                    },
+                    {
+                      "entity": "sensor.elektra_speed",
+                      "name": "Speed"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.elektra_health",
+                      "name": "Car Health"
+                    },
+                    {
+                      "entity": "binary_sensor.elektra_windows",
+                      "name": "Window Status"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "map",
+                  "dark_mode": true,
+                  "default_zoom": 12,
+                  "entities": [
+                    "device_tracker.tesla_location"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.elektra_state",
+                  "name": "Status"
+                },
+                {
+                  "entity": "binary_sensor.elektra_health",
+                  "name": "Logger Healthy"
+                },
+                {
+                  "entity": "update.elektra_update",
+                  "name": "Software Update"
+                },
+                {
+                  "entity": "sensor.elektra_geofence",
+                  "name": "Geo-fence Name"
+                },
+                {
+                  "entity": "sensor.home_tesla_location_distance",
+                  "name": "Distance to Home"
+                },
+                {
+                  "entity": "sensor.elektra_shift_state",
+                  "name": "Shifter State"
+                },
+                {
+                  "entity": "sensor.elektra_speed",
+                  "name": "Speed"
+                },
+                {
+                  "entity": "sensor.elektra_heading",
+                  "name": "Heading"
+                },
+                {
+                  "entity": "sensor.elektra_elevation",
+                  "name": "Elevation (ft)"
+                },
+                {
+                  "entity": "binary_sensor.elektra_lock",
+                  "name": "Locked"
+                },
+                {
+                  "entity": "binary_sensor.elektra_sentry_mode",
+                  "name": "Sentry Mode Enabled"
+                },
+                {
+                  "entity": "binary_sensor.elektra_windows",
+                  "name": "Windows Open"
+                },
+                {
+                  "entity": "binary_sensor.elektra_doors",
+                  "name": "Doors Open"
+                },
+                {
+                  "entity": "binary_sensor.elektra_trunk",
+                  "name": "Trunk Open"
+                },
+                {
+                  "entity": "binary_sensor.elektra_frunk",
+                  "name": "Frunk Open"
+                },
+                {
+                  "entity": "binary_sensor.elektra_user",
+                  "name": "User Present"
+                },
+                {
+                  "entity": "binary_sensor.elektra_climate",
+                  "name": "Climate On"
+                },
+                {
+                  "entity": "sensor.elektra_temperature_inside",
+                  "name": "Inside Temperature"
+                },
+                {
+                  "entity": "sensor.elektra_temperature_outside",
+                  "name": "Outside Temperature"
+                },
+                {
+                  "entity": "binary_sensor.elektra_preconditioning",
+                  "name": "Preconditioning"
+                },
+                {
+                  "entity": "sensor.elektra_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "sensor.elektra_range_estimated",
+                  "name": "Battery Range"
+                },
+                {
+                  "entity": "sensor.elektra_range_rated",
+                  "name": "Rated Battery Range"
+                },
+                {
+                  "entity": "sensor.elektra_range_ideal",
+                  "name": "Ideal Battery Range"
+                },
+                {
+                  "entity": "sensor.elektra_battery",
+                  "name": "Battery Level"
+                },
+                {
+                  "entity": "sensor.elektra_usable_battery",
+                  "name": "Usable Battery Level"
+                },
+                {
+                  "entity": "binary_sensor.elektra_plug",
+                  "name": "Plugged In"
+                },
+                {
+                  "entity": "sensor.elektra_energy_added",
+                  "name": "Charge Energy Added"
+                },
+                {
+                  "entity": "sensor.elektra_charge_limit",
+                  "name": "Charge Limit"
+                },
+                {
+                  "entity": "binary_sensor.elektra_charge_port",
+                  "name": "Charge Port Door Open"
+                },
+                {
+                  "entity": "sensor.elektra_charger_current",
+                  "name": "Charger Current"
+                },
+                {
+                  "entity": "sensor.elektra_charger_phases",
+                  "name": "Charger Phases"
+                },
+                {
+                  "entity": "sensor.elektra_charger_power",
+                  "name": "Charger Power"
+                },
+                {
+                  "entity": "sensor.elektra_charger_voltage",
+                  "name": "Charger Voltage"
+                },
+                {
+                  "entity": "sensor.elektra_charging_start_time",
+                  "name": "Scheduled Charging Start Time"
+                },
+                {
+                  "entity": "sensor.elektra_charging_time_remaining",
+                  "name": "Time To Full Charge"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "KARR",
+          "path": "karr",
+          "icon": "mdi:ev-plug-tesla",
+          "badges": [],
+          "cards": [
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "number.karr_charge_limit",
+                      "name": "Charge limit"
+                    },
+                    {
+                      "entity": "switch.karr_charger",
+                      "name": "Charger"
+                    },
+                    {
+                      "entity": "cover.karr_charger_door",
+                      "name": "Charger door"
+                    },
+                    {
+                      "entity": "number.karr_charging_amps",
+                      "name": "Charging amps"
+                    },
+                    {
+                      "entity": "lock.karr_doors",
+                      "name": "Doors"
+                    },
+                    {
+                      "entity": "button.karr_flash_lights",
+                      "name": "Flash lights"
+                    },
+                    {
+                      "entity": "cover.karr_frunk",
+                      "name": "Frunk"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_left",
+                      "name": "Heated seat left"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_rear_center",
+                      "name": "Heated seat rear center"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_rear_left",
+                      "name": "Heated seat rear left"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_rear_right",
+                      "name": "Heated seat rear right"
+                    },
+                    {
+                      "entity": "select.karr_heated_seat_right",
+                      "name": "Heated seat right"
+                    },
+                    {
+                      "entity": "button.karr_horn",
+                      "name": "Horn"
+                    },
+                    {
+                      "entity": "switch.karr_sentry_mode",
+                      "name": "Sentry mode"
+                    },
+                    {
+                      "entity": "cover.karr_trunk",
+                      "name": "Trunk"
+                    }
+                  ],
+                  "title": "KARR"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.karr_hvac_climate_system"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.karr_charger",
+                  "name": "Charger"
+                },
+                {
+                  "entity": "sensor.karr_charger_power",
+                  "name": "Charger power"
+                },
+                {
+                  "entity": "binary_sensor.karr_charging",
+                  "name": "Charging"
+                },
+                {
+                  "entity": "sensor.karr_charging_rate",
+                  "name": "Charging rate"
+                },
+                {
+                  "entity": "sensor.karr_energy_added",
+                  "name": "Energy added"
+                },
+                {
+                  "entity": "sensor.karr_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "binary_sensor.karr_online",
+                  "name": "Online"
+                },
+                {
+                  "entity": "binary_sensor.karr_parking_brake",
+                  "name": "Parking brake"
+                },
+                {
+                  "entity": "sensor.karr_range",
+                  "name": "Range"
+                },
+                {
+                  "entity": "sensor.karr_temperature_inside",
+                  "name": "Temperature (inside)"
+                },
+                {
+                  "entity": "sensor.karr_temperature_outside",
+                  "name": "Temperature (outside)"
+                }
+              ],
+              "title": "KARR"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "select.karr_cabin_overheat_protection",
+                  "name": "Cabin overheat protection"
+                },
+                {
+                  "entity": "update.karr_software_update",
+                  "name": "Software update"
+                }
+              ],
+              "title": "KARR"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "button.karr_force_data_update",
+                  "name": "Force data update"
+                },
+                {
+                  "entity": "device_tracker.karr_location_tracker",
+                  "name": "Location tracker"
+                },
+                {
+                  "entity": "switch.karr_polling",
+                  "name": "Polling"
+                },
+                {
+                  "entity": "button.karr_wake_up",
+                  "name": "Wake up"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "sensor.karr_battery",
+                      "name": "Battery Level"
+                    },
+                    {
+                      "entity": "sensor.karr_state",
+                      "name": "Car State"
+                    },
+                    {
+                      "entity": "binary_sensor.karr_plug",
+                      "name": "Plugged In"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.karr_sentry_mode",
+                      "name": "Sentry Mode"
+                    },
+                    {
+                      "entity": "sensor.karr_speed",
+                      "name": "Speed"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.karr_health",
+                      "name": "Car Health"
+                    },
+                    {
+                      "entity": "binary_sensor.karr_windows",
+                      "name": "Window Status"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "map",
+                  "dark_mode": true,
+                  "default_zoom": 12,
+                  "entities": [
+                    {
+                      "entity": "device_tracker.tesla2_location"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.karr_state",
+                  "name": "Status"
+                },
+                {
+                  "entity": "binary_sensor.karr_health",
+                  "name": "Logger Healthy"
+                },
+                {
+                  "entity": "update.karr_update",
+                  "name": "Software Update"
+                },
+                {
+                  "entity": "sensor.karr_geofence",
+                  "name": "Geo-fence Name"
+                },
+                {
+                  "entity": "sensor.home_tesla2_location_distance",
+                  "name": "Distance to Home"
+                },
+                {
+                  "entity": "sensor.karr_shift_state",
+                  "name": "Shifter State"
+                },
+                {
+                  "entity": "sensor.karr_speed",
+                  "name": "Speed"
+                },
+                {
+                  "entity": "sensor.karr_heading",
+                  "name": "Heading"
+                },
+                {
+                  "entity": "sensor.karr_elevation",
+                  "name": "Elevation (ft)"
+                },
+                {
+                  "entity": "binary_sensor.karr_lock",
+                  "name": "Locked"
+                },
+                {
+                  "entity": "binary_sensor.karr_sentry_mode",
+                  "name": "Sentry Mode Enabled"
+                },
+                {
+                  "entity": "binary_sensor.karr_windows",
+                  "name": "Windows Open"
+                },
+                {
+                  "entity": "binary_sensor.karr_doors",
+                  "name": "Doors Open"
+                },
+                {
+                  "entity": "binary_sensor.karr_trunk",
+                  "name": "Trunk Open"
+                },
+                {
+                  "entity": "binary_sensor.karr_frunk",
+                  "name": "Frunk Open"
+                },
+                {
+                  "entity": "binary_sensor.karr_user",
+                  "name": "User Present"
+                },
+                {
+                  "entity": "binary_sensor.karr_climate",
+                  "name": "Climate On"
+                },
+                {
+                  "entity": "sensor.karr_temperature_inside",
+                  "name": "Inside Temperature"
+                },
+                {
+                  "entity": "sensor.karr_temperature_outside",
+                  "name": "Outside Temperature"
+                },
+                {
+                  "entity": "binary_sensor.karr_preconditioning",
+                  "name": "Preconditioning"
+                },
+                {
+                  "entity": "sensor.karr_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "sensor.karr_range_estimated",
+                  "name": "Battery Range"
+                },
+                {
+                  "entity": "sensor.karr_range_rated",
+                  "name": "Rated Battery Range"
+                },
+                {
+                  "entity": "sensor.karr_range_ideal",
+                  "name": "Ideal Battery Range"
+                },
+                {
+                  "entity": "sensor.karr_battery",
+                  "name": "Battery Level"
+                },
+                {
+                  "entity": "sensor.karr_usable_battery",
+                  "name": "Usable Battery Level"
+                },
+                {
+                  "entity": "binary_sensor.karr_plug",
+                  "name": "Plugged In"
+                },
+                {
+                  "entity": "sensor.karr_energy_added",
+                  "name": "Charge Energy Added"
+                },
+                {
+                  "entity": "sensor.karr_charge_limit",
+                  "name": "Charge Limit"
+                },
+                {
+                  "entity": "binary_sensor.karr_charge_port",
+                  "name": "Charge Port Door Open"
+                },
+                {
+                  "entity": "sensor.karr_charger_current",
+                  "name": "Charger Current"
+                },
+                {
+                  "entity": "sensor.karr_charger_phases",
+                  "name": "Charger Phases"
+                },
+                {
+                  "entity": "sensor.karr_charger_power",
+                  "name": "Charger Power"
+                },
+                {
+                  "entity": "sensor.karr_charger_voltage",
+                  "name": "Charger Voltage"
+                },
+                {
+                  "entity": "sensor.karr_charging_start_time",
+                  "name": "Scheduled Charging Start Time"
+                },
+                {
+                  "entity": "sensor.karr_charging_time_remaining",
+                  "name": "Time To Full Charge"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Orion",
+          "path": "Orion",
+          "icon": "mdi:ev-plug-tesla",
+          "badges": [],
+          "cards": [
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "number.orion_charge_limit",
+                      "name": "Charge limit"
+                    },
+                    {
+                      "entity": "switch.orion_charger",
+                      "name": "Charger"
+                    },
+                    {
+                      "entity": "cover.orion_charger_door",
+                      "name": "Charger door"
+                    },
+                    {
+                      "entity": "number.orion_charging_amps",
+                      "name": "Charging amps"
+                    },
+                    {
+                      "entity": "lock.orion_doors",
+                      "name": "Doors"
+                    },
+                    {
+                      "entity": "button.orion_flash_lights",
+                      "name": "Flash lights"
+                    },
+                    {
+                      "entity": "cover.orion_frunk",
+                      "name": "Frunk"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_left",
+                      "name": "Heated seat left"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_rear_center",
+                      "name": "Heated seat rear center"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_rear_left",
+                      "name": "Heated seat rear left"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_rear_right",
+                      "name": "Heated seat rear right"
+                    },
+                    {
+                      "entity": "select.orion_heated_seat_right",
+                      "name": "Heated seat right"
+                    },
+                    {
+                      "entity": "button.orion_horn",
+                      "name": "Horn"
+                    },
+                    {
+                      "entity": "switch.orion_sentry_mode",
+                      "name": "Sentry mode"
+                    },
+                    {
+                      "entity": "cover.orion_trunk",
+                      "name": "Trunk"
+                    }
+                  ],
+                  "title": "Orion"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.orion_hvac_climate_system"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.orion_charger",
+                  "name": "Charger"
+                },
+                {
+                  "entity": "sensor.orion_charger_power",
+                  "name": "Charger power"
+                },
+                {
+                  "entity": "binary_sensor.orion_charging",
+                  "name": "Charging"
+                },
+                {
+                  "entity": "sensor.orion_charging_rate",
+                  "name": "Charging rate"
+                },
+                {
+                  "entity": "sensor.orion_energy_added",
+                  "name": "Energy added"
+                },
+                {
+                  "entity": "sensor.orion_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "binary_sensor.orion_online",
+                  "name": "Online"
+                },
+                {
+                  "entity": "binary_sensor.orion_parking_brake",
+                  "name": "Parking brake"
+                },
+                {
+                  "entity": "sensor.orion_range",
+                  "name": "Range"
+                },
+                {
+                  "entity": "sensor.orion_temperature_inside",
+                  "name": "Temperature (inside)"
+                },
+                {
+                  "entity": "sensor.orion_temperature_outside",
+                  "name": "Temperature (outside)"
+                }
+              ],
+              "title": "Orion"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "select.orion_cabin_overheat_protection",
+                  "name": "Cabin overheat protection"
+                },
+                {
+                  "entity": "update.orion_software_update",
+                  "name": "Software update"
+                }
+              ],
+              "title": "Orion"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "button.orion_force_data_update",
+                  "name": "Force data update"
+                },
+                {
+                  "entity": "device_tracker.orion_location_tracker",
+                  "name": "Location tracker"
+                },
+                {
+                  "entity": "switch.orion_polling",
+                  "name": "Polling"
+                },
+                {
+                  "entity": "button.orion_wake_up",
+                  "name": "Wake up"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "sensor.orion_battery",
+                      "name": "Battery Level"
+                    },
+                    {
+                      "entity": "sensor.orion_state",
+                      "name": "Car State"
+                    },
+                    {
+                      "entity": "binary_sensor.orion_plug",
+                      "name": "Plugged In"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.orion_sentry_mode",
+                      "name": "Sentry Mode"
+                    },
+                    {
+                      "entity": "sensor.orion_speed",
+                      "name": "Speed"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.orion_health",
+                      "name": "Car Health"
+                    },
+                    {
+                      "entity": "binary_sensor.orion_windows",
+                      "name": "Window Status"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "map",
+                  "dark_mode": true,
+                  "default_zoom": 12,
+                  "entities": [
+                    {
+                      "entity": "device_tracker.tesla3_location"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.orion_state",
+                  "name": "Status"
+                },
+                {
+                  "entity": "binary_sensor.orion_health",
+                  "name": "Logger Healthy"
+                },
+                {
+                  "entity": "update.orion_update",
+                  "name": "Software Update"
+                },
+                {
+                  "entity": "sensor.orion_geofence",
+                  "name": "Geo-fence Name"
+                },
+                {
+                  "entity": "sensor.home_tesla3_location_distance",
+                  "name": "Distance to Home"
+                },
+                {
+                  "entity": "sensor.orion_shift_state",
+                  "name": "Shifter State"
+                },
+                {
+                  "entity": "sensor.orion_speed",
+                  "name": "Speed"
+                },
+                {
+                  "entity": "sensor.orion_heading",
+                  "name": "Heading"
+                },
+                {
+                  "entity": "sensor.orion_elevation",
+                  "name": "Elevation (ft)"
+                },
+                {
+                  "entity": "binary_sensor.orion_lock",
+                  "name": "Locked"
+                },
+                {
+                  "entity": "binary_sensor.orion_sentry_mode",
+                  "name": "Sentry Mode Enabled"
+                },
+                {
+                  "entity": "binary_sensor.orion_windows",
+                  "name": "Windows Open"
+                },
+                {
+                  "entity": "binary_sensor.orion_doors",
+                  "name": "Doors Open"
+                },
+                {
+                  "entity": "binary_sensor.orion_trunk",
+                  "name": "Trunk Open"
+                },
+                {
+                  "entity": "binary_sensor.orion_frunk",
+                  "name": "Frunk Open"
+                },
+                {
+                  "entity": "binary_sensor.orion_user",
+                  "name": "User Present"
+                },
+                {
+                  "entity": "binary_sensor.orion_climate",
+                  "name": "Climate On"
+                },
+                {
+                  "entity": "sensor.orion_temperature_inside",
+                  "name": "Inside Temperature"
+                },
+                {
+                  "entity": "sensor.orion_temperature_outside",
+                  "name": "Outside Temperature"
+                },
+                {
+                  "entity": "binary_sensor.orion_preconditioning",
+                  "name": "Preconditioning"
+                },
+                {
+                  "entity": "sensor.orion_odometer",
+                  "name": "Odometer"
+                },
+                {
+                  "entity": "sensor.orion_range_estimated",
+                  "name": "Battery Range"
+                },
+                {
+                  "entity": "sensor.orion_range_rated",
+                  "name": "Rated Battery Range"
+                },
+                {
+                  "entity": "sensor.orion_range_ideal",
+                  "name": "Ideal Battery Range"
+                },
+                {
+                  "entity": "sensor.orion_battery",
+                  "name": "Battery Level"
+                },
+                {
+                  "entity": "sensor.orion_usable_battery",
+                  "name": "Usable Battery Level"
+                },
+                {
+                  "entity": "binary_sensor.orion_plug",
+                  "name": "Plugged In"
+                },
+                {
+                  "entity": "sensor.orion_energy_added",
+                  "name": "Charge Energy Added"
+                },
+                {
+                  "entity": "sensor.orion_charge_limit",
+                  "name": "Charge Limit"
+                },
+                {
+                  "entity": "binary_sensor.orion_charge_port",
+                  "name": "Charge Port Door Open"
+                },
+                {
+                  "entity": "sensor.orion_charger_current",
+                  "name": "Charger Current"
+                },
+                {
+                  "entity": "sensor.orion_charger_phases",
+                  "name": "Charger Phases"
+                },
+                {
+                  "entity": "sensor.orion_charger_power",
+                  "name": "Charger Power"
+                },
+                {
+                  "entity": "sensor.orion_charger_voltage",
+                  "name": "Charger Voltage"
+                },
+                {
+                  "entity": "sensor.orion_charging_start_time",
+                  "name": "Scheduled Charging Start Time"
+                },
+                {
+                  "entity": "sensor.orion_charging_time_remaining",
+                  "name": "Time To Full Charge"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "sensor.upstairs_humidity"
+                },
+                {
+                  "entity": "weather.upstairs"
+                },
+                {
+                  "entity": "sensor.bedroom_temperature"
+                },
+                {
+                  "entity": "sensor.office_temperature"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "HVAC Details",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.bedroom_temperature"
+                },
+                {
+                  "entity": "sensor.office_temperature"
+                },
+                {
+                  "entity": "sensor.upstairs_temperature"
+                }
+              ],
+              "hours_to_show": 168,
+              "title": "Temperature History",
+              "type": "history-graph"
+            },
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.air_density",
+                      "name": "Air density"
+                    },
+                    {
+                      "entity": "sensor.dew_point",
+                      "name": "Dew point"
+                    },
+                    {
+                      "entity": "sensor.feels_like",
+                      "name": "Feels like"
+                    },
+                    {
+                      "entity": "sensor.heat_index",
+                      "name": "Heat index"
+                    },
+                    {
+                      "entity": "sensor.lightning_count",
+                      "name": "Lightning count"
+                    },
+                    {
+                      "entity": "sensor.lightning_count_last_1_hr",
+                      "name": "Lightning count last 1 hr"
+                    },
+                    {
+                      "entity": "sensor.lightning_count_last_3_hr",
+                      "name": "Lightning count last 3 hr"
+                    },
+                    {
+                      "entity": "sensor.lightning_last_distance",
+                      "name": "Lightning last distance"
+                    },
+                    {
+                      "entity": "sensor.lightning_last_strike",
+                      "name": "Lightning last strike"
+                    },
+                    {
+                      "entity": "sensor.pressure_barometric",
+                      "name": "Pressure barometric"
+                    },
+                    {
+                      "entity": "sensor.pressure_sea_level",
+                      "name": "Pressure sea level"
+                    },
+                    {
+                      "entity": "sensor.temperature",
+                      "name": "Temperature"
+                    },
+                    {
+                      "entity": "sensor.wet_bulb_globe_temperature",
+                      "name": "Wet bulb globe temperature"
+                    },
+                    {
+                      "entity": "sensor.wet_bulb_temperature",
+                      "name": "Wet bulb temperature"
+                    },
+                    {
+                      "entity": "sensor.wind_chill",
+                      "name": "Wind chill"
+                    }
+                  ],
+                  "title": "🦖"
+                },
+                {
+                  "type": "weather-forecast",
+                  "entity": "weather.unknown",
+                  "show_forecast": false
+                }
+              ]
+            }
+          ],
+          "icon": "mdi:weather-cloudy",
+          "path": "climate_view",
+          "title": "Climate"
+        },
+        {
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "automation.alert_when_motion_is_detected_upstairs_and_nobody_home"
+                },
+                {
+                  "entity": "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home"
+                },
+                {
+                  "entity": "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_motion"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_main_motion"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_basement_motion"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_front_door"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_garage_door"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_family_window"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_living_window"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_sun_room_door"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_unknown_door"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_basement_window"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_bathroom_window"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_kitchen_window"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_laundry_window"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_basement_door"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_sliding_door"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_window"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_hall_smoke"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Alarm Sensors",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.auto_arm_alarm_when_gone"
+                },
+                {
+                  "entity": "input_boolean.auto_disarm_alarm_when_home"
+                },
+                {
+                  "entity": "input_boolean.notify_alarm_triggered"
+                },
+                {
+                  "entity": "input_boolean.notify_alarm_armed"
+                },
+                {
+                  "entity": "input_boolean.notify_alarm_disarmed"
+                },
+                {
+                  "entity": "automation.alert_when_door_to_garage_is_opened_for_too_long"
+                },
+                {
+                  "entity": "automation.alert_when_basement_door_is_opened_for_too_long"
+                },
+                {
+                  "entity": "automation.alert_when_front_door_is_opened_for_too_long"
+                },
+                {
+                  "entity": "automation.alert_when_sun_room_door_is_opened_for_too_long"
+                }
+              ],
+              "title": "Alarm Toggles",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                "automation.alert_when_motion_is_detected_upstairs_and_nobody_home",
+                "automation.alert_when_motion_is_detected_on_the_main_level_and_nobody_home",
+                "automation.alert_when_motion_is_detected_in_the_basement_and_nobody_home",
+                "automation.alert_when_front_door_is_open_and_nobody_home",
+                "automation.alert_when_garage_door_is_open_and_nobody_home",
+                "automation.alert_when_family_window_is_open_and_nobody_home",
+                "automation.alert_when_living_window_is_open_and_nobody_home",
+                "automation.alert_when_sun_room_door_is_open_and_nobody_home",
+                "automation.alert_when_bathroom_window_is_open_and_nobody_home",
+                "automation.alert_when_kitchen_window_is_open_and_nobody_home",
+                "automation.alert_when_unknown_door_is_open_and_nobody_home",
+                "automation.alert_when_laundry_window_is_open_and_nobody_home",
+                "automation.alert_when_basement_door_is_open_and_nobody_home",
+                "automation.alert_when_upstairs_window_is_open_and_nobody_home"
+              ],
+              "title": "Alarm Sensor Alert Toggles",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.notify_garage_doors_home"
+                },
+                {
+                  "entity": "input_boolean.notify_garage_doors_away"
+                }
+              ],
+              "title": "Jeff's Garage Toggles",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.notify_garage_doors_home"
+                },
+                {
+                  "entity": "input_boolean.notify_garage_doors_away"
+                }
+              ],
+              "title": "Jen's Garage Toggles",
+              "type": "entities"
+            },
+            {
+              "states": [
+                "arm_home",
+                "arm_away",
+                "arm_night"
+              ],
+              "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
+              "type": "alarm-panel"
+            },
+            {
+              "type": "glance",
+              "entities": [
+                {
+                  "entity": "binary_sensor.ser2sock_10000_main_motion"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_upstairs_motion"
+                },
+                {
+                  "entity": "binary_sensor.ser2sock_10000_basement_motion"
+                }
+              ],
+              "state_color": true,
+              "show_icon": true,
+              "show_name": true,
+              "show_state": true,
+              "title": "Motion"
+            }
+          ],
+          "icon": "mdi:shield-home",
+          "path": "security_view",
+          "title": "Security"
+        }
+      ]
+    }
+  }
+}

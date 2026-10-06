@@ -21,6 +21,15 @@
         "show_in_sidebar": true,
         "mode": "storage",
         "require_admin": false
+      },
+      {
+        "id": "home_original",
+        "url_path": "home-original",
+        "title": "Original",
+        "require_admin": false,
+        "show_in_sidebar": true,
+        "icon": "mdi:view-dashboard",
+        "mode": "storage"
       }
     ]
   }

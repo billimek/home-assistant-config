@@ -7,6 +7,7 @@
 !automation
 !config
 !scripts
+!themes
 !shell
 !images
 !tensorflow
@@ -19,5 +20,6 @@ known_devices.yaml
 entity_registry.yaml
 !.storage
 !.storage/lovelace.lovelace
+!.storage/lovelace.home_original
 !.storage/lovelace_dashboards
 !.storage/lovelace_resources

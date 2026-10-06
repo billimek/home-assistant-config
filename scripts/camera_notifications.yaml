@@ -1,0 +1,24 @@
+## Mute the camera push notifications for an hour, then restore only the ones that were on.
+## Used by the "Mute 1 hour" button on the home-new dashboard Cameras view.
+## Like the automation timers, the wait lives in memory: an HA restart during the hour leaves them off.
+mute_camera_notifications:
+  alias: 'Mute camera notifications for 1 hour'
+  icon: mdi:bell-off
+  mode: restart
+  sequence:
+    - variables:
+        was_on: >-
+          {{ expand(['input_boolean.camera_front_notify',
+                     'input_boolean.camera_driveway_notify',
+                     'input_boolean.camera_porch_notify',
+                     'input_boolean.camera_pool_notify',
+                     'input_boolean.camera_doorbell_notify'])
+             | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list }}
+    - action: input_boolean.turn_off
+      target:
+        entity_id: "{{ was_on }}"
+    - delay:
+        hours: 1
+    - action: input_boolean.turn_on
+      target:
+        entity_id: "{{ was_on }}"
