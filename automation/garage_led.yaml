@@ -1,0 +1,138 @@
+################################################
+## Garage door LED indicators (Inovelli)
+################################################
+## Replaces the Node-RED MQTT LED flows (zwave2mqtt topics that no longer exist).
+## The Inovelli switches show the garage door state on their LED bar:
+##   any garage door open                 -> pulsing yellow
+##   a door open for 2 hours or longer    -> flashing red
+##   all doors closed                     -> back to normal
+## Porch (LZW30-SN, node 9) and garage (LZW30-SN, node 10) switches use config
+## parameter 8, which Z-Wave JS exposes as four partial values written together:
+## color (mask 255; hue 45 = yellow, 1 = red), level (65280; 10 = brightest),
+## duration (16711680; 255 = until cleared) and effect type (2130706432;
+## 4 = pulse, 2 = fast blink, 0 = off). The two stairs
+## dimmers (LZW31: basement node 17, foyer node 24) use parameter 13 (LED color:
+## 43 yellow, 1 red, 170 normal blue) and 14 (LED intensity: 10 bright, 5 normal).
+## Unlike Node-RED, the LEDs only go back to normal when BOTH doors are closed,
+## and the red state is not limited to weekdays (same as Node-RED's LED flow).
+- id: garage_led_indicator
+  alias: 'Garage door state on Inovelli LEDs'
+  mode: queued
+  max: 5
+  trigger:
+    - platform: state
+      entity_id:
+        - cover.jeff_garage_door
+        - cover.jen_garage_door
+      id: change
+    - platform: state
+      entity_id:
+        - cover.jeff_garage_door
+        - cover.jen_garage_door
+      to: 'open'
+      for: '02:00:00'
+      id: long_open
+    - platform: homeassistant
+      event: start
+      id: start
+  variables:
+    jeff_open: "{{ is_state('cover.jeff_garage_door', 'open') }}"
+    jen_open: "{{ is_state('cover.jen_garage_door', 'open') }}"
+    any_open: "{{ jeff_open or jen_open }}"
+    jeff_long: >
+      {{ jeff_open and now() - states.cover.jeff_garage_door.last_changed >= timedelta(hours=2) }}
+    jen_long: >
+      {{ jen_open and now() - states.cover.jen_garage_door.last_changed >= timedelta(hours=2) }}
+    red: "{{ (trigger.id == 'long_open' and any_open) or jeff_long or jen_long }}"
+  action:
+    - choose:
+        # a door open for 2 hours or more: flashing red, bright red dimmer LEDs
+        - conditions: "{{ red }}"
+          sequence:
+            - action: zwave_js.bulk_set_partial_config_parameters
+              continue_on_error: true
+              target:
+                entity_id:
+                  - switch.porch
+                  - switch.garage
+              data:
+                parameter: 8
+                value:
+                  "255": 1
+                  "65280": 10
+                  "16711680": 255
+                  "2130706432": 2
+            - action: zwave_js.set_config_parameter
+              continue_on_error: true
+              target:
+                entity_id:
+                  - light.stairs
+                  - light.stairs2
+              data:
+                parameter: 13
+                value: 1
+            - action: zwave_js.set_config_parameter
+              continue_on_error: true
+              target:
+                entity_id:
+                  - light.stairs
+                  - light.stairs2
+              data:
+                parameter: 14
+                value: 10
+        # a door is open: pulsing yellow, yellow dimmer LEDs
+        - conditions: "{{ any_open }}"
+          sequence:
+            - action: zwave_js.bulk_set_partial_config_parameters
+              continue_on_error: true
+              target:
+                entity_id:
+                  - switch.porch
+                  - switch.garage
+              data:
+                parameter: 8
+                value:
+                  "255": 45
+                  "65280": 10
+                  "16711680": 255
+                  "2130706432": 4
+            - action: zwave_js.set_config_parameter
+              continue_on_error: true
+              target:
+                entity_id:
+                  - light.stairs
+                  - light.stairs2
+              data:
+                parameter: 13
+                value: 43
+      # all doors closed: effect off, dimmer LEDs back to normal blue / intensity 5
+      default:
+        - action: zwave_js.bulk_set_partial_config_parameters
+          continue_on_error: true
+          target:
+            entity_id:
+              - switch.porch
+              - switch.garage
+          data:
+            parameter: 8
+            # only the effect type needs clearing (writing all four parts as 0 was rejected by the porch switch)
+            value:
+              "2130706432": 0
+        - action: zwave_js.set_config_parameter
+          continue_on_error: true
+          target:
+            entity_id:
+              - light.stairs
+              - light.stairs2
+          data:
+            parameter: 13
+            value: 170
+        - action: zwave_js.set_config_parameter
+          continue_on_error: true
+          target:
+            entity_id:
+              - light.stairs
+              - light.stairs2
+          data:
+            parameter: 14
+            value: 5
