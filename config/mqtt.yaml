@@ -1,6 +1,7 @@
 ################################################
 ## Garage Door Covers
-## (read by the Node-RED garage flows)
+## (legacy MQTT covers, currently unused by automations: the garage automations
+## use cover.jeff_garage_door and cover.jen_garage_door)
 ################################################
 cover:
   - name: "Jens Garage - MQTT"

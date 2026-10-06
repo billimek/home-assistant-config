@@ -50,7 +50,7 @@ automation ui: !include automations.yaml
 zone: !include config/zones.yaml
 group: !include groups.yaml
 
-## Alarm mode (read by the Node-RED Alarm flow)
+## Alarm mode (read by automation/alarm_logic.yaml)
 input_select:
   alarm_mode:
     name: Alarm mode
@@ -67,7 +67,7 @@ input_datetime:
     has_date: true
     has_time: true
 
-## Toggles read by the Node-RED flows (no initial: so the last state survives restarts)
+## Toggles read by the automations in automation/ (no initial: so the last state survives restarts)
 input_boolean:
   # garage stuff
   auto_garage_doors:
@@ -218,8 +218,8 @@ template:
   ## Tesla location tracking, fed by TeslaMate's MQTT discovery trackers
   ## (tesla = Elektra, tesla2 = KARR, tesla3 = Orion).
   ## KEEP these entity ids: the Proximity integration tracks them to produce
-  ## sensor.home_tesla{,2,3}_location_distance, which Node-RED's garage
-  ## automation triggers on (200 ft crossing).
+  ## sensor.home_tesla{,2,3}_location_distance, which the garage geofence
+  ## automations in automation/garage_tesla.yaml trigger on (200 ft crossing).
   - device_tracker:
       - name: "Tesla Location"
         unique_id: tesla_location
