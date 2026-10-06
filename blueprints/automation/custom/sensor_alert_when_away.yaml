@@ -74,6 +74,7 @@ action:
               message: >-
                 {{ sensor_name }}{{ '' if motion else ' opened' }} while nobody is home.
               level: time-sensitive
+              icon: "{{ 'mdi:motion-sensor' if motion else 'mdi:door-open' }}"
               tag: "sensor_{{ key }}"
               group: security
               url: /lovelace/security

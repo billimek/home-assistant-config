@@ -40,10 +40,27 @@ notify_phones:
       description: Where a tap goes, e.g. /lovelace/security
     actions:
       description: List of iOS action buttons (action, title, destructive, authenticationRequired, ...)
+    icon:
+      description: mdi icon for the avatar; defaults from the group (see looks below). With a title, iOS shows a messaging-style avatar
+      example: "mdi:garage"
+    color:
+      description: Background color of that avatar (hex); defaults from the group
+      example: "#F5A623"
   sequence:
     - variables:
         lvl: "{{ level | default('active') }}"
         snd: "{{ sound | default('') }}"
+        # default avatar per group; a caller's icon / color overrides it
+        looks:
+          alarm: {icon: 'mdi:shield-home', color: '#E53935'}
+          garage: {icon: 'mdi:garage-open-variant', color: '#F5A623'}
+          water: {icon: 'mdi:water-alert', color: '#1E88E5'}
+          doorbell: {icon: 'mdi:doorbell', color: '#8E24AA'}
+          security: {icon: 'mdi:shield-home', color: '#FB8C00'}
+          presence: {icon: 'mdi:home-account', color: '#43A047'}
+          network: {icon: 'mdi:wifi-alert', color: '#607D8B'}
+        ico: "{{ icon | default(looks.get(group | default(''), {}).get('icon', '')) }}"
+        col: "{{ color | default(looks.get(group | default(''), {}).get('color', '')) }}"
         targets: >-
           {%- set aud = audience | default('all') -%}
           {%- set test = is_state('input_boolean.notify_test_mode', 'on') -%}
@@ -72,6 +89,8 @@ notify_phones:
           {%- if image | default('') -%}{%- set d = d | combine({'image': image}) -%}{%- endif -%}
           {%- if url | default('') -%}{%- set d = d | combine({'url': url}) -%}{%- endif -%}
           {%- if actions | default([]) -%}{%- set d = d | combine({'actions': actions}) -%}{%- endif -%}
+          {%- if ico -%}{%- set d = d | combine({'notification_icon': ico}) -%}{%- endif -%}
+          {%- if col -%}{%- set d = d | combine({'color': col}) -%}{%- endif -%}
           {{ d }}
     - repeat:
         for_each: "{{ targets }}"
