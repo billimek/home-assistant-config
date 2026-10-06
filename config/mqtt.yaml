@@ -28,7 +28,6 @@ cover:
 ## Tesla
 ## All Tesla telemetry comes from TeslaMate's built-in MQTT discovery
 ## (MQTT_DISCOVERY=true): devices Elektra (car 1), KARR (car 2), Orion (car 3).
-## Do not re-add hand-written sensors here. The location trackers in
-## configuration.yaml (device_tracker.tesla{,2,3}_location) read the discovered
-## device_tracker.elektra/karr/orion.
+## Do not re-add hand-written sensors here. The discovered
+## device_tracker.elektra/karr/orion feed the Proximity integration directly.
 ################################################

@@ -361,25 +361,3 @@ template:
       unique_id: weekday
       state: "{{ now().weekday() < 5 }}"
 
-  ## Tesla location tracking, fed by TeslaMate's MQTT discovery trackers
-  ## (tesla = Elektra, tesla2 = KARR, tesla3 = Orion).
-  ## KEEP these entity ids: the Proximity integration tracks them to produce
-  ## sensor.home_tesla{,2,3}_location_distance, which the garage geofence
-  ## automations in automation/garage_tesla.yaml trigger on (200 ft crossing).
-  - device_tracker:
-      - name: "Tesla Location"
-        unique_id: tesla_location
-        availability: "{{ state_attr('device_tracker.elektra', 'latitude') is number and state_attr('device_tracker.elektra', 'longitude') is number }}"
-        latitude: "{{ state_attr('device_tracker.elektra', 'latitude') }}"
-        longitude: "{{ state_attr('device_tracker.elektra', 'longitude') }}"
-      - name: "Tesla2 Location"
-        unique_id: tesla2_location
-        availability: "{{ state_attr('device_tracker.karr', 'latitude') is number and state_attr('device_tracker.karr', 'longitude') is number }}"
-        latitude: "{{ state_attr('device_tracker.karr', 'latitude') }}"
-        longitude: "{{ state_attr('device_tracker.karr', 'longitude') }}"
-      - name: "Tesla3 Location"
-        unique_id: tesla3_location
-        availability: "{{ state_attr('device_tracker.orion', 'latitude') is number and state_attr('device_tracker.orion', 'longitude') is number }}"
-        latitude: "{{ state_attr('device_tracker.orion', 'latitude') }}"
-        longitude: "{{ state_attr('device_tracker.orion', 'longitude') }}"
-

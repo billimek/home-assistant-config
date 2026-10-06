@@ -1471,7 +1471,7 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.home_tesla2_location_distance",
+                  "entity": "sensor.home_karr_distance",
                   "name": "Distance from home",
                   "icon": "mdi:map-marker-distance",
                   "color": "green",
@@ -1576,7 +1576,7 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.home_tesla3_location_distance",
+                  "entity": "sensor.home_orion_distance",
                   "name": "Distance from home",
                   "icon": "mdi:map-marker-distance",
                   "color": "green",
@@ -1681,7 +1681,7 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.home_tesla_location_distance",
+                  "entity": "sensor.home_elektra_distance",
                   "name": "Distance from home",
                   "icon": "mdi:map-marker-distance",
                   "color": "green",
@@ -1713,15 +1713,15 @@
                   "type": "map",
                   "entities": [
                     {
-                      "entity": "device_tracker.tesla2_location",
+                      "entity": "device_tracker.karr",
                       "label_mode": "name"
                     },
                     {
-                      "entity": "device_tracker.tesla3_location",
+                      "entity": "device_tracker.orion",
                       "label_mode": "name"
                     },
                     {
-                      "entity": "device_tracker.tesla_location",
+                      "entity": "device_tracker.elektra",
                       "label_mode": "name"
                     }
                   ],

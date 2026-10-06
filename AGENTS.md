@@ -102,8 +102,8 @@ These entity IDs are referenced by Lovelace dashboards and automations. Renaming
 - `cover.jeff_garage_door`, `cover.jen_garage_door` and `binary_sensor.og_jeff_vehicle`, `binary_sensor.og_jen_vehicle` - used by the garage automations (the vehicle sensors are "car in the garage" for the arrival auto-open)
 - `input_boolean.auto_garage_doors_night` - 10 pm garage auto-close toggle (`automation/garage_notifications.yaml`)
 - `input_boolean.auto_garage_doors` - Tesla geofence garage automation kill switch (`automation/garage_tesla.yaml`)
-- `device_tracker.tesla_location`, `device_tracker.tesla2_location`, `device_tracker.tesla3_location` - template trackers (configuration.yaml) fed by TeslaMate's discovered `device_tracker.elektra/karr/orion`. The Proximity integration ("Home" entry) tracks them to produce the distance sensors below. **Keep these ids.**
-- `sensor.home_tesla2_location_distance`, `sensor.home_tesla3_location_distance` - Proximity distance (ft) for KARR and Orion; `automation/garage_tesla.yaml` triggers on these crossing 200 ft (KARR = Jeff's door, Orion = Jen's door). Keep ids, numeric state and ft units. (`sensor.home_tesla_location_distance` for Elektra is only shown on the dashboard.)
+- `device_tracker.elektra`, `device_tracker.karr`, `device_tracker.orion` - TeslaMate-discovered trackers (car 1, 2, 3). The Proximity integration ("Home" entry) tracks them directly to produce the distance sensors below.
+- `sensor.home_karr_distance`, `sensor.home_orion_distance` - Proximity distance (ft) for KARR and Orion; `automation/garage_tesla.yaml` triggers on these crossing 200 ft (KARR = Jeff's door, Orion = Jen's door). Keep numeric state and ft units. (`sensor.home_elektra_distance` for Elektra is only shown on the dashboard.)
 
 ## Tesla / TeslaMate
 - Tesla telemetry comes from TeslaMate's MQTT discovery (`MQTT_DISCOVERY=true` in the k8s config): devices Elektra (car 1), KARR (car 2), Orion (car 3), entity ids like `sensor.elektra_battery`. There are no hand-written Tesla MQTT sensors any more.

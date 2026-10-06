@@ -2,8 +2,8 @@
 ## Tesla geofence: auto close / open the garage doors
 ################################################
 ## Replaces the Node-RED Garage tab Tesla flows.
-##   KARR  (sensor.home_tesla2_location_distance) -> Jeff's door
-##   Orion (sensor.home_tesla3_location_distance) -> Jen's door
+##   KARR  (sensor.home_karr_distance) -> Jeff's door
+##   Orion (sensor.home_orion_distance) -> Jen's door
 ## (Elektra parks in the driveway and is not used.) Distance is the Proximity
 ## integration's distance in feet from home.
 ##   Leaving (crosses above 200 ft): close the door if it is open.
@@ -22,11 +22,11 @@
   mode: single
   trigger:
     - platform: numeric_state
-      entity_id: sensor.home_tesla2_location_distance
+      entity_id: sensor.home_karr_distance
       above: 200
       id: leave
     - platform: numeric_state
-      entity_id: sensor.home_tesla2_location_distance
+      entity_id: sensor.home_karr_distance
       below: 200.01
       id: arrive
   condition:
@@ -68,11 +68,11 @@
   mode: single
   trigger:
     - platform: numeric_state
-      entity_id: sensor.home_tesla3_location_distance
+      entity_id: sensor.home_orion_distance
       above: 200
       id: leave
     - platform: numeric_state
-      entity_id: sensor.home_tesla3_location_distance
+      entity_id: sensor.home_orion_distance
       below: 200.01
       id: arrive
   condition:
