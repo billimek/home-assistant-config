@@ -13,8 +13,8 @@
 ## Guards Node-RED lacked: an unavailable/unknown previous reading is ignored (a
 ## GPS dropout must not look like a crossing), and each car has a 2 minute
 ## cooldown (mode: single + trailing delay) so a flapping reading at the 200 ft
-## boundary cannot repeatedly toggle a door. Jeff and Jen both get a push (Node-RED
-## formatted these messages but never sent them).
+## boundary cannot repeatedly toggle a door. No push is sent for the automatic
+## close/open (the garage_notifications.yaml door-opened push still fires on open).
 
 - id: garage_tesla_karr
   alias: 'Garage door follows KARR (Jeff)'
@@ -43,17 +43,6 @@
               entity_id: cover.jeff_garage_door
               state: 'open'
           sequence:
-            - action: notify.mobile_app_jeffsphone
-              continue_on_error: true
-              data: &tesla_close_jeff
-                title: AUTO GARAGE
-                message: "Closing Jeff's Garage Door!"
-                data:
-                  push:
-                    category: garage
-            - action: notify.mobile_app_jensphone
-              continue_on_error: true
-              data: *tesla_close_jeff
             - action: cover.close_cover
               target:
                 entity_id: cover.jeff_garage_door
@@ -67,17 +56,6 @@
               entity_id: binary_sensor.og_jeff_vehicle
               state: 'off'
           sequence:
-            - action: notify.mobile_app_jeffsphone
-              continue_on_error: true
-              data: &tesla_open_jeff
-                title: AUTO GARAGE
-                message: "Opening Jeff's Garage Door!"
-                data:
-                  push:
-                    category: garage_open
-            - action: notify.mobile_app_jensphone
-              continue_on_error: true
-              data: *tesla_open_jeff
             - action: cover.open_cover
               target:
                 entity_id: cover.jeff_garage_door
@@ -110,17 +88,6 @@
               entity_id: cover.jen_garage_door
               state: 'open'
           sequence:
-            - action: notify.mobile_app_jeffsphone
-              continue_on_error: true
-              data: &tesla_close_jen
-                title: AUTO GARAGE
-                message: "Closing Jen's Garage Door!"
-                data:
-                  push:
-                    category: garage2
-            - action: notify.mobile_app_jensphone
-              continue_on_error: true
-              data: *tesla_close_jen
             - action: cover.close_cover
               target:
                 entity_id: cover.jen_garage_door
@@ -134,17 +101,6 @@
               entity_id: binary_sensor.og_jen_vehicle
               state: 'off'
           sequence:
-            - action: notify.mobile_app_jeffsphone
-              continue_on_error: true
-              data: &tesla_open_jen
-                title: AUTO GARAGE
-                message: "Opening Jen's Garage Door!"
-                data:
-                  push:
-                    category: garage_open
-            - action: notify.mobile_app_jensphone
-              continue_on_error: true
-              data: *tesla_open_jen
             - action: cover.open_cover
               target:
                 entity_id: cover.jen_garage_door
