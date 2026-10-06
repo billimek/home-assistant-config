@@ -45,15 +45,21 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 | `automation/water.yaml` | basement and sump pump leak alerts |
 | `automation/network.yaml` | new WiFi device alert |
 | `scripts/lights_off.yaml` | `script.lights_off`, used at midnight |
+| `scripts/notify.yaml` | `script.notify_phones` (central iOS push: audience, level, tag, group, url, action buttons) and `script.notify_clear`. New pushes should use it, not `notify.mobile_app_*` directly. While `input_boolean.notify_test_mode` is on, everything goes to Jeff's phone only |
+| `automation/notification_actions.yaml` | single handler for iOS action buttons; action ids are `KIND\|arg\|arg` (disarm, garage open/close/snooze, sensor snooze, camera mute, water silence). Snoozes and mutes use the restoring `timer.*` helpers |
+| `automations.yaml` | the 5 Frigate camera pushes (SgtBatten blueprint, one per camera: person/dog/cat only, `custom_filter` carries the weekday/overnight/nobody-home rules, "Mute 1 h" button). They bypass `notify_phones` (so `notify_test_mode` does not apply); `notify_group` is `ALL_DEVICES`, set it to `mobile_app_jeffsphone` to test |
 
 Notes: Jen's phone (`notify.mobile_app_jensphone`) is included in the shared household pushes; the siren, Slack and the cleaning-calendar disarm were dropped on purpose. Automation timers (garage lights, deck lights, etc.) live in memory like Node-RED's did, so an HA restart while one is running leaves that light on.
+
+## Automation map
+`perl tools/automation_map.pl` regenerates `docs/automation_map.html`, a clickable flow map (triggers, automations, scripts, destinations such as Jen's phone) built by reading `automation/`, `scripts/` and the custom blueprints. There is no YAML parser on the box, so it reads by indentation and expects literal service names (`script.notify_phones` with `audience:`, `notify.*`). Re-run it after changing automations.
 
 ## Custom Blueprints
 This repository includes custom blueprints for common automation patterns. Blueprints are located in `blueprints/automation/custom/`:
 
 ### sensor_alert_when_away.yaml
 Sends notification when a sensor (door/window/motion) triggers while nobody is home.
-- **Inputs**: sensor_entity, sensor_name, presence_sensor (default: sensor.anyone_home), notify_service
+- **Inputs**: sensor_entity, sensor_name, presence_sensor (default: sensor.anyone_home), audience (default: jeff). Pushes via `script.notify_phones`; the "Snooze 1 h" button starts `timer.snooze_<sensor key>` (key = sensor id after `ser2sock_10000_`); the push clears when the sensor closes
 - **Usage**: Used by 15 alarm automations in `automation/alarm.yaml`
 - **Example**:
   ```yaml
@@ -65,7 +71,6 @@ Sends notification when a sensor (door/window/motion) triggers while nobody is h
         sensor_entity: binary_sensor.ser2sock_10000_front_door
         sensor_name: "Front door"
         presence_sensor: sensor.anyone_home
-        notify_service: notify.mobile_app_jeffsphone
   ```
 
 ### sensor_alert_timeout.yaml

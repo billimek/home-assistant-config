@@ -16,9 +16,12 @@
     - condition: template
       value_template: "{{ trigger.event.data.entity_id.startswith('device_tracker.') }}"
   action:
-    - action: notify.mobile_app_jeffsphone
+    - action: script.notify_phones
       data:
+        audience: jeff
         title: New Device Detected
+        level: passive
+        group: network
         message: >
           A new device has joined the WiFi network:
           {{ trigger.event.data.entity_id | replace('device_tracker.', '') }}

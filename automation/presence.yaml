@@ -14,11 +14,14 @@
       entity_id: zone.home
       above: 0
   action:
-    - action: notify.mobile_app_jeffsphone
-      continue_on_error: true
+    - action: script.notify_phones
       data:
-        title: Presence
-        message: Someone came home
+        audience: jeff
+        title: "🏠 Someone came home"
+        message: "{{ states('zone.home') | int(0) }} home now"
+        level: passive
+        tag: presence
+        group: presence
     - action: ecobee.resume_program
       continue_on_error: true
       target:
@@ -53,10 +56,12 @@
         - unavailable
         - unknown
   action:
-    - action: notify.mobile_app_jeffsphone
+    - action: script.notify_phones
       data:
-        title: Presence
-        message: Jen came home
-        data:
-          push:
-            sound: US-EN-Morgan-Freeman-Wife-Is-Arriving.wav
+        audience: jeff
+        title: "🏠 Jen came home"
+        message: "Jen arrived at {{ now().strftime('%-I:%M %p') }}"
+        level: active
+        sound: US-EN-Morgan-Freeman-Wife-Is-Arriving.wav
+        tag: presence_jen
+        group: presence

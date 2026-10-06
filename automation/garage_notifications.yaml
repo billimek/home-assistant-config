@@ -4,10 +4,12 @@
 ## Replaces the Node-RED Garage tab flows: open notifications, "still open and
 ## nobody home", the 120 minute open nag and the 10pm auto-close.
 ## The Tesla geofence auto open/close and the Inovelli LED indicators are separate.
-## The iOS push category (garage / garage2) gives the phone the Open/Close
-## action buttons handled by the ios_action_* automations in garage.yaml.
+## Pushes go through script.notify_phones. Open/leaving/nag pushes share the tag
+## garage_<jeff|jen>, so each replaces the last and the whole thing is cleared when the
+## door closes. The Close / Snooze / Open buttons are handled in notification_actions.yaml.
 
-## A garage door opens: push to Jeff when someone is home, Jeff and Jen when nobody is.
+## A garage door opens: quiet push to Jeff when someone is home, time-sensitive push to
+## both phones when nobody is (the "away" toggle can mute that one).
 - id: garage_door_opened_notify
   alias: 'Notify when a garage door opens'
   mode: parallel
@@ -21,47 +23,52 @@
       not_from:
         - unavailable
         - unknown
+  variables:
+    doors:
+      cover.jeff_garage_door:
+        key: jeff
+        title: Jeff's Garage Door
+      cover.jen_garage_door:
+        key: jen
+        title: Jen's Garage Door
+    door: "{{ doors[trigger.entity_id] }}"
+    home: "{{ states('zone.home') | int(0) > 0 }}"
   condition:
     - condition: state
       entity_id: input_boolean.notify_garage_doors_home
       state: 'on'
-  variables:
-    doors:
-      cover.jeff_garage_door:
-        title: Jeff's Garage Door
-        category: garage
-      cover.jen_garage_door:
-        title: Jen's Garage Door
-        category: garage2
-    door: "{{ doors[trigger.entity_id] }}"
+    - condition: template
+      value_template: "{{ home or is_state('input_boolean.notify_garage_doors_away', 'on') }}"
   action:
-    - choose:
-        - conditions:
-            - condition: numeric_state
-              entity_id: zone.home
-              above: 0
-          sequence:
-            - action: notify.mobile_app_jeffsphone
-              data:
-                title: "{{ door.title }}"
-                message: "{{ door.title }} is open"
-                data:
-                  push:
-                    category: "{{ door.category }}"
-                    sound: US-EN-Morgan-Freeman-Garage-Door-Opened.wav
-      default:
-        - action: notify.mobile_app_jeffsphone
-          continue_on_error: true
-          data: &garage_open_away
-            title: "{{ door.title }}"
-            message: "{{ door.title }} is open and no one is home!"
-            data:
-              push:
-                category: "{{ door.category }}"
-                sound: US-EN-Morgan-Freeman-Garage-Door-Opened.wav
-        - action: notify.mobile_app_jensphone
-          continue_on_error: true
-          data: *garage_open_away
+    - action: script.notify_phones
+      data:
+        audience: "{{ 'jeff' if home else 'all' }}"
+        title: "{{ door.title }}"
+        message: "{{ door.title }} is open{{ '' if home else ' and no one is home!' }}"
+        level: "{{ 'active' if home else 'time-sensitive' }}"
+        sound: US-EN-Morgan-Freeman-Garage-Door-Opened.wav
+        tag: "garage_{{ door.key }}"
+        group: garage
+        url: /lovelace/home
+        actions:
+          - action: "GARAGE_CLOSE|{{ door.key }}"
+            title: Close
+
+## The door is shut again: remove its open / nag pushes.
+- id: garage_door_closed_clear
+  alias: 'Clear the garage door pushes when a door closes'
+  mode: parallel
+  max: 4
+  trigger:
+    - platform: state
+      entity_id:
+        - cover.jeff_garage_door
+        - cover.jen_garage_door
+      to: 'closed'
+  action:
+    - action: script.notify_clear
+      data:
+        tag: "garage_{{ 'jeff' if trigger.entity_id == 'cover.jeff_garage_door' else 'jen' }}"
 
 ## Everyone leaves while a garage door is open.
 - id: garage_door_open_when_leaving
@@ -74,11 +81,11 @@
   variables:
     doors:
       - entity: cover.jeff_garage_door
+        key: jeff
         title: Jeff's Garage Door
-        category: garage
       - entity: cover.jen_garage_door
+        key: jen
         title: Jen's Garage Door
-        category: garage2
   action:
     - repeat:
         for_each: "{{ doors }}"
@@ -87,25 +94,26 @@
               - condition: template
                 value_template: "{{ is_state(repeat.item.entity, 'open') }}"
             then:
-              - action: notify.mobile_app_jeffsphone
-                continue_on_error: true
-                data: &garage_still_open
+              - action: script.notify_phones
+                data:
                   title: "{{ repeat.item.title }}"
                   message: "{{ repeat.item.title }} is still open and no one is home!"
-                  data:
-                    push:
-                      category: "{{ repeat.item.category }}"
-                      sound: US-EN-Morgan-Freeman-Garage-Door-Opened.wav
-              - action: notify.mobile_app_jensphone
-                continue_on_error: true
-                data: *garage_still_open
+                  level: time-sensitive
+                  sound: US-EN-Morgan-Freeman-Garage-Door-Opened.wav
+                  tag: "garage_{{ repeat.item.key }}"
+                  group: garage
+                  url: /lovelace/home
+                  actions:
+                    - action: "GARAGE_CLOSE|{{ repeat.item.key }}"
+                      title: Close
 
 ## A door stays open for 2 hours (weekdays only: the family leaves them open on
 ## weekends). Pushes to both phones, repeats every 3 hours while still open, and
-## closes the door if that door's auto-close toggle is on.
+## closes the door if that door's auto-close toggle is on. "Snooze 2 h" starts that
+## door's timer, which skips both the push and the auto-close.
 - id: garage_door_open_nag
   alias: 'Nag when a garage door has been open for 2 hours'
-  description: "Weekday push to both phones after a door is open 2 hours, repeated every 3 hours; auto-closes if that door's auto-close toggle is on."
+  description: "Weekday push to both phones after a door is open 2 hours, repeated every 3 hours; Close / Snooze 2 h buttons; auto-closes if that door's auto-close toggle is on."
   mode: parallel
   max: 2
   trigger:
@@ -118,13 +126,15 @@
   variables:
     doors:
       cover.jeff_garage_door:
+        key: jeff
         title: Jeff's Garage Door
-        category: garage
         auto_close: input_boolean.auto_close_garage_door_jeff
+        snooze: timer.garage_jeff_snooze
       cover.jen_garage_door:
+        key: jen
         title: Jen's Garage Door
-        category: garage2
         auto_close: input_boolean.auto_close_garage_door_jen
+        snooze: timer.garage_jen_snooze
     door: "{{ doors[trigger.entity_id] }}"
     entity: "{{ trigger.entity_id }}"
   action:
@@ -133,20 +143,24 @@
           - if:
               - condition: time
                 weekday: [mon, tue, wed, thu, fri]
+              - condition: template
+                value_template: "{{ is_state(door.snooze, 'idle') }}"
             then:
-              - action: notify.mobile_app_jeffsphone
-                continue_on_error: true
-                data: &garage_nag
+              - action: script.notify_phones
+                data:
                   title: "{{ door.title }}"
                   message: >
                     {{ door.title }} has remained open for about
                     {{ 2 + 3 * (repeat.index - 1) }} hours
-                  data:
-                    push:
-                      category: "{{ door.category }}"
-              - action: notify.mobile_app_jensphone
-                continue_on_error: true
-                data: *garage_nag
+                  level: time-sensitive
+                  tag: "garage_{{ door.key }}"
+                  group: garage
+                  url: /lovelace/home
+                  actions:
+                    - action: "GARAGE_CLOSE|{{ door.key }}"
+                      title: Close
+                    - action: "GARAGE_SNOOZE|{{ door.key }}|120"
+                      title: Snooze 2 h
               - if:
                   - condition: template
                     value_template: "{{ is_state(door.auto_close, 'on') }}"
@@ -162,6 +176,7 @@
             value_template: "{{ not is_state(entity, 'open') }}"
 
 ## 10pm: close any open garage door (if the night toggle is on) and tell both phones.
+## The push has its own tag (not cleared when the door closes) and an "Open again" button.
 ## Node-RED also spoke the message with tts.google_say; that is dropped.
 - id: garage_close_at_10pm
   alias: 'Close open garage doors at 10pm'
@@ -177,11 +192,11 @@
   variables:
     doors:
       - entity: cover.jeff_garage_door
+        key: jeff
         title: Jeff's Garage Door
-        category: garage
       - entity: cover.jen_garage_door
+        key: jen
         title: Jen's Garage Door
-        category: garage2
   action:
     - repeat:
         for_each: "{{ doors }}"
@@ -190,17 +205,17 @@
               - condition: template
                 value_template: "{{ is_state(repeat.item.entity, 'open') }}"
             then:
-              - action: notify.mobile_app_jeffsphone
-                continue_on_error: true
-                data: &garage_auto_close
+              - action: script.notify_phones
+                data:
                   title: "{{ repeat.item.title }}"
                   message: "Automatically closing {{ repeat.item.title }}"
-                  data:
-                    push:
-                      category: "{{ repeat.item.category }}"
-              - action: notify.mobile_app_jensphone
-                continue_on_error: true
-                data: *garage_auto_close
+                  level: time-sensitive
+                  tag: "garage_{{ repeat.item.key }}_night"
+                  group: garage
+                  url: /lovelace/home
+                  actions:
+                    - action: "GARAGE_OPEN|{{ repeat.item.key }}"
+                      title: Open again
               - action: cover.close_cover
                 target:
                   entity_id: "{{ repeat.item.entity }}"

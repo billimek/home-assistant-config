@@ -2,11 +2,13 @@
 ## Alarm notifications
 ################################################
 ## Replaces the Node-RED alarm armed / disarmed / triggered notification flows.
-## Gated by the input_boolean.notify_alarm_* toggles.
+## Gated by the input_boolean.notify_alarm_* toggles. Sent through script.notify_phones.
 ## Slack is no longer used; Discord only fires for a triggered alarm.
+## The only action button is Disarm (Face ID); it is handled in notification_actions.yaml.
 
 - id: alarm_triggered_notify
   alias: 'Notify when the alarm is triggered'
+  description: 'Critical push to both phones (Disarm button, tap opens Security) and a Discord message.'
   mode: single
   trigger:
     - platform: state
@@ -18,21 +20,20 @@
       state: 'on'
   action:
     - parallel:
-        - action: notify.mobile_app_jeffsphone
-          continue_on_error: true
-          data: &triggered_ios
+        - action: script.notify_phones
+          data:
             title: "🚨 ALARM TRIGGERED! 🚨"
-            message: "THE ALARM HAS TRIGGERED! OMG WTFBBQ!!!!111 🔥 \n{{ trigger.to_state.state }}"
-            data:
-              push:
-                category: alarm
-                sound:
-                  name: ct-error.caf
-                  critical: 1
-                  volume: 1.0
-        - action: notify.mobile_app_jensphone
-          continue_on_error: true
-          data: *triggered_ios
+            subtitle: "{{ states('sensor.alarm_zones_active') }}"
+            message: "THE ALARM HAS TRIGGERED! OMG WTFBBQ!!!!111 🔥 {{ states('sensor.alarm_panel_message') }}"
+            level: critical
+            tag: alarm_triggered
+            group: alarm
+            url: /lovelace/security
+            actions:
+              - action: DISARM_ALARM
+                title: Disarm
+                destructive: true
+                authenticationRequired: true
         - action: notify.discord
           continue_on_error: true
           data:
@@ -41,8 +42,22 @@
               - '782247274029776937'
               - '65851793686405120'
 
+- id: alarm_triggered_clear
+  alias: 'Clear the alarm-triggered push when the alarm is disarmed'
+  description: 'Removes the critical push from the phones once the alarm leaves the triggered state.'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      from: 'triggered'
+  action:
+    - action: script.notify_clear
+      data:
+        tag: alarm_triggered
+
 - id: alarm_armed_notify
   alias: 'Notify when the alarm is armed'
+  description: 'Passive (summary-only) push with a Disarm button; replaces the previous alarm status push.'
   mode: queued
   trigger:
     - platform: state
@@ -57,21 +72,30 @@
     - condition: state
       entity_id: input_boolean.notify_alarm_armed
       state: 'on'
+  variables:
+    modes:
+      armed_away: Away
+      armed_home: Home
+      armed_night: Night
+      armed_vacation: Vacation
+      armed_custom_bypass: Custom bypass
   action:
-    - action: notify.mobile_app_jeffsphone
-      continue_on_error: true
-      data: &alarm_status_ios
-        title: Alarm System
-        message: "Alarm is now {{ trigger.to_state.state }}"
-        data:
-          push:
-            category: alarm
-    - action: notify.mobile_app_jensphone
-      continue_on_error: true
-      data: *alarm_status_ios
+    - action: script.notify_phones
+      data:
+        title: "🔒 Alarm armed"
+        message: "Armed – {{ modes.get(trigger.to_state.state, trigger.to_state.state) }}"
+        level: passive
+        tag: alarm_status
+        group: alarm
+        url: /lovelace/security
+        actions:
+          - action: DISARM_ALARM
+            title: Disarm
+            authenticationRequired: true
 
 - id: alarm_disarmed_notify
   alias: 'Notify when the alarm is disarmed'
+  description: 'Passive push that replaces the "armed" push.'
   mode: queued
   trigger:
     - platform: state
@@ -82,15 +106,18 @@
       entity_id: input_boolean.notify_alarm_disarmed
       state: 'on'
   action:
-    - action: notify.mobile_app_jeffsphone
-      continue_on_error: true
-      data: *alarm_status_ios
-    - action: notify.mobile_app_jensphone
-      continue_on_error: true
-      data: *alarm_status_ios
+    - action: script.notify_phones
+      data:
+        title: "🔓 Alarm disarmed"
+        message: "Disarmed at {{ now().strftime('%-I:%M %p') }}"
+        level: passive
+        tag: alarm_status
+        group: alarm
+        url: /lovelace/security
 
 - id: alarm_suspicious_disarm_notify
   alias: 'Notify when the alarm is disarmed between midnight and 5am'
+  description: 'Time-sensitive push to Jeff only.'
   mode: queued
   trigger:
     - platform: state
@@ -101,10 +128,12 @@
       after: '00:00:00'
       before: '05:00:00'
   action:
-    - action: notify.mobile_app_jeffsphone
+    - action: script.notify_phones
       data:
-        title: Suspicious Activity
-        message: "Someone disarmed the alarm at {{ now().strftime('%m/%d/%Y %H:%M:%S') }}"
-        data:
-          push:
-            category: alarm
+        audience: jeff
+        title: "Suspicious activity"
+        message: "Someone disarmed the alarm at {{ now().strftime('%-I:%M %p on %m/%d') }}"
+        level: time-sensitive
+        tag: alarm_suspicious
+        group: alarm
+        url: /lovelace/security

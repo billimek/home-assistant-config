@@ -1,15 +1,27 @@
-- id: '1706749818643'
-  alias: 'Camera alerts: porch (only when nobody home)'
-  description: 'Frigate push for the porch camera, only while the family group is away. Gated by input_boolean.camera_porch_notify.'
+## Frigate camera pushes: one SgtBatten blueprint instance per camera.
+## Each is gated by its input_boolean.camera_<name>_notify toggle (dashboard + "Mute 1 h" button),
+## only notifies for person / dog / cat, and has a "Mute 1 h" action button (CAMERA_MUTE|<name>|60,
+## handled in automation/notification_actions.yaml). The weekday / overnight / nobody-home rules
+## are a custom_filter template; group.family is 'home' while anyone in it is home.
+## notify_group ALL_DEVICES (both phones). These bypass script.notify_phones, so notify_test_mode does
+## not apply; to test, set notify_group to mobile_app_jeffsphone.
+- id: '1707590445295'
+  alias: 'Camera alerts: porch'
+  description: 'Frigate push for the porch camera overnight (22:00-05:59) or whenever nobody is home. Gated by input_boolean.camera_porch_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
       camera: camera.porch
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
-      presence_filter: group.family
+      labels: [person, dog, cat]
+      interruption_level: time-sensitive
+      alert_once: true
+      button_3: Mute 1 h
+      url_3: CAMERA_MUTE|porch|60
+      icon_3: sfsymbols:bell.slash
+      custom_filter: "{{ now().hour >= 22 or now().hour < 6 or not is_state('group.family', 'home') }}"
       state_filter: true
       state_entity: input_boolean.camera_porch_notify
       state_filter_states:
@@ -23,151 +35,77 @@
       camera: camera.doorbell
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
+      labels: [person, dog, cat]
+      interruption_level: time-sensitive
+      alert_once: true
+      button_3: Mute 1 h
+      url_3: CAMERA_MUTE|doorbell|60
+      icon_3: sfsymbols:bell.slash
       state_filter: true
       state_entity: input_boolean.camera_doorbell_notify
       state_filter_states:
       - 'on'
 - id: '1706755452977'
-  alias: 'Camera alerts: driveway (weekdays)'
-  description: 'Frigate push for the driveway camera on weekdays only (Mon-Fri, via custom_filter). Gated by input_boolean.camera_driveway_notify.'
+  alias: 'Camera alerts: driveway'
+  description: 'Frigate push for the driveway camera on weekdays (Mon-Fri) or whenever nobody is home, 2 min cooldown. Gated by input_boolean.camera_driveway_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
       camera: camera.driveway
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
+      labels: [person, dog, cat]
+      cooldown: 120
+      alert_once: true
+      button_3: Mute 1 h
+      url_3: CAMERA_MUTE|driveway|60
+      icon_3: sfsymbols:bell.slash
+      custom_filter: "{{ now().weekday() < 5 or not is_state('group.family', 'home') }}"
       state_filter: true
       state_entity: input_boolean.camera_driveway_notify
       state_filter_states:
       - 'on'
-      mqtt_topic: frigate/reviews
-      custom_filter: '{{ now().weekday() < 5 }}'
 - id: '1706755468710'
-  alias: 'Camera alerts: front (weekdays)'
-  description: 'Frigate push for the front camera on weekdays only (Mon-Fri, via custom_filter). Gated by input_boolean.camera_front_notify.'
+  alias: 'Camera alerts: front'
+  description: 'Frigate push for the front camera on weekdays (Mon-Fri) or whenever nobody is home, 2 min cooldown. Gated by input_boolean.camera_front_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
       camera: camera.front
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      disable_times: []
       message: '{{ label }} detected - {{ camera_name }}'
+      labels: [person, dog, cat]
+      cooldown: 120
+      alert_once: true
+      button_3: Mute 1 h
+      url_3: CAMERA_MUTE|front|60
+      icon_3: sfsymbols:bell.slash
+      custom_filter: "{{ now().weekday() < 5 or not is_state('group.family', 'home') }}"
       state_filter: true
       state_entity: input_boolean.camera_front_notify
       state_filter_states:
       - 'on'
-      custom_filter: '{{ now().weekday() < 5 }}'
 - id: '1706755509478'
-  alias: 'Camera alerts: pool (overnight only)'
-  description: 'Frigate push for the pool camera only from 22:00 to 05:59 (hours 6-21 are suppressed). Gated by input_boolean.camera_pool_notify.'
+  alias: 'Camera alerts: pool'
+  description: 'Frigate push for the pool camera overnight (22:00-05:59) or whenever nobody is home. Gated by input_boolean.camera_pool_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
       camera: camera.pool
       notify_group: ALL_DEVICES
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      disable_times:
-      - '6'
-      - '7'
-      - '8'
-      - '9'
-      - '10'
-      - '11'
-      - '12'
-      - '13'
-      - '14'
-      - '15'
-      - '16'
-      - '17'
-      - '18'
-      - '19'
-      - '20'
-      - '21'
       message: '{{ label }} detected - {{ camera_name }}'
+      labels: [person, dog, cat]
+      interruption_level: time-sensitive
+      alert_once: true
+      button_3: Mute 1 h
+      url_3: CAMERA_MUTE|pool|60
+      icon_3: sfsymbols:bell.slash
+      custom_filter: "{{ now().hour >= 22 or now().hour < 6 or not is_state('group.family', 'home') }}"
       state_filter: true
       state_entity: input_boolean.camera_pool_notify
-      state_filter_states:
-      - 'on'
-- id: '1706820625839'
-  alias: 'Camera alerts: pool (only when nobody home)'
-  description: 'Frigate push for the pool camera, only while the family group is away. Gated by input_boolean.camera_pool_notify.'
-  use_blueprint:
-    path: SgtBatten/Beta.yaml
-    input:
-      camera: camera.pool
-      notify_group: ALL_DEVICES
-      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      disable_times: []
-      message: '{{ label }} detected - {{ camera_name }}'
-      presence_filter: group.family
-      state_filter: true
-      state_entity: input_boolean.camera_pool_notify
-      state_filter_states:
-      - 'on'
-- id: '1706821037958'
-  alias: 'Camera alerts: driveway (only when nobody home)'
-  description: 'Frigate push for the driveway camera, only while the family group is away. Gated by input_boolean.camera_driveway_notify.'
-  use_blueprint:
-    path: SgtBatten/Beta.yaml
-    input:
-      camera: camera.driveway
-      notify_group: ALL_DEVICES
-      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      message: '{{ label }} detected - {{ camera_name }}'
-      presence_filter: group.family
-      state_filter: true
-      state_entity: input_boolean.camera_driveway_notify
-      state_filter_states:
-      - 'on'
-- id: '1706821133056'
-  alias: 'Camera alerts: front (only when nobody home)'
-  description: 'Frigate push for the front camera, only while the family group is away. Gated by input_boolean.camera_front_notify.'
-  use_blueprint:
-    path: SgtBatten/Beta.yaml
-    input:
-      camera: camera.front
-      notify_group: ALL_DEVICES
-      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      disable_times: []
-      message: '{{ label }} detected - {{ camera_name }}'
-      presence_filter: group.family
-      state_filter: true
-      state_entity: input_boolean.camera_front_notify
-      state_filter_states:
-      - 'on'
-- id: '1707590445295'
-  alias: 'Camera alerts: porch (overnight only)'
-  description: 'Frigate push for the porch camera only from 22:00 to 05:59 (hours 6-21 are suppressed). Gated by input_boolean.camera_porch_notify.'
-  use_blueprint:
-    path: SgtBatten/Beta.yaml
-    input:
-      camera: camera.porch
-      notify_group: ALL_DEVICES
-      notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
-      disable_times:
-      - '6'
-      - '7'
-      - '8'
-      - '9'
-      - '10'
-      - '11'
-      - '12'
-      - '13'
-      - '14'
-      - '15'
-      - '16'
-      - '17'
-      - '18'
-      - '19'
-      - '20'
-      - '21'
-      message: '{{ label }} detected - {{ camera_name }}'
-      state_filter: true
-      state_entity: input_boolean.camera_porch_notify
       state_filter_states:
       - 'on'

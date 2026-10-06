@@ -112,6 +112,110 @@ input_boolean:
     name: Notification when garage doors are open/closed and we are home
   notify_garage_doors_away:
     name: Notification when garage doors are open/closed and we are away
+  notify_test_mode:
+    name: Notification test mode (pushes go to Jeff's phone only)
+    icon: mdi:test-tube
+
+## Snooze timers for phone notification actions (automation/notification_actions.yaml).
+## restore: true so a snooze survives an HA restart.
+timer:
+  garage_jeff_snooze:
+    name: Snooze Jeff's garage door nag
+    icon: mdi:bell-sleep
+    restore: true
+  garage_jen_snooze:
+    name: Snooze Jen's garage door nag
+    icon: mdi:bell-sleep
+    restore: true
+  water_alert_snooze:
+    name: Silence repeating water alerts
+    icon: mdi:bell-sleep
+    restore: true
+
+  ## Camera "Mute 1 h" action buttons (see automation/notification_actions.yaml)
+  camera_porch_mute:
+    name: Porch camera mute
+    icon: mdi:bell-off
+    restore: true
+  camera_doorbell_mute:
+    name: Doorbell camera mute
+    icon: mdi:bell-off
+    restore: true
+  camera_driveway_mute:
+    name: Driveway camera mute
+    icon: mdi:bell-off
+    restore: true
+  camera_front_mute:
+    name: Front camera mute
+    icon: mdi:bell-off
+    restore: true
+  camera_pool_mute:
+    name: Pool camera mute
+    icon: mdi:bell-off
+    restore: true
+
+  ## One per alarm sensor, used by the door/window/motion alert blueprints. The key is the part
+  ## of the sensor id after ser2sock_10000_ (a missing timer never blocks an alert).
+  snooze_upstairs_motion:
+    name: Snooze upstairs motion alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_main_motion:
+    name: Snooze main motion alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_basement_motion:
+    name: Snooze basement motion alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_front_door:
+    name: Snooze front door alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_garage_door:
+    name: Snooze door to garage alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_family_window:
+    name: Snooze family window alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_living_window:
+    name: Snooze living window alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_sun_room_door:
+    name: Snooze sun room door alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_bathroom_window:
+    name: Snooze bathroom window alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_kitchen_window:
+    name: Snooze kitchen window alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_unknown_door:
+    name: Snooze unknown door alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_laundry_window:
+    name: Snooze laundry window alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_basement_door:
+    name: Snooze basement door alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_sliding_door:
+    name: Snooze sliding door alerts
+    icon: mdi:bell-sleep
+    restore: true
+  snooze_upstairs_window:
+    name: Snooze upstairs window alerts
+    icon: mdi:bell-sleep
+    restore: true
 
 notify:
   - name: ALL_DEVICES

@@ -1,0 +1,99 @@
+################################################
+## iOS notification action buttons
+################################################
+## One handler for every action button we put on a push (see scripts/notify.yaml).
+## Action ids are "KIND|arg|arg" strings; other ids (e.g. the Frigate blueprint's) are ignored.
+##   DISARM_ALARM
+##   GARAGE_OPEN|jeff|jen   GARAGE_CLOSE|jeff|jen
+##   GARAGE_SNOOZE|jeff|jen|<minutes>   suppress that door's 2 h nag (and its auto-close)
+##   SENSOR_SNOOZE|<sensor key>|<minutes>  mute one alarm sensor's alerts (timer.snooze_<key>)
+##   CAMERA_MUTE|<porch|doorbell|driveway|front|pool>|<minutes>  turn that camera's input_boolean.camera_<n>_notify
+##       off (this mutes every Frigate instance for it); camera_mute_finished below turns it back on
+##   WATER_SILENCE|all|<minutes>        stop the repeating water alerts
+
+- id: ios_notification_actions
+  alias: 'Handle iOS notification action buttons'
+  description: 'Runs the action behind a push button: disarm the alarm, open/close a garage door, snooze the garage nag, silence water alerts.'
+  mode: queued
+  max: 10
+  trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+  variables:
+    parts: "{{ (trigger.event.data.get('action', '') | string).split('|') }}"
+    kind: "{{ parts[0] }}"
+    arg: "{{ parts[1] if parts | length > 1 else '' }}"
+    minutes: "{{ parts[2] | int(30) if parts | length > 2 else 30 }}"
+    doors:
+      jeff: cover.jeff_garage_door
+      jen: cover.jen_garage_door
+  condition:
+    - condition: template
+      value_template: "{{ kind in ['DISARM_ALARM', 'GARAGE_OPEN', 'GARAGE_CLOSE', 'GARAGE_SNOOZE', 'SENSOR_SNOOZE', 'CAMERA_MUTE', 'WATER_SILENCE'] }}"
+  action:
+    - choose:
+        - conditions: "{{ kind == 'DISARM_ALARM' }}"
+          sequence:
+            - action: alarm_control_panel.alarm_disarm
+              target:
+                entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+              data:
+                code: !env_var ALARMCD
+        - conditions: "{{ kind == 'GARAGE_CLOSE' and arg in doors }}"
+          sequence:
+            - action: cover.close_cover
+              target:
+                entity_id: "{{ doors[arg] }}"
+        - conditions: "{{ kind == 'GARAGE_OPEN' and arg in doors }}"
+          sequence:
+            - action: cover.open_cover
+              target:
+                entity_id: "{{ doors[arg] }}"
+        - conditions: "{{ kind == 'GARAGE_SNOOZE' and arg in doors }}"
+          sequence:
+            - action: timer.start
+              target:
+                entity_id: "timer.garage_{{ arg }}_snooze"
+              data:
+                duration: "{{ minutes * 60 }}"
+        - conditions: "{{ kind == 'SENSOR_SNOOZE' and states('timer.snooze_' ~ arg) in ['idle', 'active', 'paused'] }}"
+          sequence:
+            - action: timer.start
+              target:
+                entity_id: "timer.snooze_{{ arg }}"
+              data:
+                duration: "{{ minutes * 60 }}"
+        - conditions: "{{ kind == 'CAMERA_MUTE' and arg in ['porch', 'doorbell', 'driveway', 'front', 'pool'] }}"
+          sequence:
+            - action: input_boolean.turn_off
+              target:
+                entity_id: "input_boolean.camera_{{ arg }}_notify"
+            - action: timer.start
+              target:
+                entity_id: "timer.camera_{{ arg }}_mute"
+              data:
+                duration: "{{ minutes * 60 }}"
+        - conditions: "{{ kind == 'WATER_SILENCE' }}"
+          sequence:
+            - action: timer.start
+              target:
+                entity_id: timer.water_alert_snooze
+              data:
+                duration: "{{ minutes * 60 }}"
+
+- id: camera_mute_finished
+  alias: 'Turn a camera mute back on when its timer ends'
+  description: 'Re-enables input_boolean.camera_<name>_notify when timer.camera_<name>_mute (started by the Mute 1 h button) finishes. The timer survives restarts, so a mute can not get stuck.'
+  mode: queued
+  trigger:
+    - platform: event
+      event_type: timer.finished
+  condition:
+    - condition: template
+      value_template: >-
+        {{ trigger.event.data.entity_id in ['timer.camera_porch_mute', 'timer.camera_doorbell_mute',
+           'timer.camera_driveway_mute', 'timer.camera_front_mute', 'timer.camera_pool_mute'] }}
+  action:
+    - action: input_boolean.turn_on
+      target:
+        entity_id: "input_boolean.camera_{{ trigger.event.data.entity_id.split('.')[1].split('_')[1] }}_notify"

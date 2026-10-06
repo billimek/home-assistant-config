@@ -1,0 +1,113 @@
+## Central iOS push sender. Automations call script.notify_phones instead of notify.mobile_app_*.
+##   audience: all (default, both phones) | jeff | jen (in test mode jen pushes go to Jeff's phone instead)
+##   level:    passive | active (default) | time-sensitive | critical (critical needs a sound; defaults to the system one)
+##   tag:      a later push with the same tag replaces the earlier one; script.notify_clear removes it
+##   actions:  list of iOS action buttons; action ids are "KIND|arg|arg" strings handled by
+##             automation/notification_actions.yaml
+## While input_boolean.notify_test_mode is on, every push goes to Jeff's phone only.
+
+notify_phones:
+  alias: 'Send a push to the phones'
+  icon: mdi:bell-ring
+  mode: parallel
+  max: 20
+  fields:
+    title:
+      description: Notification title
+      required: true
+      example: "Garage"
+    message:
+      description: Notification body
+      required: true
+      example: "Jeff's garage door is open"
+    subtitle:
+      description: Optional second line
+    audience:
+      description: all (both phones) or jeff
+      example: all
+    level:
+      description: passive, active, time-sensitive or critical
+      example: time-sensitive
+    tag:
+      description: Replaces / clears earlier pushes with the same tag
+    group:
+      description: Thread/group name used to stack related pushes
+    sound:
+      description: Sound file name (the critical sound when level is critical)
+    image:
+      description: Attachment URL, e.g. /api/camera_proxy/camera.doorbell
+    url:
+      description: Where a tap goes, e.g. /lovelace/security
+    actions:
+      description: List of iOS action buttons (action, title, destructive, authenticationRequired, ...)
+  sequence:
+    - variables:
+        lvl: "{{ level | default('active') }}"
+        snd: "{{ sound | default('') }}"
+        targets: >-
+          {%- set aud = audience | default('all') -%}
+          {%- set test = is_state('input_boolean.notify_test_mode', 'on') -%}
+          {%- set t = [] -%}
+          {%- if aud in ['all', 'jeff'] or test -%}
+            {%- set t = t + ['notify.mobile_app_jeffsphone'] -%}
+          {%- endif -%}
+          {%- if aud in ['all', 'jen'] and not test -%}
+            {%- set t = t + ['notify.mobile_app_jensphone'] -%}
+          {%- endif -%}
+          {{ t }}
+        payload: >-
+          {%- set push = {'interruption-level': lvl} -%}
+          {%- if lvl == 'critical' -%}
+            {%- set push = push | combine({'sound': {'name': snd or 'default', 'critical': 1, 'volume': 1.0}}) -%}
+          {%- elif snd -%}
+            {%- set push = push | combine({'sound': snd}) -%}
+          {%- endif -%}
+          {%- if group | default('') -%}
+            {%- set push = push | combine({'thread-id': group}) -%}
+          {%- endif -%}
+          {%- set d = {'push': push} -%}
+          {%- if tag | default('') -%}{%- set d = d | combine({'tag': tag}) -%}{%- endif -%}
+          {%- if group | default('') -%}{%- set d = d | combine({'group': group}) -%}{%- endif -%}
+          {%- if subtitle | default('') -%}{%- set d = d | combine({'subtitle': subtitle}) -%}{%- endif -%}
+          {%- if image | default('') -%}{%- set d = d | combine({'image': image}) -%}{%- endif -%}
+          {%- if url | default('') -%}{%- set d = d | combine({'url': url}) -%}{%- endif -%}
+          {%- if actions | default([]) -%}{%- set d = d | combine({'actions': actions}) -%}{%- endif -%}
+          {{ d }}
+    - repeat:
+        for_each: "{{ targets }}"
+        sequence:
+          - action: "{{ repeat.item }}"
+            continue_on_error: true
+            data:
+              title: "{{ title }}"
+              message: "{{ message }}"
+              data: "{{ payload }}"
+
+## Remove an earlier push by tag (e.g. the "door open" push once the door closes).
+notify_clear:
+  alias: 'Clear a push from the phones'
+  icon: mdi:bell-remove
+  mode: parallel
+  max: 20
+  fields:
+    tag:
+      description: Tag of the push to remove
+      required: true
+      example: garage_jeff
+  sequence:
+    - variables:
+        targets: >-
+          {%- set t = ['notify.mobile_app_jeffsphone'] -%}
+          {%- if not is_state('input_boolean.notify_test_mode', 'on') -%}
+            {%- set t = t + ['notify.mobile_app_jensphone'] -%}
+          {%- endif -%}
+          {{ t }}
+    - repeat:
+        for_each: "{{ targets }}"
+        sequence:
+          - action: "{{ repeat.item }}"
+            continue_on_error: true
+            data:
+              message: clear_notification
+              data:
+                tag: "{{ tag }}"

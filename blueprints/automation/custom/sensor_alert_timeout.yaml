@@ -1,6 +1,10 @@
 blueprint:
   name: Sensor Alert Timeout
-  description: Send notification when a sensor (door/window) stays open for too long
+  description: >
+    Push (via script.notify_phones) when a sensor (door/window) stays open for too long. The push
+    has a "Snooze 1 h" button, which starts timer.snooze_<key> (key = the part of the sensor id
+    after ser2sock_10000_); the alert is skipped while that timer is active and the push is
+    removed when the sensor closes.
   domain: automation
   input:
     sensor_entity:
@@ -44,6 +48,12 @@ trigger:
     to: 'on'
     for:
       seconds: !input timeout_seconds
+    id: too_long
+  - platform: state
+    entity_id: !input sensor_entity
+    from: 'on'
+    to: 'off'
+    id: closed
 
 action:
   - variables:
@@ -51,21 +61,35 @@ action:
       timeout_seconds: !input timeout_seconds
       notify_jeff: !input notify_jeff
       notify_jen: !input notify_jen
+      key: "{{ trigger.entity_id.split('ser2sock_10000_')[-1] }}"
+      audience: >-
+        {{ 'all' if notify_jeff and notify_jen else 'jeff' if notify_jeff else 'jen' if notify_jen else 'none' }}
   - choose:
       - conditions:
+          - condition: trigger
+            id: too_long
           - condition: template
-            value_template: "{{ notify_jeff }}"
+            value_template: "{{ audience != 'none' }}"
+          # a missing timer is 'unknown', so it never blocks an alert
+          - condition: template
+            value_template: "{{ not is_state('timer.snooze_' ~ key, 'active') }}"
         sequence:
-          - service: notify.mobile_app_jeffsphone
+          - action: script.notify_phones
             data:
-              title: "Alarm Panel"
-              message: "{{ sensor_name }} is opened for more than {{ (timeout_seconds / 60) | int }} minutes"
-  - choose:
+              audience: "{{ audience }}"
+              title: "{{ sensor_name }} left open"
+              message: "{{ sensor_name }} has been open for more than {{ (timeout_seconds / 60) | int }} minutes."
+              level: time-sensitive
+              tag: "sensor_{{ key }}"
+              group: security
+              url: /lovelace/security
+              actions:
+                - action: "SENSOR_SNOOZE|{{ key }}|60"
+                  title: Snooze 1 h
       - conditions:
-          - condition: template
-            value_template: "{{ notify_jen }}"
+          - condition: trigger
+            id: closed
         sequence:
-          - service: notify.mobile_app_jensphone
+          - action: script.notify_clear
             data:
-              title: "Alarm Panel"
-              message: "{{ sensor_name }} is opened for more than {{ (timeout_seconds / 60) | int }} minutes"
+              tag: "sensor_{{ key }}"

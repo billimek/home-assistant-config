@@ -80,7 +80,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_upstairs_motion
       sensor_name: "Upstairs motion detected"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_main_motion
   alias: 'Alert when motion is detected on the main level and nobody home'
@@ -90,7 +89,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_main_motion
       sensor_name: "Main level motion detected"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_basement_motion
   alias: 'Alert when motion is detected in the basement and nobody home'
@@ -100,7 +98,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_basement_motion
       sensor_name: "Basement motion detected"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_front_door_open
   alias: 'Alert when front door is open and nobody home'
@@ -110,7 +107,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_front_door
       sensor_name: "Front door"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_garage_door_open
   alias: 'Alert when garage door is open and nobody home'
@@ -120,7 +116,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_garage_door
       sensor_name: "Garage door"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_family_window_open
   alias: 'Alert when family window is open and nobody home'
@@ -130,7 +125,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_family_window
       sensor_name: "Family window"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_living_window_open
   alias: 'Alert when living window is open and nobody home'
@@ -140,7 +134,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_living_window
       sensor_name: "Living window"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_sun_room_door_open
   alias: 'Alert when sun room door is open and nobody home'
@@ -150,7 +143,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_sun_room_door
       sensor_name: "Sun Room Door"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_bathroom_window_open
   alias: 'Alert when bathroom window is open and nobody home'
@@ -160,7 +152,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_bathroom_window
       sensor_name: "Bathroom Window"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_kitchen_window_open
   alias: 'Alert when kitchen window is open and nobody home'
@@ -170,7 +161,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_kitchen_window
       sensor_name: "Kitchen Window"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_unknown_door_open
   alias: 'Alert when unknown door is open and nobody home'
@@ -180,7 +170,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_unknown_door
       sensor_name: "Unknown Door"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_laundry_window_open
   alias: 'Alert when laundry window is open and nobody home'
@@ -190,7 +179,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_laundry_window
       sensor_name: "Laundry Window"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_basement_door_open
   alias: 'Alert when basement door is open and nobody home'
@@ -200,7 +188,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_basement_door
       sensor_name: "Basement Door"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_sliding_door_open
   alias: 'Alert when sliding door is open and nobody home'
@@ -210,7 +197,6 @@
       sensor_entity: binary_sensor.ser2sock_10000_sliding_door
       sensor_name: "Sliding Door"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
 - id: alert_when_upstairs_window_open
   alias: 'Alert when upstairs window is open and nobody home'
@@ -220,26 +206,8 @@
       sensor_entity: binary_sensor.ser2sock_10000_upstairs_window
       sensor_name: "Upstairs Window"
       presence_sensor: sensor.anyone_home
-      notify_service: notify.mobile_app_jeffsphone
 
-################################################
-## iOS/Mobile app actions
-################################################
-- id: ios_action_disarm_alarm
-  alias: 'iOS action to disarm alarm'
-  initial_state: on
-  trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: DISARM_ALARM
-  action:
-    # was alarm_control_panel.ser2sock_10000_alarm_disarm, a service that does not exist
-    - action: alarm_control_panel.alarm_disarm
-      target:
-        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
-      data:
-        code: !env_var ALARMCD
+## The iOS action-button handlers (disarm etc.) live in notification_actions.yaml
 
 ################################################
 ## AlarmDecoder connection watchdog
@@ -266,8 +234,12 @@
     - service: homeassistant.reload_config_entry
       target:
         entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
-    - service: notify.mobile_app_jeffsphone
+    - service: script.notify_phones
       data:
+        audience: jeff
+        level: time-sensitive
+        tag: alarmdecoder_watchdog
+        group: security
         title: 'AlarmDecoder reconnected'
         message: >
           Alarm panel stopped reporting; reloaded the AlarmDecoder integration.

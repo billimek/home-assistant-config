@@ -2,81 +2,67 @@
 ## Water leak alerts
 ################################################
 ## Replaces the Node-RED "basement water" and "sump pump water" flows.
-## Node-RED rate-limited to 1 alert per 5 minutes across BOTH sensors (so one
-## sensor could mute the other); here each sensor has its own 5 minute window
-## (mode: single + trailing delay drops re-triggers).
+## Critical push to both phones (+ Discord once). While a sensor stays wet the push
+## repeats every 10 minutes until it dries or "Silence 1 h" (timer.water_alert_snooze,
+## handled in notification_actions.yaml) is tapped. When it dries, the alert push is
+## replaced by a quiet "water cleared" one.
 ## Slack is gone; the old Slack @channel alert goes to the Discord channel instead.
 
-- id: water_leak_basement
-  alias: 'Alert when water is detected in the basement'
-  mode: single
+- id: water_leak
+  alias: 'Alert when water is detected (basement, sump pump)'
+  description: 'Critical push every 10 min while a leak sensor is wet, Silence 1 h button, quiet "cleared" push when it dries.'
+  mode: parallel
+  max: 2
   trigger:
     - platform: state
       entity_id: binary_sensor.water_sensor_a_water_alarm_water_leak_detected
       to: 'on'
-  variables:
-    where: the basement
-  action:
-    - parallel:
-        - action: notify.mobile_app_jeffsphone
-          continue_on_error: true
-          data: &water_ios
-            title: "💦 WATER DETECTED! 💦"
-            message: "Water detected in {{ where }}! 🌊"
-            data:
-              push:
-                sound:
-                  name: US-EN-Morgan-Freeman-Water-Detected-In-Basement.wav
-                  critical: 1
-                  volume: 1.0
-        - action: notify.mobile_app_jensphone
-          continue_on_error: true
-          data: *water_ios
-        - action: notify.discord
-          continue_on_error: true
-          data:
-            message: "💦 WATER DETECTED IN {{ where | upper }}! 💦"
-            target:
-              - '782247274029776937'
-    - delay: '00:05:00'
-
-- id: water_leak_sump_pump
-  alias: 'Alert when water is detected at the sump pump'
-  mode: single
-  trigger:
+      id: basement
     - platform: state
       entity_id: binary_sensor.water_sensor_b_water_alarm_water_leak_detected
       to: 'on'
+      id: sump
   variables:
-    where: the sump pump
+    sensor: "{{ trigger.entity_id }}"
+    where: "{{ 'the basement' if trigger.id == 'basement' else 'the sump pump' }}"
+    tag: "water_{{ trigger.id }}"
   action:
-    - parallel:
-        - action: notify.mobile_app_jeffsphone
-          continue_on_error: true
-          data:
-            title: "💦 WATER DETECTED! 💦"
-            message: "Water detected at {{ where }}! 🌊"
-            data:
-              push:
-                sound:
-                  name: US-EN-Morgan-Freeman-Water-Detected-In-Basement.wav
-                  critical: 1
-                  volume: 1.0
-        - action: notify.mobile_app_jensphone
-          continue_on_error: true
-          data:
-            title: "💦 WATER DETECTED! 💦"
-            message: "Water detected at {{ where }}! 🌊"
-            data:
-              push:
-                sound:
-                  name: US-EN-Morgan-Freeman-Water-Detected-In-Basement.wav
-                  critical: 1
-                  volume: 1.0
-        - action: notify.discord
-          continue_on_error: true
-          data:
-            message: "💦 WATER DETECTED AT {{ where | upper }}! 💦"
-            target:
-              - '782247274029776937'
-    - delay: '00:05:00'
+    - repeat:
+        sequence:
+          - if:
+              - condition: state
+                entity_id: timer.water_alert_snooze
+                state: 'idle'
+            then:
+              - action: script.notify_phones
+                data:
+                  title: "💦 WATER DETECTED! 💦"
+                  message: "Water detected {{ 'in' if trigger.id == 'basement' else 'at' }} {{ where }}! 🌊"
+                  level: critical
+                  sound: US-EN-Morgan-Freeman-Water-Detected-In-Basement.wav
+                  tag: "{{ tag }}"
+                  group: water
+                  actions:
+                    - action: "WATER_SILENCE|all|60"
+                      title: Silence 1 h
+          - if: "{{ repeat.first }}"
+            then:
+              - action: notify.discord
+                continue_on_error: true
+                data:
+                  message: "💦 WATER DETECTED {{ 'IN' if trigger.id == 'basement' else 'AT' }} {{ where | upper }}! 💦"
+                  target:
+                    - '782247274029776937'
+          - wait_template: "{{ not is_state(sensor, 'on') }}"
+            timeout: '00:10:00'
+            continue_on_timeout: true
+        until:
+          - condition: template
+            value_template: "{{ not is_state(sensor, 'on') }}"
+    - action: script.notify_phones
+      data:
+        title: "✅ Water cleared"
+        message: "The water sensor at {{ where }} is dry again."
+        level: passive
+        tag: "{{ tag }}"
+        group: water
