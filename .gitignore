@@ -14,6 +14,7 @@
 !cameras
 !blueprints
 !docs
+!docs/screenshots
 !**/*/*.yaml
 !.gitignore
 secrets.yaml

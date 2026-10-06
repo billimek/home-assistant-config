@@ -6,23 +6,23 @@ All automation logic is native Home Assistant YAML: no Node-RED, no external flo
 
 ## Screenshots
 
-Home
-![home view](https://i.imgur.com/bn19oeC.png "Home")
+Desktop
 
-Cameras
-![camera view](https://i.imgur.com/1wTt9ja.png "Cameras")
+![home view](docs/screenshots/desktop-home.png "Home")
 
-Lights
-![lights view](https://i.imgur.com/ZUTuq4S.png "Lights")
+![camera view](docs/screenshots/desktop-cameras.png "Cameras")
 
-Cars
-![cars view](https://i.imgur.com/ccK8AcO.png "Cars")
+![lights view](docs/screenshots/desktop-lights.png "Lights")
 
-Security
-![security view](https://i.imgur.com/p0OpPCs.png "Security")
+![security view](docs/screenshots/desktop-security.png "Security")
 
-Climate
-![climate view](https://i.imgur.com/ccK8AcO.png "Climate")
+iOS app
+
+<p>
+<img src="docs/screenshots/mobile-home.png" width="240" alt="home view">
+<img src="docs/screenshots/mobile-lights.png" width="240" alt="lights view">
+<img src="docs/screenshots/mobile-security.png" width="240" alt="security view">
+</p>
 
 ## What it does
 
