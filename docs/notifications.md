@@ -10,7 +10,7 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 |---|---|---|---|---|---|
 | 🚨 Alarm triggered | panel goes `triggered` (toggle `notify_alarm_triggered`) | both + Discord | critical | **Disarm** (Face ID) | when the alarm leaves `triggered` |
 | 🔒 Alarm armed | any `armed_*` (toggle `notify_alarm_armed`) | both | passive | **Disarm** (Face ID) | replaced by the next alarm status push |
-| 🔓 Alarm disarmed | `disarmed` (toggle `notify_alarm_disarmed`) | both | passive | none | replaced by the next alarm status push |
+| 🔓 Alarm disarmed | `disarmed` (toggle `notify_alarm_disarmed`), not sent for the 05:00 auto-disarm (`timer.alarm_auto_disarm`) | both | passive | none | replaced by the next alarm status push |
 | Alarm not armed | everyone left while guest mode is on, so the automatic arm was skipped | Jeff | passive | none | replaced by the next one |
 | Suspicious activity | disarmed between 00:00 and 05:00 | Jeff | time-sensitive | none | |
 | 💦 Water detected | basement or sump sensor wet; repeats every 10 min while wet | both + Discord (once) | critical | **Silence 1 h** | replaced by "✅ Water cleared" when dry |
@@ -28,7 +28,7 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 | New device detected | a new `device_tracker` entity appears | Jeff | passive | none | |
 | Camera detections | Frigate person, dog or cat on one of 5 cameras (rules below) | both | time-sensitive (porch, doorbell, pool) / active (driveway, front) | Mute 1 h; tapping opens that camera's live view (`/lovelace/camera-<name>`) | |
 
-**Camera rules** (one automation per camera, all gated by `input_boolean.camera_<name>_notify`): porch and pool notify 22:00-05:59 or when nobody is home; driveway and front notify on weekdays or when nobody is home, with a 2 min cooldown; the doorbell camera always notifies.
+**Camera rules** (one automation per camera, all gated by `input_boolean.camera_<name>_notify`): porch and pool notify 22:00-05:59 or when nobody is home; front notifies on weekdays or when nobody is home, driveway only when nobody is home or on weekdays 09:30-15:00, both with a 2 min cooldown; the doorbell camera always notifies.
 
 **Guest mode** (`input_boolean.guest_mode`, auto-off after 72 h via `timer.guest_mode`): `sensor.anyone_home` reads `home`, so the "opened/motion while nobody is home" pushes don't fire; the porch and pool camera pushes are muted; automatic alarm arming is blocked. Left on in guest mode: the "left open" timeout pushes, the alarm armed/disarmed/triggered pushes, the other cameras. It sends a passive "Guest mode turned off" push to Jeff when the timer expires.
 

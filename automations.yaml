@@ -57,7 +57,7 @@
       - 'on'
 - id: '1706755452977'
   alias: 'Camera alerts: driveway'
-  description: 'Frigate push for the driveway camera on weekdays (Mon-Fri) or whenever nobody is home, 2 min cooldown. Gated by input_boolean.camera_driveway_notify.'
+  description: 'Frigate push for the driveway camera whenever nobody is home, or weekdays 09:30-15:00 while someone is home; 2 min cooldown. Gated by input_boolean.camera_driveway_notify.'
   use_blueprint:
     path: SgtBatten/Beta.yaml
     input:
@@ -75,7 +75,7 @@
       button_3: Mute 1 h
       url_3: CAMERA_MUTE|driveway|60
       icon_3: sfsymbols:bell.slash
-      custom_filter: "{{ now().weekday() < 5 or not is_state('group.family', 'home') }}"
+      custom_filter: "{{ not is_state('group.family', 'home') or (now().weekday() < 5 and '09:30' <= now().strftime('%H:%M') < '15:00') }}"
       state_filter: true
       state_entity: input_boolean.camera_driveway_notify
       state_filter_states:

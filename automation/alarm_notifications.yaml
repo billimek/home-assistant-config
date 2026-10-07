@@ -97,7 +97,7 @@
 
 - id: alarm_disarmed_notify
   alias: 'Notify when the alarm is disarmed'
-  description: 'Passive push that replaces the "armed" push.'
+  description: 'Passive push that replaces the "armed" push. Skipped while timer.alarm_auto_disarm is running (the 05:00 auto-disarm).'
   mode: queued
   trigger:
     - platform: state
@@ -107,6 +107,9 @@
     - condition: state
       entity_id: input_boolean.notify_alarm_disarmed
       state: 'on'
+    - condition: state
+      entity_id: timer.alarm_auto_disarm
+      state: 'idle'
   action:
     - action: script.notify_phones
       data:

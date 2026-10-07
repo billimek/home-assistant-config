@@ -1418,7 +1418,7 @@
                   "type": "custom:mushroom-template-card",
                   "entity": "sensor.karr_state",
                   "primary": "{{ states('sensor.karr_state') }}",
-                  "secondary": "{{ 'Tap icon to wake' if states('sensor.karr_state') == 'Asleep' else '' }}",
+                  "secondary": "{{ 'Tap icon to wake' if states('sensor.karr_state') in ['Asleep','Offline'] else '' }}",
                   "icon": "{{ 'mdi:sleep' if states('sensor.karr_state') in ['Asleep','Offline'] else 'mdi:car-connected' }}",
                   "icon_color": "{{ 'grey' if states('sensor.karr_state') in ['Asleep','Offline'] else 'blue' }}",
                   "tap_action": {
@@ -1581,7 +1581,7 @@
                   "type": "custom:mushroom-template-card",
                   "entity": "sensor.orion_state",
                   "primary": "{{ states('sensor.orion_state') }}",
-                  "secondary": "{{ 'Tap icon to wake' if states('sensor.orion_state') == 'Asleep' else '' }}",
+                  "secondary": "{{ 'Tap icon to wake' if states('sensor.orion_state') in ['Asleep','Offline'] else '' }}",
                   "icon": "{{ 'mdi:sleep' if states('sensor.orion_state') in ['Asleep','Offline'] else 'mdi:car-connected' }}",
                   "icon_color": "{{ 'grey' if states('sensor.orion_state') in ['Asleep','Offline'] else 'blue' }}",
                   "tap_action": {
@@ -1744,7 +1744,7 @@
                   "type": "custom:mushroom-template-card",
                   "entity": "sensor.elektra_state",
                   "primary": "{{ states('sensor.elektra_state') }}",
-                  "secondary": "{{ 'Tap icon to wake' if states('sensor.elektra_state') == 'Asleep' else '' }}",
+                  "secondary": "{{ 'Tap icon to wake' if states('sensor.elektra_state') in ['Asleep','Offline'] else '' }}",
                   "icon": "{{ 'mdi:sleep' if states('sensor.elektra_state') in ['Asleep','Offline'] else 'mdi:car-connected' }}",
                   "icon_color": "{{ 'grey' if states('sensor.elektra_state') in ['Asleep','Offline'] else 'blue' }}",
                   "tap_action": {

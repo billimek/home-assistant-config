@@ -124,6 +124,12 @@ timer:
     name: Silence repeating water alerts
     icon: mdi:bell-sleep
     restore: true
+  ## Set by the 05:00 auto-disarm so alarm_disarmed_notify skips its push (automation/alarm_logic.yaml)
+  alarm_auto_disarm:
+    name: Automatic alarm disarm in progress
+    icon: mdi:shield-off
+    duration: '00:00:30'
+
   ## Auto-off for input_boolean.guest_mode (automation/guest_mode.yaml)
   guest_mode:
     name: Guest mode auto-off
