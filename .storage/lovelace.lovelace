@@ -1384,15 +1384,30 @@
                   "icon": "mdi:car-electric"
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "sensor.karr_battery",
-                  "name": "Battery",
+                  "primary": "Battery {{ states('sensor.karr_battery') | float(0) | round(0) | int }}%",
+                  "secondary": "{% set ch = is_state('binary_sensor.karr_charging','on') %}{% if ch %}Charging · {{ states('sensor.karr_charger_power') | float(0) | round(1) }} kW · {% set h = states('sensor.karr_charging_time_remaining') | float(0) %}{{ h | int }}h {{ ((h % 1) * 60) | round(0) | int }}m left{% else %}{{ states('sensor.karr_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.karr_plug','on') else 'Unplugged' }}{% endif %}",
+                  "icon": "{{ 'mdi:battery-charging' if is_state('binary_sensor.karr_charging','on') else 'mdi:battery' }}",
+                  "icon_color": "{% if is_state('binary_sensor.karr_charging','on') %}amber{% elif is_state('binary_sensor.karr_plug','off') and is_state('device_tracker.karr','home') and states('sensor.karr_battery') | float(100) < 50 %}red{% else %}green{% endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "number.karr_charge_limit",
+                  "name": "Charge limit",
+                  "icon": "mdi:battery-lock",
                   "color": "green",
                   "features": [
                     {
-                      "type": "bar-gauge",
-                      "min": 0,
-                      "max": 100
+                      "type": "numeric-input",
+                      "style": "buttons"
                     }
                   ],
                   "grid_options": {
@@ -1400,10 +1415,23 @@
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "sensor.karr_range",
-                  "name": "Range",
-                  "color": "green",
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.karr_state",
+                  "primary": "{{ states('sensor.karr_state') }}",
+                  "secondary": "Tap icon to wake",
+                  "icon": "{{ 'mdi:sleep' if states('sensor.karr_state') in ['Asleep','Offline'] else 'mdi:car-connected' }}",
+                  "icon_color": "{{ 'grey' if states('sensor.karr_state') in ['Asleep','Offline'] else 'blue' }}",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "icon_tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "button.press",
+                    "target": {
+                      "entity_id": "button.karr_wake_up"
+                    }
+                  },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -1436,9 +1464,33 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "cover.karr_frunk",
+                  "entity": "binary_sensor.karr_frunk",
                   "name": "Frunk",
-                  "color": "green",
+                  "icon": "mdi:car-door",
+                  "color": "red",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "cover.open_cover",
+                    "target": {
+                      "entity_id": "cover.karr_frunk"
+                    },
+                    "confirmation": {
+                      "text": "Open the frunk?"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.karr_sentry_mode",
+                  "name": "Sentry",
+                  "icon": "mdi:cctv",
+                  "color": "red",
                   "tap_action": {
                     "action": "toggle"
                   },
@@ -1447,33 +1499,39 @@
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "button.karr_flash_lights",
-                  "name": "Flash lights",
-                  "color": "green",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.home_karr_distance",
-                  "name": "Distance from home",
-                  "icon": "mdi:map-marker-distance",
-                  "color": "green",
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "sensor.karr_geofence",
-                  "name": "Location",
+                  "primary": "{{ states('sensor.karr_geofence') | title }}",
+                  "secondary": "{% set d = states('sensor.home_karr_distance') | float(0) %}{{ (d | round(0) | int ~ ' ft') if d < 1000 else ((d / 5280) | round(1) ~ ' mi') }} from home",
                   "icon": "mdi:map-marker",
-                  "color": "green",
+                  "icon_color": "green",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.karr_tire_alert",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "tile",
+                    "entity": "binary_sensor.karr_tire_alert",
+                    "name": "Tire pressure low",
+                    "icon": "mdi:car-tire-alert",
+                    "color": "red",
+                    "grid_options": {
+                      "columns": 6
+                    }
+                  },
                   "grid_options": {
                     "columns": 6
                   }
@@ -1489,15 +1547,30 @@
                   "icon": "mdi:car-electric"
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "sensor.orion_battery",
-                  "name": "Battery",
+                  "primary": "Battery {{ states('sensor.orion_battery') | float(0) | round(0) | int }}%",
+                  "secondary": "{% set ch = is_state('binary_sensor.orion_charging','on') %}{% if ch %}Charging · {{ states('sensor.orion_charger_power') | float(0) | round(1) }} kW · {% set h = states('sensor.orion_charging_time_remaining') | float(0) %}{{ h | int }}h {{ ((h % 1) * 60) | round(0) | int }}m left{% else %}{{ states('sensor.orion_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.orion_plug','on') else 'Unplugged' }}{% endif %}",
+                  "icon": "{{ 'mdi:battery-charging' if is_state('binary_sensor.orion_charging','on') else 'mdi:battery' }}",
+                  "icon_color": "{% if is_state('binary_sensor.orion_charging','on') %}amber{% elif is_state('binary_sensor.orion_plug','off') and is_state('device_tracker.orion','home') and states('sensor.orion_battery') | float(100) < 50 %}red{% else %}green{% endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "number.orion_charge_limit",
+                  "name": "Charge limit",
+                  "icon": "mdi:battery-lock",
                   "color": "green",
                   "features": [
                     {
-                      "type": "bar-gauge",
-                      "min": 0,
-                      "max": 100
+                      "type": "numeric-input",
+                      "style": "buttons"
                     }
                   ],
                   "grid_options": {
@@ -1505,10 +1578,23 @@
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "sensor.orion_range",
-                  "name": "Range",
-                  "color": "green",
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.orion_state",
+                  "primary": "{{ states('sensor.orion_state') }}",
+                  "secondary": "Tap icon to wake",
+                  "icon": "{{ 'mdi:sleep' if states('sensor.orion_state') in ['Asleep','Offline'] else 'mdi:car-connected' }}",
+                  "icon_color": "{{ 'grey' if states('sensor.orion_state') in ['Asleep','Offline'] else 'blue' }}",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "icon_tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "button.press",
+                    "target": {
+                      "entity_id": "button.orion_wake_up"
+                    }
+                  },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -1541,9 +1627,33 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "cover.orion_frunk",
+                  "entity": "binary_sensor.orion_frunk",
                   "name": "Frunk",
-                  "color": "green",
+                  "icon": "mdi:car-door",
+                  "color": "red",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "cover.open_cover",
+                    "target": {
+                      "entity_id": "cover.orion_frunk"
+                    },
+                    "confirmation": {
+                      "text": "Open the frunk?"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.orion_sentry_mode",
+                  "name": "Sentry",
+                  "icon": "mdi:cctv",
+                  "color": "red",
                   "tap_action": {
                     "action": "toggle"
                   },
@@ -1552,33 +1662,39 @@
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "button.orion_flash_lights",
-                  "name": "Flash lights",
-                  "color": "green",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.home_orion_distance",
-                  "name": "Distance from home",
-                  "icon": "mdi:map-marker-distance",
-                  "color": "green",
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "sensor.orion_geofence",
-                  "name": "Location",
+                  "primary": "{{ states('sensor.orion_geofence') | title }}",
+                  "secondary": "{% set d = states('sensor.home_orion_distance') | float(0) %}{{ (d | round(0) | int ~ ' ft') if d < 1000 else ((d / 5280) | round(1) ~ ' mi') }} from home",
                   "icon": "mdi:map-marker",
-                  "color": "green",
+                  "icon_color": "green",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.orion_tire_alert",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "tile",
+                    "entity": "binary_sensor.orion_tire_alert",
+                    "name": "Tire pressure low",
+                    "icon": "mdi:car-tire-alert",
+                    "color": "red",
+                    "grid_options": {
+                      "columns": 6
+                    }
+                  },
                   "grid_options": {
                     "columns": 6
                   }
@@ -1594,15 +1710,30 @@
                   "icon": "mdi:car-electric"
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "sensor.elektra_battery",
-                  "name": "Battery",
+                  "primary": "Battery {{ states('sensor.elektra_battery') | float(0) | round(0) | int }}%",
+                  "secondary": "{% set ch = is_state('binary_sensor.elektra_charging','on') %}{% if ch %}Charging · {{ states('sensor.elektra_charger_power') | float(0) | round(1) }} kW · {% set h = states('sensor.elektra_charging_time_remaining') | float(0) %}{{ h | int }}h {{ ((h % 1) * 60) | round(0) | int }}m left{% else %}{{ states('sensor.elektra_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.elektra_plug','on') else 'Unplugged' }}{% endif %}",
+                  "icon": "{{ 'mdi:battery-charging' if is_state('binary_sensor.elektra_charging','on') else 'mdi:battery' }}",
+                  "icon_color": "{% if is_state('binary_sensor.elektra_charging','on') %}amber{% elif is_state('binary_sensor.elektra_plug','off') and is_state('device_tracker.elektra','home') and states('sensor.elektra_battery') | float(100) < 50 %}red{% else %}green{% endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "number.elektra_charge_limit",
+                  "name": "Charge limit",
+                  "icon": "mdi:battery-lock",
                   "color": "green",
                   "features": [
                     {
-                      "type": "bar-gauge",
-                      "min": 0,
-                      "max": 100
+                      "type": "numeric-input",
+                      "style": "buttons"
                     }
                   ],
                   "grid_options": {
@@ -1610,10 +1741,23 @@
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "sensor.elektra_range",
-                  "name": "Range",
-                  "color": "green",
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.elektra_state",
+                  "primary": "{{ states('sensor.elektra_state') }}",
+                  "secondary": "Tap icon to wake",
+                  "icon": "{{ 'mdi:sleep' if states('sensor.elektra_state') in ['Asleep','Offline'] else 'mdi:car-connected' }}",
+                  "icon_color": "{{ 'grey' if states('sensor.elektra_state') in ['Asleep','Offline'] else 'blue' }}",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "icon_tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "button.press",
+                    "target": {
+                      "entity_id": "button.elektra_wake_up"
+                    }
+                  },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -1646,9 +1790,33 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "cover.elektra_frunk",
+                  "entity": "binary_sensor.elektra_frunk",
                   "name": "Frunk",
-                  "color": "green",
+                  "icon": "mdi:car-door",
+                  "color": "red",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "cover.open_cover",
+                    "target": {
+                      "entity_id": "cover.elektra_frunk"
+                    },
+                    "confirmation": {
+                      "text": "Open the frunk?"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "switch.elektra_sentry_mode",
+                  "name": "Sentry",
+                  "icon": "mdi:cctv",
+                  "color": "red",
                   "tap_action": {
                     "action": "toggle"
                   },
@@ -1657,33 +1825,39 @@
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "button.elektra_flash_lights",
-                  "name": "Flash lights",
-                  "color": "green",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.home_elektra_distance",
-                  "name": "Distance from home",
-                  "icon": "mdi:map-marker-distance",
-                  "color": "green",
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "sensor.elektra_geofence",
-                  "name": "Location",
+                  "primary": "{{ states('sensor.elektra_geofence') | title }}",
+                  "secondary": "{% set d = states('sensor.home_elektra_distance') | float(0) %}{{ (d | round(0) | int ~ ' ft') if d < 1000 else ((d / 5280) | round(1) ~ ' mi') }} from home",
                   "icon": "mdi:map-marker",
-                  "color": "green",
+                  "icon_color": "green",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.elektra_tire_alert",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "tile",
+                    "entity": "binary_sensor.elektra_tire_alert",
+                    "name": "Tire pressure low",
+                    "icon": "mdi:car-tire-alert",
+                    "color": "red",
+                    "grid_options": {
+                      "columns": 6
+                    }
+                  },
                   "grid_options": {
                     "columns": 6
                   }
@@ -1800,6 +1974,30 @@
                   "icon_tap_action": {
                     "action": "more-info",
                     "entity": "timer.guest_mode"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.auto_alarm_presence",
+                  "name": "Arm away / disarm home",
+                  "color": "blue",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.auto_arm_disarm_alarm_night",
+                  "name": "Arm at midnight",
+                  "color": "blue",
+                  "tap_action": {
+                    "action": "toggle"
                   },
                   "grid_options": {
                     "columns": "full"
@@ -2173,24 +2371,6 @@
                       "entity_id": "automation.alert_when_upstairs_window_is_open_and_nobody_home"
                     }
                   },
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "heading",
-                  "heading": "Smoke",
-                  "heading_style": "subtitle"
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.ser2sock_10000_hall_smoke",
-                  "name": "Hall smoke",
-                  "color": "red",
-                  "state_content": [
-                    "state",
-                    "last_changed"
-                  ],
                   "grid_options": {
                     "columns": 6
                   }

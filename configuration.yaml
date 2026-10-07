@@ -363,3 +363,27 @@ template:
       unique_id: weekday
       state: "{{ now().weekday() < 5 }}"
 
+
+  ## Tire pressure alert per car (any of the four TeslaMate soft-tire sensors)
+  - binary_sensor:
+    - name: "KARR Tire Alert"
+      unique_id: karr_tire_alert
+      device_class: problem
+      state: >
+        {{ expand('binary_sensor.karr_tire_soft_front_left', 'binary_sensor.karr_tire_soft_front_right',
+                  'binary_sensor.karr_tire_soft_rear_left', 'binary_sensor.karr_tire_soft_rear_right')
+           | selectattr('state', 'eq', 'on') | list | count > 0 }}
+    - name: "Orion Tire Alert"
+      unique_id: orion_tire_alert
+      device_class: problem
+      state: >
+        {{ expand('binary_sensor.orion_tire_soft_front_left', 'binary_sensor.orion_tire_soft_front_right',
+                  'binary_sensor.orion_tire_soft_rear_left', 'binary_sensor.orion_tire_soft_rear_right')
+           | selectattr('state', 'eq', 'on') | list | count > 0 }}
+    - name: "Elektra Tire Alert"
+      unique_id: elektra_tire_alert
+      device_class: problem
+      state: >
+        {{ expand('binary_sensor.elektra_tire_soft_front_left', 'binary_sensor.elektra_tire_soft_front_right',
+                  'binary_sensor.elektra_tire_soft_rear_left', 'binary_sensor.elektra_tire_soft_rear_right')
+           | selectattr('state', 'eq', 'on') | list | count > 0 }}
