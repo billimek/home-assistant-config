@@ -50,6 +50,9 @@ trigger:
     to: 'off'
     id: closed
 
+mode: queued
+max: 10
+
 action:
   - variables:
       sensor_name: !input sensor_name

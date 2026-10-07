@@ -116,8 +116,12 @@
               - switch.garage
           data:
             parameter: 8
-            # only the effect type needs clearing (writing all four parts as 0 was rejected by the porch switch)
+            # keep the normal color/level/duration and set the effect to off: writing the effect alone
+            # fails on the garage switch (SetValueFailed) and writing all four parts as 0 was rejected
             value:
+              "255": 45
+              "65280": 10
+              "16711680": 255
               "2130706432": 0
         - action: zwave_js.set_config_parameter
           continue_on_error: true
