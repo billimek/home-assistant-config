@@ -146,3 +146,30 @@
         tag: alarm_suspicious
         group: alarm
         url: /lovelace/security
+
+- id: alarm_disarmed_while_away_notify
+  alias: 'Notify when the alarm is disarmed while nobody is home'
+  description: 'Time-sensitive push to Jeff only. Skipped for automatic disarms (timer.alarm_auto_disarm).'
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      to: 'disarmed'
+  condition:
+    - condition: numeric_state
+      entity_id: zone.home
+      below: 1
+    - condition: state
+      entity_id: timer.alarm_auto_disarm
+      state: 'idle'
+  action:
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "Alarm disarmed while away"
+        message: "Someone disarmed the alarm at {{ now().strftime('%-I:%M %p on %m/%d') }} and nobody is home"
+        level: time-sensitive
+        icon: 'mdi:shield-off'
+        tag: alarm_disarmed_away
+        group: alarm
+        url: /lovelace/security

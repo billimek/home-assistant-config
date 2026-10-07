@@ -9,6 +9,7 @@
 ## Two switches: input_boolean.auto_alarm_presence (arm when the last person leaves,
 ## disarm when the first arrives) and input_boolean.auto_arm_disarm_alarm_night
 ## (midnight arm, 05:00 disarm).
+## An arm that does not take effect within a minute sends the "Alarm did not arm" push (only when the arm was attempted, so a disabled toggle or guest mode stays quiet).
 ## Guest mode (input_boolean.guest_mode) blocks both automatic arms (midnight and
 ## everyone-leaves) so guests never deal with the alarm; disarming is unaffected.
 
@@ -41,6 +42,25 @@
             entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
           data:
             code: !env_var ALARMCD
+        - wait_template: "{{ states('alarm_control_panel.ser2sock_10000_alarm_panel').startswith('armed') }}"
+          timeout: '00:01:00'
+          continue_on_timeout: true
+        - if:
+            - condition: not
+              conditions:
+                - condition: template
+                  value_template: "{{ states('alarm_control_panel.ser2sock_10000_alarm_panel').startswith('armed') }}"
+          then:
+            - action: script.notify_phones
+              data:
+                audience: jeff
+                title: "Alarm did not arm"
+                message: "The midnight auto-arm did not take effect. Panel state: {{ states('alarm_control_panel.ser2sock_10000_alarm_panel') }}. {{ states('sensor.alarm_panel_message') }}"
+                level: time-sensitive
+                icon: 'mdi:shield-alert'
+                tag: alarm_arm_failed
+                group: alarm
+                url: /lovelace/security
 
 ## 05:00: disarm if the night toggle is on and the alarm is not already disarmed.
 - id: alarm_morning_disarm
@@ -138,3 +158,25 @@
             entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
           data:
             code: !env_var ALARMCD
+        - wait_template: "{{ states('alarm_control_panel.ser2sock_10000_alarm_panel').startswith('armed') }}"
+          timeout: '00:01:00'
+          continue_on_timeout: true
+        - if:
+            - condition: not
+              conditions:
+                - condition: template
+                  value_template: "{{ states('alarm_control_panel.ser2sock_10000_alarm_panel').startswith('armed') }}"
+            - condition: numeric_state
+              entity_id: zone.home
+              below: 1
+          then:
+            - action: script.notify_phones
+              data:
+                audience: jeff
+                title: "Alarm did not arm"
+                message: "Everyone left, but the alarm did not arm. Panel state: {{ states('alarm_control_panel.ser2sock_10000_alarm_panel') }}. {{ states('sensor.alarm_panel_message') }}"
+                level: time-sensitive
+                icon: 'mdi:shield-alert'
+                tag: alarm_arm_failed
+                group: alarm
+                url: /lovelace/security
