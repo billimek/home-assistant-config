@@ -33,6 +33,9 @@
           entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
           state: 'disarmed'
       then:
+        - action: timer.start
+          target:
+            entity_id: timer.alarm_auto_disarm
         - action: alarm_control_panel.alarm_arm_home
           target:
             entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
@@ -84,6 +87,9 @@
           entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
           state: 'disarmed'
   action:
+    - action: timer.start
+      target:
+        entity_id: timer.alarm_auto_disarm
     - action: alarm_control_panel.alarm_disarm
       target:
         entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
@@ -124,6 +130,9 @@
                 group: alarm
                 url: /lovelace/security
       default:
+        - action: timer.start
+          target:
+            entity_id: timer.alarm_auto_disarm
         - action: alarm_control_panel.alarm_arm_home
           target:
             entity_id: alarm_control_panel.ser2sock_10000_alarm_panel

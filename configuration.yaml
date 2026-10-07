@@ -124,9 +124,9 @@ timer:
     name: Silence repeating water alerts
     icon: mdi:bell-sleep
     restore: true
-  ## Set by the 05:00 auto-disarm so alarm_disarmed_notify skips its push (automation/alarm_logic.yaml)
+  ## Set by the automatic arm/disarm automations so the armed/disarmed pushes are skipped (automation/alarm_logic.yaml)
   alarm_auto_disarm:
-    name: Automatic alarm disarm in progress
+    name: Automatic alarm arm/disarm in progress
     icon: mdi:shield-off
     duration: '00:00:30'
 
