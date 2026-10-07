@@ -23,9 +23,6 @@
                   "entity": "sensor.alarm_status"
                 },
                 {
-                  "entity": "input_select.alarm_mode"
-                },
-                {
                   "entity": "alarm_control_panel.ser2sock_10000_alarm_panel"
                 },
                 {
@@ -2055,10 +2052,7 @@
             {
               "entities": [
                 {
-                  "entity": "input_boolean.auto_arm_alarm_when_gone"
-                },
-                {
-                  "entity": "input_boolean.auto_disarm_alarm_when_home"
+                  "entity": "input_boolean.auto_alarm_presence"
                 },
                 {
                   "entity": "input_boolean.notify_alarm_triggered"

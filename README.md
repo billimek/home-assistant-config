@@ -144,10 +144,8 @@ TeslaMate publishes three cars (Elektra, KARR, Orion) to Home Assistant through 
 
 | Helper | Controls |
 |---|---|
-| `input_select.alarm_mode` | `automatic`, `standby` or `night only` |
 | `input_boolean.auto_arm_disarm_alarm_night` | Midnight arm and 05:00 disarm |
-| `input_boolean.auto_arm_alarm_when_gone` | Arm when everyone leaves |
-| `input_boolean.auto_disarm_alarm_when_home` | Disarm on arrival |
+| `input_boolean.auto_alarm_presence` | Arm when everyone leaves, disarm when someone arrives |
 | `input_boolean.auto_garage_doors` | Tesla geofence garage automation |
 | `input_boolean.auto_garage_doors_night` | 10 pm garage auto-close |
 | `input_boolean.auto_close_garage_door_jeff`, `_jen` | Auto-close after 2 h open |

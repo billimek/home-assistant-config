@@ -32,7 +32,7 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 
 | File | What it does |
 |---|---|
-| `automation/alarm_logic.yaml` | midnight lights-off + arm, 05:00 disarm, disarm on arrival, arm when everyone leaves (gated by `input_boolean.auto_arm_disarm_alarm_night`, `auto_disarm_alarm_when_home`, `auto_arm_alarm_when_gone` and `input_select.alarm_mode`) |
+| `automation/alarm_logic.yaml` | midnight lights-off + arm, 05:00 disarm, disarm on arrival, arm when everyone leaves (gated by `input_boolean.auto_arm_disarm_alarm_night` for midnight/05:00 and `input_boolean.auto_alarm_presence` for arrive/leave; guest mode skips the leave arm and sends a passive push) |
 | `automation/alarm_notifications.yaml` | armed / disarmed / triggered / suspicious-disarm pushes + Discord for a triggered alarm (gated by `input_boolean.notify_alarm_*`) |
 | `automation/alarm.yaml` | sensor alerts (blueprints), iOS DISARM_ALARM action, AlarmDecoder watchdog |
 | `automation/guest_mode.yaml` | `input_boolean.guest_mode` auto-off (72 h `timer.guest_mode`). While on: no automatic alarm arming (`alarm_logic.yaml`), `sensor.anyone_home` reads `home` (silences the away sensor alerts), porch and pool camera pushes muted (`custom_filter` in `automations.yaml`) |

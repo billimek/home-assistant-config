@@ -54,16 +54,6 @@ automation ui: !include automations.yaml
 zone: !include config/zones.yaml
 group: !include groups.yaml
 
-## Alarm mode (read by automation/alarm_logic.yaml)
-input_select:
-  alarm_mode:
-    name: Alarm mode
-    options:
-      - automatic
-      - standby
-      - night only
-    icon: mdi:security-home
-
 ## Last time the Dahua doorbell listener delivered an event (see automation/doorbell.yaml watchdog)
 input_datetime:
   dahua_last_event:
@@ -86,10 +76,8 @@ input_boolean:
     name: Automatically close Jen's Garage Door if open for 2 hours
   auto_close_garage_door_jeff:
     name: Automatically close Jeff's Garage Door if open for 2 hours
-  auto_arm_alarm_when_gone:
-    name: Automatically arm alarm when no one is home
-  auto_disarm_alarm_when_home:
-    name: Automatically disarm alarm when someone comes home
+  auto_alarm_presence:
+    name: Arm alarm when everyone leaves and disarm when someone arrives
 
   # guests staying over (automation/guest_mode.yaml)
   guest_mode:

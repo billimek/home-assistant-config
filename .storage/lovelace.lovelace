@@ -601,20 +601,8 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "input_boolean.auto_arm_alarm_when_gone",
-                  "name": "Arm when away",
-                  "color": "blue",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.auto_disarm_alarm_when_home",
-                  "name": "Disarm when home",
+                  "entity": "input_boolean.auto_alarm_presence",
+                  "name": "Arm away / disarm home",
                   "color": "blue",
                   "tap_action": {
                     "action": "toggle"

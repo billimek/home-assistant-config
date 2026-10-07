@@ -6,6 +6,9 @@
 ## The cleaning-calendar checks from Node-RED are dropped (the calendar feed is
 ## gone); revisit when an iCloud calendar integration exists.
 
+## Two switches: input_boolean.auto_alarm_presence (arm when the last person leaves,
+## disarm when the first arrives) and input_boolean.auto_arm_disarm_alarm_night
+## (midnight arm, 05:00 disarm).
 ## Guest mode (input_boolean.guest_mode) blocks both automatic arms (midnight and
 ## everyone-leaves) so guests never deal with the alarm; disarming is unaffected.
 
@@ -70,11 +73,8 @@
       above: 0
   condition:
     - condition: state
-      entity_id: input_boolean.auto_disarm_alarm_when_home
+      entity_id: input_boolean.auto_alarm_presence
       state: 'on'
-    - condition: state
-      entity_id: input_select.alarm_mode
-      state: automatic
     - condition: not
       conditions:
         - condition: state
@@ -89,6 +89,7 @@
 
 ## Everyone leaves (zone.home drops to 0): arm. Node-RED only did this outside
 ## 06:31-14:00 to avoid arming when the cleaners were due; now it arms at any hour.
+## Guest mode skips the arm, with a passive push so a missed arm is explained.
 - id: alarm_arm_on_leave
   alias: 'Arm alarm when everyone leaves'
   mode: single
@@ -98,20 +99,30 @@
       below: 1
   condition:
     - condition: state
-      entity_id: input_boolean.auto_arm_alarm_when_gone
+      entity_id: input_boolean.auto_alarm_presence
       state: 'on'
-    - condition: state
-      entity_id: input_boolean.guest_mode
-      state: 'off'
-    - condition: state
-      entity_id: input_select.alarm_mode
-      state: automatic
     - condition: state
       entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
       state: 'disarmed'
   action:
-    - action: alarm_control_panel.alarm_arm_home
-      target:
-        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
-      data:
-        code: !env_var ALARMCD
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.guest_mode
+              state: 'on'
+          sequence:
+            - action: script.notify_phones
+              data:
+                audience: jeff
+                title: "Alarm not armed"
+                message: "Everyone left, but guest mode is on so the alarm was not armed."
+                level: passive
+                tag: alarm_not_armed
+                group: alarm
+                url: /lovelace/security
+      default:
+        - action: alarm_control_panel.alarm_arm_home
+          target:
+            entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+          data:
+            code: !env_var ALARMCD

@@ -11,6 +11,7 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 | 🚨 Alarm triggered | panel goes `triggered` (toggle `notify_alarm_triggered`) | both + Discord | critical | **Disarm** (Face ID) | when the alarm leaves `triggered` |
 | 🔒 Alarm armed | any `armed_*` (toggle `notify_alarm_armed`) | both | passive | **Disarm** (Face ID) | replaced by the next alarm status push |
 | 🔓 Alarm disarmed | `disarmed` (toggle `notify_alarm_disarmed`) | both | passive | none | replaced by the next alarm status push |
+| Alarm not armed | everyone left while guest mode is on, so the automatic arm was skipped | Jeff | passive | none | replaced by the next one |
 | Suspicious activity | disarmed between 00:00 and 05:00 | Jeff | time-sensitive | none | |
 | 💦 Water detected | basement or sump sensor wet; repeats every 10 min while wet | both + Discord (once) | critical | **Silence 1 h** | replaced by "✅ Water cleared" when dry |
 | 🚗 Garage door open | a door opens (`notify_garage_doors_home`; the away case needs `notify_garage_doors_away`) | Jeff when someone is home, both when nobody is | active (home) / time-sensitive (away) | **Close** | when the door closes |
