@@ -1,27 +1,40 @@
+# Ignore everything, then allow-list what belongs in the repo
 *
-!*.yaml
-!.yamllint
-!*.py
-!*.png
-!*.md
-!automation
-!config
-!scripts
-!themes
-!shell
-!images
-!tensorflow
-!cameras
-!blueprints
-!docs
-!docs/screenshots
-!**/*/*.yaml
+
+# Top-level files
 !.gitignore
-secrets.yaml
-known_devices.yaml
-entity_registry.yaml
-!.storage
+!.yamllint
+!*.md
+!LICENSE
+!*.yaml
+
+# Directories tracked in full
+!automation/
+!automation/**
+!blueprints/
+!blueprints/**
+# stock Home Assistant blueprints are not ours
+blueprints/automation/homeassistant/
+blueprints/script/
+blueprints/template/
+!config/
+!config/**
+!docs/
+!docs/**
+!scripts/
+!scripts/**
+!themes/
+!themes/**
+!tools/
+!tools/**
+
+# Dashboards (the rest of .storage is runtime state)
+!.storage/
+.storage/*
 !.storage/lovelace.lovelace
 !.storage/lovelace.home_original
 !.storage/lovelace_dashboards
 !.storage/lovelace_resources
+
+# Never commit
+secrets.yaml

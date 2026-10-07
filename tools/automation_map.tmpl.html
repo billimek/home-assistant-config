@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automation map</title>
+<style>
+  :root {
+    --bg: #fafafa; --fg: #1d1d1f; --muted: #6e6e73; --card: #fff; --line: #c7c7cc; --hi: #0a6cff;
+    --trigger: #e8f1ff; --auto: #fff4d6; --script: #efe6ff; --phone: #dff5e3; --chat: #ffe3e3; --service: #eee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #151517; --fg: #f2f2f7; --muted: #98989f; --card: #1f1f22; --line: #48484a; --hi: #4c9aff;
+      --trigger: #1c2b44; --auto: #3d3418; --script: #2c2444; --phone: #1b3a24; --chat: #4a2222; --service: #2a2a2c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.4 system-ui, sans-serif; }
+  header { padding: 16px; }
+  h1 { margin: 0 0 4px; font-size: 20px; }
+  .sub { color: var(--muted); font-size: 12px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 0 16px 12px; }
+  button, input[type=search] { font: inherit; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+  button.on { background: var(--hi); border-color: var(--hi); color: #fff; }
+  label { color: var(--muted); }
+  .wrap { overflow: auto; padding: 0 16px 16px; }
+  .col-h { fill: var(--muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+  .node rect { stroke: var(--line); stroke-width: 1; rx: 6; }
+  .node text { fill: var(--fg); font-size: 12px; pointer-events: none; }
+  .node { cursor: pointer; }
+  .node.entity rect, .node.schedule rect { fill: var(--trigger); }
+  .node.automation rect { fill: var(--auto); }
+  .node.script rect { fill: var(--script); }
+  .node.phone rect { fill: var(--phone); }
+  .node.chat rect { fill: var(--chat); }
+  .node.service rect { fill: var(--service); }
+  .node.sel rect { stroke: var(--hi); stroke-width: 2.5; }
+  .edge { fill: none; stroke: var(--line); stroke-width: 1.2; opacity: .55; }
+  .edge.notify { stroke: #34a853; opacity: .8; }
+  .dim .edge:not(.hl) { opacity: .06; }
+  .dim .node:not(.hl) { opacity: .25; }
+  .edge.hl { stroke: var(--hi); stroke-width: 2; opacity: 1; }
+  #detail, #list { padding: 0 16px 24px; }
+  #list table { border-collapse: collapse; width: 100%; max-width: 1100px; }
+  #list td, #list th { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  #list th { color: var(--muted); font-weight: 600; }
+  .file { color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Automation map</h1>
+  <div class="sub">Triggers → automations → scripts → destinations. Green lines are notifications. Click any box to trace its paths. Generated <span id="gen"></span> by tools/automation_map.pl.</div>
+</header>
+<div class="bar">
+  <span>Show what notifies:</span>
+  <button data-dest="" class="on">Everything</button>
+  <button data-dest="d:phone_jen">Jen's phone</button>
+  <button data-dest="d:phone_jeff">Jeff's phone</button>
+  <button data-dest="d:discord">Discord</button>
+  <input type="search" id="q" placeholder="Filter by name or entity…">
+  <label><input type="checkbox" id="all"> include non-notification actions</label>
+</div>
+<div class="wrap"><svg id="svg"></svg></div>
+<div id="detail"></div>
+<div id="list"></div>
+<script>
+const DATA = /*DATA*/null;
+const NOTIFY = new Set(['phone', 'chat']);
+const COLS = ['Triggers', 'Automations', 'Scripts', 'Destinations'];
+const COLX = [0, 340, 680, 960], W = 270, ROW = 26;
+const byId = Object.fromEntries(DATA.nodes.map(n => [n.id, n]));
+const out = {}, inn = {};
+DATA.edges.forEach(e => { (out[e.from] ??= []).push(e.to); (inn[e.to] ??= []).push(e.from); });
+document.getElementById('gen').textContent = DATA.generated;
+let destFilter = '', selected = null;
+
+function reach(start, map) {
+  const seen = new Set([start]), st = [start];
+  while (st.length) for (const n of map[st.pop()] || []) if (!seen.has(n)) { seen.add(n); st.push(n); }
+  return seen;
+}
+function visibleSet() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const all = document.getElementById('all').checked;
+  let keep;
+  if (destFilter) keep = reach(destFilter, inn);
+  else if (all) keep = new Set(DATA.nodes.map(n => n.id));
+  else {
+    keep = new Set();
+    DATA.nodes.filter(n => NOTIFY.has(n.kind)).forEach(n => reach(n.id, inn).forEach(x => keep.add(x)));
+  }
+  if (q) {
+    const hit = DATA.nodes.filter(n => keep.has(n.id) && (n.label + ' ' + (n.file || '')).toLowerCase().includes(q)).map(n => n.id);
+    const k2 = new Set();
+    hit.forEach(h => { reach(h, inn).forEach(x => k2.add(x)); reach(h, out).forEach(x => k2.add(x)); });
+    keep = new Set([...k2].filter(x => keep.has(x)));
+  }
+  return keep;
+}
+function layout(keep) {
+  const cols = [[], [], [], []];
+  DATA.nodes.filter(n => keep.has(n.id)).forEach(n => cols[n.col].push(n));
+  cols[1].sort((a, b) => (a.file + a.label).localeCompare(b.file + b.label));
+  cols[1].forEach((n, i) => n.y = i);
+  for (const c of [0, 2, 3]) {
+    cols[c].forEach(n => {
+      const nb = (c === 0 ? out[n.id] : [...(inn[n.id] || []), ...(out[n.id] || [])]) || [];
+      const ys = nb.map(x => byId[x]).filter(x => x && x.col === 1 && keep.has(x.id)).map(x => x.y);
+      n.k = ys.length ? ys.reduce((s, v) => s + v, 0) / ys.length : 9999;
+    });
+    cols[c].sort((a, b) => a.k - b.k || a.label.localeCompare(b.label));
+    cols[c].forEach((n, i) => n.y = i);
+  }
+  return cols;
+}
+function render() {
+  const keep = visibleSet(), cols = layout(keep);
+  const rows = Math.max(1, ...cols.map(c => c.length));
+  const svg = document.getElementById('svg');
+  const H = rows * ROW + 40, Wd = COLX[3] + W + 10;
+  svg.setAttribute('width', Wd); svg.setAttribute('height', H); svg.setAttribute('viewBox', `0 0 ${Wd} ${H}`);
+  const pos = n => [COLX[n.col], 30 + n.y * ROW];
+  let s = COLS.map((c, i) => `<text class="col-h" x="${COLX[i]}" y="14">${c} (${cols[i].length})</text>`).join('');
+  const edges = DATA.edges.filter(e => keep.has(e.from) && keep.has(e.to));
+  s += '<g id="edges">' + edges.map((e, i) => {
+    const a = byId[e.from], b = byId[e.to], [x1, y1] = pos(a), [x2, y2] = pos(b);
+    const sx = x1 + W, sy = y1 + 10, ex = x2, ey = y2 + 10, m = (sx + ex) / 2;
+    return `<path class="edge${e.notify ? ' notify' : ''}" data-f="${e.from}" data-t="${e.to}" d="M${sx},${sy} C${m},${sy} ${m},${ey} ${ex},${ey}"/>`;
+  }).join('') + '</g>';
+  s += cols.flat().map(n => {
+    const [x, y] = pos(n);
+    const t = n.label.length > 40 ? n.label.slice(0, 39) + '…' : n.label;
+    return `<g class="node ${n.kind}" data-id="${n.id}" transform="translate(${x},${y})"><title>${n.label.replace(/</g, '&lt;')}${n.file ? '\n' + n.file : ''}</title><rect width="${W}" height="20"/><text x="8" y="14">${t.replace(/</g, '&lt;')}</text></g>`;
+  }).join('');
+  svg.innerHTML = s;
+  svg.querySelectorAll('.node').forEach(g => g.addEventListener('click', () => { selected = selected === g.dataset.id ? null : g.dataset.id; highlight(); }));
+  highlight(); renderList(keep);
+}
+function highlight() {
+  const svg = document.getElementById('svg');
+  svg.classList.toggle('dim', !!selected);
+  svg.querySelectorAll('.node').forEach(g => { g.classList.remove('hl', 'sel'); });
+  svg.querySelectorAll('.edge').forEach(p => p.classList.remove('hl'));
+  const d = document.getElementById('detail');
+  if (!selected || !byId[selected]) { d.innerHTML = ''; return; }
+  const up = reach(selected, inn), down = reach(selected, out);
+  svg.querySelectorAll('.node').forEach(g => { const id = g.dataset.id; if (up.has(id) || down.has(id)) g.classList.add('hl'); if (id === selected) g.classList.add('sel'); });
+  svg.querySelectorAll('.edge').forEach(p => {
+    const f = p.dataset.f, t = p.dataset.t;
+    if ((up.has(f) && up.has(t)) || (down.has(f) && down.has(t))) p.classList.add('hl');
+  });
+  const n = byId[selected];
+  d.innerHTML = `<b>${esc(n.label)}</b> <span class="file">${esc(n.file || n.kind)}</span>` + (n.desc ? `<div>${esc(n.desc)}</div>` : '');
+}
+function esc(s) { return String(s ?? '').replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
+function renderList(keep) {
+  const autos = DATA.nodes.filter(n => n.kind === 'automation' && keep.has(n.id)).sort((a, b) => (a.file + a.label).localeCompare(b.file + b.label));
+  const names = (id, map, f) => (map[id] || []).map(x => byId[x]).filter(x => x && keep.has(x.id) && f(x)).map(x => x.label);
+  document.getElementById('list').innerHTML = `<h3>${autos.length} automations shown</h3><table><tr><th>Automation</th><th>Triggered by</th><th>Sends to</th></tr>` +
+    autos.map(a => `<tr><td>${esc(a.label)}<div class="file">${esc(a.file)}${a.blueprint ? ' · blueprint' : ''}</div></td><td>${esc(names(a.id, inn, () => true).join(', '))}</td><td>${esc(names(a.id, out, () => true).join(', '))}</td></tr>`).join('') + '</table>';
+}
+document.querySelectorAll('button[data-dest]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('button[data-dest]').forEach(x => x.classList.toggle('on', x === b));
+  destFilter = b.dataset.dest; selected = null; render();
+}));
+document.getElementById('q').addEventListener('input', render);
+document.getElementById('all').addEventListener('change', render);
+render();
+</script>
+</body>
+</html>
