@@ -4,8 +4,8 @@ Basic YAML syntax validator for Home Assistant configuration files.
 This script checks for basic YAML syntax errors before deployment.
 
 Usage:
-    python3 scripts/validate_yaml.py
-    python3 scripts/validate_yaml.py <specific_file.yaml>
+    python3 tools/validate_yaml.py
+    python3 tools/validate_yaml.py <specific_file.yaml>
 """
 
 import sys

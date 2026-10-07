@@ -1,0 +1,46 @@
+## Toggles read by the automations in automation/ (no initial: so the last state survives restarts)
+# garage stuff
+auto_garage_doors:
+  name: Automatically open/close garage doors
+auto_garage_doors_night:
+  name: Automatically close garage doors at night
+
+# auto-run stuff
+auto_arm_disarm_alarm_night:
+  name: Arm alarm at midnight and disarm at 5am
+auto_close_garage_door_jen:
+  name: Automatically close Jen's Garage Door if open for 2 hours
+auto_close_garage_door_jeff:
+  name: Automatically close Jeff's Garage Door if open for 2 hours
+auto_alarm_presence:
+  name: Arm alarm when everyone leaves and disarm when someone arrives
+
+# guests staying over (automation/guest_mode.yaml)
+guest_mode:
+  name: Guest mode
+  icon: mdi:account-multiple
+
+# notifications
+camera_front_notify:
+  name: Front camera notifications
+camera_driveway_notify:
+  name: Driveway camera notifications
+camera_porch_notify:
+  name: Porch camera notifications
+camera_pool_notify:
+  name: Pool camera notifications
+camera_doorbell_notify:
+  name: Doorbell camera notifications
+notify_alarm_armed:
+  name: Notification when alarm is armed
+notify_alarm_disarmed:
+  name: Notification when alarm is disarmed
+notify_alarm_triggered:
+  name: Notification when alarm is triggered
+notify_garage_doors_home:
+  name: Notification when garage doors are open/closed and we are home
+notify_garage_doors_away:
+  name: Notification when garage doors are open/closed and we are away
+notify_test_mode:
+  name: Notification test mode (pushes go to Jeff's phone only)
+  icon: mdi:test-tube

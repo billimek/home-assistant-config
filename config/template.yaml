@@ -1,0 +1,141 @@
+## Home presence
+- sensor:
+  - name: "Anyone Home"
+    unique_id: anyone_home
+    # unavailable (not "not_home") while the group is unknown, e.g. at startup,
+    # so the away alerts can't fire from a restart
+    availability: "{{ states('group.family') not in ['unknown', 'unavailable'] }}"
+    # guest mode reads as "home" so the away-only sensor alerts stay quiet
+    state: >
+      {{ 'home' if is_state('group.family', 'home')
+         or is_state('input_boolean.guest_mode', 'on') else 'not_home' }}
+
+## Jeff's garage
+- sensor:
+  - name: "Garage Status"
+    unique_id: garage_status
+    state: >
+      {% set door_state = states('cover.jeff_garage_door') %}
+      {% if door_state in ['unknown', 'unavailable'] %}
+        n/a
+      {% else %}
+        {{ door_state | title }}
+      {% endif %}
+
+  - name: "Garage Car Present"
+    unique_id: garage_car_present
+    state: >
+      {% set door_state = states('cover.jeff_garage_door') %}
+      {% set vehicle = states('binary_sensor.og_jeff_vehicle') %}
+      {% if door_state in ['unknown', 'unavailable'] %}
+        n/a
+      {% elif door_state == 'open' %}
+        n/a
+      {% elif vehicle == 'on' %}
+        Yes
+      {% else %}
+        No
+      {% endif %}
+
+## Jen's garage
+- sensor:
+  - name: "Garage2 Status"
+    unique_id: garage2_status
+    state: >
+      {% set door_state = states('cover.jen_garage_door') %}
+      {% if door_state in ['unknown', 'unavailable'] %}
+        n/a
+      {% else %}
+        {{ door_state | title }}
+      {% endif %}
+
+  - name: "Garage2 Car Present"
+    unique_id: garage2_car_present
+    state: >
+      {% set door_state = states('cover.jen_garage_door') %}
+      {% set vehicle = states('binary_sensor.og_jen_vehicle') %}
+      {% if door_state in ['unknown', 'unavailable'] %}
+        n/a
+      {% elif door_state == 'open' %}
+        n/a
+      {% elif vehicle == 'on' %}
+        Yes
+      {% else %}
+        No
+      {% endif %}
+
+## Alarm panel
+- sensor:
+  - name: "Alarm Status"
+    unique_id: alarm_status
+    availability: "{{ states('alarm_control_panel.ser2sock_10000_alarm_panel') not in ['unknown', 'unavailable'] }}"
+    state: "{{ 'Armed' if states('alarm_control_panel.ser2sock_10000_alarm_panel').startswith('armed') else 'Disarmed' }}"
+
+  # Friendly version of the keypad line ("FAULT 17        UPSTAIRS MOTION", "****DISARMED****  Ready to Arm")
+  # for the dashboard. Unrecognised messages pass through with the padding/asterisks removed.
+  - name: "Alarm Panel Message"
+    unique_id: alarm_panel_message
+    state: >
+      {% set d = states('sensor.ser2sock_10000_alarm_panel_display') | regex_replace('\s+', ' ') | trim %}
+      {% if d in ['', 'unknown', 'unavailable'] %}
+        Unknown
+      {% elif 'READY TO ARM' in d | upper %}
+        Ready to arm
+      {% elif 'HIT * FOR FAULTS' in d | upper %}
+        Not ready, faults open
+      {% elif d | regex_match('^FAULT [0-9]+ ', ignorecase=true) %}
+        {% set p = d.split(' ', 2) %}
+        Open: {{ p[2] | lower | capitalize }} (zone {{ p[1] }})
+      {% elif 'MAY EXIT NOW' in d | upper %}
+        Exit now
+      {% else %}
+        {{ d | replace('*', ' ') | regex_replace('\s+', ' ') | trim }}
+      {% endif %}
+
+  # What is open or tripped right now, for the dashboard (Home status pill and Security tab)
+  - name: "Alarm Zones Active"
+    unique_id: alarm_zones_active
+    state: >
+      {% set z = states.binary_sensor | selectattr('entity_id', 'search', '^binary_sensor\.ser2sock_10000_') | rejectattr('entity_id', 'eq', 'binary_sensor.ser2sock_10000_basement_window') | selectattr('state', 'eq', 'on') | list %}
+      {% set motion = z | selectattr('attributes.device_class', 'eq', 'motion') | map(attribute='name') | list %}
+      {% set opened = z | selectattr('attributes.device_class', 'in', ['door', 'window']) | map(attribute='name') | list %}
+      {% set smoke = z | selectattr('attributes.device_class', 'eq', 'smoke') | map(attribute='name') | list %}
+      {% set parts = [] %}
+      {% if smoke %}{% set parts = parts + ['Smoke: ' ~ smoke | join(', ')] %}{% endif %}
+      {% if opened %}{% set parts = parts + ['Open: ' ~ opened | join(', ')] %}{% endif %}
+      {% if motion %}{% set parts = parts + ['Motion: ' ~ motion | join(', ')] %}{% endif %}
+      {{ parts | join(' · ') if parts else 'All zones closed' }}
+    attributes:
+      active: >
+        {{ states.binary_sensor | selectattr('entity_id', 'search', '^binary_sensor\.ser2sock_10000_') | rejectattr('entity_id', 'eq', 'binary_sensor.ser2sock_10000_basement_window') | selectattr('state', 'eq', 'on') | list | count }}
+
+## Weekday
+- sensor:
+  - name: "Weekday"
+    unique_id: weekday
+    state: "{{ now().weekday() < 5 }}"
+
+
+## Tire pressure alert per car (any of the four TeslaMate soft-tire sensors)
+- binary_sensor:
+  - name: "KARR Tire Alert"
+    unique_id: karr_tire_alert
+    device_class: problem
+    state: >
+      {{ expand('binary_sensor.karr_tire_soft_front_left', 'binary_sensor.karr_tire_soft_front_right',
+                'binary_sensor.karr_tire_soft_rear_left', 'binary_sensor.karr_tire_soft_rear_right')
+         | selectattr('state', 'eq', 'on') | list | count > 0 }}
+  - name: "Orion Tire Alert"
+    unique_id: orion_tire_alert
+    device_class: problem
+    state: >
+      {{ expand('binary_sensor.orion_tire_soft_front_left', 'binary_sensor.orion_tire_soft_front_right',
+                'binary_sensor.orion_tire_soft_rear_left', 'binary_sensor.orion_tire_soft_rear_right')
+         | selectattr('state', 'eq', 'on') | list | count > 0 }}
+  - name: "Elektra Tire Alert"
+    unique_id: elektra_tire_alert
+    device_class: problem
+    state: >
+      {{ expand('binary_sensor.elektra_tire_soft_front_left', 'binary_sensor.elektra_tire_soft_front_right',
+                'binary_sensor.elektra_tire_soft_rear_left', 'binary_sensor.elektra_tire_soft_rear_right')
+         | selectattr('state', 'eq', 'on') | list | count > 0 }}

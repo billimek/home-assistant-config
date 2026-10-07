@@ -1,0 +1,5 @@
+## Last time the Dahua doorbell listener delivered an event (see automation/doorbell.yaml watchdog)
+dahua_last_event:
+  name: Dahua last event received
+  has_date: true
+  has_time: true

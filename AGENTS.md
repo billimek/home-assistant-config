@@ -17,6 +17,7 @@ Home Assistant YAML configuration for a smart home running on Kubernetes. No bui
 - **Templates**: Jinja2 syntax in `{% %}` blocks for state/template sensors
 - **Secrets**: Use `!env_var VARIABLE_NAME` for sensitive data (never commit actual secrets to `secrets.yaml`)
 - **File Organization**: Split by domain - automations in `automation/`, sensors in `config/`, scripts in `scripts/`
+- **configuration.yaml layout**: it only holds core settings and `!include`s. Helpers and templates live in `config/input_boolean.yaml`, `config/input_datetime.yaml`, `config/timer.yaml`, `config/template.yaml`; groups in `config/groups.yaml`; zones in `config/zones.yaml`. `tools/` holds helper scripts (not HA scripts)
 
 ## Key Conventions
 - Automation files in `automation/` are merged via `!include_dir_merge_list` in configuration.yaml
@@ -40,7 +41,7 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 | `automation/garage.yaml` | iOS open/close garage actions |
 | `automation/garage_notifications.yaml` | door-opened push, still-open-when-leaving, 2 h weekday nag (+ optional auto-close), 10 pm close (`input_boolean.auto_garage_doors_night`) |
 | `automation/garage_tesla.yaml` | KARR/Orion geofence: close on leaving, open on arriving (gated by `input_boolean.auto_garage_doors`) |
-| `automation/garage_led.yaml` | garage-door state on Inovelli LED bars via `zwave_js` config parameters (porch/garage switch param 8 as partial values, stairs dimmers params 13/14). The garage switch (node 10) currently rejects param 8 |
+| `automation/garage_led.yaml` | garage-door state on Inovelli LED bars via `zwave_js` config parameters (porch/garage switch param 8 as partial values, stairs dimmers params 13/14). |
 | `automation/lights.yaml`, `automation/lights_motion.yaml` | dusk/schedule lights (porch, sunroom/foyer/trees, cabinet, plant lights) and motion/event lights (garage, deck, desk via Wyze MQTT, stairs) |
 | `automation/presence.yaml` | arrival push, Jen came home, Ecobee away/resume |
 | `automation/water.yaml` | basement and sump pump leak alerts |
@@ -110,4 +111,4 @@ These entity IDs are referenced by Lovelace dashboards and automations. Renaming
 - Tesla telemetry comes from TeslaMate's MQTT discovery (`MQTT_DISCOVERY=true` in the k8s config): devices Elektra (car 1), KARR (car 2), Orion (car 3), entity ids like `sensor.elektra_battery`. There are no hand-written Tesla MQTT sensors any more.
 - `tesla_custom` provides the car controls (buttons, locks, charge limit, seat heaters, climate). Its 11 telemetry entities per car that collide with TeslaMate names were renamed `*_tc_*` and disabled so the discovered entities own the clean ids.
 - The only automations that consume Tesla data are the two geofence automations in `automation/garage_tesla.yaml`, via the two distance sensors above (Elektra is not used). Node-RED no longer reads anything.
-- The old raw `sensor.tesla*_latitude/longitude` MQTT sensors (a temporary fallback for the location trackers) were removed from `config/mqtt.yaml` after a real drive on 2026-10-05 showed the discovered trackers update about once a second and drive the Orion geofence correctly.
+- The old raw `sensor.tesla*_latitude/longitude` MQTT sensors (a temporary fallback for the location trackers) were removed (`config/mqtt.yaml` has since been deleted entirely, along with the unused legacy MQTT garage covers) after a real drive on 2026-10-05 showed the discovered trackers update about once a second and drive the Orion geofence correctly.
