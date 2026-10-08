@@ -237,6 +237,12 @@
                     "columns": 3
                   }
                 }
+              ],
+              "visibility": [
+                {
+                  "condition": "screen",
+                  "media_query": "(max-width: 1023px)"
+                }
               ]
             },
             {
@@ -557,6 +563,12 @@
                     "columns": 6
                   }
                 }
+              ],
+              "visibility": [
+                {
+                  "condition": "screen",
+                  "media_query": "(max-width: 1023px)"
+                }
               ]
             },
             {
@@ -829,6 +841,12 @@
                     "columns": 12
                   }
                 }
+              ],
+              "visibility": [
+                {
+                  "condition": "screen",
+                  "media_query": "(max-width: 1023px)"
+                }
               ]
             },
             {
@@ -1003,6 +1021,12 @@
                     "columns": 6
                   }
                 }
+              ],
+              "visibility": [
+                {
+                  "condition": "screen",
+                  "media_query": "(max-width: 1023px)"
+                }
               ]
             },
             {
@@ -1058,6 +1082,919 @@
                     "columns": "full"
                   },
                   "content": "**Updates** {{ states.update | selectattr('state', 'eq', 'on') | list | count }} available · **Unavailable entities** {{ states | selectattr('state', 'eq', 'unavailable') | list | count }}\n\n**Doorbell listener** last event {{ ((now().timestamp() - state_attr('input_datetime.dahua_last_event', 'timestamp') | float(0)) / 60) | round(0) | int }} min ago"
+                }
+              ],
+              "visibility": [
+                {
+                  "condition": "screen",
+                  "media_query": "(max-width: 1023px)"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "visibility": [
+                {
+                  "condition": "screen",
+                  "media_query": "(min-width: 1024px)"
+                }
+              ],
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Who's home",
+                  "icon": "mdi:account-multiple"
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "person.jeff_billimek",
+                  "primary": "Jeff",
+                  "secondary": "{% set s = states('person.jeff_billimek') %}{% set d = states('sensor.home_jeffs_phone_gps_distance') | float(0) %}{% if s == 'home' %}Home{% elif s == 'not_home' %}{{ (d | round(0) | int ~ ' ft') if d < 1000 else ((d / 5280) | round(1) ~ ' mi') }}{% else %}{{ s | replace('_', ' ') | title }}{% endif %} · {{ states('sensor.jeffsphone_battery_level') | int(0) }}%",
+                  "picture": "{{ state_attr('person.jeff_billimek', 'entity_picture') }}",
+                  "icon": "mdi:account",
+                  "icon_color": "{{ 'green' if is_state('person.jeff_billimek', 'home') else 'grey' }}",
+                  "layout": "vertical",
+                  "fill_container": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/person-jeff"
+                  },
+                  "grid_options": {
+                    "columns": 3
+                  },
+                  "badge_icon": "{{ 'mdi:battery-alert' if states('sensor.jeffsphone_battery_level') | float(100) < 20 and not is_state('sensor.jeffsphone_battery_state', 'Charging') else '' }}",
+                  "badge_color": "red"
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "person.jennifer_billimek",
+                  "primary": "Jen",
+                  "secondary": "{% set s = states('person.jennifer_billimek') %}{% set d = states('sensor.home_jen_s_phone_gps_distance') | float(0) %}{% if s == 'home' %}Home{% elif s == 'not_home' %}{{ (d | round(0) | int ~ ' ft') if d < 1000 else ((d / 5280) | round(1) ~ ' mi') }}{% else %}{{ s | replace('_', ' ') | title }}{% endif %} · {{ states('sensor.jensphone_battery_level') | int(0) }}%",
+                  "picture": "{{ state_attr('person.jennifer_billimek', 'entity_picture') }}",
+                  "icon": "mdi:account",
+                  "icon_color": "{{ 'green' if is_state('person.jennifer_billimek', 'home') else 'grey' }}",
+                  "layout": "vertical",
+                  "fill_container": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/person-jen"
+                  },
+                  "grid_options": {
+                    "columns": 3
+                  },
+                  "badge_icon": "{{ 'mdi:battery-alert' if states('sensor.jensphone_battery_level') | float(100) < 20 and not is_state('sensor.jensphone_battery_state', 'Charging') else '' }}",
+                  "badge_color": "red"
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "person.ansley_billimek",
+                  "primary": "Ansley",
+                  "secondary": "{% set s = states('person.ansley_billimek') %}{% if s == 'home' %}Home{% elif s == 'not_home' %}Away{% else %}{{ s | replace('_', ' ') | title }}{% endif %} · {{ states('sensor.ansley_s_iphone_battery_level') | int(0) }}%",
+                  "picture": "{{ state_attr('person.ansley_billimek', 'entity_picture') }}",
+                  "icon": "mdi:account",
+                  "icon_color": "{{ 'green' if is_state('person.ansley_billimek', 'home') else 'grey' }}",
+                  "layout": "vertical",
+                  "fill_container": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/person-ansley"
+                  },
+                  "grid_options": {
+                    "columns": 3
+                  },
+                  "badge_icon": "{{ 'mdi:battery-alert' if states('sensor.ansley_s_iphone_battery_level') | float(100) < 20 and not is_state('sensor.ansley_s_iphone_battery_state', 'Charging') else '' }}",
+                  "badge_color": "red"
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "person.brinley",
+                  "primary": "Brinley",
+                  "secondary": "{% set s = states('person.brinley') %}{% if s == 'home' %}Home{% elif s == 'not_home' %}Away{% else %}{{ s | replace('_', ' ') | title }}{% endif %}",
+                  "picture": "{{ state_attr('person.brinley', 'entity_picture') }}",
+                  "icon": "mdi:account",
+                  "icon_color": "{{ 'green' if is_state('person.brinley', 'home') else 'grey' }}",
+                  "layout": "vertical",
+                  "fill_container": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/person-brinley"
+                  },
+                  "grid_options": {
+                    "columns": 3
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Alarm",
+                  "icon": "mdi:shield-home"
+                },
+                {
+                  "type": "custom:button-card",
+                  "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
+                  "name": "Alarm",
+                  "show_state": true,
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "custom_fields": {
+                    "modes": {
+                      "card": {
+                        "type": "horizontal-stack",
+                        "cards": [
+                          {
+                            "type": "custom:button-card",
+                            "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
+                            "icon": "mdi:home",
+                            "show_name": false,
+                            "show_state": false,
+                            "tap_action": {
+                              "action": "call-service",
+                              "service": "script.alarm_arm_home"
+                            },
+                            "styles": {
+                              "card": [
+                                {
+                                  "height": "40px"
+                                },
+                                {
+                                  "border-radius": "10px"
+                                },
+                                {
+                                  "box-shadow": "none"
+                                },
+                                {
+                                  "background": "[[[ return entity.state === 'armed_home' ? 'rgba(127,127,127,0.45)' : 'transparent'; ]]]"
+                                }
+                              ],
+                              "icon": [
+                                {
+                                  "width": "20px"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "custom:button-card",
+                            "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
+                            "icon": "mdi:lock",
+                            "show_name": false,
+                            "show_state": false,
+                            "tap_action": {
+                              "action": "call-service",
+                              "service": "script.alarm_arm_away"
+                            },
+                            "styles": {
+                              "card": [
+                                {
+                                  "height": "40px"
+                                },
+                                {
+                                  "border-radius": "10px"
+                                },
+                                {
+                                  "box-shadow": "none"
+                                },
+                                {
+                                  "background": "[[[ return entity.state === 'armed_away' ? 'rgba(127,127,127,0.45)' : 'transparent'; ]]]"
+                                }
+                              ],
+                              "icon": [
+                                {
+                                  "width": "20px"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "custom:button-card",
+                            "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
+                            "icon": "mdi:weather-night",
+                            "show_name": false,
+                            "show_state": false,
+                            "tap_action": {
+                              "action": "call-service",
+                              "service": "script.alarm_arm_night"
+                            },
+                            "styles": {
+                              "card": [
+                                {
+                                  "height": "40px"
+                                },
+                                {
+                                  "border-radius": "10px"
+                                },
+                                {
+                                  "box-shadow": "none"
+                                },
+                                {
+                                  "background": "[[[ return entity.state === 'armed_night' ? 'rgba(127,127,127,0.45)' : 'transparent'; ]]]"
+                                }
+                              ],
+                              "icon": [
+                                {
+                                  "width": "20px"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "custom:button-card",
+                            "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
+                            "icon": "mdi:shield-off",
+                            "show_name": false,
+                            "show_state": false,
+                            "tap_action": {
+                              "action": "call-service",
+                              "service": "script.alarm_disarm"
+                            },
+                            "styles": {
+                              "card": [
+                                {
+                                  "height": "40px"
+                                },
+                                {
+                                  "border-radius": "10px"
+                                },
+                                {
+                                  "box-shadow": "none"
+                                },
+                                {
+                                  "background": "[[[ return entity.state === 'disarmed' ? 'rgba(127,127,127,0.45)' : 'transparent'; ]]]"
+                                }
+                              ],
+                              "icon": [
+                                {
+                                  "width": "20px"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "12px"
+                      },
+                      {
+                        "padding": "12px"
+                      }
+                    ],
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"i n\" \"i s\" \"modes modes\""
+                      },
+                      {
+                        "grid-template-columns": "40px 1fr"
+                      },
+                      {
+                        "grid-template-rows": "auto auto auto"
+                      },
+                      {
+                        "row-gap": "8px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "font-weight": "600"
+                      }
+                    ],
+                    "state": [
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "font-size": "13px"
+                      },
+                      {
+                        "opacity": "0.8"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "28px"
+                      }
+                    ],
+                    "custom_fields": {
+                      "modes": [
+                        {
+                          "width": "100%"
+                        },
+                        {
+                          "background": "rgba(127,127,127,0.18)"
+                        },
+                        {
+                          "border-radius": "12px"
+                        },
+                        {
+                          "padding": "3px"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alarm_panel_message",
+                  "name": "Panel",
+                  "icon": "mdi:shield-home",
+                  "color": "blue",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alarm_zones_active",
+                  "name": "Zones",
+                  "icon": "mdi:shield-search",
+                  "tap_action": {
+                    "action": "none"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.auto_alarm_presence",
+                  "name": "Arm away / disarm home",
+                  "color": "blue",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.auto_arm_disarm_alarm_night",
+                  "name": "Arm at midnight",
+                  "color": "blue",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Climate",
+                  "icon": "mdi:thermostat",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/climate"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.upstairs",
+                  "name": "Upstairs",
+                  "color": "cyan",
+                  "vertical": true,
+                  "features": [
+                    {
+                      "type": "target-temperature"
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "climate.downstairs",
+                  "name": "Downstairs",
+                  "color": "cyan",
+                  "vertical": true,
+                  "features": [
+                    {
+                      "type": "target-temperature"
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "System",
+                  "icon": "mdi:server"
+                },
+                {
+                  "type": "markdown",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "content": "**Updates** {{ states.update | selectattr('state', 'eq', 'on') | list | count }} available · **Unavailable entities** {{ states | selectattr('state', 'eq', 'unavailable') | list | count }}\n\n**Doorbell listener** last event {{ ((now().timestamp() - state_attr('input_datetime.dahua_last_event', 'timestamp') | float(0)) / 60) | round(0) | int }} min ago"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "visibility": [
+                {
+                  "condition": "screen",
+                  "media_query": "(min-width: 1024px)"
+                }
+              ],
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Garage",
+                  "icon": "mdi:garage-variant"
+                },
+                {
+                  "type": "custom:button-card",
+                  "entity": "cover.jeff_garage_door",
+                  "name": "Jeff's garage",
+                  "icon": "mdi:garage-variant",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "show_state": false,
+                  "show_label": false,
+                  "custom_fields": {
+                    "state": "[[[ return entity.state.charAt(0).toUpperCase() + entity.state.slice(1); ]]]",
+                    "sub": "[[[ return 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); ]]]",
+                    "btn": {
+                      "card": {
+                        "type": "custom:button-card",
+                        "entity": "cover.jeff_garage_door",
+                        "name": "[[[ return entity.state === \"closed\" ? \"Open\" : \"Close\"; ]]]",
+                        "show_icon": false,
+                        "tap_action": {
+                          "action": "toggle"
+                        },
+                        "styles": {
+                          "card": [
+                            {
+                              "height": "48px"
+                            },
+                            {
+                              "border-radius": "14px"
+                            },
+                            {
+                              "box-shadow": "none"
+                            },
+                            {
+                              "background": "rgba(127,127,127,0.18)"
+                            }
+                          ],
+                          "name": [
+                            {
+                              "font-size": "16px"
+                            },
+                            {
+                              "font-weight": "700"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "22px"
+                      },
+                      {
+                        "padding": "14px"
+                      },
+                      {
+                        "height": "100%"
+                      }
+                    ],
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"i n\" \"state state\" \"sub sub\" \"btn btn\""
+                      },
+                      {
+                        "grid-template-columns": "40px 1fr"
+                      },
+                      {
+                        "grid-template-rows": "auto auto auto auto"
+                      },
+                      {
+                        "row-gap": "6px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "28px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "font-size": "14px"
+                      },
+                      {
+                        "opacity": "0.7"
+                      }
+                    ],
+                    "custom_fields": {
+                      "state": [
+                        {
+                          "justify-self": "start"
+                        },
+                        {
+                          "font-size": "30px"
+                        },
+                        {
+                          "font-weight": "700"
+                        },
+                        {
+                          "color": "[[[ return entity.state === 'closed' ? 'var(--primary-text-color)' : 'var(--amber-color)'; ]]]"
+                        }
+                      ],
+                      "sub": [
+                        {
+                          "justify-self": "start"
+                        },
+                        {
+                          "font-size": "13px"
+                        },
+                        {
+                          "opacity": "0.7"
+                        }
+                      ],
+                      "btn": [
+                        {
+                          "width": "100%"
+                        },
+                        {
+                          "margin-top": "6px"
+                        }
+                      ]
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "entity": "cover.jen_garage_door",
+                  "name": "Jen's garage",
+                  "icon": "mdi:garage-variant",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "show_state": false,
+                  "show_label": false,
+                  "custom_fields": {
+                    "state": "[[[ return entity.state.charAt(0).toUpperCase() + entity.state.slice(1); ]]]",
+                    "sub": "[[[ return 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); ]]]",
+                    "btn": {
+                      "card": {
+                        "type": "custom:button-card",
+                        "entity": "cover.jen_garage_door",
+                        "name": "[[[ return entity.state === \"closed\" ? \"Open\" : \"Close\"; ]]]",
+                        "show_icon": false,
+                        "tap_action": {
+                          "action": "toggle"
+                        },
+                        "styles": {
+                          "card": [
+                            {
+                              "height": "48px"
+                            },
+                            {
+                              "border-radius": "14px"
+                            },
+                            {
+                              "box-shadow": "none"
+                            },
+                            {
+                              "background": "rgba(127,127,127,0.18)"
+                            }
+                          ],
+                          "name": [
+                            {
+                              "font-size": "16px"
+                            },
+                            {
+                              "font-weight": "700"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "border-radius": "22px"
+                      },
+                      {
+                        "padding": "14px"
+                      },
+                      {
+                        "height": "100%"
+                      }
+                    ],
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"i n\" \"state state\" \"sub sub\" \"btn btn\""
+                      },
+                      {
+                        "grid-template-columns": "40px 1fr"
+                      },
+                      {
+                        "grid-template-rows": "auto auto auto auto"
+                      },
+                      {
+                        "row-gap": "6px"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "28px"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "font-size": "14px"
+                      },
+                      {
+                        "opacity": "0.7"
+                      }
+                    ],
+                    "custom_fields": {
+                      "state": [
+                        {
+                          "justify-self": "start"
+                        },
+                        {
+                          "font-size": "30px"
+                        },
+                        {
+                          "font-weight": "700"
+                        },
+                        {
+                          "color": "[[[ return entity.state === 'closed' ? 'var(--primary-text-color)' : 'var(--amber-color)'; ]]]"
+                        }
+                      ],
+                      "sub": [
+                        {
+                          "justify-self": "start"
+                        },
+                        {
+                          "font-size": "13px"
+                        },
+                        {
+                          "opacity": "0.7"
+                        }
+                      ],
+                      "btn": [
+                        {
+                          "width": "100%"
+                        },
+                        {
+                          "margin-top": "6px"
+                        }
+                      ]
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.auto_garage_doors",
+                  "name": "Tesla geofence",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.auto_garage_doors_night",
+                  "name": "10 pm close",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.auto_close_garage_door_jeff",
+                  "name": "Jeff auto-close",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.auto_close_garage_door_jen",
+                  "name": "Jen auto-close",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Cameras",
+                  "icon": "mdi:cctv",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/cameras"
+                  },
+                  "badges": [
+                    {
+                      "type": "button",
+                      "icon": "mdi:bell-off",
+                      "text": "Mute 1 hour",
+                      "tap_action": {
+                        "action": "perform-action",
+                        "perform_action": "script.mute_camera_notifications"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.doorbell",
+                  "camera_view": "auto",
+                  "show_name": false,
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/cameras"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_doorbell_notify",
+                  "primary": "Doorbell",
+                  "secondary": "{% if is_state('timer.camera_doorbell_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_doorbell_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_doorbell_notify', 'on') %}On{% else %}Off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_doorbell_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_doorbell_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_doorbell_mute', 'active') else 'purple' if is_state('input_boolean.camera_doorbell_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "doorbell"
+                    }
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "doorbell",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_front_notify",
+                  "primary": "Front",
+                  "secondary": "{% if is_state('timer.camera_front_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_front_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_front_notify', 'on') %}On{% else %}Off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_front_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_front_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_front_mute', 'active') else 'purple' if is_state('input_boolean.camera_front_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "front"
+                    }
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "front",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_driveway_notify",
+                  "primary": "Driveway",
+                  "secondary": "{% if is_state('timer.camera_driveway_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_driveway_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_driveway_notify', 'on') %}On{% else %}Off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_driveway_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_driveway_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_driveway_mute', 'active') else 'purple' if is_state('input_boolean.camera_driveway_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "driveway"
+                    }
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "driveway",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_porch_notify",
+                  "primary": "Porch",
+                  "secondary": "{% if is_state('timer.camera_porch_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_porch_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_porch_notify', 'on') %}On{% else %}Off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_porch_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_porch_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_porch_mute', 'active') else 'purple' if is_state('input_boolean.camera_porch_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "porch"
+                    }
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "porch",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_pool_notify",
+                  "primary": "Pool",
+                  "secondary": "{% if is_state('timer.camera_pool_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_pool_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_pool_notify', 'on') %}On{% else %}Off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_pool_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_pool_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_pool_mute', 'active') else 'purple' if is_state('input_boolean.camera_pool_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "pool"
+                    }
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "pool",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
                 }
               ]
             }
@@ -1225,59 +2162,59 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/doorbell/master.m3u8' : '/lovelace/camera-doorbell'; ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-doorbell'; return '/api/frigate/notifications/' + id + '/doorbell/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
                   },
                   "styles": {
                     "card": [
-                      "padding: 0",
-                      "overflow: hidden",
-                      "background-size: cover",
-                      "background-position: center",
-                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      {
+                        "padding": "0"
+                      },
+                      {
+                        "overflow": "hidden"
+                      },
+                      {
+                        "background-size": "cover"
+                      },
+                      {
+                        "background-position": "center"
+                      },
+                      {
+                        "background-image": "[[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      }
                     ],
                     "grid": [
-                      [
-                        "grid-template-areas",
-                        "\"n\""
-                      ],
-                      [
-                        "grid-template-rows",
-                        "1fr"
-                      ],
-                      [
-                        "align-items",
-                        "end"
-                      ]
+                      {
+                        "grid-template-areas": "\"n\""
+                      },
+                      {
+                        "grid-template-rows": "1fr"
+                      },
+                      {
+                        "align-items": "end"
+                      }
                     ],
                     "name": [
-                      [
-                        "justify-self",
-                        "start"
-                      ],
-                      [
-                        "padding",
-                        "4px 10px"
-                      ],
-                      [
-                        "margin",
-                        "6px"
-                      ],
-                      [
-                        "border-radius",
-                        "8px"
-                      ],
-                      [
-                        "background",
-                        "rgba(0,0,0,0.55)"
-                      ],
-                      [
-                        "color",
-                        "white"
-                      ],
-                      [
-                        "font-size",
-                        "13px"
-                      ]
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "padding": "4px 10px"
+                      },
+                      {
+                        "margin": "6px"
+                      },
+                      {
+                        "border-radius": "8px"
+                      },
+                      {
+                        "background": "rgba(0,0,0,0.55)"
+                      },
+                      {
+                        "color": "white"
+                      },
+                      {
+                        "font-size": "13px"
+                      }
                     ]
                   },
                   "grid_options": {
@@ -1299,59 +2236,59 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/front/master.m3u8' : '/lovelace/camera-front'; ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-front'; return '/api/frigate/notifications/' + id + '/front/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
                   },
                   "styles": {
                     "card": [
-                      "padding: 0",
-                      "overflow: hidden",
-                      "background-size: cover",
-                      "background-position: center",
-                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      {
+                        "padding": "0"
+                      },
+                      {
+                        "overflow": "hidden"
+                      },
+                      {
+                        "background-size": "cover"
+                      },
+                      {
+                        "background-position": "center"
+                      },
+                      {
+                        "background-image": "[[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      }
                     ],
                     "grid": [
-                      [
-                        "grid-template-areas",
-                        "\"n\""
-                      ],
-                      [
-                        "grid-template-rows",
-                        "1fr"
-                      ],
-                      [
-                        "align-items",
-                        "end"
-                      ]
+                      {
+                        "grid-template-areas": "\"n\""
+                      },
+                      {
+                        "grid-template-rows": "1fr"
+                      },
+                      {
+                        "align-items": "end"
+                      }
                     ],
                     "name": [
-                      [
-                        "justify-self",
-                        "start"
-                      ],
-                      [
-                        "padding",
-                        "4px 10px"
-                      ],
-                      [
-                        "margin",
-                        "6px"
-                      ],
-                      [
-                        "border-radius",
-                        "8px"
-                      ],
-                      [
-                        "background",
-                        "rgba(0,0,0,0.55)"
-                      ],
-                      [
-                        "color",
-                        "white"
-                      ],
-                      [
-                        "font-size",
-                        "13px"
-                      ]
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "padding": "4px 10px"
+                      },
+                      {
+                        "margin": "6px"
+                      },
+                      {
+                        "border-radius": "8px"
+                      },
+                      {
+                        "background": "rgba(0,0,0,0.55)"
+                      },
+                      {
+                        "color": "white"
+                      },
+                      {
+                        "font-size": "13px"
+                      }
                     ]
                   },
                   "grid_options": {
@@ -1373,59 +2310,59 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/driveway/master.m3u8' : '/lovelace/camera-driveway'; ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-driveway'; return '/api/frigate/notifications/' + id + '/driveway/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
                   },
                   "styles": {
                     "card": [
-                      "padding: 0",
-                      "overflow: hidden",
-                      "background-size: cover",
-                      "background-position: center",
-                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      {
+                        "padding": "0"
+                      },
+                      {
+                        "overflow": "hidden"
+                      },
+                      {
+                        "background-size": "cover"
+                      },
+                      {
+                        "background-position": "center"
+                      },
+                      {
+                        "background-image": "[[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      }
                     ],
                     "grid": [
-                      [
-                        "grid-template-areas",
-                        "\"n\""
-                      ],
-                      [
-                        "grid-template-rows",
-                        "1fr"
-                      ],
-                      [
-                        "align-items",
-                        "end"
-                      ]
+                      {
+                        "grid-template-areas": "\"n\""
+                      },
+                      {
+                        "grid-template-rows": "1fr"
+                      },
+                      {
+                        "align-items": "end"
+                      }
                     ],
                     "name": [
-                      [
-                        "justify-self",
-                        "start"
-                      ],
-                      [
-                        "padding",
-                        "4px 10px"
-                      ],
-                      [
-                        "margin",
-                        "6px"
-                      ],
-                      [
-                        "border-radius",
-                        "8px"
-                      ],
-                      [
-                        "background",
-                        "rgba(0,0,0,0.55)"
-                      ],
-                      [
-                        "color",
-                        "white"
-                      ],
-                      [
-                        "font-size",
-                        "13px"
-                      ]
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "padding": "4px 10px"
+                      },
+                      {
+                        "margin": "6px"
+                      },
+                      {
+                        "border-radius": "8px"
+                      },
+                      {
+                        "background": "rgba(0,0,0,0.55)"
+                      },
+                      {
+                        "color": "white"
+                      },
+                      {
+                        "font-size": "13px"
+                      }
                     ]
                   },
                   "grid_options": {
@@ -1447,59 +2384,59 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/porch/master.m3u8' : '/lovelace/camera-porch'; ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-porch'; return '/api/frigate/notifications/' + id + '/porch/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
                   },
                   "styles": {
                     "card": [
-                      "padding: 0",
-                      "overflow: hidden",
-                      "background-size: cover",
-                      "background-position: center",
-                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      {
+                        "padding": "0"
+                      },
+                      {
+                        "overflow": "hidden"
+                      },
+                      {
+                        "background-size": "cover"
+                      },
+                      {
+                        "background-position": "center"
+                      },
+                      {
+                        "background-image": "[[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      }
                     ],
                     "grid": [
-                      [
-                        "grid-template-areas",
-                        "\"n\""
-                      ],
-                      [
-                        "grid-template-rows",
-                        "1fr"
-                      ],
-                      [
-                        "align-items",
-                        "end"
-                      ]
+                      {
+                        "grid-template-areas": "\"n\""
+                      },
+                      {
+                        "grid-template-rows": "1fr"
+                      },
+                      {
+                        "align-items": "end"
+                      }
                     ],
                     "name": [
-                      [
-                        "justify-self",
-                        "start"
-                      ],
-                      [
-                        "padding",
-                        "4px 10px"
-                      ],
-                      [
-                        "margin",
-                        "6px"
-                      ],
-                      [
-                        "border-radius",
-                        "8px"
-                      ],
-                      [
-                        "background",
-                        "rgba(0,0,0,0.55)"
-                      ],
-                      [
-                        "color",
-                        "white"
-                      ],
-                      [
-                        "font-size",
-                        "13px"
-                      ]
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "padding": "4px 10px"
+                      },
+                      {
+                        "margin": "6px"
+                      },
+                      {
+                        "border-radius": "8px"
+                      },
+                      {
+                        "background": "rgba(0,0,0,0.55)"
+                      },
+                      {
+                        "color": "white"
+                      },
+                      {
+                        "font-size": "13px"
+                      }
                     ]
                   },
                   "grid_options": {
@@ -1521,59 +2458,59 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/pool/master.m3u8' : '/lovelace/camera-pool'; ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-pool'; return '/api/frigate/notifications/' + id + '/pool/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
                   },
                   "styles": {
                     "card": [
-                      "padding: 0",
-                      "overflow: hidden",
-                      "background-size: cover",
-                      "background-position: center",
-                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      {
+                        "padding": "0"
+                      },
+                      {
+                        "overflow": "hidden"
+                      },
+                      {
+                        "background-size": "cover"
+                      },
+                      {
+                        "background-position": "center"
+                      },
+                      {
+                        "background-image": "[[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                      }
                     ],
                     "grid": [
-                      [
-                        "grid-template-areas",
-                        "\"n\""
-                      ],
-                      [
-                        "grid-template-rows",
-                        "1fr"
-                      ],
-                      [
-                        "align-items",
-                        "end"
-                      ]
+                      {
+                        "grid-template-areas": "\"n\""
+                      },
+                      {
+                        "grid-template-rows": "1fr"
+                      },
+                      {
+                        "align-items": "end"
+                      }
                     ],
                     "name": [
-                      [
-                        "justify-self",
-                        "start"
-                      ],
-                      [
-                        "padding",
-                        "4px 10px"
-                      ],
-                      [
-                        "margin",
-                        "6px"
-                      ],
-                      [
-                        "border-radius",
-                        "8px"
-                      ],
-                      [
-                        "background",
-                        "rgba(0,0,0,0.55)"
-                      ],
-                      [
-                        "color",
-                        "white"
-                      ],
-                      [
-                        "font-size",
-                        "13px"
-                      ]
+                      {
+                        "justify-self": "start"
+                      },
+                      {
+                        "padding": "4px 10px"
+                      },
+                      {
+                        "margin": "6px"
+                      },
+                      {
+                        "border-radius": "8px"
+                      },
+                      {
+                        "background": "rgba(0,0,0,0.55)"
+                      },
+                      {
+                        "color": "white"
+                      },
+                      {
+                        "font-size": "13px"
+                      }
                     ]
                   },
                   "grid_options": {
