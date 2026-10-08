@@ -140,18 +140,24 @@
                 'binary_sensor.elektra_tire_soft_rear_left', 'binary_sensor.elektra_tire_soft_rear_right')
          | selectattr('state', 'eq', 'on') | list | count > 0 }}
 
-## Coldest forecast low over the next two nights (Ecobee daily forecast). Feeds the freeze
-## warning push (automation/home_health.yaml) and the Weather tab. Trigger-based because the
-## forecast is an action response, which no template helper can read.
+## Forecast-driven sensors, from the Tempest's own forecast (weather.unknown, named "🦖"; it has
+## rain probability and 10 days, and matched other weather apps better than the Ecobee one).
+## Trigger-based because the forecast is an action response, which no template helper can read.
+## Fire event refresh_forecast_sensors to update them on demand.
+##  - Forecast Low: coldest forecast low of today + tomorrow; feeds the freeze warning push
+##    (automation/home_health.yaml), the Weather tab and the Home tab
+##  - Next Rain: first day with a 50 % or better chance of rain
 - triggers:
     - trigger: time_pattern
       minutes: '/30'
     - trigger: homeassistant
       event: start
+    - trigger: event
+      event_type: refresh_forecast_sensors
   actions:
     - action: weather.get_forecasts
       target:
-        entity_id: weather.upstairs
+        entity_id: weather.unknown
       data:
         type: daily
       response_variable: daily
@@ -161,22 +167,25 @@
       unit_of_measurement: "°F"
       device_class: temperature
       state: >
-        {% set f = (daily['weather.upstairs'].forecast | default([]))[:2] %}
+        {% set f = (daily['weather.unknown'].forecast | default([]))[:2] %}
         {{ f | map(attribute='templow') | map('float', 100) | min if f else none }}
 
     - name: "Next Rain"
       unique_id: next_rain
       icon: mdi:weather-rainy
       state: >
-        {% set rain = ['rainy', 'pouring', 'lightning-rainy', 'snowy-rainy', 'hail'] %}
-        {% set hit = (daily['weather.upstairs'].forecast | default([])) | selectattr('condition', 'in', rain) | first | default(none) %}
-        {% if hit is none %}
-          None in the next 5 days
+        {% set days = daily['weather.unknown'].forecast | default([]) | selectattr('precipitation_probability', 'number') | selectattr('precipitation_probability', 'ge', 50) | list %}
+        {% if not days %}
+          None in the next 10 days
         {% else %}
-          {% set d = (hit.datetime | as_datetime | as_local).date() %}
+          {% set d = (days[0].datetime | as_datetime | as_local).date() %}
           {% set delta = (d - now().date()).days %}
-          {{ 'Today' if delta <= 0 else 'Tomorrow' if delta == 1 else d.strftime('%A') }}
+          {{ 'Today' if delta <= 0 else 'Tomorrow' if delta == 1 else d.strftime('%A') }} · {{ days[0].precipitation_probability | int }}%
         {% endif %}
+      attributes:
+        condition: >
+          {% set days = daily['weather.unknown'].forecast | default([]) | selectattr('precipitation_probability', 'number') | selectattr('precipitation_probability', 'ge', 50) | list %}
+          {{ days[0].condition if days else none }}
 
 ## EV charging cost this month: the monthly utility meters (UI helpers on each car's TeslaMate
 ## sensor.<car>_energy_added) x (1 + charging loss) x the rate in input_number.ev_electricity_rate.

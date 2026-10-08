@@ -1,0 +1,43 @@
+## One-tap alarm buttons for the dashboards. The tile's built-in alarm-modes feature pops up a
+## keypad; these scripts send the code from the ALARMCD env var instead (a dashboard button
+## cannot hold a secret). Anyone who can open the dashboard can arm and disarm with them.
+## The HA automation trace stores the resolved code in plain text, as with alarm_logic.yaml.
+alarm_arm_home:
+  alias: 'Arm alarm (home)'
+  icon: mdi:shield-home
+  sequence:
+    - action: alarm_control_panel.alarm_arm_home
+      target:
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      data:
+        code: !env_var ALARMCD
+
+alarm_arm_away:
+  alias: 'Arm alarm (away)'
+  icon: mdi:shield-lock
+  sequence:
+    - action: alarm_control_panel.alarm_arm_away
+      target:
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      data:
+        code: !env_var ALARMCD
+
+alarm_arm_night:
+  alias: 'Arm alarm (night)'
+  icon: mdi:shield-moon
+  sequence:
+    - action: alarm_control_panel.alarm_arm_night
+      target:
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      data:
+        code: !env_var ALARMCD
+
+alarm_disarm:
+  alias: 'Disarm alarm'
+  icon: mdi:shield-off
+  sequence:
+    - action: alarm_control_panel.alarm_disarm
+      target:
+        entity_id: alarm_control_panel.ser2sock_10000_alarm_panel
+      data:
+        code: !env_var ALARMCD
