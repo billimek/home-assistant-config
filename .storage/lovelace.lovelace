@@ -757,10 +757,10 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.forecast_low_2_nights",
-                  "name": "Coldest low, 2 nights",
-                  "icon": "mdi:snowflake-thermometer",
-                  "color": "cyan",
+                  "entity": "sensor.next_rain",
+                  "name": "Next rain",
+                  "icon": "mdi:weather-rainy",
+                  "color": "blue",
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "/lovelace/weather"
@@ -770,14 +770,27 @@
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "sensor.st_00161537_wind_gust",
-                  "name": "Gust",
-                  "icon": "mdi:weather-windy",
-                  "color": "teal",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "/lovelace/weather"
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "numeric_state",
+                      "entity": "sensor.forecast_low_2_nights",
+                      "below": 28
+                    }
+                  ],
+                  "card": {
+                    "type": "tile",
+                    "entity": "sensor.forecast_low_2_nights",
+                    "name": "Freeze coming, low",
+                    "icon": "mdi:snowflake-alert",
+                    "color": "cyan",
+                    "tap_action": {
+                      "action": "navigate",
+                      "navigation_path": "/lovelace/weather"
+                    },
+                    "grid_options": {
+                      "columns": 6
+                    }
                   },
                   "grid_options": {
                     "columns": 6
@@ -806,7 +819,7 @@
                   "grid_options": {
                     "columns": "full"
                   },
-                  "content": "{% set ns = namespace(i=[]) %}\n{% for e, n in [('jeffsphone', \"Jeff's phone\"), ('jensphone', \"Jen's phone\"), ('ansley_s_iphone', \"Ansley's phone\")] %}{% if states('sensor.' ~ e ~ '_battery_level') | float(100) < 20 and not is_state('sensor.' ~ e ~ '_battery_state', 'Charging') %}{% set ns.i = ns.i + ['🔋 ' ~ n ~ ' is at ' ~ states('sensor.' ~ e ~ '_battery_level') | int(0) ~ '%'] %}{% endif %}{% endfor %}\n{% for e, n in [('sensor.water_sensor_a_battery_level', 'Basement leak sensor'), ('sensor.water_sensor_b_battery_level', 'Sump pump leak sensor')] %}{% if states(e) | float(100) < 30 %}{% set ns.i = ns.i + ['💦 ' ~ n ~ ' battery ' ~ states(e) | float(0) | round(0) | int ~ '%'] %}{% endif %}{% endfor %}\n{% if states('sensor.st_00161537_battery') | float(100) < 20 %}{% set ns.i = ns.i + ['🌦️ Weather station battery ' ~ states('sensor.st_00161537_battery') ~ '%'] %}{% endif %}\n{% for c in ['black', 'cyan', 'magenta', 'yellow'] %}{% if states('sensor.brother_mfc_9330cdw_' ~ c ~ '_toner_cartridge') | float(100) < 15 %}{% set ns.i = ns.i + ['🖨️ ' ~ c | title ~ ' toner ' ~ states('sensor.brother_mfc_9330cdw_' ~ c ~ '_toner_cartridge') ~ '%'] %}{% endif %}{% endfor %}\n{% if is_state('binary_sensor.lv142781_door_status_any_open', 'on') %}{% set ns.i = ns.i + ['🧊 A fridge door is open'] %}{% endif %}\n{% if states('sensor.ge_profile_fridge_lv142781_lv142781_water_filter_status_days_remaining') | float(99) <= 14 %}{% set ns.i = ns.i + ['🧊 Fridge water filter: ' ~ states('sensor.ge_profile_fridge_lv142781_lv142781_water_filter_status_days_remaining') | int(0) ~ ' days left'] %}{% endif %}\n{% for c in ['elektra', 'karr', 'orion'] %}{% if is_state('sensor.' ~ c ~ '_geofence', 'home') and is_state('binary_sensor.' ~ c ~ '_plug', 'off') and states('sensor.' ~ c ~ '_battery') | float(100) < 50 %}{% set ns.i = ns.i + ['🔌 ' ~ c | title ~ ' is unplugged at ' ~ states('sensor.' ~ c ~ '_battery') | int(0) ~ '%'] %}{% endif %}{% if is_state('binary_sensor.' ~ c ~ '_tire_alert', 'on') %}{% set ns.i = ns.i + ['🛞 ' ~ c | title ~ ' tire pressure low'] %}{% endif %}{% endfor %}\n{% set b = states('sensor.backup_last_successful_automatic_backup') | as_datetime(none) %}{% if b is none or (now() - b).days >= 3 %}{% set ns.i = ns.i + ['💾 No successful backup in 3+ days'] %}{% endif %}\n{% if ns.i %}{% for x in ns.i %}- {{ x }}\n{% endfor %}{% else %}✅ Nothing needs attention{% endif %}"
+                  "content": "{% set ns = namespace(i=[]) %}\n{% for e, n in [('jeffsphone', \"Jeff's phone\"), ('jensphone', \"Jen's phone\"), ('ansley_s_iphone', \"Ansley's phone\")] %}{% if states('sensor.' ~ e ~ '_battery_level') | float(100) < 20 and not is_state('sensor.' ~ e ~ '_battery_state', 'Charging') %}{% set ns.i = ns.i + ['🔋 ' ~ n ~ ' is at ' ~ states('sensor.' ~ e ~ '_battery_level') | int(0) ~ '%'] %}{% endif %}{% endfor %}\n{% for e, n in [('sensor.water_sensor_a_battery_level', 'Basement leak sensor'), ('sensor.water_sensor_b_battery_level', 'Sump pump leak sensor')] %}{% if states(e) | float(100) < 30 %}{% set ns.i = ns.i + ['💦 ' ~ n ~ ' battery ' ~ states(e) | float(0) | round(0) | int ~ '%'] %}{% endif %}{% endfor %}\n{% if states('sensor.st_00161537_battery') | float(100) < 20 %}{% set ns.i = ns.i + ['🌦️ Weather station battery ' ~ states('sensor.st_00161537_battery') ~ '%'] %}{% endif %}\n{% for c in ['black', 'cyan', 'magenta', 'yellow'] %}{% if states('sensor.brother_mfc_9330cdw_' ~ c ~ '_toner_cartridge') | float(100) < 15 %}{% set ns.i = ns.i + ['🖨️ ' ~ c | title ~ ' toner ' ~ states('sensor.brother_mfc_9330cdw_' ~ c ~ '_toner_cartridge') ~ '%'] %}{% endif %}{% endfor %}\n{% if is_state('binary_sensor.lv142781_door_status_any_open', 'on') %}{% set ns.i = ns.i + ['🧊 A fridge door is open'] %}{% endif %}\n{% for c in ['elektra', 'karr', 'orion'] %}{% if is_state('sensor.' ~ c ~ '_geofence', 'home') and is_state('binary_sensor.' ~ c ~ '_plug', 'off') and states('sensor.' ~ c ~ '_battery') | float(100) < 50 %}{% set ns.i = ns.i + ['🔌 ' ~ c | title ~ ' is unplugged at ' ~ states('sensor.' ~ c ~ '_battery') | int(0) ~ '%'] %}{% endif %}{% if is_state('binary_sensor.' ~ c ~ '_tire_alert', 'on') %}{% set ns.i = ns.i + ['🛞 ' ~ c | title ~ ' tire pressure low'] %}{% endif %}{% endfor %}\n{% set b = states('sensor.backup_last_successful_automatic_backup') | as_datetime(none) %}{% if b is none or (now() - b).days >= 3 %}{% set ns.i = ns.i + ['💾 No successful backup in 3+ days'] %}{% endif %}\n{% if ns.i %}{% for x in ns.i %}- {{ x }}\n{% endfor %}{% else %}✅ Nothing needs attention{% endif %}"
                 },
                 {
                   "type": "heading",
@@ -818,7 +831,7 @@
                   "grid_options": {
                     "columns": "full"
                   },
-                  "content": "**Backup** last {{ as_timestamp(states('sensor.backup_last_successful_automatic_backup'), 0) | timestamp_custom('%a %-I:%M %p') }} · next {{ as_timestamp(states('sensor.backup_next_scheduled_automatic_backup'), 0) | timestamp_custom('%a %-I:%M %p') }}\n\n**Updates** {{ states.update | selectattr('state', 'eq', 'on') | list | count }} available · **Unavailable entities** {{ states | selectattr('state', 'eq', 'unavailable') | list | count }}\n\n**Doorbell listener** last event {{ ((now().timestamp() - state_attr('input_datetime.dahua_last_event', 'timestamp') | float(0)) / 60) | round(0) | int }} min ago · **Alarm panel** {{ states('sensor.alarm_status') }}"
+                  "content": "**Updates** {{ states.update | selectattr('state', 'eq', 'on') | list | count }} available · **Unavailable entities** {{ states | selectattr('state', 'eq', 'unavailable') | list | count }}\n\n**Doorbell listener** last event {{ ((now().timestamp() - state_attr('input_datetime.dahua_last_event', 'timestamp') | float(0)) / 60) | round(0) | int }} min ago"
                 }
               ]
             }
@@ -994,6 +1007,101 @@
                   },
                   "grid_options": {
                     "columns": 12
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Camera mutes",
+                  "icon": "mdi:bell-off"
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_porch_mute",
+                  "name": "Porch",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_doorbell_mute",
+                  "name": "Doorbell",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_driveway_mute",
+                  "name": "Driveway",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_front_mute",
+                  "name": "Front",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_pool_mute",
+                  "name": "Pool",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
                   }
                 }
               ]
@@ -1943,13 +2051,6 @@
                   "grid_options": {
                     "columns": 12
                   }
-                },
-                {
-                  "type": "markdown",
-                  "grid_options": {
-                    "columns": 12
-                  },
-                  "content": "**Tires (psi)** FL {{ states('sensor.karr_tire_pressure_front_left') | float(0) | round(0) | int }} · FR {{ states('sensor.karr_tire_pressure_front_right') | float(0) | round(0) | int }} · RL {{ states('sensor.karr_tire_pressure_rear_left') | float(0) | round(0) | int }} · RR {{ states('sensor.karr_tire_pressure_rear_right') | float(0) | round(0) | int }}"
                 }
               ]
             },
@@ -2143,13 +2244,6 @@
                   "grid_options": {
                     "columns": 12
                   }
-                },
-                {
-                  "type": "markdown",
-                  "grid_options": {
-                    "columns": 12
-                  },
-                  "content": "**Tires (psi)** FL {{ states('sensor.orion_tire_pressure_front_left') | float(0) | round(0) | int }} · FR {{ states('sensor.orion_tire_pressure_front_right') | float(0) | round(0) | int }} · RL {{ states('sensor.orion_tire_pressure_rear_left') | float(0) | round(0) | int }} · RR {{ states('sensor.orion_tire_pressure_rear_right') | float(0) | round(0) | int }}"
                 }
               ]
             },
@@ -2343,13 +2437,92 @@
                   "grid_options": {
                     "columns": 12
                   }
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Charging cost this month",
+                  "icon": "mdi:cash"
                 },
                 {
-                  "type": "markdown",
+                  "type": "tile",
+                  "entity": "sensor.ev_charging_cost_month",
+                  "name": "All cars",
+                  "color": "green",
+                  "state_content": [
+                    "state",
+                    "last_month"
+                  ],
                   "grid_options": {
                     "columns": 12
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.karr_charging_cost_month",
+                  "name": "KARR",
+                  "color": "green",
+                  "state_content": [
+                    "state",
+                    "energy_kwh"
+                  ],
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.orion_charging_cost_month",
+                  "name": "Orion",
+                  "color": "green",
+                  "state_content": [
+                    "state",
+                    "energy_kwh"
+                  ],
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.elektra_charging_cost_month",
+                  "name": "Elektra",
+                  "color": "green",
+                  "state_content": [
+                    "state",
+                    "energy_kwh"
+                  ],
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.ev_electricity_rate",
+                  "name": "Rate",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "more-info"
                   },
-                  "content": "**Tires (psi)** FL {{ states('sensor.elektra_tire_pressure_front_left') | float(0) | round(0) | int }} · FR {{ states('sensor.elektra_tire_pressure_front_right') | float(0) | round(0) | int }} · RL {{ states('sensor.elektra_tire_pressure_rear_left') | float(0) | round(0) | int }} · RR {{ states('sensor.elektra_tire_pressure_rear_right') | float(0) | round(0) | int }}"
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.ev_charging_loss",
+                  "name": "Charging loss",
+                  "color": "amber",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
                 }
               ]
             },
@@ -2499,102 +2672,7 @@
                 },
                 {
                   "type": "markdown",
-                  "content": "{% set t = states.timer | selectattr('state', 'eq', 'active') | selectattr('entity_id', 'search', 'snooze|mute') | list %}{% if t %}{% for x in t %}- **{{ x.name }}**: {{ (((as_timestamp(x.attributes.finishes_at) - now().timestamp()) / 60) | round(0) | int) }} min left\n{% endfor %}{% else %}Nothing snoozed or muted.{% endif %}",
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "heading",
-                  "heading": "Camera mutes",
-                  "icon": "mdi:bell-off"
-                },
-                {
-                  "type": "tile",
-                  "entity": "timer.camera_porch_mute",
-                  "name": "Porch",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
-                    }
-                  ],
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "timer.camera_doorbell_mute",
-                  "name": "Doorbell",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
-                    }
-                  ],
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "timer.camera_driveway_mute",
-                  "name": "Driveway",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
-                    }
-                  ],
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "timer.camera_front_mute",
-                  "name": "Front",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
-                    }
-                  ],
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "timer.camera_pool_mute",
-                  "name": "Pool",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
-                    }
-                  ],
+                  "content": "{% set t = states.timer | selectattr('state', 'eq', 'active') | selectattr('entity_id', 'search', 'snooze') | rejectattr('entity_id', 'search', 'mute') | list %}{% if t %}{% for x in t %}- **{{ x.name }}**: {{ (((as_timestamp(x.attributes.finishes_at) - now().timestamp()) / 60) | round(0) | int) }} min left\n{% endfor %}{% else %}Nothing snoozed.{% endif %}",
                   "grid_options": {
                     "columns": "full"
                   }

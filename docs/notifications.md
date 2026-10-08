@@ -27,10 +27,8 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 | 🔋 Leak sensor battery low | a leak sensor drops below 30 %, then Sundays 09:00 while it stays low | Jeff | active | none | replaced by the next one |
 | Printer toner low | a Brother cartridge drops below 15 % | Jeff | passive | none | |
 | 🧊 Fridge door open | a fridge or freezer door open for 3 min | Jeff | time-sensitive | none | when the door closes |
-| 🧊 Fridge water filter | 14 days or less left | Jeff | passive | none | |
 | 🥶 Freeze coming | `sensor.forecast_low_2_nights` crosses below 28 °F (once per cold snap) | Jeff | passive | none | |
 | 🔌 Plug in the car | 21:00, a car is home, unplugged and under 50 % | Jeff | active | none | |
-| 🚗 Elektra open or unlocked | Elektra at home with a door, frunk or trunk open for 10 min, or unlocked at 23:30 | Jeff | time-sensitive | none | |
 | 🛞 Tire pressure | a car reports a soft tire for 10 min | Jeff | active | none | |
 | AlarmDecoder reconnected | panel stopped reporting; integration reloaded | Jeff | time-sensitive | none | |
 | 🏠 Someone came home | `zone.home` goes above 0 | Jeff | passive | none | |

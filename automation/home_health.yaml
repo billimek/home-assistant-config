@@ -76,7 +76,7 @@
         icon: 'mdi:printer-alert'
         color: '#607D8B'
 
-## GE fridge: door left open, water filter running out
+## GE fridge: door left open
 - id: fridge_door_open
   alias: 'Fridge door left open'
   description: 'Push when any fridge or freezer door has been open for 3 minutes; the push clears when it closes.'
@@ -109,29 +109,6 @@
         - action: script.notify_clear
           data:
             tag: fridge_door
-
-- id: fridge_filter_low
-  alias: 'Fridge water filter due soon'
-  description: 'Push when the fridge water filter has 14 days or less left.'
-  mode: single
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.ge_profile_fridge_lv142781_lv142781_water_filter_status_days_remaining
-      below: 15
-  condition:
-    - condition: template
-      value_template: "{{ trigger.from_state.state not in ['unavailable', 'unknown'] }}"
-  action:
-    - action: script.notify_phones
-      data:
-        audience: jeff
-        title: "🧊 Fridge water filter"
-        message: "{{ trigger.to_state.state | int(0) }} days left on the fridge water filter."
-        level: passive
-        tag: fridge_filter
-        group: home
-        icon: 'mdi:water-check'
-        color: '#039BE5'
 
 ## Freeze warning. sensor.forecast_low_2_nights (config/template.yaml) is the coldest forecast
 ## low of the next two nights. The trigger fires when it crosses below 28 °F (a hard freeze, so

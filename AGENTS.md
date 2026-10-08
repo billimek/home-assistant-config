@@ -45,8 +45,8 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 | `automation/lights.yaml`, `automation/lights_motion.yaml` | dusk/schedule lights (porch, sunroom/foyer/trees, cabinet, plant lights) and motion/event lights (garage, deck, desk via Wyze MQTT, stairs) |
 | `automation/presence.yaml` | arrival push, Jen came home, Ecobee away/resume and Nest eco (skipped in guest mode) |
 | `automation/water.yaml` | basement and sump pump leak alerts |
-| `automation/home_health.yaml` | leak sensor battery, printer toner, fridge door and water filter, freeze warning (`sensor.forecast_low_2_nights`, a trigger-based template sensor in `config/template.yaml` built from the Ecobee daily forecast) |
-| `automation/car_alerts.yaml` | 21:00 plug-in reminder (any car home, unplugged, under 50 %), Elektra open/unlocked check, tire pressure push |
+| `automation/home_health.yaml` | leak sensor battery, printer toner, fridge door, freeze warning (`sensor.forecast_low_2_nights`, a trigger-based template sensor in `config/template.yaml` built from the Ecobee daily forecast; the same block also feeds `sensor.next_rain`) |
+| `automation/car_alerts.yaml` | 21:00 plug-in reminder (any car home, unplugged, under 50 %), tire pressure push |
 | `automation/network.yaml` | new WiFi device alert |
 | `scripts/lights_off.yaml` | `script.lights_off`, used at midnight (leaves the basement lights on while guest mode is on) |
 | `scripts/notify.yaml` | `script.notify_phones` (central iOS push: audience, level, tag, group, url, action buttons) and `script.notify_clear`. New pushes should use it, not `notify.mobile_app_*` directly. While `input_boolean.notify_test_mode` is on, everything goes to Jeff's phone only |
@@ -110,6 +110,7 @@ These entity IDs are referenced by Lovelace dashboards and automations. Renaming
 - `sensor.home_karr_distance`, `sensor.home_orion_distance` - Proximity distance (ft) for KARR and Orion; `automation/garage_tesla.yaml` triggers on these crossing 200 ft (KARR = Jeff's door, Orion = Jen's door). Keep numeric state and ft units. (`sensor.home_elektra_distance` for Elektra is only shown on the dashboard.)
 
 ## Tesla / TeslaMate
+- EV charging cost: monthly `utility_meter` UI helpers (`sensor.<car>_charging_energy_month`) on TeslaMate's `sensor.<car>_energy_added`, priced in `config/template.yaml` (`sensor.<car>_charging_cost_month`, `sensor.ev_charging_cost_month`) from `input_number.ev_electricity_rate` and `input_number.ev_charging_loss` (`config/input_number.yaml`). Shown on the Cars tab.
 - Tesla telemetry comes from TeslaMate's MQTT discovery (`MQTT_DISCOVERY=true` in the k8s config): devices Elektra (car 1), KARR (car 2), Orion (car 3), entity ids like `sensor.elektra_battery`. There are no hand-written Tesla MQTT sensors any more.
 - `tesla_custom` provides the car controls (buttons, locks, charge limit, seat heaters, climate). Its 11 telemetry entities per car that collide with TeslaMate names were renamed `*_tc_*` and disabled so the discovered entities own the clean ids.
 - The only automations that consume Tesla data are the two geofence automations in `automation/garage_tesla.yaml`, via the two distance sensors above (Elektra is not used). Node-RED no longer reads anything.

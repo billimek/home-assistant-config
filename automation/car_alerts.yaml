@@ -1,8 +1,7 @@
 ################################################
 ## Car alerts (TeslaMate / tesla_custom)
 ################################################
-## Pushes go to Jeff only. The cars live in the garage, except Elektra, which sits outside
-## (so only Elektra gets the open / unlocked check).
+## Pushes go to Jeff only. Door, frunk and trunk left open is covered by the Tesla app itself.
 
 ## Evening reminder for any car that is home, unplugged and under 50 %.
 - id: car_plug_in_reminder
@@ -40,48 +39,6 @@
         color: '#43A047'
         url: /lovelace/cars
 
-## Elektra is parked outside: warn if a door, the frunk or the trunk stays open for 10 minutes,
-## or if it is still unlocked at 23:30.
-- id: elektra_left_open
-  alias: 'Elektra left open or unlocked'
-  description: 'Push when Elektra is at home with a door/frunk/trunk open for 10 min, or unlocked at 23:30.'
-  mode: single
-  trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.elektra_doors
-        - binary_sensor.elektra_frunk
-        - binary_sensor.elektra_trunk
-      to: 'on'
-      for: '00:10:00'
-    - platform: time
-      at: '23:30:00'
-  variables:
-    issues: >-
-      {%- set ns = namespace(l=[]) -%}
-      {%- if is_state('binary_sensor.elektra_doors', 'on') -%}{%- set ns.l = ns.l + ['a door is open'] -%}{%- endif -%}
-      {%- if is_state('binary_sensor.elektra_frunk', 'on') -%}{%- set ns.l = ns.l + ['the frunk is open'] -%}{%- endif -%}
-      {%- if is_state('binary_sensor.elektra_trunk', 'on') -%}{%- set ns.l = ns.l + ['the trunk is open'] -%}{%- endif -%}
-      {%- if is_state('binary_sensor.elektra_lock', 'on') -%}{%- set ns.l = ns.l + ['it is unlocked'] -%}{%- endif -%}
-      {{ ns.l }}
-  condition:
-    - condition: state
-      entity_id: sensor.elektra_geofence
-      state: 'home'
-    - condition: template
-      value_template: "{{ issues | count > 0 }}"
-  action:
-    - action: script.notify_phones
-      data:
-        audience: jeff
-        title: "🚗 Elektra"
-        message: "Elektra is parked at home and {{ issues | join(', ') }}."
-        level: time-sensitive
-        tag: elektra_open
-        group: cars
-        icon: 'mdi:car-door-lock-open'
-        color: '#43A047'
-        url: /lovelace/cars
 
 ## The three template binary sensors (config/template.yaml) trip when any TeslaMate soft-tire flag is on.
 - id: car_tire_pressure
