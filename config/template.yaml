@@ -232,3 +232,75 @@
     state: "{% from 'attention.jinja' import collect %}{{ collect() | from_json | count }}"
     attributes:
       items: "{% from 'attention.jinja' import collect %}{{ collect() | from_json }}"
+
+## Last person Frigate would have alerted on, per camera (Cameras tab, "Last person seen").
+## Mirrors the camera push rule: a Frigate review with severity alert whose objects include a
+## person. image.<cam>_person shows every person snapshot, including low-score ones that never
+## alert. State = review start time; review_id is Frigate's event id, which the dashboard uses
+## for the full snapshot (tap) and the HLS clip (hold) through the /api/frigate proxy.
+- triggers:
+    - trigger: mqtt
+      topic: frigate/reviews
+  conditions:
+    - condition: template
+      value_template: >
+        {% set a = trigger.payload_json.after %}
+        {{ trigger.payload_json.type in ['new', 'update', 'end'] and a.severity == 'alert'
+           and (a.data.objects | map('regex_replace', '-verified$', '') | select('eq', 'person') | list | count > 0)
+           and a.data.detections | count > 0 }}
+  sensor:
+    - name: "Doorbell Last Alert Person"
+      unique_id: doorbell_last_alert_person
+      device_class: timestamp
+      icon: mdi:account-eye
+      state: >
+        {% set a = trigger.payload_json.after %}
+        {% if a.camera == 'doorbell' %}{{ a.start_time | float(0) | timestamp_custom('%Y-%m-%dT%H:%M:%S+00:00', false) }}{% else %}{{ this.state if this.state | as_datetime(none) else none }}{% endif %}
+      attributes:
+        review_id: >
+          {% set a = trigger.payload_json.after %}
+          {% if a.camera == 'doorbell' %}{{ a.data.detections[0] }}{% else %}{{ this.attributes.get('review_id', none) }}{% endif %}
+    - name: "Front Last Alert Person"
+      unique_id: front_last_alert_person
+      device_class: timestamp
+      icon: mdi:account-eye
+      state: >
+        {% set a = trigger.payload_json.after %}
+        {% if a.camera == 'front' %}{{ a.start_time | float(0) | timestamp_custom('%Y-%m-%dT%H:%M:%S+00:00', false) }}{% else %}{{ this.state if this.state | as_datetime(none) else none }}{% endif %}
+      attributes:
+        review_id: >
+          {% set a = trigger.payload_json.after %}
+          {% if a.camera == 'front' %}{{ a.data.detections[0] }}{% else %}{{ this.attributes.get('review_id', none) }}{% endif %}
+    - name: "Driveway Last Alert Person"
+      unique_id: driveway_last_alert_person
+      device_class: timestamp
+      icon: mdi:account-eye
+      state: >
+        {% set a = trigger.payload_json.after %}
+        {% if a.camera == 'driveway' %}{{ a.start_time | float(0) | timestamp_custom('%Y-%m-%dT%H:%M:%S+00:00', false) }}{% else %}{{ this.state if this.state | as_datetime(none) else none }}{% endif %}
+      attributes:
+        review_id: >
+          {% set a = trigger.payload_json.after %}
+          {% if a.camera == 'driveway' %}{{ a.data.detections[0] }}{% else %}{{ this.attributes.get('review_id', none) }}{% endif %}
+    - name: "Porch Last Alert Person"
+      unique_id: porch_last_alert_person
+      device_class: timestamp
+      icon: mdi:account-eye
+      state: >
+        {% set a = trigger.payload_json.after %}
+        {% if a.camera == 'porch' %}{{ a.start_time | float(0) | timestamp_custom('%Y-%m-%dT%H:%M:%S+00:00', false) }}{% else %}{{ this.state if this.state | as_datetime(none) else none }}{% endif %}
+      attributes:
+        review_id: >
+          {% set a = trigger.payload_json.after %}
+          {% if a.camera == 'porch' %}{{ a.data.detections[0] }}{% else %}{{ this.attributes.get('review_id', none) }}{% endif %}
+    - name: "Pool Last Alert Person"
+      unique_id: pool_last_alert_person
+      device_class: timestamp
+      icon: mdi:account-eye
+      state: >
+        {% set a = trigger.payload_json.after %}
+        {% if a.camera == 'pool' %}{{ a.start_time | float(0) | timestamp_custom('%Y-%m-%dT%H:%M:%S+00:00', false) }}{% else %}{{ this.state if this.state | as_datetime(none) else none }}{% endif %}
+      attributes:
+        review_id: >
+          {% set a = trigger.payload_json.after %}
+          {% if a.camera == 'pool' %}{{ a.data.detections[0] }}{% else %}{{ this.attributes.get('review_id', none) }}{% endif %}

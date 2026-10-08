@@ -1061,7 +1061,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Cameras",
@@ -1210,75 +1211,370 @@
                   "icon": "mdi:account-eye"
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "image.doorbell_person",
-                  "name": "Doorbell",
+                  "type": "custom:button-card",
+                  "entity": "sensor.doorbell_last_alert_person",
+                  "show_icon": false,
                   "show_name": true,
                   "show_state": false,
-                  "aspect_ratio": "16:9",
+                  "show_entity_picture": false,
+                  "aspect_ratio": "16/9",
+                  "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Doorbell · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Doorbell · ' + t : 'Doorbell · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "/lovelace/camera-doorbell"
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-doorbell'; ]]]"
+                  },
+                  "hold_action": {
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/doorbell/master.m3u8' : '/lovelace/camera-doorbell'; ]]]"
+                  },
+                  "styles": {
+                    "card": [
+                      "padding: 0",
+                      "overflow: hidden",
+                      "background-size: cover",
+                      "background-position: center",
+                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                    ],
+                    "grid": [
+                      [
+                        "grid-template-areas",
+                        "\"n\""
+                      ],
+                      [
+                        "grid-template-rows",
+                        "1fr"
+                      ],
+                      [
+                        "align-items",
+                        "end"
+                      ]
+                    ],
+                    "name": [
+                      [
+                        "justify-self",
+                        "start"
+                      ],
+                      [
+                        "padding",
+                        "4px 10px"
+                      ],
+                      [
+                        "margin",
+                        "6px"
+                      ],
+                      [
+                        "border-radius",
+                        "8px"
+                      ],
+                      [
+                        "background",
+                        "rgba(0,0,0,0.55)"
+                      ],
+                      [
+                        "color",
+                        "white"
+                      ],
+                      [
+                        "font-size",
+                        "13px"
+                      ]
+                    ]
                   },
                   "grid_options": {
                     "columns": 6
                   }
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "image.front_person",
-                  "name": "Front",
+                  "type": "custom:button-card",
+                  "entity": "sensor.front_last_alert_person",
+                  "show_icon": false,
                   "show_name": true,
                   "show_state": false,
-                  "aspect_ratio": "16:9",
+                  "show_entity_picture": false,
+                  "aspect_ratio": "16/9",
+                  "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Front · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Front · ' + t : 'Front · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "/lovelace/camera-front"
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-front'; ]]]"
+                  },
+                  "hold_action": {
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/front/master.m3u8' : '/lovelace/camera-front'; ]]]"
+                  },
+                  "styles": {
+                    "card": [
+                      "padding: 0",
+                      "overflow: hidden",
+                      "background-size: cover",
+                      "background-position: center",
+                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                    ],
+                    "grid": [
+                      [
+                        "grid-template-areas",
+                        "\"n\""
+                      ],
+                      [
+                        "grid-template-rows",
+                        "1fr"
+                      ],
+                      [
+                        "align-items",
+                        "end"
+                      ]
+                    ],
+                    "name": [
+                      [
+                        "justify-self",
+                        "start"
+                      ],
+                      [
+                        "padding",
+                        "4px 10px"
+                      ],
+                      [
+                        "margin",
+                        "6px"
+                      ],
+                      [
+                        "border-radius",
+                        "8px"
+                      ],
+                      [
+                        "background",
+                        "rgba(0,0,0,0.55)"
+                      ],
+                      [
+                        "color",
+                        "white"
+                      ],
+                      [
+                        "font-size",
+                        "13px"
+                      ]
+                    ]
                   },
                   "grid_options": {
                     "columns": 6
                   }
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "image.driveway_person",
-                  "name": "Driveway",
+                  "type": "custom:button-card",
+                  "entity": "sensor.driveway_last_alert_person",
+                  "show_icon": false,
                   "show_name": true,
                   "show_state": false,
-                  "aspect_ratio": "16:9",
+                  "show_entity_picture": false,
+                  "aspect_ratio": "16/9",
+                  "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Driveway · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Driveway · ' + t : 'Driveway · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "/lovelace/camera-driveway"
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-driveway'; ]]]"
+                  },
+                  "hold_action": {
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/driveway/master.m3u8' : '/lovelace/camera-driveway'; ]]]"
+                  },
+                  "styles": {
+                    "card": [
+                      "padding: 0",
+                      "overflow: hidden",
+                      "background-size: cover",
+                      "background-position: center",
+                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                    ],
+                    "grid": [
+                      [
+                        "grid-template-areas",
+                        "\"n\""
+                      ],
+                      [
+                        "grid-template-rows",
+                        "1fr"
+                      ],
+                      [
+                        "align-items",
+                        "end"
+                      ]
+                    ],
+                    "name": [
+                      [
+                        "justify-self",
+                        "start"
+                      ],
+                      [
+                        "padding",
+                        "4px 10px"
+                      ],
+                      [
+                        "margin",
+                        "6px"
+                      ],
+                      [
+                        "border-radius",
+                        "8px"
+                      ],
+                      [
+                        "background",
+                        "rgba(0,0,0,0.55)"
+                      ],
+                      [
+                        "color",
+                        "white"
+                      ],
+                      [
+                        "font-size",
+                        "13px"
+                      ]
+                    ]
                   },
                   "grid_options": {
                     "columns": 6
                   }
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "image.porch_person",
-                  "name": "Porch",
+                  "type": "custom:button-card",
+                  "entity": "sensor.porch_last_alert_person",
+                  "show_icon": false,
                   "show_name": true,
                   "show_state": false,
-                  "aspect_ratio": "16:9",
+                  "show_entity_picture": false,
+                  "aspect_ratio": "16/9",
+                  "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Porch · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Porch · ' + t : 'Porch · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "/lovelace/camera-porch"
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-porch'; ]]]"
+                  },
+                  "hold_action": {
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/porch/master.m3u8' : '/lovelace/camera-porch'; ]]]"
+                  },
+                  "styles": {
+                    "card": [
+                      "padding: 0",
+                      "overflow: hidden",
+                      "background-size: cover",
+                      "background-position: center",
+                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                    ],
+                    "grid": [
+                      [
+                        "grid-template-areas",
+                        "\"n\""
+                      ],
+                      [
+                        "grid-template-rows",
+                        "1fr"
+                      ],
+                      [
+                        "align-items",
+                        "end"
+                      ]
+                    ],
+                    "name": [
+                      [
+                        "justify-self",
+                        "start"
+                      ],
+                      [
+                        "padding",
+                        "4px 10px"
+                      ],
+                      [
+                        "margin",
+                        "6px"
+                      ],
+                      [
+                        "border-radius",
+                        "8px"
+                      ],
+                      [
+                        "background",
+                        "rgba(0,0,0,0.55)"
+                      ],
+                      [
+                        "color",
+                        "white"
+                      ],
+                      [
+                        "font-size",
+                        "13px"
+                      ]
+                    ]
                   },
                   "grid_options": {
                     "columns": 6
                   }
                 },
                 {
-                  "type": "picture-entity",
-                  "entity": "image.pool_person",
-                  "name": "Pool",
+                  "type": "custom:button-card",
+                  "entity": "sensor.pool_last_alert_person",
+                  "show_icon": false,
                   "show_name": true,
                   "show_state": false,
-                  "aspect_ratio": "16:9",
+                  "show_entity_picture": false,
+                  "aspect_ratio": "16/9",
+                  "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Pool · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Pool · ' + t : 'Pool · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "/lovelace/camera-pool"
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-pool'; ]]]"
+                  },
+                  "hold_action": {
+                    "action": "url",
+                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/pool/master.m3u8' : '/lovelace/camera-pool'; ]]]"
+                  },
+                  "styles": {
+                    "card": [
+                      "padding: 0",
+                      "overflow: hidden",
+                      "background-size: cover",
+                      "background-position: center",
+                      "background-image: [[[ const id = entity.attributes.review_id; return id ? 'url(/api/frigate/notifications/' + id + '/snapshot.jpg)' : 'none'; ]]]"
+                    ],
+                    "grid": [
+                      [
+                        "grid-template-areas",
+                        "\"n\""
+                      ],
+                      [
+                        "grid-template-rows",
+                        "1fr"
+                      ],
+                      [
+                        "align-items",
+                        "end"
+                      ]
+                    ],
+                    "name": [
+                      [
+                        "justify-self",
+                        "start"
+                      ],
+                      [
+                        "padding",
+                        "4px 10px"
+                      ],
+                      [
+                        "margin",
+                        "6px"
+                      ],
+                      [
+                        "border-radius",
+                        "8px"
+                      ],
+                      [
+                        "background",
+                        "rgba(0,0,0,0.55)"
+                      ],
+                      [
+                        "color",
+                        "white"
+                      ],
+                      [
+                        "font-size",
+                        "13px"
+                      ]
+                    ]
                   },
                   "grid_options": {
                     "columns": 6
@@ -1459,7 +1755,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Lights",
@@ -1918,7 +2215,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Weather",
@@ -2213,7 +2511,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Cars",
@@ -2908,7 +3207,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Security",
@@ -3744,7 +4044,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Climate",
@@ -3932,7 +4233,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Jeff",
@@ -4062,7 +4364,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Jen",
@@ -4192,7 +4495,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Ansley",
@@ -4290,7 +4594,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Brinley",
@@ -4354,7 +4659,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Doorbell",
@@ -4391,7 +4697,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Front",
@@ -4428,7 +4735,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Driveway",
@@ -4465,7 +4773,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Porch",
@@ -4502,7 +4811,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         },
         {
           "title": "Pool",
@@ -4539,7 +4849,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "dense_section_placement": true
         }
       ],
       "button_card_templates": {
