@@ -13,6 +13,7 @@
 ## 4 = pulse, 2 = fast blink, 0 = off). The two stairs
 ## dimmers (LZW31: basement node 17, foyer node 24) use parameter 13 (LED color:
 ## 43 yellow, 1 red, 170 normal blue) and 14 (LED intensity: 10 bright, 5 normal).
+## Each device is written only while its Z-Wave node is alive (zwave_js.node_status).
 ## Unlike Node-RED, the LEDs only go back to normal when BOTH doors are closed,
 ## and the red state is not limited to weekdays (same as Node-RED's LED flow).
 - id: garage_led_indicator
@@ -45,99 +46,98 @@
     jen_long: >
       {{ jen_open and now() - states.cover.jen_garage_door.last_changed >= timedelta(hours=2) }}
     red: "{{ (trigger.id == 'long_open' and any_open) or jeff_long or jen_long }}"
+    # LED values for the current state (red / yellow / normal)
+    sw_color: "{{ 1 if red else 45 }}"
+    sw_effect: "{{ 2 if red else (4 if any_open else 0) }}"
+    dim_color: "{{ 1 if red else (43 if any_open else 170) }}"
+    dim_intensity: "{{ 10 if red else 5 }}"
+    # yellow leaves the dimmer LED intensity as it is
+    write_intensity: "{{ red or not any_open }}"
   action:
-    - choose:
-        # a door open for 2 hours or more: flashing red, bright red dimmer LEDs
-        - conditions: "{{ red }}"
-          sequence:
-            - action: zwave_js.bulk_set_partial_config_parameters
-              continue_on_error: true
-              target:
-                entity_id:
-                  - switch.porch
-                  - switch.garage
-              data:
-                parameter: 8
-                value:
-                  "255": 1
-                  "65280": 10
-                  "16711680": 255
-                  "2130706432": 2
-            - action: zwave_js.set_config_parameter
-              continue_on_error: true
-              target:
-                entity_id:
-                  - light.stairs
-                  - light.stairs2
-              data:
-                parameter: 13
-                value: 1
-            - action: zwave_js.set_config_parameter
-              continue_on_error: true
-              target:
-                entity_id:
-                  - light.stairs
-                  - light.stairs2
-              data:
-                parameter: 14
-                value: 10
-        # a door is open: pulsing yellow, yellow dimmer LEDs
-        - conditions: "{{ any_open }}"
-          sequence:
-            - action: zwave_js.bulk_set_partial_config_parameters
-              continue_on_error: true
-              target:
-                entity_id:
-                  - switch.porch
-                  - switch.garage
-              data:
-                parameter: 8
-                value:
-                  "255": 45
-                  "65280": 10
-                  "16711680": 255
-                  "2130706432": 4
-            - action: zwave_js.set_config_parameter
-              continue_on_error: true
-              target:
-                entity_id:
-                  - light.stairs
-                  - light.stairs2
-              data:
-                parameter: 13
-                value: 43
-      # all doors closed: effect off, dimmer LEDs back to normal blue / intensity 5
-      default:
+    # The node_status condition takes device ids, not entity ids. A dead node is
+    # skipped so it cannot stall the queue; it picks up the right colour on the
+    # next door change or HA start.
+    # porch switch (node 9)
+    - if:
+        - condition: zwave_js.node_status
+          options:
+            device_id: 7ea022c5a3865a117c428da7b42fc514
+            status: alive
+      then:
         - action: zwave_js.bulk_set_partial_config_parameters
           continue_on_error: true
           target:
-            entity_id:
-              - switch.porch
-              - switch.garage
+            entity_id: switch.porch
           data:
             parameter: 8
-            # keep the normal color/level/duration and set the effect to off: writing the effect alone
-            # fails on the garage switch (SetValueFailed) and writing all four parts as 0 was rejected
+            # all four parts are always written: writing the effect alone fails on the
+            # garage switch (SetValueFailed) and writing all four parts as 0 was rejected
             value:
-              "255": 45
+              "255": "{{ sw_color }}"
               "65280": 10
               "16711680": 255
-              "2130706432": 0
+              "2130706432": "{{ sw_effect }}"
+    # garage switch (node 10)
+    - if:
+        - condition: zwave_js.node_status
+          options:
+            device_id: a8160acdfa84c7bf29ea98e77c77b85f
+            status: alive
+      then:
+        - action: zwave_js.bulk_set_partial_config_parameters
+          continue_on_error: true
+          target:
+            entity_id: switch.garage
+          data:
+            parameter: 8
+            value:
+              "255": "{{ sw_color }}"
+              "65280": 10
+              "16711680": 255
+              "2130706432": "{{ sw_effect }}"
+    # basement stairs dimmer (node 17)
+    - if:
+        - condition: zwave_js.node_status
+          options:
+            device_id: d2396cbee58214ae09a0a042a5a66340
+            status: alive
+      then:
         - action: zwave_js.set_config_parameter
           continue_on_error: true
           target:
-            entity_id:
-              - light.stairs
-              - light.stairs2
+            entity_id: light.stairs
           data:
             parameter: 13
-            value: 170
+            value: "{{ dim_color }}"
+        - if: "{{ write_intensity }}"
+          then:
+            - action: zwave_js.set_config_parameter
+              continue_on_error: true
+              target:
+                entity_id: light.stairs
+              data:
+                parameter: 14
+                value: "{{ dim_intensity }}"
+    # foyer stairs dimmer (node 24)
+    - if:
+        - condition: zwave_js.node_status
+          options:
+            device_id: de8381d9c172aa1695ee3697a9e20669
+            status: alive
+      then:
         - action: zwave_js.set_config_parameter
           continue_on_error: true
           target:
-            entity_id:
-              - light.stairs
-              - light.stairs2
+            entity_id: light.stairs2
           data:
-            parameter: 14
-            value: 5
+            parameter: 13
+            value: "{{ dim_color }}"
+        - if: "{{ write_intensity }}"
+          then:
+            - action: zwave_js.set_config_parameter
+              continue_on_error: true
+              target:
+                entity_id: light.stairs2
+              data:
+                parameter: 14
+                value: "{{ dim_intensity }}"

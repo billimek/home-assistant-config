@@ -29,22 +29,27 @@ guest_mode:
 camera_porch_mute:
   name: Porch camera mute
   icon: mdi:bell-off
+  duration: "01:00:00"
   restore: true
 camera_doorbell_mute:
   name: Doorbell camera mute
   icon: mdi:bell-off
+  duration: "01:00:00"
   restore: true
 camera_driveway_mute:
   name: Driveway camera mute
   icon: mdi:bell-off
+  duration: "01:00:00"
   restore: true
 camera_front_mute:
   name: Front camera mute
   icon: mdi:bell-off
+  duration: "01:00:00"
   restore: true
 camera_pool_mute:
   name: Pool camera mute
   icon: mdi:bell-off
+  duration: "01:00:00"
   restore: true
 
 ## One per alarm sensor, used by the door/window/motion alert blueprints. The key is the part

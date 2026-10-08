@@ -2014,6 +2014,101 @@
                   "grid_options": {
                     "columns": "full"
                   }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Camera mutes",
+                  "icon": "mdi:bell-off"
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_porch_mute",
+                  "name": "Porch",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_doorbell_mute",
+                  "name": "Doorbell",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_driveway_mute",
+                  "name": "Driveway",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_front_mute",
+                  "name": "Front",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "timer.camera_pool_mute",
+                  "name": "Pool",
+                  "icon": "mdi:bell-off",
+                  "features": [
+                    {
+                      "type": "timer-actions",
+                      "actions": [
+                        "start",
+                        "cancel"
+                      ]
+                    }
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 }
               ]
             },
