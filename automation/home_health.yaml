@@ -1,0 +1,161 @@
+################################################
+## Home health: batteries, appliances, weather
+################################################
+## All pushes go to Jeff only for now (audience: jeff) and use script.notify_phones.
+## Thresholds live in each automation's variables / trigger, change them there.
+
+## The Z-Wave leak sensors sleep for long stretches (they only wake on water), so a stale
+## "last seen" is normal. A flat battery is the real risk, so check the level instead.
+- id: water_sensor_battery_low
+  alias: 'Leak sensor battery low'
+  description: 'Push when a leak sensor battery drops below 30 %, then a Sunday 09:00 reminder while it stays low.'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.water_sensor_a_battery_level
+        - sensor.water_sensor_b_battery_level
+      below: 30
+      id: low
+    - platform: time
+      at: '09:00:00'
+      id: weekly
+  variables:
+    names:
+      sensor.water_sensor_a_battery_level: basement
+      sensor.water_sensor_b_battery_level: sump pump
+    low: >-
+      {%- set ns = namespace(l=[]) -%}
+      {%- for e, n in names.items() -%}
+        {%- if states(e) | float(100) < 30 -%}
+          {%- set ns.l = ns.l + [n ~ ' (' ~ states(e) | float(0) | round(0) | int ~ '%)'] -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.l }}
+  condition:
+    - condition: template
+      value_template: >-
+        {{ low | count > 0 and
+           ((trigger.id == 'weekly' and now().weekday() == 6) or
+            (trigger.id == 'low' and trigger.from_state.state not in ['unavailable', 'unknown'])) }}
+  action:
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "🔋 Leak sensor battery low"
+        message: "Replace the battery in the {{ low | join(' and ') }} leak sensor{{ 's' if low | count > 1 }}. A dead sensor will not warn you about water."
+        level: active
+        tag: water_battery
+        group: water
+        icon: 'mdi:battery-alert'
+
+- id: printer_toner_low
+  alias: 'Printer toner low'
+  description: 'Push when any Brother toner cartridge drops below 15 %.'
+  mode: queued
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.brother_mfc_9330cdw_black_toner_cartridge
+        - sensor.brother_mfc_9330cdw_cyan_toner_cartridge
+        - sensor.brother_mfc_9330cdw_magenta_toner_cartridge
+        - sensor.brother_mfc_9330cdw_yellow_toner_cartridge
+      below: 15
+  condition:
+    - condition: template
+      value_template: "{{ trigger.from_state.state not in ['unavailable', 'unknown'] }}"
+  action:
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "🖨️ Printer toner low"
+        message: "{{ trigger.to_state.name | replace('Brother MFC-9330CDW ', '') | replace(' Cartridge', '') }} is at {{ trigger.to_state.state }}%."
+        level: passive
+        tag: "toner_{{ trigger.entity_id }}"
+        group: home
+        icon: 'mdi:printer-alert'
+        color: '#607D8B'
+
+## GE fridge: door left open, water filter running out
+- id: fridge_door_open
+  alias: 'Fridge door left open'
+  description: 'Push when any fridge or freezer door has been open for 3 minutes; the push clears when it closes.'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.lv142781_door_status_any_open
+      to: 'on'
+      for: '00:03:00'
+      id: open
+    - platform: state
+      entity_id: binary_sensor.lv142781_door_status_any_open
+      to: 'off'
+      id: closed
+  action:
+    - choose:
+        - conditions: "{{ trigger.id == 'open' }}"
+          sequence:
+            - action: script.notify_phones
+              data:
+                audience: jeff
+                title: "🧊 Fridge door open"
+                message: "A fridge or freezer door has been open for 3 minutes."
+                level: time-sensitive
+                tag: fridge_door
+                group: home
+                icon: 'mdi:fridge-alert'
+                color: '#039BE5'
+      default:
+        - action: script.notify_clear
+          data:
+            tag: fridge_door
+
+- id: fridge_filter_low
+  alias: 'Fridge water filter due soon'
+  description: 'Push when the fridge water filter has 14 days or less left.'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.ge_profile_fridge_lv142781_lv142781_water_filter_status_days_remaining
+      below: 15
+  condition:
+    - condition: template
+      value_template: "{{ trigger.from_state.state not in ['unavailable', 'unknown'] }}"
+  action:
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "🧊 Fridge water filter"
+        message: "{{ trigger.to_state.state | int(0) }} days left on the fridge water filter."
+        level: passive
+        tag: fridge_filter
+        group: home
+        icon: 'mdi:water-check'
+        color: '#039BE5'
+
+## Freeze warning. sensor.forecast_low_2_nights (config/template.yaml) is the coldest forecast
+## low of the next two nights. The trigger fires when it crosses below 28 °F (a hard freeze, so
+## an ordinary 30-32 °F night stays quiet) and re-arms once the forecast warms up, so a
+## multi-night cold snap is one push. Passive, so a crossing in the small hours does not buzz.
+- id: freeze_warning
+  alias: 'Freeze warning'
+  description: 'Passive push when the forecast low for the next two nights drops below 28 °F: disconnect hoses, cover plants.'
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.forecast_low_2_nights
+      below: 28
+  condition:
+    - condition: template
+      value_template: "{{ trigger.from_state.state not in ['unavailable', 'unknown'] }}"
+  action:
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "🥶 Freeze coming"
+        message: "Forecast low of {{ states('sensor.forecast_low_2_nights') | float(0) | round(0) | int }}°F in the next two nights. Disconnect hoses and cover tender plants."
+        level: passive
+        tag: freeze_warning
+        group: weather
+        icon: 'mdi:snowflake-alert'
+        color: '#4FC3F7'

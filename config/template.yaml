@@ -139,3 +139,27 @@
       {{ expand('binary_sensor.elektra_tire_soft_front_left', 'binary_sensor.elektra_tire_soft_front_right',
                 'binary_sensor.elektra_tire_soft_rear_left', 'binary_sensor.elektra_tire_soft_rear_right')
          | selectattr('state', 'eq', 'on') | list | count > 0 }}
+
+## Coldest forecast low over the next two nights (Ecobee daily forecast). Feeds the freeze
+## warning push (automation/home_health.yaml) and the Weather tab. Trigger-based because the
+## forecast is an action response, which no template helper can read.
+- triggers:
+    - trigger: time_pattern
+      minutes: '/30'
+    - trigger: homeassistant
+      event: start
+  actions:
+    - action: weather.get_forecasts
+      target:
+        entity_id: weather.upstairs
+      data:
+        type: daily
+      response_variable: daily
+  sensor:
+    - name: "Forecast Low (2 nights)"
+      unique_id: forecast_low_2_nights
+      unit_of_measurement: "°F"
+      device_class: temperature
+      state: >
+        {% set f = (daily['weather.upstairs'].forecast | default([]))[:2] %}
+        {{ f | map(attribute='templow') | map('float', 100) | min if f else none }}

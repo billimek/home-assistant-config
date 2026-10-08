@@ -1,0 +1,121 @@
+################################################
+## Car alerts (TeslaMate / tesla_custom)
+################################################
+## Pushes go to Jeff only. The cars live in the garage, except Elektra, which sits outside
+## (so only Elektra gets the open / unlocked check).
+
+## Evening reminder for any car that is home, unplugged and under 50 %.
+- id: car_plug_in_reminder
+  alias: 'Remind to plug in a low car'
+  description: 'At 21:00, push for each car that is home, not plugged in and below 50 % battery.'
+  mode: single
+  trigger:
+    - platform: time
+      at: '21:00:00'
+  variables:
+    min_battery: 50
+    cars: >-
+      {%- set ns = namespace(l=[]) -%}
+      {%- for c in ['elektra', 'karr', 'orion'] -%}
+        {%- if is_state('sensor.' ~ c ~ '_geofence', 'home')
+              and is_state('binary_sensor.' ~ c ~ '_plug', 'off')
+              and states('sensor.' ~ c ~ '_battery') | float(100) < min_battery -%}
+          {%- set ns.l = ns.l + [c | title ~ ' (' ~ states('sensor.' ~ c ~ '_battery') | float(0) | round(0) | int ~ '%)'] -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.l }}
+  condition:
+    - condition: template
+      value_template: "{{ cars | count > 0 }}"
+  action:
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "🔌 Plug in the car"
+        message: "{{ cars | join(', ') }} {{ 'is' if cars | count == 1 else 'are' }} unplugged and low."
+        level: active
+        tag: car_plug_in
+        group: cars
+        icon: 'mdi:ev-plug-type2'
+        color: '#43A047'
+        url: /lovelace/cars
+
+## Elektra is parked outside: warn if a door, the frunk or the trunk stays open for 10 minutes,
+## or if it is still unlocked at 23:30.
+- id: elektra_left_open
+  alias: 'Elektra left open or unlocked'
+  description: 'Push when Elektra is at home with a door/frunk/trunk open for 10 min, or unlocked at 23:30.'
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.elektra_doors
+        - binary_sensor.elektra_frunk
+        - binary_sensor.elektra_trunk
+      to: 'on'
+      for: '00:10:00'
+    - platform: time
+      at: '23:30:00'
+  variables:
+    issues: >-
+      {%- set ns = namespace(l=[]) -%}
+      {%- if is_state('binary_sensor.elektra_doors', 'on') -%}{%- set ns.l = ns.l + ['a door is open'] -%}{%- endif -%}
+      {%- if is_state('binary_sensor.elektra_frunk', 'on') -%}{%- set ns.l = ns.l + ['the frunk is open'] -%}{%- endif -%}
+      {%- if is_state('binary_sensor.elektra_trunk', 'on') -%}{%- set ns.l = ns.l + ['the trunk is open'] -%}{%- endif -%}
+      {%- if is_state('binary_sensor.elektra_lock', 'on') -%}{%- set ns.l = ns.l + ['it is unlocked'] -%}{%- endif -%}
+      {{ ns.l }}
+  condition:
+    - condition: state
+      entity_id: sensor.elektra_geofence
+      state: 'home'
+    - condition: template
+      value_template: "{{ issues | count > 0 }}"
+  action:
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "🚗 Elektra"
+        message: "Elektra is parked at home and {{ issues | join(', ') }}."
+        level: time-sensitive
+        tag: elektra_open
+        group: cars
+        icon: 'mdi:car-door-lock-open'
+        color: '#43A047'
+        url: /lovelace/cars
+
+## The three template binary sensors (config/template.yaml) trip when any TeslaMate soft-tire flag is on.
+- id: car_tire_pressure
+  alias: 'Car tire pressure low'
+  description: 'Push with the pressures when a car reports a soft tire for 10 minutes.'
+  mode: parallel
+  max: 3
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.elektra_tire_alert
+        - binary_sensor.karr_tire_alert
+        - binary_sensor.orion_tire_alert
+      to: 'on'
+      for: '00:10:00'
+  variables:
+    car: "{{ trigger.entity_id.split('.')[1].split('_')[0] }}"
+    tires: >-
+      {%- set ns = namespace(l=[]) -%}
+      {%- for pos in ['front_left', 'front_right', 'rear_left', 'rear_right'] -%}
+        {%- if is_state('binary_sensor.' ~ car ~ '_tire_soft_' ~ pos, 'on') -%}
+          {%- set ns.l = ns.l + [pos | replace('_', ' ') ~ ' ' ~ states('sensor.' ~ car ~ '_tire_pressure_' ~ pos) | float(0) | round(0) | int ~ ' psi'] -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.l }}
+  action:
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "🛞 {{ car | title }} tire pressure"
+        message: "Low: {{ tires | join(', ') if tires else 'check the tires' }}."
+        level: active
+        tag: "tires_{{ car }}"
+        group: cars
+        icon: 'mdi:car-tire-alert'
+        color: '#43A047'
+        url: /lovelace/cars

@@ -24,6 +24,14 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 | 🚪 / 🪟 Left open | 6 doors open for 5 minutes | both | time-sensitive | **Snooze 1 h** | when the door closes |
 | 🔔 Doorbell | Dahua ring or button (30 s cooldown) | both | time-sensitive | **Live view** | |
 | Doorbell listener stopped | no Dahua events for 6 h | Jeff | time-sensitive | none | |
+| 🔋 Leak sensor battery low | a leak sensor drops below 30 %, then Sundays 09:00 while it stays low | Jeff | active | none | replaced by the next one |
+| Printer toner low | a Brother cartridge drops below 15 % | Jeff | passive | none | |
+| 🧊 Fridge door open | a fridge or freezer door open for 3 min | Jeff | time-sensitive | none | when the door closes |
+| 🧊 Fridge water filter | 14 days or less left | Jeff | passive | none | |
+| 🥶 Freeze coming | `sensor.forecast_low_2_nights` crosses below 28 °F (once per cold snap) | Jeff | passive | none | |
+| 🔌 Plug in the car | 21:00, a car is home, unplugged and under 50 % | Jeff | active | none | |
+| 🚗 Elektra open or unlocked | Elektra at home with a door, frunk or trunk open for 10 min, or unlocked at 23:30 | Jeff | time-sensitive | none | |
+| 🛞 Tire pressure | a car reports a soft tire for 10 min | Jeff | active | none | |
 | AlarmDecoder reconnected | panel stopped reporting; integration reloaded | Jeff | time-sensitive | none | |
 | 🏠 Someone came home | `zone.home` goes above 0 | Jeff | passive | none | |
 | 🏠 Jen came home | Jen's person entity becomes `home` | Jeff | active | none | |
@@ -32,7 +40,7 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 
 **Camera rules** (one automation per camera, all gated by `input_boolean.camera_<name>_notify`): porch and pool notify 22:00-05:59 or when nobody is home; front notifies on weekdays or when nobody is home, driveway only when nobody is home or on weekdays 09:30-15:00, both with a 2 min cooldown; the doorbell camera always notifies.
 
-**Guest mode** (`input_boolean.guest_mode`, auto-off after 72 h via `timer.guest_mode`): `sensor.anyone_home` reads `home`, so the "opened/motion while nobody is home" pushes don't fire; the porch and pool camera pushes are muted; automatic alarm arming is blocked. Left on in guest mode: the "left open" timeout pushes, the alarm armed/disarmed/triggered pushes, the other cameras. It sends a passive "Guest mode turned off" push to Jeff when the timer expires.
+**Guest mode** (`input_boolean.guest_mode`, auto-off after 72 h via `timer.guest_mode`): `sensor.anyone_home` reads `home`, so the "opened/motion while nobody is home" pushes don't fire; the porch and pool camera pushes are muted; automatic alarm arming is blocked. The midnight `script.lights_off` leaves the basement lights (bedroom, living room, hallway, stairs) on. The downstairs Nest stays out of eco when everyone leaves. Left on in guest mode: the "left open" timeout pushes, the alarm armed/disarmed/triggered pushes, the other cameras. It sends a passive "Guest mode turned off" push to Jeff when the timer expires.
 
 ## Look
 

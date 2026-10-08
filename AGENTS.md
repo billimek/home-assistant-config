@@ -43,10 +43,12 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 | `automation/garage_tesla.yaml` | KARR/Orion geofence: close on leaving, open on arriving (gated by `input_boolean.auto_garage_doors`) |
 | `automation/garage_led.yaml` | garage-door state on Inovelli LED bars via `zwave_js` config parameters (porch/garage switch param 8 as partial values, stairs dimmers params 13/14). |
 | `automation/lights.yaml`, `automation/lights_motion.yaml` | dusk/schedule lights (porch, sunroom/foyer/trees, cabinet, plant lights) and motion/event lights (garage, deck, desk via Wyze MQTT, stairs) |
-| `automation/presence.yaml` | arrival push, Jen came home, Ecobee away/resume |
+| `automation/presence.yaml` | arrival push, Jen came home, Ecobee away/resume and Nest eco (skipped in guest mode) |
 | `automation/water.yaml` | basement and sump pump leak alerts |
+| `automation/home_health.yaml` | leak sensor battery, printer toner, fridge door and water filter, freeze warning (`sensor.forecast_low_2_nights`, a trigger-based template sensor in `config/template.yaml` built from the Ecobee daily forecast) |
+| `automation/car_alerts.yaml` | 21:00 plug-in reminder (any car home, unplugged, under 50 %), Elektra open/unlocked check, tire pressure push |
 | `automation/network.yaml` | new WiFi device alert |
-| `scripts/lights_off.yaml` | `script.lights_off`, used at midnight |
+| `scripts/lights_off.yaml` | `script.lights_off`, used at midnight (leaves the basement lights on while guest mode is on) |
 | `scripts/notify.yaml` | `script.notify_phones` (central iOS push: audience, level, tag, group, url, action buttons) and `script.notify_clear`. New pushes should use it, not `notify.mobile_app_*` directly. While `input_boolean.notify_test_mode` is on, everything goes to Jeff's phone only |
 | `docs/notifications.md` | catalog of every push (trigger, who, level, buttons), the avatar table, the action-id convention, and how to add or test a notification |
 | `scripts/camera_notifications.yaml` | `script.mute_camera_notifications` (dashboard "Mute 1 hour"): turns off each camera toggle that is on and starts its `timer.camera_<name>_mute` |

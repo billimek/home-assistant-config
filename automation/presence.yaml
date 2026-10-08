@@ -28,6 +28,13 @@
         entity_id: climate.upstairs
       data:
         resume_all: true
+    # Nest has no away preset through the API, only eco
+    - action: climate.set_preset_mode
+      continue_on_error: true
+      target:
+        entity_id: climate.downstairs
+      data:
+        preset_mode: none
 
 - id: presence_everyone_left
   alias: 'Everyone left home'
@@ -44,6 +51,18 @@
         entity_id: climate.upstairs
       data:
         preset_mode: away
+    # guests keep the downstairs Nest running normally
+    - if:
+        - condition: state
+          entity_id: input_boolean.guest_mode
+          state: 'off'
+      then:
+        - action: climate.set_preset_mode
+          continue_on_error: true
+          target:
+            entity_id: climate.downstairs
+          data:
+            preset_mode: eco
 
 - id: presence_jen_came_home
   alias: 'Jen came home'

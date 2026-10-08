@@ -729,6 +729,98 @@
                   }
                 }
               ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Outside",
+                  "icon": "mdi:weather-partly-cloudy",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/weather"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_temperature",
+                  "name": "Temperature",
+                  "color": "orange",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/weather"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.forecast_low_2_nights",
+                  "name": "Coldest low, 2 nights",
+                  "icon": "mdi:snowflake-thermometer",
+                  "color": "cyan",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/weather"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_wind_gust",
+                  "name": "Gust",
+                  "icon": "mdi:weather-windy",
+                  "color": "teal",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/weather"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_precipitation",
+                  "name": "Rain today",
+                  "color": "blue",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/weather"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Needs attention",
+                  "icon": "mdi:alert-circle-outline"
+                },
+                {
+                  "type": "markdown",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "content": "{% set ns = namespace(i=[]) %}\n{% for e, n in [('jeffsphone', \"Jeff's phone\"), ('jensphone', \"Jen's phone\"), ('ansley_s_iphone', \"Ansley's phone\")] %}{% if states('sensor.' ~ e ~ '_battery_level') | float(100) < 20 and not is_state('sensor.' ~ e ~ '_battery_state', 'Charging') %}{% set ns.i = ns.i + ['🔋 ' ~ n ~ ' is at ' ~ states('sensor.' ~ e ~ '_battery_level') | int(0) ~ '%'] %}{% endif %}{% endfor %}\n{% for e, n in [('sensor.water_sensor_a_battery_level', 'Basement leak sensor'), ('sensor.water_sensor_b_battery_level', 'Sump pump leak sensor')] %}{% if states(e) | float(100) < 30 %}{% set ns.i = ns.i + ['💦 ' ~ n ~ ' battery ' ~ states(e) | float(0) | round(0) | int ~ '%'] %}{% endif %}{% endfor %}\n{% if states('sensor.st_00161537_battery') | float(100) < 20 %}{% set ns.i = ns.i + ['🌦️ Weather station battery ' ~ states('sensor.st_00161537_battery') ~ '%'] %}{% endif %}\n{% for c in ['black', 'cyan', 'magenta', 'yellow'] %}{% if states('sensor.brother_mfc_9330cdw_' ~ c ~ '_toner_cartridge') | float(100) < 15 %}{% set ns.i = ns.i + ['🖨️ ' ~ c | title ~ ' toner ' ~ states('sensor.brother_mfc_9330cdw_' ~ c ~ '_toner_cartridge') ~ '%'] %}{% endif %}{% endfor %}\n{% if is_state('binary_sensor.lv142781_door_status_any_open', 'on') %}{% set ns.i = ns.i + ['🧊 A fridge door is open'] %}{% endif %}\n{% if states('sensor.ge_profile_fridge_lv142781_lv142781_water_filter_status_days_remaining') | float(99) <= 14 %}{% set ns.i = ns.i + ['🧊 Fridge water filter: ' ~ states('sensor.ge_profile_fridge_lv142781_lv142781_water_filter_status_days_remaining') | int(0) ~ ' days left'] %}{% endif %}\n{% for c in ['elektra', 'karr', 'orion'] %}{% if is_state('sensor.' ~ c ~ '_geofence', 'home') and is_state('binary_sensor.' ~ c ~ '_plug', 'off') and states('sensor.' ~ c ~ '_battery') | float(100) < 50 %}{% set ns.i = ns.i + ['🔌 ' ~ c | title ~ ' is unplugged at ' ~ states('sensor.' ~ c ~ '_battery') | int(0) ~ '%'] %}{% endif %}{% if is_state('binary_sensor.' ~ c ~ '_tire_alert', 'on') %}{% set ns.i = ns.i + ['🛞 ' ~ c | title ~ ' tire pressure low'] %}{% endif %}{% endfor %}\n{% set b = states('sensor.backup_last_successful_automatic_backup') | as_datetime(none) %}{% if b is none or (now() - b).days >= 3 %}{% set ns.i = ns.i + ['💾 No successful backup in 3+ days'] %}{% endif %}\n{% if ns.i %}{% for x in ns.i %}- {{ x }}\n{% endfor %}{% else %}✅ Nothing needs attention{% endif %}"
+                },
+                {
+                  "type": "heading",
+                  "heading": "System",
+                  "icon": "mdi:server"
+                },
+                {
+                  "type": "markdown",
+                  "grid_options": {
+                    "columns": "full"
+                  },
+                  "content": "**Backup** last {{ as_timestamp(states('sensor.backup_last_successful_automatic_backup'), 0) | timestamp_custom('%a %-I:%M %p') }} · next {{ as_timestamp(states('sensor.backup_next_scheduled_automatic_backup'), 0) | timestamp_custom('%a %-I:%M %p') }}\n\n**Updates** {{ states.update | selectattr('state', 'eq', 'on') | list | count }} available · **Unavailable entities** {{ states | selectattr('state', 'eq', 'unavailable') | list | count }}\n\n**Doorbell listener** last event {{ ((now().timestamp() - state_attr('input_datetime.dahua_last_event', 'timestamp') | float(0)) / 60) | round(0) | int }} min ago · **Alarm panel** {{ states('sensor.alarm_status') }}"
+                }
+              ]
             }
           ]
         },
@@ -1368,6 +1460,292 @@
           ]
         },
         {
+          "title": "Weather",
+          "path": "weather",
+          "icon": "mdi:weather-partly-cloudy",
+          "type": "sections",
+          "max_columns": 3,
+          "theme": "home_new",
+          "subview": true,
+          "back_path": "/lovelace/home",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Right now",
+                  "icon": "mdi:weather-sunny"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_temperature",
+                  "name": "Temperature",
+                  "color": "orange",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_feels_like",
+                  "name": "Feels like",
+                  "color": "orange",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_humidity",
+                  "name": "Humidity",
+                  "color": "blue",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_dew_point",
+                  "name": "Dew point",
+                  "color": "blue",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_wind_speed",
+                  "name": "Wind",
+                  "icon": "mdi:weather-windy",
+                  "color": "teal",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_wind_gust",
+                  "name": "Gust",
+                  "icon": "mdi:weather-windy-variant",
+                  "color": "teal",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_wind_direction",
+                  "name": "Wind direction",
+                  "icon": "mdi:compass",
+                  "color": "teal",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_air_pressure",
+                  "name": "Pressure",
+                  "color": "purple",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_uv_index",
+                  "name": "UV index",
+                  "icon": "mdi:sun-wireless",
+                  "color": "amber",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_irradiance",
+                  "name": "Solar",
+                  "icon": "mdi:solar-power",
+                  "color": "amber",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Forecast",
+                  "icon": "mdi:calendar-week"
+                },
+                {
+                  "type": "weather-forecast",
+                  "entity": "weather.upstairs",
+                  "forecast_type": "daily",
+                  "show_current": true,
+                  "show_forecast": true,
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.forecast_low_2_nights",
+                  "name": "Coldest low, next 2 nights",
+                  "icon": "mdi:snowflake-thermometer",
+                  "color": "cyan",
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "Rain and lightning",
+                  "icon": "mdi:weather-lightning-rainy"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_precipitation",
+                  "name": "Rain today",
+                  "color": "blue",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_precipitation_intensity",
+                  "name": "Rain rate",
+                  "color": "blue",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_lightning_count",
+                  "name": "Strikes",
+                  "icon": "mdi:flash",
+                  "color": "amber",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_lightning_last_distance",
+                  "name": "Last strike distance",
+                  "icon": "mdi:flash-alert",
+                  "color": "amber",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.rachio_rain",
+                  "name": "Rachio rain sensor",
+                  "color": "blue",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_battery",
+                  "name": "Station battery",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Last 24 hours",
+                  "icon": "mdi:chart-line"
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "Temperature",
+                  "entities": [
+                    "sensor.st_00161537_temperature",
+                    "sensor.st_00161537_dew_point"
+                  ],
+                  "hours_to_show": 24,
+                  "points_per_hour": 2,
+                  "line_width": 3,
+                  "show": {
+                    "legend": true,
+                    "fill": "fade"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "Wind",
+                  "entities": [
+                    "sensor.st_00161537_wind_speed",
+                    "sensor.st_00161537_wind_gust"
+                  ],
+                  "hours_to_show": 24,
+                  "points_per_hour": 2,
+                  "line_width": 3,
+                  "show": {
+                    "legend": true,
+                    "fill": "fade"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "Pressure",
+                  "entities": [
+                    "sensor.st_00161537_air_pressure"
+                  ],
+                  "hours_to_show": 24,
+                  "points_per_hour": 1,
+                  "line_width": 3,
+                  "show": {
+                    "fill": "fade"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "Humidity",
+                  "entities": [
+                    "sensor.st_00161537_humidity"
+                  ],
+                  "hours_to_show": 24,
+                  "points_per_hour": 1,
+                  "line_width": 3,
+                  "show": {
+                    "fill": "fade"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
           "title": "Cars",
           "path": "cars",
           "icon": "mdi:car-electric",
@@ -1535,6 +1913,43 @@
                   "grid_options": {
                     "columns": 6
                   }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "sensor.karr_active_route_minutes_to_arrival",
+                      "state_not": "unavailable"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "sensor.karr_active_route_minutes_to_arrival",
+                      "state_not": "unknown"
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:mushroom-template-card",
+                    "entity": "sensor.karr_active_route_minutes_to_arrival",
+                    "primary": "{{ states('sensor.karr_active_route_destination') }}",
+                    "secondary": "{{ states('sensor.karr_active_route_minutes_to_arrival') | float(0) | round(0) | int }} min away · {{ states('sensor.karr_active_route_distance_to_arrival') | float(0) | round(1) }} mi · arrives with {{ states('sensor.karr_active_route_energy_at_arrival') | float(0) | round(0) | int }}%",
+                    "icon": "mdi:navigation-variant",
+                    "icon_color": "blue",
+                    "fill_container": true,
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "markdown",
+                  "grid_options": {
+                    "columns": 12
+                  },
+                  "content": "**Tires (psi)** FL {{ states('sensor.karr_tire_pressure_front_left') | float(0) | round(0) | int }} · FR {{ states('sensor.karr_tire_pressure_front_right') | float(0) | round(0) | int }} · RL {{ states('sensor.karr_tire_pressure_rear_left') | float(0) | round(0) | int }} · RR {{ states('sensor.karr_tire_pressure_rear_right') | float(0) | round(0) | int }}"
                 }
               ]
             },
@@ -1698,6 +2113,43 @@
                   "grid_options": {
                     "columns": 6
                   }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "sensor.orion_active_route_minutes_to_arrival",
+                      "state_not": "unavailable"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "sensor.orion_active_route_minutes_to_arrival",
+                      "state_not": "unknown"
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:mushroom-template-card",
+                    "entity": "sensor.orion_active_route_minutes_to_arrival",
+                    "primary": "{{ states('sensor.orion_active_route_destination') }}",
+                    "secondary": "{{ states('sensor.orion_active_route_minutes_to_arrival') | float(0) | round(0) | int }} min away · {{ states('sensor.orion_active_route_distance_to_arrival') | float(0) | round(1) }} mi · arrives with {{ states('sensor.orion_active_route_energy_at_arrival') | float(0) | round(0) | int }}%",
+                    "icon": "mdi:navigation-variant",
+                    "icon_color": "blue",
+                    "fill_container": true,
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "markdown",
+                  "grid_options": {
+                    "columns": 12
+                  },
+                  "content": "**Tires (psi)** FL {{ states('sensor.orion_tire_pressure_front_left') | float(0) | round(0) | int }} · FR {{ states('sensor.orion_tire_pressure_front_right') | float(0) | round(0) | int }} · RL {{ states('sensor.orion_tire_pressure_rear_left') | float(0) | round(0) | int }} · RR {{ states('sensor.orion_tire_pressure_rear_right') | float(0) | round(0) | int }}"
                 }
               ]
             },
@@ -1861,6 +2313,43 @@
                   "grid_options": {
                     "columns": 6
                   }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "sensor.elektra_active_route_minutes_to_arrival",
+                      "state_not": "unavailable"
+                    },
+                    {
+                      "condition": "state",
+                      "entity": "sensor.elektra_active_route_minutes_to_arrival",
+                      "state_not": "unknown"
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:mushroom-template-card",
+                    "entity": "sensor.elektra_active_route_minutes_to_arrival",
+                    "primary": "{{ states('sensor.elektra_active_route_destination') }}",
+                    "secondary": "{{ states('sensor.elektra_active_route_minutes_to_arrival') | float(0) | round(0) | int }} min away · {{ states('sensor.elektra_active_route_distance_to_arrival') | float(0) | round(1) }} mi · arrives with {{ states('sensor.elektra_active_route_energy_at_arrival') | float(0) | round(0) | int }}%",
+                    "icon": "mdi:navigation-variant",
+                    "icon_color": "blue",
+                    "fill_container": true,
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "markdown",
+                  "grid_options": {
+                    "columns": 12
+                  },
+                  "content": "**Tires (psi)** FL {{ states('sensor.elektra_tire_pressure_front_left') | float(0) | round(0) | int }} · FR {{ states('sensor.elektra_tire_pressure_front_right') | float(0) | round(0) | int }} · RL {{ states('sensor.elektra_tire_pressure_rear_left') | float(0) | round(0) | int }} · RR {{ states('sensor.elektra_tire_pressure_rear_right') | float(0) | round(0) | int }}"
                 }
               ]
             },
@@ -2713,6 +3202,118 @@
                   }
                 }
               ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Upstairs rooms",
+                  "icon": "mdi:home-thermometer"
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.bedroom_temperature",
+                  "primary": "Bedroom {{ states('sensor.bedroom_temperature') | float(0) | round(1) }}°",
+                  "secondary": "{{ 'Occupied' if is_state('binary_sensor.bedroom_occupancy', 'on') else 'Empty' }}",
+                  "icon": "mdi:bed",
+                  "icon_color": "{{ 'amber' if is_state('binary_sensor.bedroom_occupancy', 'on') else 'grey' }}",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.office_temperature",
+                  "primary": "Office {{ states('sensor.office_temperature') | float(0) | round(1) }}°",
+                  "secondary": "{{ 'Occupied' if is_state('binary_sensor.office_occupancy', 'on') else 'Empty' }}",
+                  "icon": "mdi:desk",
+                  "icon_color": "{{ 'amber' if is_state('binary_sensor.office_occupancy', 'on') else 'grey' }}",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.upstairs_temperature",
+                  "primary": "Hallway {{ states('sensor.upstairs_temperature') | float(0) | round(1) }}°",
+                  "secondary": "{{ 'Occupied' if is_state('binary_sensor.upstairs_occupancy', 'on') else 'Empty' }}",
+                  "icon": "mdi:stairs",
+                  "icon_color": "{{ 'amber' if is_state('binary_sensor.upstairs_occupancy', 'on') else 'grey' }}",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.st_00161537_temperature",
+                  "name": "Outside",
+                  "color": "orange",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/weather"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.upstairs_humidity",
+                  "name": "Upstairs humidity",
+                  "color": "blue",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.downstairs_humidity",
+                  "name": "Downstairs humidity",
+                  "color": "blue",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "Temperatures, last 24 hours",
+                  "entities": [
+                    {
+                      "entity": "sensor.bedroom_temperature",
+                      "name": "Bedroom"
+                    },
+                    {
+                      "entity": "sensor.office_temperature",
+                      "name": "Office"
+                    },
+                    {
+                      "entity": "sensor.upstairs_temperature",
+                      "name": "Hallway"
+                    },
+                    {
+                      "entity": "sensor.downstairs_temperature",
+                      "name": "Downstairs"
+                    },
+                    {
+                      "entity": "sensor.st_00161537_temperature",
+                      "name": "Outside"
+                    }
+                  ],
+                  "hours_to_show": 24,
+                  "points_per_hour": 2,
+                  "line_width": 2,
+                  "show": {
+                    "legend": true
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ]
             }
           ]
         },
@@ -2769,6 +3370,62 @@
                   "name": "Distance from home",
                   "icon": "mdi:map-marker-distance",
                   "color": "green",
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.jeffsphone_battery_level",
+                  "primary": "Battery {{ states('sensor.jeffsphone_battery_level') | int(0) }}%",
+                  "secondary": "{{ states('sensor.jeffsphone_battery_state') }}",
+                  "icon": "{{ 'mdi:battery-charging' if is_state('sensor.jeffsphone_battery_state', 'Charging') else 'mdi:battery' }}",
+                  "icon_color": "{% if states('sensor.jeffsphone_battery_level') | float(100) < 20 %}red{% elif states('sensor.jeffsphone_battery_level') | float(100) < 40 %}amber{% else %}green{% endif %}",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.jeffsphone_ssid",
+                  "primary": "{{ states('sensor.jeffsphone_ssid') if states('sensor.jeffsphone_connection_type') == 'Wi-Fi' else states('sensor.jeffsphone_connection_type') }}",
+                  "secondary": "Network",
+                  "icon": "mdi:wifi",
+                  "icon_color": "blue",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.jeffsphone_activity",
+                  "name": "Activity",
+                  "icon": "mdi:run",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.jeffsphone_steps",
+                  "name": "Steps today",
+                  "icon": "mdi:shoe-print",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.jeffsphone_geocoded_location",
+                  "primary": "{{ states('sensor.jeffsphone_geocoded_location') | regex_replace('[\\r\\n]+', ', ') }}",
+                  "secondary": "Last known address",
+                  "icon": "mdi:map-marker",
+                  "icon_color": "green",
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 12
                   }
@@ -2848,6 +3505,62 @@
                   }
                 },
                 {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.jensphone_battery_level",
+                  "primary": "Battery {{ states('sensor.jensphone_battery_level') | int(0) }}%",
+                  "secondary": "{{ states('sensor.jensphone_battery_state') }}",
+                  "icon": "{{ 'mdi:battery-charging' if is_state('sensor.jensphone_battery_state', 'Charging') else 'mdi:battery' }}",
+                  "icon_color": "{% if states('sensor.jensphone_battery_level') | float(100) < 20 %}red{% elif states('sensor.jensphone_battery_level') | float(100) < 40 %}amber{% else %}green{% endif %}",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.jensphone_ssid",
+                  "primary": "{{ states('sensor.jensphone_ssid') if states('sensor.jensphone_connection_type') == 'Wi-Fi' else states('sensor.jensphone_connection_type') }}",
+                  "secondary": "Network",
+                  "icon": "mdi:wifi",
+                  "icon_color": "blue",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.jensphone_activity",
+                  "name": "Activity",
+                  "icon": "mdi:run",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.jensphone_steps",
+                  "name": "Steps today",
+                  "icon": "mdi:shoe-print",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.jensphone_geocoded_location",
+                  "primary": "{{ states('sensor.jensphone_geocoded_location') | regex_replace('[\\r\\n]+', ', ') }}",
+                  "secondary": "Last known address",
+                  "icon": "mdi:map-marker",
+                  "icon_color": "green",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
                   "type": "map",
                   "entities": [
                     {
@@ -2919,6 +3632,30 @@
                   "color": "green",
                   "grid_options": {
                     "columns": 12
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.ansley_s_iphone_battery_level",
+                  "primary": "Battery {{ states('sensor.ansley_s_iphone_battery_level') | int(0) }}%",
+                  "secondary": "{{ states('sensor.ansley_s_iphone_battery_state') }}",
+                  "icon": "{{ 'mdi:battery-charging' if is_state('sensor.ansley_s_iphone_battery_state', 'Charging') else 'mdi:battery' }}",
+                  "icon_color": "{% if states('sensor.ansley_s_iphone_battery_level') | float(100) < 20 %}red{% elif states('sensor.ansley_s_iphone_battery_level') | float(100) < 40 %}amber{% else %}green{% endif %}",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.ansley_s_iphone_ssid",
+                  "primary": "{{ states('sensor.ansley_s_iphone_ssid') if states('sensor.ansley_s_iphone_connection_type') == 'Wi-Fi' else states('sensor.ansley_s_iphone_connection_type') }}",
+                  "secondary": "Network",
+                  "icon": "mdi:wifi",
+                  "icon_color": "blue",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
                   }
                 },
                 {
