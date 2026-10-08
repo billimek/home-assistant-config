@@ -559,19 +559,64 @@
                   "state_content": [
                     "state"
                   ],
-                  "features": [
-                    {
-                      "type": "alarm-modes",
-                      "modes": [
-                        "armed_home",
-                        "armed_away",
-                        "armed_night",
-                        "disarmed"
-                      ]
-                    }
-                  ],
                   "grid_options": {
                     "columns": "full"
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Home",
+                  "icon": "mdi:shield-home",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.alarm_arm_home"
+                  },
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 2
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Away",
+                  "icon": "mdi:shield-lock",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.alarm_arm_away"
+                  },
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 2
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Night",
+                  "icon": "mdi:shield-moon",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.alarm_arm_night"
+                  },
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 2
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Disarm",
+                  "icon": "mdi:shield-off",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.alarm_disarm"
+                  },
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 2
                   }
                 },
                 {
@@ -673,59 +718,81 @@
                   "icon": "mdi:account-multiple"
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "person.jeff_billimek",
-                  "name": "Jeff",
-                  "color": "green",
-                  "vertical": true,
-                  "grid_options": {
-                    "columns": 3
-                  },
+                  "primary": "Jeff",
+                  "secondary": "{% set s = states('person.jeff_billimek') %}{% set d = states('sensor.home_jeffs_phone_gps_distance') | float(0) %}{% if s == 'home' %}Home{% elif s == 'not_home' %}{{ (d | round(0) | int ~ ' ft') if d < 1000 else ((d / 5280) | round(1) ~ ' mi') }}{% else %}{{ s | replace('_', ' ') | title }}{% endif %} · {{ states('sensor.jeffsphone_battery_level') | int(0) }}%",
+                  "picture": "{{ state_attr('person.jeff_billimek', 'entity_picture') }}",
+                  "icon": "mdi:account",
+                  "icon_color": "{{ 'green' if is_state('person.jeff_billimek', 'home') else 'grey' }}",
+                  "layout": "vertical",
+                  "fill_container": true,
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "/lovelace/person-jeff"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "person.jennifer_billimek",
-                  "name": "Jen",
-                  "color": "green",
-                  "vertical": true,
+                  },
                   "grid_options": {
                     "columns": 3
                   },
+                  "badge_icon": "{{ 'mdi:battery-alert' if states('sensor.jeffsphone_battery_level') | float(100) < 20 and not is_state('sensor.jeffsphone_battery_state', 'Charging') else '' }}",
+                  "badge_color": "red"
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "person.jennifer_billimek",
+                  "primary": "Jen",
+                  "secondary": "{% set s = states('person.jennifer_billimek') %}{% set d = states('sensor.home_jen_s_phone_gps_distance') | float(0) %}{% if s == 'home' %}Home{% elif s == 'not_home' %}{{ (d | round(0) | int ~ ' ft') if d < 1000 else ((d / 5280) | round(1) ~ ' mi') }}{% else %}{{ s | replace('_', ' ') | title }}{% endif %} · {{ states('sensor.jensphone_battery_level') | int(0) }}%",
+                  "picture": "{{ state_attr('person.jennifer_billimek', 'entity_picture') }}",
+                  "icon": "mdi:account",
+                  "icon_color": "{{ 'green' if is_state('person.jennifer_billimek', 'home') else 'grey' }}",
+                  "layout": "vertical",
+                  "fill_container": true,
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "/lovelace/person-jen"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "person.ansley_billimek",
-                  "name": "Ansley",
-                  "color": "green",
-                  "vertical": true,
+                  },
                   "grid_options": {
                     "columns": 3
                   },
+                  "badge_icon": "{{ 'mdi:battery-alert' if states('sensor.jensphone_battery_level') | float(100) < 20 and not is_state('sensor.jensphone_battery_state', 'Charging') else '' }}",
+                  "badge_color": "red"
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "person.ansley_billimek",
+                  "primary": "Ansley",
+                  "secondary": "{% set s = states('person.ansley_billimek') %}{% if s == 'home' %}Home{% elif s == 'not_home' %}Away{% else %}{{ s | replace('_', ' ') | title }}{% endif %} · {{ states('sensor.ansley_s_iphone_battery_level') | int(0) }}%",
+                  "picture": "{{ state_attr('person.ansley_billimek', 'entity_picture') }}",
+                  "icon": "mdi:account",
+                  "icon_color": "{{ 'green' if is_state('person.ansley_billimek', 'home') else 'grey' }}",
+                  "layout": "vertical",
+                  "fill_container": true,
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "/lovelace/person-ansley"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "person.brinley",
-                  "name": "Brinley",
-                  "color": "green",
-                  "vertical": true,
+                  },
                   "grid_options": {
                     "columns": 3
                   },
+                  "badge_icon": "{{ 'mdi:battery-alert' if states('sensor.ansley_s_iphone_battery_level') | float(100) < 20 and not is_state('sensor.ansley_s_iphone_battery_state', 'Charging') else '' }}",
+                  "badge_color": "red"
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "person.brinley",
+                  "primary": "Brinley",
+                  "secondary": "{% set s = states('person.brinley') %}{% if s == 'home' %}Home{% elif s == 'not_home' %}Away{% else %}{{ s | replace('_', ' ') | title }}{% endif %}",
+                  "picture": "{{ state_attr('person.brinley', 'entity_picture') }}",
+                  "icon": "mdi:account",
+                  "icon_color": "{{ 'green' if is_state('person.brinley', 'home') else 'grey' }}",
+                  "layout": "vertical",
+                  "fill_container": true,
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "/lovelace/person-brinley"
+                  },
+                  "grid_options": {
+                    "columns": 3
                   }
                 }
               ]
@@ -869,6 +936,15 @@
                   }
                 },
                 {
+                  "type": "markdown",
+                  "text_only": true,
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  },
+                  "content": "{% macro f(s) %}{% if s[:2] != '20' %}never{% else %}{% set d = strptime(s[:19], '%Y-%m-%dT%H:%M:%S') %}{{ d.strftime('%-I:%M %p') if d.date() == now().date() else d.strftime('%a %-I:%M %p') }}{% endif %}{% endmacro %}{% set pets = [states('image.doorbell_dog'), states('image.doorbell_cat')] | select('match', '^20') | list %}Last person {{ f(states('image.doorbell_person')) }} · last pet {{ f(pets | max) if pets else 'never' }}"
+                },
+                {
                   "type": "custom:advanced-camera-card",
                   "cameras": [
                     {
@@ -882,6 +958,15 @@
                   "grid_options": {
                     "columns": 12
                   }
+                },
+                {
+                  "type": "markdown",
+                  "text_only": true,
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  },
+                  "content": "{% macro f(s) %}{% if s[:2] != '20' %}never{% else %}{% set d = strptime(s[:19], '%Y-%m-%dT%H:%M:%S') %}{{ d.strftime('%-I:%M %p') if d.date() == now().date() else d.strftime('%a %-I:%M %p') }}{% endif %}{% endmacro %}{% set pets = [states('image.front_dog'), states('image.front_cat')] | select('match', '^20') | list %}Last person {{ f(states('image.front_person')) }} · last pet {{ f(pets | max) if pets else 'never' }}"
                 },
                 {
                   "type": "custom:advanced-camera-card",
@@ -899,6 +984,15 @@
                   }
                 },
                 {
+                  "type": "markdown",
+                  "text_only": true,
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  },
+                  "content": "{% macro f(s) %}{% if s[:2] != '20' %}never{% else %}{% set d = strptime(s[:19], '%Y-%m-%dT%H:%M:%S') %}{{ d.strftime('%-I:%M %p') if d.date() == now().date() else d.strftime('%a %-I:%M %p') }}{% endif %}{% endmacro %}{% set pets = [states('image.driveway_dog'), states('image.driveway_cat')] | select('match', '^20') | list %}Last person {{ f(states('image.driveway_person')) }} · last pet {{ f(pets | max) if pets else 'never' }}"
+                },
+                {
                   "type": "custom:advanced-camera-card",
                   "cameras": [
                     {
@@ -914,6 +1008,15 @@
                   }
                 },
                 {
+                  "type": "markdown",
+                  "text_only": true,
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  },
+                  "content": "{% macro f(s) %}{% if s[:2] != '20' %}never{% else %}{% set d = strptime(s[:19], '%Y-%m-%dT%H:%M:%S') %}{{ d.strftime('%-I:%M %p') if d.date() == now().date() else d.strftime('%a %-I:%M %p') }}{% endif %}{% endmacro %}{% set pets = [states('image.porch_dog'), states('image.porch_cat')] | select('match', '^20') | list %}Last person {{ f(states('image.porch_person')) }} · last pet {{ f(pets | max) if pets else 'never' }}"
+                },
+                {
                   "type": "custom:advanced-camera-card",
                   "cameras": [
                     {
@@ -926,6 +1029,112 @@
                   },
                   "grid_options": {
                     "columns": 12
+                  }
+                },
+                {
+                  "type": "markdown",
+                  "text_only": true,
+                  "grid_options": {
+                    "columns": "full",
+                    "rows": 1
+                  },
+                  "content": "{% macro f(s) %}{% if s[:2] != '20' %}never{% else %}{% set d = strptime(s[:19], '%Y-%m-%dT%H:%M:%S') %}{{ d.strftime('%-I:%M %p') if d.date() == now().date() else d.strftime('%a %-I:%M %p') }}{% endif %}{% endmacro %}{% set pets = [states('image.pool_dog'), states('image.pool_cat')] | select('match', '^20') | list %}Last person {{ f(states('image.pool_person')) }} · last pet {{ f(pets | max) if pets else 'never' }}"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Last person seen",
+                  "icon": "mdi:account-eye"
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "image.doorbell_person",
+                  "name": "Doorbell",
+                  "show_name": true,
+                  "show_state": false,
+                  "aspect_ratio": "16:9",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/camera-doorbell"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "image.front_person",
+                  "name": "Front",
+                  "show_name": true,
+                  "show_state": false,
+                  "aspect_ratio": "16:9",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/camera-front"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "image.driveway_person",
+                  "name": "Driveway",
+                  "show_name": true,
+                  "show_state": false,
+                  "aspect_ratio": "16:9",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/camera-driveway"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "image.porch_person",
+                  "name": "Porch",
+                  "show_name": true,
+                  "show_state": false,
+                  "aspect_ratio": "16:9",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/camera-porch"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "picture-entity",
+                  "entity": "image.pool_person",
+                  "name": "Pool",
+                  "show_name": true,
+                  "show_state": false,
+                  "aspect_ratio": "16:9",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/camera-pool"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "event.porch_front_door_doorbell",
+                  "primary": "Doorbell last rang",
+                  "secondary": "{% set r = states('event.porch_front_door_doorbell') | as_datetime(none) %}{% if r is none %}Not since restart{% else %}{% set l = r | as_local %}{{ l.strftime('%-I:%M %p') if l.date() == now().date() else l.strftime('%a %-I:%M %p') }}{% endif %}",
+                  "icon": "mdi:doorbell",
+                  "icon_color": "purple",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
                   }
                 }
               ]
@@ -950,158 +1159,143 @@
                   ]
                 },
                 {
-                  "type": "tile",
-                  "entity": "input_boolean.camera_doorbell_notify",
-                  "name": "Doorbell",
-                  "color": "purple",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.camera_front_notify",
-                  "name": "Front",
-                  "color": "purple",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.camera_driveway_notify",
-                  "name": "Driveway",
-                  "color": "purple",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.camera_porch_notify",
-                  "name": "Porch",
-                  "color": "purple",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.camera_pool_notify",
-                  "name": "Pool",
-                  "color": "purple",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
                   "type": "heading",
-                  "heading": "Camera mutes",
-                  "icon": "mdi:bell-off"
+                  "heading": "Tap to toggle · hold to mute for 1 hour",
+                  "heading_style": "subtitle"
                 },
                 {
-                  "type": "tile",
-                  "entity": "timer.camera_porch_mute",
-                  "name": "Porch",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_doorbell_notify",
+                  "primary": "Doorbell",
+                  "secondary": "{% if is_state('timer.camera_doorbell_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_doorbell_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_doorbell_notify', 'on') %}Notifications on{% else %}Notifications off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_doorbell_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_doorbell_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_doorbell_mute', 'active') else 'purple' if is_state('input_boolean.camera_doorbell_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "doorbell"
                     }
-                  ],
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "doorbell",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
                   "grid_options": {
-                    "columns": "full"
+                    "columns": 6
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "timer.camera_doorbell_mute",
-                  "name": "Doorbell",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_front_notify",
+                  "primary": "Front",
+                  "secondary": "{% if is_state('timer.camera_front_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_front_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_front_notify', 'on') %}Notifications on{% else %}Notifications off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_front_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_front_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_front_mute', 'active') else 'purple' if is_state('input_boolean.camera_front_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "front"
                     }
-                  ],
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "front",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
                   "grid_options": {
-                    "columns": "full"
+                    "columns": 6
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "timer.camera_driveway_mute",
-                  "name": "Driveway",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_driveway_notify",
+                  "primary": "Driveway",
+                  "secondary": "{% if is_state('timer.camera_driveway_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_driveway_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_driveway_notify', 'on') %}Notifications on{% else %}Notifications off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_driveway_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_driveway_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_driveway_mute', 'active') else 'purple' if is_state('input_boolean.camera_driveway_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "driveway"
                     }
-                  ],
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "driveway",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
                   "grid_options": {
-                    "columns": "full"
+                    "columns": 6
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "timer.camera_front_mute",
-                  "name": "Front",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_porch_notify",
+                  "primary": "Porch",
+                  "secondary": "{% if is_state('timer.camera_porch_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_porch_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_porch_notify', 'on') %}Notifications on{% else %}Notifications off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_porch_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_porch_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_porch_mute', 'active') else 'purple' if is_state('input_boolean.camera_porch_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "porch"
                     }
-                  ],
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "porch",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
                   "grid_options": {
-                    "columns": "full"
+                    "columns": 6
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "timer.camera_pool_mute",
-                  "name": "Pool",
-                  "icon": "mdi:bell-off",
-                  "features": [
-                    {
-                      "type": "timer-actions",
-                      "actions": [
-                        "start",
-                        "cancel"
-                      ]
+                  "type": "custom:mushroom-template-card",
+                  "entity": "input_boolean.camera_pool_notify",
+                  "primary": "Pool",
+                  "secondary": "{% if is_state('timer.camera_pool_mute', 'active') %}Muted · {{ (((as_timestamp(state_attr('timer.camera_pool_mute', 'finishes_at')) - now().timestamp()) / 60) | round(0) | int) }} min left{% elif is_state('input_boolean.camera_pool_notify', 'on') %}Notifications on{% else %}Notifications off{% endif %}",
+                  "icon": "{{ 'mdi:bell-sleep' if is_state('timer.camera_pool_mute', 'active') else 'mdi:bell' if is_state('input_boolean.camera_pool_notify', 'on') else 'mdi:bell-off' }}",
+                  "icon_color": "{{ 'amber' if is_state('timer.camera_pool_mute', 'active') else 'purple' if is_state('input_boolean.camera_pool_notify', 'on') else 'grey' }}",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_toggle",
+                    "data": {
+                      "camera": "pool"
                     }
-                  ],
+                  },
+                  "hold_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.camera_notifications_mute",
+                    "data": {
+                      "camera": "pool",
+                      "minutes": 60
+                    }
+                  },
+                  "fill_container": true,
                   "grid_options": {
-                    "columns": "full"
+                    "columns": 6
                   }
                 }
               ]
@@ -1574,8 +1768,7 @@
           "type": "sections",
           "max_columns": 3,
           "theme": "home_new",
-          "subview": true,
-          "back_path": "/lovelace/home",
+          "subview": false,
           "sections": [
             {
               "type": "grid",
@@ -1692,7 +1885,7 @@
                 },
                 {
                   "type": "weather-forecast",
-                  "entity": "weather.upstairs",
+                  "entity": "weather.unknown",
                   "forecast_type": "daily",
                   "show_current": true,
                   "show_forecast": true,
@@ -1706,6 +1899,16 @@
                   "name": "Coldest low, next 2 nights",
                   "icon": "mdi:snowflake-thermometer",
                   "color": "cyan",
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.next_rain",
+                  "name": "Next rain (50%+ chance)",
+                  "icon": "mdi:weather-rainy",
+                  "color": "blue",
                   "grid_options": {
                     "columns": 12
                   }
@@ -2584,19 +2787,64 @@
                   "state_content": [
                     "state"
                   ],
-                  "features": [
-                    {
-                      "type": "alarm-modes",
-                      "modes": [
-                        "armed_home",
-                        "armed_away",
-                        "armed_night",
-                        "disarmed"
-                      ]
-                    }
-                  ],
                   "grid_options": {
                     "columns": "full"
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Home",
+                  "icon": "mdi:shield-home",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.alarm_arm_home"
+                  },
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 2
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Away",
+                  "icon": "mdi:shield-lock",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.alarm_arm_away"
+                  },
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 2
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Night",
+                  "icon": "mdi:shield-moon",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.alarm_arm_night"
+                  },
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 2
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Disarm",
+                  "icon": "mdi:shield-off",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "script.alarm_disarm"
+                  },
+                  "grid_options": {
+                    "columns": 3,
+                    "rows": 2
                   }
                 },
                 {
@@ -3213,8 +3461,7 @@
           "type": "sections",
           "max_columns": 2,
           "theme": "home_new",
-          "subview": true,
-          "back_path": "/lovelace/home",
+          "subview": false,
           "sections": [
             {
               "type": "grid",

@@ -28,3 +28,52 @@ mute_camera_notifications:
                   entity_id: "timer.camera_{{ repeat.item }}_mute"
                 data:
                   duration: '01:00:00'
+
+## Per-camera controls for the Cameras tab tiles (tap = toggle, hold = mute for an hour).
+## Same restoring timers as above: camera_mute_finished turns the toggle back on when a mute ends.
+camera_notifications_toggle:
+  alias: 'Toggle a camera''s notifications'
+  icon: mdi:bell
+  mode: parallel
+  fields:
+    camera:
+      description: porch, doorbell, driveway, front or pool
+      required: true
+      example: porch
+  sequence:
+    - choose:
+        # tapping a muted camera ends the mute early
+        - conditions: "{{ is_state('timer.camera_' ~ camera ~ '_mute', 'active') }}"
+          sequence:
+            - action: timer.cancel
+              target:
+                entity_id: "timer.camera_{{ camera }}_mute"
+            - action: input_boolean.turn_on
+              target:
+                entity_id: "input_boolean.camera_{{ camera }}_notify"
+      default:
+        - action: input_boolean.toggle
+          target:
+            entity_id: "input_boolean.camera_{{ camera }}_notify"
+
+camera_notifications_mute:
+  alias: 'Mute a camera''s notifications'
+  icon: mdi:bell-sleep
+  mode: parallel
+  fields:
+    camera:
+      description: porch, doorbell, driveway, front or pool
+      required: true
+      example: porch
+    minutes:
+      description: How long to mute (default 60)
+      example: 60
+  sequence:
+    - action: input_boolean.turn_off
+      target:
+        entity_id: "input_boolean.camera_{{ camera }}_notify"
+    - action: timer.start
+      target:
+        entity_id: "timer.camera_{{ camera }}_mute"
+      data:
+        duration: "{{ (minutes | default(60) | int(60)) * 60 }}"
