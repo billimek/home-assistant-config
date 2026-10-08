@@ -188,32 +188,32 @@
           {{ days[0].condition if days else none }}
 
 ## EV charging cost this month: the monthly utility meters (UI helpers on each car's TeslaMate
-## sensor.<car>_energy_added) x (1 + charging loss) x the rate in input_number.ev_electricity_rate.
+## sensor.<car>_energy_added) x the rate in input_number.ev_electricity_rate (an effective $/kWh into the battery, so it already includes the charging loss).
 - sensor:
   - name: "KARR Charging Cost Month"
     unique_id: karr_charging_cost_month
     unit_of_measurement: "$"
     icon: mdi:ev-station
-    state: "{{ (states('sensor.karr_charging_energy_month') | float(0) * (1 + states('input_number.ev_charging_loss') | float(0) / 100) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
+    state: "{{ (states('sensor.karr_charging_energy_month') | float(0) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
     attributes:
       energy_kwh: "{{ states('sensor.karr_charging_energy_month') | float(0) | round(1) }}"
-      last_month: "{{ (state_attr('sensor.karr_charging_energy_month', 'last_period') | float(0) * (1 + states('input_number.ev_charging_loss') | float(0) / 100) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
+      last_month: "{{ (state_attr('sensor.karr_charging_energy_month', 'last_period') | float(0) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
   - name: "Orion Charging Cost Month"
     unique_id: orion_charging_cost_month
     unit_of_measurement: "$"
     icon: mdi:ev-station
-    state: "{{ (states('sensor.orion_charging_energy_month') | float(0) * (1 + states('input_number.ev_charging_loss') | float(0) / 100) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
+    state: "{{ (states('sensor.orion_charging_energy_month') | float(0) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
     attributes:
       energy_kwh: "{{ states('sensor.orion_charging_energy_month') | float(0) | round(1) }}"
-      last_month: "{{ (state_attr('sensor.orion_charging_energy_month', 'last_period') | float(0) * (1 + states('input_number.ev_charging_loss') | float(0) / 100) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
+      last_month: "{{ (state_attr('sensor.orion_charging_energy_month', 'last_period') | float(0) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
   - name: "Elektra Charging Cost Month"
     unique_id: elektra_charging_cost_month
     unit_of_measurement: "$"
     icon: mdi:ev-station
-    state: "{{ (states('sensor.elektra_charging_energy_month') | float(0) * (1 + states('input_number.ev_charging_loss') | float(0) / 100) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
+    state: "{{ (states('sensor.elektra_charging_energy_month') | float(0) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
     attributes:
       energy_kwh: "{{ states('sensor.elektra_charging_energy_month') | float(0) | round(1) }}"
-      last_month: "{{ (state_attr('sensor.elektra_charging_energy_month', 'last_period') | float(0) * (1 + states('input_number.ev_charging_loss') | float(0) / 100) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
+      last_month: "{{ (state_attr('sensor.elektra_charging_energy_month', 'last_period') | float(0) * states('input_number.ev_electricity_rate') | float(0)) | round(2) }}"
   - name: "EV Charging Cost Month"
     unique_id: ev_charging_cost_month
     unit_of_measurement: "$"
@@ -221,3 +221,14 @@
     state: "{{ (states('sensor.karr_charging_cost_month') | float(0) + states('sensor.orion_charging_cost_month') | float(0) + states('sensor.elektra_charging_cost_month') | float(0)) | round(2) }}"
     attributes:
       last_month: "{{ (state_attr('sensor.karr_charging_cost_month', 'last_month') | float(0) + state_attr('sensor.orion_charging_cost_month', 'last_month') | float(0) + state_attr('sensor.elektra_charging_cost_month', 'last_month') | float(0)) | round(2) }}"
+
+## Things that need a human (low batteries, toner, fridge door, unplugged cars, tires, stale backup).
+## The list lives in custom_templates/attention.jinja; the Home dashboard shows its "Needs attention"
+## section only while this count is above 0.
+- sensor:
+  - name: "Attention Items"
+    unique_id: attention_items
+    icon: mdi:alert-circle-outline
+    state: "{% from 'attention.jinja' import collect %}{{ collect() | from_json | count }}"
+    attributes:
+      items: "{% from 'attention.jinja' import collect %}{{ collect() | from_json }}"

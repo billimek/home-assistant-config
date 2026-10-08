@@ -58,6 +58,9 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 
 Notes: Jen's phone (`notify.mobile_app_jensphone`) is included in the shared household pushes; the siren, Slack and the cleaning-calendar disarm were dropped on purpose. Automation timers (garage lights, deck lights, etc.) live in memory like Node-RED's did, so an HA restart while one is running leaves that light on.
 
+## Dashboard helpers
+`sensor.attention_items` (state = count, attribute `items`) is built by the macro in `custom_templates/attention.jinja` (low phone/leak/weather-station batteries, toner, fridge door, unplugged cars, tire alerts, stale backup). The Home dashboard's "Needs attention" section is only visible while the count is above 0. Reload macro edits with `homeassistant.reload_custom_templates`.
+
 ## Automation map
 `perl tools/automation_map.pl` regenerates `docs/automation_map.html`, a clickable flow map (triggers, automations, scripts, destinations such as Jen's phone) built by reading `automation/`, `scripts/` and the custom blueprints. There is no YAML parser on the box, so it reads by indentation and expects literal service names (`script.notify_phones` with `audience:`, `notify.*`). Re-run it after changing automations.
 
@@ -111,7 +114,7 @@ These entity IDs are referenced by Lovelace dashboards and automations. Renaming
 - `sensor.home_karr_distance`, `sensor.home_orion_distance` - Proximity distance (ft) for KARR and Orion; `automation/garage_tesla.yaml` triggers on these crossing 200 ft (KARR = Jeff's door, Orion = Jen's door). Keep numeric state and ft units. (`sensor.home_elektra_distance` for Elektra is only shown on the dashboard.)
 
 ## Tesla / TeslaMate
-- EV charging cost: monthly `utility_meter` UI helpers (`sensor.<car>_charging_energy_month`) on TeslaMate's `sensor.<car>_energy_added`, priced in `config/template.yaml` (`sensor.<car>_charging_cost_month`, `sensor.ev_charging_cost_month`) from `input_number.ev_electricity_rate` and `input_number.ev_charging_loss` (`config/input_number.yaml`). Shown on the Cars tab.
+- EV charging cost: monthly `utility_meter` UI helpers (`sensor.<car>_charging_energy_month`) on TeslaMate's `sensor.<car>_energy_added`, priced in `config/template.yaml` (`sensor.<car>_charging_cost_month`, `sensor.ev_charging_cost_month`) from `input_number.ev_electricity_rate` (an effective $/kWh that already includes the ~10 % charging loss; `config/input_number.yaml`). Shown on the Cars tab.
 - Tesla telemetry comes from TeslaMate's MQTT discovery (`MQTT_DISCOVERY=true` in the k8s config): devices Elektra (car 1), KARR (car 2), Orion (car 3), entity ids like `sensor.elektra_battery`. There are no hand-written Tesla MQTT sensors any more.
 - `tesla_custom` provides the car controls (buttons, locks, charge limit, seat heaters, climate). Its 11 telemetry entities per car that collide with TeslaMate names were renamed `*_tc_*` and disabled so the discovered entities own the clean ids.
 - The only automations that consume Tesla data are the two geofence automations in `automation/garage_tesla.yaml`, via the two distance sensors above (Elektra is not used). Node-RED no longer reads anything.

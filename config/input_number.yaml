@@ -1,18 +1,11 @@
-## Inputs for the EV charging cost sensors (config/template.yaml). No initial: so edits survive restarts.
+## Input for the EV charging cost sensors (config/template.yaml). No initial: so edits survive restarts.
+## TeslaMate's energy_added is what reaches the battery and the wall draws about 10 % more, so set this
+## to your Georgia Power $/kWh x 1.10 (0.14 -> 0.154).
 ev_electricity_rate:
-  name: EV electricity rate
+  name: EV electricity rate (incl. charging loss)
   icon: mdi:currency-usd
   min: 0
   max: 1
   step: 0.001
   mode: box
   unit_of_measurement: "$/kWh"
-## TeslaMate's energy_added is what reaches the battery; the wall draws a bit more.
-ev_charging_loss:
-  name: EV charging loss
-  icon: mdi:flash-triangle
-  min: 0
-  max: 30
-  step: 1
-  mode: box
-  unit_of_measurement: "%"
