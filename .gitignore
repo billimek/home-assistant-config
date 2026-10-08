@@ -38,3 +38,5 @@ blueprints/template/
 
 # Never commit
 secrets.yaml
+!www/
+!www/clip.html

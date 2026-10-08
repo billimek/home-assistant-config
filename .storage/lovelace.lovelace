@@ -2162,7 +2162,7 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-doorbell'; return '/api/frigate/notifications/' + id + '/doorbell/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-doorbell'; return '/local/clip.html?src=' + encodeURIComponent('/api/frigate/notifications/' + id + '/doorbell/master.m3u8'); ]]]"
                   },
                   "styles": {
                     "card": [
@@ -2236,7 +2236,7 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-front'; return '/api/frigate/notifications/' + id + '/front/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-front'; return '/local/clip.html?src=' + encodeURIComponent('/api/frigate/notifications/' + id + '/front/master.m3u8'); ]]]"
                   },
                   "styles": {
                     "card": [
@@ -2310,7 +2310,7 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-driveway'; return '/api/frigate/notifications/' + id + '/driveway/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-driveway'; return '/local/clip.html?src=' + encodeURIComponent('/api/frigate/notifications/' + id + '/driveway/master.m3u8'); ]]]"
                   },
                   "styles": {
                     "card": [
@@ -2384,7 +2384,7 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-porch'; return '/api/frigate/notifications/' + id + '/porch/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-porch'; return '/local/clip.html?src=' + encodeURIComponent('/api/frigate/notifications/' + id + '/porch/master.m3u8'); ]]]"
                   },
                   "styles": {
                     "card": [
@@ -2458,7 +2458,7 @@
                   },
                   "hold_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-pool'; return '/api/frigate/notifications/' + id + '/pool/' + (/iPhone|iPad|iPod/.test(navigator.userAgent) ? 'master.m3u8' : 'clip.mp4'); ]]]"
+                    "url_path": "[[[ const id = entity.attributes.review_id; if (!id) return '/lovelace/camera-pool'; return '/local/clip.html?src=' + encodeURIComponent('/api/frigate/notifications/' + id + '/pool/master.m3u8'); ]]]"
                   },
                   "styles": {
                     "card": [
