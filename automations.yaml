@@ -15,6 +15,7 @@
       camera: camera.porch
       tap_action: /lovelace/camera-porch
       notify_group: ALL_DEVICES
+      base_url: https://hass.eviljungle.com
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       title: '{{ camera_name }}'
       message: '{{ label }} detected'
@@ -40,6 +41,7 @@
       camera: camera.doorbell
       tap_action: /lovelace/camera-doorbell
       notify_group: ALL_DEVICES
+      base_url: https://hass.eviljungle.com
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       title: '{{ camera_name }}'
       message: '{{ label }} detected'
@@ -64,6 +66,7 @@
       camera: camera.driveway
       tap_action: /lovelace/camera-driveway
       notify_group: ALL_DEVICES
+      base_url: https://hass.eviljungle.com
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       title: '{{ camera_name }}'
       message: '{{ label }} detected'
@@ -89,6 +92,7 @@
       camera: camera.front
       tap_action: /lovelace/camera-front
       notify_group: ALL_DEVICES
+      base_url: https://hass.eviljungle.com
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       title: '{{ camera_name }}'
       message: '{{ label }} detected'
@@ -114,6 +118,7 @@
       camera: camera.pool
       tap_action: /lovelace/camera-pool
       notify_group: ALL_DEVICES
+      base_url: https://hass.eviljungle.com
       notify_device: 47982353ddbfc02bcac5e9dd874b2b9f
       title: '{{ camera_name }}'
       message: '{{ label }} detected'
