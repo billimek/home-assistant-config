@@ -3,3 +3,9 @@ dahua_last_event:
   name: Dahua last event received
   has_date: true
   has_time: true
+
+## Last time automation.dahua_self_heal reloaded the Dahua config entry (cooldown and repeat detection)
+dahua_last_reload:
+  name: Dahua last auto-reload
+  has_date: true
+  has_time: true

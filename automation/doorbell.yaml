@@ -70,6 +70,9 @@
                 datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
         - conditions: "{{ trigger.id == 'stale' }}"
           sequence:
+            - action: homeassistant.reload_config_entry
+              target:
+                entity_id: event.porch_front_door_doorbell
             - action: script.notify_phones
               data:
                 audience: jeff
@@ -77,5 +80,65 @@
                 level: time-sensitive
                 tag: dahua_watchdog
                 message: >
-                  No Dahua events received for 6+ hours. Reload the Dahua
-                  "Front Door" config entry (disable, then enable).
+                  No Dahua events received for 6+ hours. The Dahua "Front Door"
+                  entry was reloaded; if this repeats, reboot the doorbell.
+
+## Self-heal: the Dahua integration can wedge after the doorbell closes its event
+## connection (2026-10-09: 13:04 disconnect, every call timing out for 2.7 h while the
+## doorbell itself, ping and Frigate stream were fine; entities only went unavailable
+## after 2.7 h). A reload fixes it. Triggers on the integration's timeout log lines
+## (system_log_event) or on its entities being unavailable for 10 min. Cooldown 45 min;
+## a second reload within 6 h pushes Jeff a "reboot it" alert.
+- id: dahua_self_heal
+  alias: 'Reload the Dahua integration when it stops responding'
+  mode: single
+  trigger:
+    - platform: event
+      event_type: system_log_event
+      id: log
+    - platform: state
+      entity_id:
+        - event.porch_front_door_doorbell
+        - binary_sensor.front_door_button_pressed
+      to: 'unavailable'
+      for: '00:10:00'
+      id: unavailable
+  condition:
+    - condition: template
+      value_template: >
+        {% if trigger.id == 'log' %}
+          {{ 'custom_components.dahua' in (trigger.event.data.name | string)
+             and 'TimeoutError' in (trigger.event.data.message | string) }}
+        {% else %}
+          true
+        {% endif %}
+    # cooldown: one reload per 45 min (a fresh reload can log a timeout of its own)
+    - condition: template
+      value_template: >
+        {% set last = states('input_datetime.dahua_last_reload') | as_datetime %}
+        {{ last is none or now() - (last | as_local) > timedelta(minutes=45) }}
+  action:
+    - variables:
+        last: "{{ states('input_datetime.dahua_last_reload') | as_datetime }}"
+        repeat: "{{ last is not none and now() - (last | as_local) < timedelta(hours=6) }}"
+    - action: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.dahua_last_reload
+      data:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+    - action: homeassistant.reload_config_entry
+      target:
+        entity_id: event.porch_front_door_doorbell
+    - if:
+        - condition: template
+          value_template: "{{ repeat }}"
+      then:
+        - action: script.notify_phones
+          data:
+            audience: jeff
+            title: Doorbell integration keeps failing
+            level: time-sensitive
+            tag: dahua_self_heal
+            message: >
+              The Dahua integration timed out again within 6 hours of the last
+              auto-reload. Reboot the doorbell (web UI at its IP, or the API).

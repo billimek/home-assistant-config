@@ -24,6 +24,7 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 | 🚪 / 🪟 Left open | 6 doors open for 5 minutes | both | time-sensitive | **Snooze 1 h** | when the door closes |
 | 🔔 Doorbell | Dahua ring or button (30 s cooldown) | both | time-sensitive | **Live view** | |
 | Doorbell listener stopped | no Dahua events for 6 h | Jeff | time-sensitive | none | |
+| Doorbell integration keeps failing | Dahua timed out again within 6 h of an auto-reload | Jeff | time-sensitive | none | |
 | 🔋 Leak sensor battery low | a leak sensor drops below 30 %, then Sundays 09:00 while it stays low | Jeff | active | none | replaced by the next one |
 | Printer toner low | a Brother cartridge drops below 15 % | Jeff | passive | none | |
 | 🧊 Fridge door open | a fridge or freezer door open for 3 min | Jeff | time-sensitive | none | when the door closes |

@@ -37,7 +37,7 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 | `automation/alarm_notifications.yaml` | armed / disarmed / triggered / suspicious-disarm pushes + Discord for a triggered alarm (gated by `input_boolean.notify_alarm_*`) |
 | `automation/alarm.yaml` | sensor alerts (blueprints), iOS DISARM_ALARM action, AlarmDecoder watchdog |
 | `automation/guest_mode.yaml` | `input_boolean.guest_mode` auto-off (72 h `timer.guest_mode`). While on: no automatic alarm arming (`alarm_logic.yaml`), `sensor.anyone_home` reads `home` (silences the away sensor alerts), porch and pool camera pushes muted (`custom_filter` in `automations.yaml`) |
-| `automation/doorbell.yaml` | doorbell ring push (Dahua AD410) + watchdog that alerts if the Dahua listener goes quiet for 6 h (`input_datetime.dahua_last_event`) |
+| `automation/doorbell.yaml` | doorbell ring push (Dahua AD410) + `dahua_self_heal` (reloads the Dahua "Front Door" entry on timeout log lines or 10 min unavailable, 45 min cooldown via `input_datetime.dahua_last_reload`, pushes Jeff if it repeats within 6 h) + watchdog that reloads and alerts if the Dahua listener goes quiet for 6 h (`input_datetime.dahua_last_event`) |
 | `automation/garage.yaml` | iOS open/close garage actions |
 | `automation/garage_notifications.yaml` | door-opened push, still-open-when-leaving, 2 h weekday nag (+ optional auto-close), 10 pm close (`input_boolean.auto_garage_doors_night`) |
 | `automation/garage_tesla.yaml` | KARR/Orion geofence: close on leaving, open on arriving (gated by `input_boolean.auto_garage_doors`) |
