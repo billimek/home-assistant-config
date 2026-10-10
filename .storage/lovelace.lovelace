@@ -3314,8 +3314,17 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.rain_today",
+                  "entity": "sensor.precipitation_today",
                   "name": "Rain today",
+                  "color": "blue",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.precipitation_yesterday",
+                  "name": "Rain yesterday",
                   "color": "blue",
                   "grid_options": {
                     "columns": 6
@@ -3356,7 +3365,7 @@
                   "name": "Station battery",
                   "color": "green",
                   "grid_options": {
-                    "columns": 12
+                    "columns": 6
                   }
                 }
               ]
