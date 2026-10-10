@@ -3314,7 +3314,7 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.st_00161537_precipitation",
+                  "entity": "sensor.rain_today",
                   "name": "Rain today",
                   "color": "blue",
                   "grid_options": {
@@ -3352,20 +3352,11 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "binary_sensor.rachio_rain",
-                  "name": "Rachio rain sensor",
-                  "color": "blue",
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "tile",
                   "entity": "sensor.st_00161537_battery",
                   "name": "Station battery",
                   "color": "green",
                   "grid_options": {
-                    "columns": 6
+                    "columns": 12
                   }
                 }
               ]
