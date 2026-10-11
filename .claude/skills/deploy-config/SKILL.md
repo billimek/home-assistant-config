@@ -26,8 +26,12 @@ Keep output at each step to a line or two.
 - Summarize changed files. If there are none, say the pod is already current and stop.
 
 ## 3. Pull
+- Pod: `git -C /config status --short`
+- For each dirty file under `.storage/lovelace*` (HA rewrites these on dashboard saves): if `git -C /config diff --quiet origin/master -- <file>` exits 0, the pod copy already equals the incoming version. Ask the user to confirm, then run `git -C /config checkout -- <file>`.
+- Any other dirty file, or a `.storage/lovelace*` file that differs from `origin/master`: print the files and stop. Ask the user how to proceed. Do not reset or discard. A differing dashboard file means the live dashboard has changes not in git; run `tools/sync-dashboards.sh`, commit, and push first.
 - Pod: `git -C /config pull --ff-only`
-- If it fails because tracked files are dirty (HA rewrites the tracked `.storage/lovelace*` files on dashboard saves), run `git -C /config status --short`, print the files, and stop. Ask the user how to proceed. Do not reset or discard.
+
+To capture dashboard edits made through the MCP into the repo, run `tools/sync-dashboards.sh` locally, then commit and push before deploying.
 
 ## 4. Validate
 - `ha_get_system_health(include="config_check")`.

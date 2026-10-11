@@ -14,7 +14,7 @@ Claude edits files in this local clone and uses the Home Assistant MCP (`mcp__ho
 ## Deploying changes
 1. Edit and validate locally (`yamllint .`, `perl tools/automation_map.pl` if automations changed).
 2. Commit and push to GitHub. Ask the user before pushing to master.
-3. Pull in the pod: `kubectl -n default exec deploy/home-assistant -c code-server -- git -C /config pull --ff-only` (deployment `home-assistant`, containers `app` and `code-server`). If it fails because of local changes (HA rewrites the tracked `.storage/lovelace*` files on dashboard saves), report it and stop. Do not reset, stash or discard anything.
+3. Pull in the pod: `kubectl -n default exec deploy/home-assistant -c code-server -- git -C /config pull --ff-only` (deployment `home-assistant`, containers `app` and `code-server`). If it fails because of local changes (HA rewrites the tracked `.storage/lovelace*` files on dashboard saves), the `deploy-config` skill discards a dashboard file only when it is identical to the incoming commit and you confirm; anything else is reported and left alone. After saving dashboards via the MCP, run `tools/sync-dashboards.sh` to copy the live files into the clone before committing.
 4. Check config (`ha_get_system_health` with `include="config_check"`), then reload what changed with `ha_reload_core` (`automations`, `scripts`, `templates`, `input_*`, `groups`, `zones`, `themes`, `core`, or `all`). If `configuration.yaml` or a non-reloadable key changed, say a restart is needed and ask before calling `ha_restart`.
 5. Confirm with `ha_get_logs` (`source="system"`) and system health that nothing errored.
 
