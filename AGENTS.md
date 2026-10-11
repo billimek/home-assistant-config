@@ -1,13 +1,33 @@
 # Agent Guidelines for Home Assistant Config
 
 ## Repository Overview
-Home Assistant YAML configuration for a smart home running on Kubernetes. No build/test system - validation happens on HA restart.
+Home Assistant YAML configuration for a smart home running on Kubernetes. No build/test system - validate locally with yamllint, then check config on the running HA after deploying (see "Deploying changes").
+
+Claude edits files in this local clone and uses the Home Assistant MCP (`mcp__homeassistant__*`) for live state, dashboards, UI automations/helpers, reloads and logs. Nothing in the pod runs Claude. `/config` in the pod is a git clone of this repo with a read-only deploy key: the pod can fetch/pull but not push.
 
 ## Validation & Linting
 - **Recommended**: Install and run `yamllint .` for YAML syntax checking
 - **Home Assistant CLI**: `ha core check` (if HA CLI installed locally)
 - **Docker validation**: `docker run --rm -v $(pwd):/config homeassistant/home-assistant:latest python -m homeassistant --script check_config --config /config`
-- Production validation occurs on Home Assistant restart in Kubernetes cluster
+- **Live check**: after the change is pulled into the pod, `ha_get_system_health(include="config_check")` via the MCP validates the config before any reload or restart
+
+## Deploying changes
+1. Edit and validate locally (`yamllint .`, `perl tools/automation_map.pl` if automations changed).
+2. Commit and push to GitHub. Ask the user before pushing to master.
+3. Pull in the pod: `kubectl -n default exec deploy/home-assistant -c code-server -- git -C /config pull --ff-only` (deployment `home-assistant`, containers `app` and `code-server`). If it fails because of local changes (HA rewrites the tracked `.storage/lovelace*` files on dashboard saves), report it and stop. Do not reset, stash or discard anything.
+4. Check config (`ha_get_system_health` with `include="config_check"`), then reload what changed with `ha_reload_core` (`automations`, `scripts`, `templates`, `input_*`, `groups`, `zones`, `themes`, `core`, or `all`). If `configuration.yaml` or a non-reloadable key changed, say a restart is needed and ask before calling `ha_restart`.
+5. Confirm with `ha_get_logs` (`source="system"`) and system health that nothing errored.
+
+## Where config lives
+| Path | Managed by | Edit via |
+|---|---|---|
+| `configuration.yaml`, `automation/`, `scripts/`, `config/`, `automations.yaml`, `blueprints/automation/custom/`, `themes/` | git (YAML) | file edits in this clone, then the deploy flow |
+| `docs/`, `tools/`, `www/clip.html`, `README.md`, `AGENTS.md` | git (not loaded by HA) | file edits |
+| `.storage/lovelace.lovelace`, `.storage/lovelace.home_original`, `.storage/lovelace_dashboards`, `.storage/lovelace_resources` | tracked snapshots, rewritten by HA on dashboard saves | dashboards via `ha_config_set_dashboard` / `ha_config_set_dashboard_resource`; never hand-edit these files |
+| rest of `.storage/`, the database, backups, `custom_components/`, `custom_templates/`, `www/` (except `clip.html`), `secrets.yaml` | runtime state, not in git (see `.gitignore` allowlist) | MCP / HA UI only |
+
+- Prefer the MCP for entities, devices, UI-created helpers, dashboards and one-off state or log inspection. Use file edits for YAML-defined config (the paths above).
+- Do not edit `.storage` files directly; HA overwrites them.
 
 ## Code Style
 - **Format**: YAML with 2-space indentation
@@ -15,7 +35,7 @@ Home Assistant YAML configuration for a smart home running on Kubernetes. No bui
 - **Automation Structure**: Must include `id`, `alias`, `trigger`, `action`; optional `initial_state`, `condition`
 - **Comments**: Use `##` for section headers, `#` for inline comments
 - **Templates**: Jinja2 syntax in `{% %}` blocks for state/template sensors
-- **Secrets**: Use `!env_var VARIABLE_NAME` for sensitive data (never commit actual secrets to `secrets.yaml`)
+- **Secrets**: Use `!env_var VARIABLE_NAME` for sensitive data (`secrets.yaml` is gitignored and `!secret` is not used here). Never put tokens or secrets in the repo, in `AGENTS.md`/docs, or in git remote URLs (the remote is the plain SSH URL, auth is the deploy key)
 - **File Organization**: Split by domain - automations in `automation/`, sensors in `config/`, scripts in `scripts/`
 - **configuration.yaml layout**: it only holds core settings and `!include`s. Helpers and templates live in `config/input_boolean.yaml`, `config/input_datetime.yaml`, `config/timer.yaml`, `config/template.yaml`; groups in `config/groups.yaml`; zones in `config/zones.yaml`. `tools/` holds helper scripts (not HA scripts)
 
@@ -26,7 +46,7 @@ Home Assistant YAML configuration for a smart home running on Kubernetes. No bui
 - Always quote state values like 'on'/'off' and strings with special characters
 - Entity naming pattern: `{domain}.{location}_{device}_{attribute}`
 - Alarm code: `code: !env_var ALARMCD` (the HA automation trace stores the resolved code in plain text)
-- Reload after editing: `automation.reload` for automations, `script.reload` for scripts, `input_datetime.reload` etc. for helpers. A new helper *domain* key in configuration.yaml needs a restart (`default_config` already loads the common ones).
+- Reload after pulling (step 4 above): `automation.reload` for automations, `script.reload` for scripts, `input_datetime.reload` etc. for helpers; `ha_reload_core` covers these. A new helper *domain* key in configuration.yaml needs a restart (`default_config` already loads the common ones).
 
 ## Automations (formerly Node-RED)
 All automation logic is native Home Assistant YAML. It used to run in Node-RED (configuration kept in https://github.com/billimek/node-red-config); the Node-RED flows were migrated and disabled in October 2026, so Node-RED consumes nothing from this repo any more. Where things live:

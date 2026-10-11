@@ -1,6 +1,6 @@
 # Home Assistant Configuration
 
-YAML configuration for a smart home, running [Home Assistant Core](https://home-assistant.io/) on [my Kubernetes cluster](https://github.com/billimek/k8s-gitops). The config is read and persisted by Home Assistant itself, and an embedded [code-server](https://github.com/coder/code-server) with the [Home Assistant config helper](https://marketplace.visualstudio.com/items?itemName=keesschollaart.vscode-home-assistant) is used to edit it live.
+YAML configuration for a smart home, running [Home Assistant Core](https://home-assistant.io/) on [my Kubernetes cluster](https://github.com/billimek/k8s-gitops). `/config` in the pod is a git clone of this repo. Changes are edited locally, pushed to GitHub, pulled into the pod, then reloaded through the Home Assistant MCP (see [AGENTS.md](AGENTS.md#deploying-changes)).
 
 All automation logic is native Home Assistant YAML: no Node-RED, no external flow engine.
 
@@ -161,6 +161,6 @@ TeslaMate publishes three cars (Elektra, KARR, Orion) to Home Assistant through 
 - YAML with 2-space indentation; `##` for section headers, `#` for inline comments.
 - Entity ids are snake_case, in the pattern `{domain}.{location}_{device}_{attribute}`.
 - Secrets come from environment variables with `!env_var`, never committed.
-- Reload after editing: `automation.reload`, `script.reload`, `input_*.reload`. A new helper domain key in `configuration.yaml` needs a restart.
-- Validate with `yamllint .` (config in [.yamllint](.yamllint)) or `ha core check`; the full check runs when Home Assistant restarts.
+- Reload after pulling the change into the pod: `automation.reload`, `script.reload`, `input_*.reload`. A new helper domain key in `configuration.yaml` needs a restart.
+- Validate with `yamllint .` (config in [.yamllint](.yamllint)) or `ha core check`; on the running instance use the config check in system health before reloading.
 - Agent and contributor guidance is in [AGENTS.md](AGENTS.md).
