@@ -2754,17 +2754,22 @@
                   }
                 },
                 {
-                  "type": "button",
-                  "name": "Wake WSL",
-                  "icon": "mdi:sleep-off",
-                  "show_name": true,
-                  "show_icon": true,
+                  "type": "custom:mushroom-template-card",
+                  "primary": "Wake WSL",
+                  "icon": "mdi:desktop-tower-monitor",
+                  "icon_color": "blue",
+                  "layout": "horizontal",
                   "tap_action": {
                     "action": "perform-action",
                     "perform_action": "rest_command.wake_wsl"
                   },
+                  "hold_action": {
+                    "action": "none"
+                  },
+                  "fill_container": true,
                   "grid_options": {
-                    "columns": 6
+                    "columns": 6,
+                    "rows": 1
                   }
                 }
               ]
@@ -3403,7 +3408,7 @@
                   "type": "custom:mushroom-template-card",
                   "entity": "sensor.karr_battery",
                   "primary": "Battery {{ states('sensor.karr_battery') | float(0) | round(0) | int }}%",
-                  "secondary": "{% set ch = is_state('binary_sensor.karr_charging','on') %}{% if ch %}Charging · {{ states('sensor.karr_charger_power') | float(0) | round(1) }} kW · {% set h = states('sensor.karr_charging_time_remaining') | float(0) %}{{ h | int }}h {{ ((h % 1) * 60) | round(0) | int }}m left{% else %}{{ states('sensor.karr_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.karr_plug','on') else 'Unplugged' }}{% endif %}",
+                  "secondary": "{% set ch = is_state('binary_sensor.karr_charging','on') %}{% if ch %}Charging {{ states('sensor.karr_charger_power') | float(0) | round(1) }} kW · {{ states('sensor.karr_charger_voltage') | float(0) | round(0) | int }} V {{ states('sensor.karr_charger_current') | float(0) | round(0) | int }} A · +{{ states('sensor.karr_energy_added') | float(0) | round(1) }} kWh · done {{ (now() + timedelta(hours=states('sensor.karr_charging_time_remaining') | float(0))).strftime('%-I:%M %p') }}{% else %}{{ states('sensor.karr_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.karr_plug','on') else 'Unplugged' }}{% endif %}",
                   "icon": "{{ 'mdi:battery-charging' if is_state('binary_sensor.karr_charging','on') else 'mdi:battery' }}",
                   "icon_color": "{% if is_state('binary_sensor.karr_charging','on') %}amber{% elif is_state('binary_sensor.karr_plug','off') and is_state('device_tracker.karr','home') and states('sensor.karr_battery') | float(100) < 50 %}red{% else %}green{% endif %}",
                   "tap_action": {
@@ -3411,7 +3416,7 @@
                   },
                   "fill_container": true,
                   "grid_options": {
-                    "columns": 6
+                    "columns": 12
                   }
                 },
                 {
@@ -3453,13 +3458,19 @@
                   }
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "climate.karr_hvac_climate_system",
-                  "name": "Climate",
-                  "color": "cyan",
+                  "primary": "{{ 'Climate off' if is_state('climate.karr_hvac_climate_system','off') else 'Climate on' }}",
+                  "secondary": "{{ states('sensor.karr_temperature_inside') | float(0) | round(0) | int }}° in · {{ states('sensor.karr_temperature_outside') | float(0) | round(0) | int }}° out",
+                  "icon": "{{ 'mdi:thermometer' if is_state('climate.karr_hvac_climate_system','off') else 'mdi:air-conditioner' }}",
+                  "icon_color": "{{ 'grey' if is_state('climate.karr_hvac_climate_system','off') else 'cyan' }}",
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -3479,11 +3490,12 @@
                   }
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "binary_sensor.karr_frunk",
-                  "name": "Frunk",
-                  "icon": "mdi:car-door",
-                  "color": "red",
+                  "primary": "{% set o = [('windows', is_state('binary_sensor.karr_windows','on')), ('doors', is_state('binary_sensor.karr_doors','on')), ('trunk', is_state('binary_sensor.karr_trunk','on')), ('frunk', is_state('binary_sensor.karr_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ ('Open: ' ~ o | join(', ')) if o else 'All closed' }}",
+                  "secondary": "Hold to open frunk",
+                  "icon": "{% set o = [('windows', is_state('binary_sensor.karr_windows','on')), ('doors', is_state('binary_sensor.karr_doors','on')), ('trunk', is_state('binary_sensor.karr_trunk','on')), ('frunk', is_state('binary_sensor.karr_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ 'mdi:car-door' if o else 'mdi:car-door-lock' }}",
+                  "icon_color": "{% set o = [('windows', is_state('binary_sensor.karr_windows','on')), ('doors', is_state('binary_sensor.karr_doors','on')), ('trunk', is_state('binary_sensor.karr_trunk','on')), ('frunk', is_state('binary_sensor.karr_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ 'red' if o else 'green' }}",
                   "tap_action": {
                     "action": "more-info"
                   },
@@ -3497,6 +3509,7 @@
                       "text": "Open the frunk?"
                     }
                   },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -3581,6 +3594,53 @@
                   "grid_options": {
                     "columns": 12
                   }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "update.karr_update",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "tile",
+                    "entity": "update.karr_update",
+                    "name": "Software update available",
+                    "color": "blue",
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "numeric_state",
+                      "entity": "sensor.karr_speed",
+                      "above": 0
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:mushroom-template-card",
+                    "entity": "sensor.karr_speed",
+                    "primary": "Driving · {{ states('sensor.karr_speed') | float(0) | round(0) | int }} {{ state_attr('sensor.karr_speed', 'unit_of_measurement') }}",
+                    "secondary": "{% set s = states('sensor.karr_shift_state') %}{{ s ~ ' · ' if s in ['P','R','N','D'] else '' }}heading {{ ['N','NE','E','SE','S','SW','W','NW'][((states('sensor.karr_heading') | float(0) + 22.5) // 45 % 8) | int] }}",
+                    "icon": "mdi:steering",
+                    "icon_color": "blue",
+                    "fill_container": true,
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
                 }
               ]
             },
@@ -3596,7 +3656,7 @@
                   "type": "custom:mushroom-template-card",
                   "entity": "sensor.orion_battery",
                   "primary": "Battery {{ states('sensor.orion_battery') | float(0) | round(0) | int }}%",
-                  "secondary": "{% set ch = is_state('binary_sensor.orion_charging','on') %}{% if ch %}Charging · {{ states('sensor.orion_charger_power') | float(0) | round(1) }} kW · {% set h = states('sensor.orion_charging_time_remaining') | float(0) %}{{ h | int }}h {{ ((h % 1) * 60) | round(0) | int }}m left{% else %}{{ states('sensor.orion_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.orion_plug','on') else 'Unplugged' }}{% endif %}",
+                  "secondary": "{% set ch = is_state('binary_sensor.orion_charging','on') %}{% if ch %}Charging {{ states('sensor.orion_charger_power') | float(0) | round(1) }} kW · {{ states('sensor.orion_charger_voltage') | float(0) | round(0) | int }} V {{ states('sensor.orion_charger_current') | float(0) | round(0) | int }} A · +{{ states('sensor.orion_energy_added') | float(0) | round(1) }} kWh · done {{ (now() + timedelta(hours=states('sensor.orion_charging_time_remaining') | float(0))).strftime('%-I:%M %p') }}{% else %}{{ states('sensor.orion_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.orion_plug','on') else 'Unplugged' }}{% endif %}",
                   "icon": "{{ 'mdi:battery-charging' if is_state('binary_sensor.orion_charging','on') else 'mdi:battery' }}",
                   "icon_color": "{% if is_state('binary_sensor.orion_charging','on') %}amber{% elif is_state('binary_sensor.orion_plug','off') and is_state('device_tracker.orion','home') and states('sensor.orion_battery') | float(100) < 50 %}red{% else %}green{% endif %}",
                   "tap_action": {
@@ -3604,7 +3664,7 @@
                   },
                   "fill_container": true,
                   "grid_options": {
-                    "columns": 6
+                    "columns": 12
                   }
                 },
                 {
@@ -3646,13 +3706,19 @@
                   }
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "climate.orion_hvac_climate_system",
-                  "name": "Climate",
-                  "color": "cyan",
+                  "primary": "{{ 'Climate off' if is_state('climate.orion_hvac_climate_system','off') else 'Climate on' }}",
+                  "secondary": "{{ states('sensor.orion_temperature_inside') | float(0) | round(0) | int }}° in · {{ states('sensor.orion_temperature_outside') | float(0) | round(0) | int }}° out",
+                  "icon": "{{ 'mdi:thermometer' if is_state('climate.orion_hvac_climate_system','off') else 'mdi:air-conditioner' }}",
+                  "icon_color": "{{ 'grey' if is_state('climate.orion_hvac_climate_system','off') else 'cyan' }}",
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -3672,11 +3738,12 @@
                   }
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "binary_sensor.orion_frunk",
-                  "name": "Frunk",
-                  "icon": "mdi:car-door",
-                  "color": "red",
+                  "primary": "{% set o = [('windows', is_state('binary_sensor.orion_windows','on')), ('doors', is_state('binary_sensor.orion_doors','on')), ('trunk', is_state('binary_sensor.orion_trunk','on')), ('frunk', is_state('binary_sensor.orion_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ ('Open: ' ~ o | join(', ')) if o else 'All closed' }}",
+                  "secondary": "Hold to open frunk",
+                  "icon": "{% set o = [('windows', is_state('binary_sensor.orion_windows','on')), ('doors', is_state('binary_sensor.orion_doors','on')), ('trunk', is_state('binary_sensor.orion_trunk','on')), ('frunk', is_state('binary_sensor.orion_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ 'mdi:car-door' if o else 'mdi:car-door-lock' }}",
+                  "icon_color": "{% set o = [('windows', is_state('binary_sensor.orion_windows','on')), ('doors', is_state('binary_sensor.orion_doors','on')), ('trunk', is_state('binary_sensor.orion_trunk','on')), ('frunk', is_state('binary_sensor.orion_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ 'red' if o else 'green' }}",
                   "tap_action": {
                     "action": "more-info"
                   },
@@ -3690,6 +3757,7 @@
                       "text": "Open the frunk?"
                     }
                   },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -3774,6 +3842,53 @@
                   "grid_options": {
                     "columns": 12
                   }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "update.orion_update",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "tile",
+                    "entity": "update.orion_update",
+                    "name": "Software update available",
+                    "color": "blue",
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "numeric_state",
+                      "entity": "sensor.orion_speed",
+                      "above": 0
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:mushroom-template-card",
+                    "entity": "sensor.orion_speed",
+                    "primary": "Driving · {{ states('sensor.orion_speed') | float(0) | round(0) | int }} {{ state_attr('sensor.orion_speed', 'unit_of_measurement') }}",
+                    "secondary": "{% set s = states('sensor.orion_shift_state') %}{{ s ~ ' · ' if s in ['P','R','N','D'] else '' }}heading {{ ['N','NE','E','SE','S','SW','W','NW'][((states('sensor.orion_heading') | float(0) + 22.5) // 45 % 8) | int] }}",
+                    "icon": "mdi:steering",
+                    "icon_color": "blue",
+                    "fill_container": true,
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
                 }
               ]
             },
@@ -3789,7 +3904,7 @@
                   "type": "custom:mushroom-template-card",
                   "entity": "sensor.elektra_battery",
                   "primary": "Battery {{ states('sensor.elektra_battery') | float(0) | round(0) | int }}%",
-                  "secondary": "{% set ch = is_state('binary_sensor.elektra_charging','on') %}{% if ch %}Charging · {{ states('sensor.elektra_charger_power') | float(0) | round(1) }} kW · {% set h = states('sensor.elektra_charging_time_remaining') | float(0) %}{{ h | int }}h {{ ((h % 1) * 60) | round(0) | int }}m left{% else %}{{ states('sensor.elektra_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.elektra_plug','on') else 'Unplugged' }}{% endif %}",
+                  "secondary": "{% set ch = is_state('binary_sensor.elektra_charging','on') %}{% if ch %}Charging {{ states('sensor.elektra_charger_power') | float(0) | round(1) }} kW · {{ states('sensor.elektra_charger_voltage') | float(0) | round(0) | int }} V {{ states('sensor.elektra_charger_current') | float(0) | round(0) | int }} A · +{{ states('sensor.elektra_energy_added') | float(0) | round(1) }} kWh · done {{ (now() + timedelta(hours=states('sensor.elektra_charging_time_remaining') | float(0))).strftime('%-I:%M %p') }}{% else %}{{ states('sensor.elektra_range_ideal') | float(0) | round(0) | int }} mi · {{ 'Plugged in' if is_state('binary_sensor.elektra_plug','on') else 'Unplugged' }}{% endif %}",
                   "icon": "{{ 'mdi:battery-charging' if is_state('binary_sensor.elektra_charging','on') else 'mdi:battery' }}",
                   "icon_color": "{% if is_state('binary_sensor.elektra_charging','on') %}amber{% elif is_state('binary_sensor.elektra_plug','off') and is_state('device_tracker.elektra','home') and states('sensor.elektra_battery') | float(100) < 50 %}red{% else %}green{% endif %}",
                   "tap_action": {
@@ -3797,7 +3912,7 @@
                   },
                   "fill_container": true,
                   "grid_options": {
-                    "columns": 6
+                    "columns": 12
                   }
                 },
                 {
@@ -3839,13 +3954,19 @@
                   }
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "climate.elektra_hvac_climate_system",
-                  "name": "Climate",
-                  "color": "cyan",
+                  "primary": "{{ 'Climate off' if is_state('climate.elektra_hvac_climate_system','off') else 'Climate on' }}",
+                  "secondary": "{{ states('sensor.elektra_temperature_inside') | float(0) | round(0) | int }}° in · {{ states('sensor.elektra_temperature_outside') | float(0) | round(0) | int }}° out",
+                  "icon": "{{ 'mdi:thermometer' if is_state('climate.elektra_hvac_climate_system','off') else 'mdi:air-conditioner' }}",
+                  "icon_color": "{{ 'grey' if is_state('climate.elektra_hvac_climate_system','off') else 'cyan' }}",
                   "tap_action": {
                     "action": "toggle"
                   },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -3865,11 +3986,12 @@
                   }
                 },
                 {
-                  "type": "tile",
+                  "type": "custom:mushroom-template-card",
                   "entity": "binary_sensor.elektra_frunk",
-                  "name": "Frunk",
-                  "icon": "mdi:car-door",
-                  "color": "red",
+                  "primary": "{% set o = [('windows', is_state('binary_sensor.elektra_windows','on')), ('doors', is_state('binary_sensor.elektra_doors','on')), ('trunk', is_state('binary_sensor.elektra_trunk','on')), ('frunk', is_state('binary_sensor.elektra_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ ('Open: ' ~ o | join(', ')) if o else 'All closed' }}",
+                  "secondary": "Hold to open frunk",
+                  "icon": "{% set o = [('windows', is_state('binary_sensor.elektra_windows','on')), ('doors', is_state('binary_sensor.elektra_doors','on')), ('trunk', is_state('binary_sensor.elektra_trunk','on')), ('frunk', is_state('binary_sensor.elektra_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ 'mdi:car-door' if o else 'mdi:car-door-lock' }}",
+                  "icon_color": "{% set o = [('windows', is_state('binary_sensor.elektra_windows','on')), ('doors', is_state('binary_sensor.elektra_doors','on')), ('trunk', is_state('binary_sensor.elektra_trunk','on')), ('frunk', is_state('binary_sensor.elektra_frunk','on'))] | selectattr('1') | map(attribute='0') | list %}{{ 'red' if o else 'green' }}",
                   "tap_action": {
                     "action": "more-info"
                   },
@@ -3883,6 +4005,7 @@
                       "text": "Open the frunk?"
                     }
                   },
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 6
                   }
@@ -3958,6 +4081,53 @@
                     "primary": "{{ states('sensor.elektra_active_route_destination') }}",
                     "secondary": "{{ states('sensor.elektra_active_route_minutes_to_arrival') | float(0) | round(0) | int }} min away · {{ states('sensor.elektra_active_route_distance_to_arrival') | float(0) | round(1) }} mi · arrives with {{ states('sensor.elektra_active_route_energy_at_arrival') | float(0) | round(0) | int }}%",
                     "icon": "mdi:navigation-variant",
+                    "icon_color": "blue",
+                    "fill_container": true,
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "update.elektra_update",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "tile",
+                    "entity": "update.elektra_update",
+                    "name": "Software update available",
+                    "color": "blue",
+                    "grid_options": {
+                      "columns": 12
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "numeric_state",
+                      "entity": "sensor.elektra_speed",
+                      "above": 0
+                    }
+                  ],
+                  "card": {
+                    "type": "custom:mushroom-template-card",
+                    "entity": "sensor.elektra_speed",
+                    "primary": "Driving · {{ states('sensor.elektra_speed') | float(0) | round(0) | int }} {{ state_attr('sensor.elektra_speed', 'unit_of_measurement') }}",
+                    "secondary": "{% set s = states('sensor.elektra_shift_state') %}{{ s ~ ' · ' if s in ['P','R','N','D'] else '' }}heading {{ ['N','NE','E','SE','S','SW','W','NW'][((states('sensor.elektra_heading') | float(0) + 22.5) // 45 % 8) | int] }}",
+                    "icon": "mdi:steering",
                     "icon_color": "blue",
                     "fill_container": true,
                     "grid_options": {
