@@ -18,6 +18,8 @@ Claude edits files in this local clone and uses the Home Assistant MCP (`mcp__ho
 4. Check config (`ha_get_system_health` with `include="config_check"`), then reload what changed with `ha_reload_core` (`automations`, `scripts`, `templates`, `input_*`, `groups`, `zones`, `themes`, `core`, or `all`). If `configuration.yaml` or a non-reloadable key changed, say a restart is needed and ask before calling `ha_restart`.
 5. Confirm with `ha_get_logs` (`source="system"`) and system health that nothing errored.
 
+Steps 3 to 5 are packaged as the project skill `deploy-config` (`.claude/skills/deploy-config/SKILL.md`).
+
 ## Where config lives
 | Path | Managed by | Edit via |
 |---|---|---|

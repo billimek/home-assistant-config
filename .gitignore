@@ -9,6 +9,10 @@
 !*.yaml
 
 # Directories tracked in full
+!.claude/
+.claude/*
+!.claude/skills/
+!.claude/skills/**
 !automation/
 !automation/**
 !blueprints/
