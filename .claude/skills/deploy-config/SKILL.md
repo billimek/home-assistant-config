@@ -5,13 +5,15 @@ description: Pull the latest pushed commits into the running Home Assistant pod,
 
 # Deploy config to Home Assistant
 
-Deploys commits already pushed to GitHub into the running pod, then validates and reloads. Stop and report at any failure. Never reset, discard, stash or force anything unless the user confirms (step 4 rollback only).
+Deploys commits already pushed to GitHub into the running pod, then validates and reloads. Stop and report at any failure. Never reset, discard, stash or force anything unless the user confirms (step 4 rollback only). The one exception is a dirty `.storage/lovelace*` file that is identical to the incoming commit (step 3): discard it without asking.
 
 Pod target: namespace `default`, deployment `home-assistant`, container `code-server`. Git and the deploy key live in that container; `/config` is shared with the `app` container. The deploy key is read-only: the pod can fetch and pull, not push.
 
 Define for all pod commands:
 
     kubectl -n default exec deploy/home-assistant -c code-server -- git -C /config <args>
+
+In the shell, wrap it in a function (`p() { kubectl -n default exec deploy/home-assistant -c code-server -- git -C /config "$@"; }`); a variable holding the command string does not word-split in zsh.
 
 Keep output at each step to a line or two.
 
@@ -27,7 +29,7 @@ Keep output at each step to a line or two.
 
 ## 3. Pull
 - Pod: `git -C /config status --short`
-- For each dirty file under `.storage/lovelace*` (HA rewrites these on dashboard saves): if `git -C /config diff --quiet origin/master -- <file>` exits 0, the pod copy already equals the incoming version. Ask the user to confirm, then run `git -C /config checkout -- <file>`.
+- For each dirty file under `.storage/lovelace*` (HA rewrites these on dashboard saves): if `git -C /config diff --quiet origin/master -- <file>` exits 0, the pod copy already equals the incoming version, so nothing is lost. Run `git -C /config checkout -- <file>` without asking and mention it in one line.
 - Any other dirty file, or a `.storage/lovelace*` file that differs from `origin/master`: print the files and stop. Ask the user how to proceed. Do not reset or discard. A differing dashboard file means the live dashboard has changes not in git; run `tools/sync-dashboards.sh`, commit, and push first.
 - Pod: `git -C /config pull --ff-only`
 
