@@ -5379,11 +5379,11 @@
                   }
                 },
                 {
-                  "type": "tile",
-                  "entity": "sensor.home_ansley_s_phone_gps_distance_2",
-                  "name": "Distance from home",
+                  "type": "custom:mushroom-template-card",
+                  "primary": "Distance from home",
+                  "secondary": "{% set d = distance('device_tracker.ansley_s_iphone') %}{% if d is none %}Unknown{% else %}{% set ft = d * 3280.84 %}{{ (ft | round(0) | int ~ ' ft') if ft < 1000 else ((ft / 5280) | round(1) ~ ' mi') }}{% endif %}",
                   "icon": "mdi:map-marker-distance",
-                  "color": "green",
+                  "icon_color": "{{ 'green' if is_state('person.ansley_billimek', 'home') else 'grey' }}",
                   "grid_options": {
                     "columns": 12
                   }
@@ -5410,6 +5410,38 @@
                   "fill_container": true,
                   "grid_options": {
                     "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.ansley_s_iphone_activity",
+                  "name": "Activity",
+                  "icon": "mdi:run",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.ansley_s_iphone_steps",
+                  "name": "Steps today",
+                  "icon": "mdi:shoe-print",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.ansley_s_iphone_geocoded_location",
+                  "primary": "{{ states('sensor.ansley_s_iphone_geocoded_location') | regex_replace('[\\r\\n]+', ', ') }}",
+                  "secondary": "Last known address",
+                  "icon": "mdi:map-marker",
+                  "icon_color": "green",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 12
                   }
                 },
                 {
@@ -5462,16 +5494,6 @@
                   "entity": "device_tracker.brinleythebest2",
                   "name": "GPS",
                   "icon": "mdi:crosshairs-gps",
-                  "color": "green",
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.home_brinley_s_phone_gps_distance",
-                  "name": "Distance from home",
-                  "icon": "mdi:map-marker-distance",
                   "color": "green",
                   "grid_options": {
                     "columns": 12
