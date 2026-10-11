@@ -257,7 +257,7 @@
                   "type": "custom:button-card",
                   "entity": "cover.jeff_garage_door",
                   "name": "Jeff's garage",
-                  "icon": "mdi:garage-variant",
+                  "icon": "[[[ return entity.state === 'closed' && states['sensor.garage_car_present'] && states['sensor.garage_car_present'].state === 'Yes' ? 'mdi:car' : 'mdi:garage-variant'; ]]]",
                   "tap_action": {
                     "action": "more-info"
                   },
@@ -265,7 +265,7 @@
                   "show_label": false,
                   "custom_fields": {
                     "state": "[[[ return entity.state.charAt(0).toUpperCase() + entity.state.slice(1); ]]]",
-                    "sub": "[[[ return 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); ]]]",
+                    "sub": "[[[ const t = 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); const p = states['sensor.garage_car_present']; return entity.state === 'closed' && p && (p.state === 'Yes' || p.state === 'No') ? t + (p.state === 'Yes' ? ' · car in' : ' · no car') : t; ]]]",
                     "btn": {
                       "card": {
                         "type": "custom:button-card",
@@ -388,7 +388,7 @@
                   "type": "custom:button-card",
                   "entity": "cover.jen_garage_door",
                   "name": "Jen's garage",
-                  "icon": "mdi:garage-variant",
+                  "icon": "[[[ return entity.state === 'closed' && states['sensor.garage2_car_present'] && states['sensor.garage2_car_present'].state === 'Yes' ? 'mdi:car' : 'mdi:garage-variant'; ]]]",
                   "tap_action": {
                     "action": "more-info"
                   },
@@ -396,7 +396,7 @@
                   "show_label": false,
                   "custom_fields": {
                     "state": "[[[ return entity.state.charAt(0).toUpperCase() + entity.state.slice(1); ]]]",
-                    "sub": "[[[ return 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); ]]]",
+                    "sub": "[[[ const t = 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); const p = states['sensor.garage2_car_present']; return entity.state === 'closed' && p && (p.state === 'Yes' || p.state === 'No') ? t + (p.state === 'Yes' ? ' · car in' : ' · no car') : t; ]]]",
                     "btn": {
                       "card": {
                         "type": "custom:button-card",
@@ -1439,7 +1439,7 @@
                   "type": "custom:button-card",
                   "entity": "cover.jeff_garage_door",
                   "name": "Jeff's garage",
-                  "icon": "mdi:garage-variant",
+                  "icon": "[[[ return entity.state === 'closed' && states['sensor.garage_car_present'] && states['sensor.garage_car_present'].state === 'Yes' ? 'mdi:car' : 'mdi:garage-variant'; ]]]",
                   "tap_action": {
                     "action": "more-info"
                   },
@@ -1447,7 +1447,7 @@
                   "show_label": false,
                   "custom_fields": {
                     "state": "[[[ return entity.state.charAt(0).toUpperCase() + entity.state.slice(1); ]]]",
-                    "sub": "[[[ return 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); ]]]",
+                    "sub": "[[[ const t = 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); const p = states['sensor.garage_car_present']; return entity.state === 'closed' && p && (p.state === 'Yes' || p.state === 'No') ? t + (p.state === 'Yes' ? ' · car in' : ' · no car') : t; ]]]",
                     "btn": {
                       "card": {
                         "type": "custom:button-card",
@@ -1570,7 +1570,7 @@
                   "type": "custom:button-card",
                   "entity": "cover.jen_garage_door",
                   "name": "Jen's garage",
-                  "icon": "mdi:garage-variant",
+                  "icon": "[[[ return entity.state === 'closed' && states['sensor.garage2_car_present'] && states['sensor.garage2_car_present'].state === 'Yes' ? 'mdi:car' : 'mdi:garage-variant'; ]]]",
                   "tap_action": {
                     "action": "more-info"
                   },
@@ -1578,7 +1578,7 @@
                   "show_label": false,
                   "custom_fields": {
                     "state": "[[[ return entity.state.charAt(0).toUpperCase() + entity.state.slice(1); ]]]",
-                    "sub": "[[[ return 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); ]]]",
+                    "sub": "[[[ const t = 'since ' + new Date(entity.last_changed).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); const p = states['sensor.garage2_car_present']; return entity.state === 'closed' && p && (p.state === 'Yes' || p.state === 'No') ? t + (p.state === 'Yes' ? ' · car in' : ' · no car') : t; ]]]",
                     "btn": {
                       "card": {
                         "type": "custom:button-card",
