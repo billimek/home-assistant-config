@@ -76,3 +76,39 @@
         icon: 'mdi:car-tire-alert'
         color: '#43A047'
         url: /lovelace/cars
+
+
+## Elektra arrives on a weekday and is still unplugged 2 hours later (audience jeff until Brinley's phone is set up).
+- id: elektra_not_plugged_in_after_arrival
+  alias: 'Elektra not plugged in 2 hours after arriving'
+  description: 'On a weekday arrival, push if Elektra is still home and unplugged after 2 hours.'
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: sensor.elektra_geofence
+      to: 'home'
+  condition:
+    - condition: time
+      weekday: [mon, tue, wed, thu, fri]
+  action:
+    - wait_for_trigger:
+        - platform: state
+          entity_id: binary_sensor.elektra_plug
+          to: 'on'
+      timeout: '02:00:00'
+      continue_on_timeout: true
+    - condition: template
+      value_template: >-
+        {{ is_state('sensor.elektra_geofence', 'home')
+           and is_state('binary_sensor.elektra_plug', 'off') }}
+    - action: script.notify_phones
+      data:
+        audience: jeff
+        title: "🔌 Plug in Elektra"
+        message: "Elektra got home 2 hours ago and is not plugged in ({{ states('sensor.elektra_battery') | float(0) | round(0) | int }}%)."
+        level: active
+        tag: elektra_plug_in
+        group: cars
+        icon: 'mdi:ev-plug-type2'
+        color: '#43A047'
+        url: /lovelace/cars
