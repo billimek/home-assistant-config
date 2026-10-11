@@ -3,31 +3,61 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Frigate clip</title>
+<title>Frigate</title>
 <style>
-  html, body { margin: 0; height: 100%; background: #111; }
-  body { display: flex; align-items: center; justify-content: center; font: 16px sans-serif; color: #ccc; }
+  html, body { margin: 0; min-height: 100%; background: #111; }
+  body { font: 16px sans-serif; color: #ccc; }
+  body.clip { display: flex; align-items: center; justify-content: center; height: 100%; }
   video { width: 100%; max-height: 100%; }
+  a { display: block; position: relative; margin-bottom: 6px; }
+  a img { display: block; width: 100%; }
+  a span { position: absolute; left: 8px; bottom: 8px; padding: 4px 10px; border-radius: 8px; background: rgba(0,0,0,0.55); color: #fff; font-size: 13px; }
 </style>
 </head>
 <body>
-<video id="v" controls autoplay muted playsinline></video>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js"></script>
 <script>
-  // Plays a Frigate event clip (HLS) from the /api/frigate proxy: ?src=/api/frigate/notifications/<id>/<camera>/master.m3u8
-  // Safari plays HLS natively; other browsers go through hls.js.
-  var v = document.getElementById('v');
-  var src = new URLSearchParams(location.search).get('src') || '';
-  if (src.indexOf('/api/frigate/notifications/') !== 0) {
-    document.body.textContent = 'No clip';
-  } else if (v.canPlayType('application/vnd.apple.mpegurl')) {
-    v.src = src;
-  } else if (window.Hls && Hls.isSupported()) {
-    var h = new Hls();
-    h.loadSource(src);
-    h.attachMedia(v);
+  // ?src=/api/frigate/notifications/<id>/<camera>/master.m3u8 plays an event clip (HLS).
+  // ?cam=<camera>&ids=<id>@<iso time>,... lists snapshots, newest first; tap one to play its clip.
+  var q = new URLSearchParams(location.search);
+  var src = q.get('src') || '';
+  var cam = q.get('cam') || '';
+  var ids = (q.get('ids') || '').split(',').filter(Boolean);
+  var base = '/api/frigate/notifications/';
+  if (src) {
+    document.body.className = 'clip';
+    var v = document.createElement('video');
+    v.controls = true; v.autoplay = true; v.muted = true; v.playsInline = true;
+    document.body.appendChild(v);
+    if (src.indexOf(base) !== 0) {
+      document.body.textContent = 'No clip';
+    } else if (v.canPlayType('application/vnd.apple.mpegurl')) {
+      v.src = src;
+    } else if (window.Hls && Hls.isSupported()) {
+      var h = new Hls();
+      h.loadSource(src);
+      h.attachMedia(v);
+    } else {
+      document.body.textContent = 'This browser cannot play the clip';
+    }
+  } else if (ids.length && /^[a-z0-9_]+$/.test(cam)) {
+    ids.forEach(function (e) {
+      var p = e.split('@');
+      if (!/^[0-9.\-A-Za-z]+$/.test(p[0])) return;
+      var a = document.createElement('a');
+      a.href = '?src=' + encodeURIComponent(base + p[0] + '/' + cam + '/master.m3u8');
+      var i = document.createElement('img');
+      i.src = base + p[0] + '/snapshot.jpg';
+      i.loading = 'lazy';
+      var s = document.createElement('span');
+      var d = new Date(p[1]);
+      s.textContent = isNaN(d) ? '' : d.toLocaleDateString([], {weekday: 'short'}) + ' ' + d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
+      a.appendChild(i);
+      a.appendChild(s);
+      document.body.appendChild(a);
+    });
   } else {
-    document.body.textContent = 'This browser cannot play the clip';
+    document.body.textContent = 'No clip';
   }
 </script>
 </body>

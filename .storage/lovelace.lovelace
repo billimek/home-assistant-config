@@ -2076,7 +2076,7 @@
                   "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Doorbell · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Doorbell · ' + t : 'Doorbell · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-doorbell'; ]]]"
+                    "url_path": "[[[ const h = entity.attributes.history; const id = entity.attributes.review_id; if (h && h.length) return '/local/clip.html?cam=doorbell&ids=' + encodeURIComponent(h.map(x => x.id + '@' + x.t).join(',')); return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-doorbell'; ]]]"
                   },
                   "hold_action": {
                     "action": "url",
@@ -2150,7 +2150,7 @@
                   "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Front · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Front · ' + t : 'Front · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-front'; ]]]"
+                    "url_path": "[[[ const h = entity.attributes.history; const id = entity.attributes.review_id; if (h && h.length) return '/local/clip.html?cam=front&ids=' + encodeURIComponent(h.map(x => x.id + '@' + x.t).join(',')); return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-front'; ]]]"
                   },
                   "hold_action": {
                     "action": "url",
@@ -2224,7 +2224,7 @@
                   "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Driveway · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Driveway · ' + t : 'Driveway · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-driveway'; ]]]"
+                    "url_path": "[[[ const h = entity.attributes.history; const id = entity.attributes.review_id; if (h && h.length) return '/local/clip.html?cam=driveway&ids=' + encodeURIComponent(h.map(x => x.id + '@' + x.t).join(',')); return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-driveway'; ]]]"
                   },
                   "hold_action": {
                     "action": "url",
@@ -2298,7 +2298,7 @@
                   "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Porch · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Porch · ' + t : 'Porch · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-porch'; ]]]"
+                    "url_path": "[[[ const h = entity.attributes.history; const id = entity.attributes.review_id; if (h && h.length) return '/local/clip.html?cam=porch&ids=' + encodeURIComponent(h.map(x => x.id + '@' + x.t).join(',')); return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-porch'; ]]]"
                   },
                   "hold_action": {
                     "action": "url",
@@ -2372,7 +2372,7 @@
                   "name": "[[[ const id = entity.attributes.review_id; if (!id) return 'Pool · no alert yet'; const d = new Date(entity.state); const t = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}); return d.toDateString() === new Date().toDateString() ? 'Pool · ' + t : 'Pool · ' + d.toLocaleDateString([], {weekday: 'short'}) + ' ' + t; ]]]",
                   "tap_action": {
                     "action": "url",
-                    "url_path": "[[[ const id = entity.attributes.review_id; return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-pool'; ]]]"
+                    "url_path": "[[[ const h = entity.attributes.history; const id = entity.attributes.review_id; if (h && h.length) return '/local/clip.html?cam=pool&ids=' + encodeURIComponent(h.map(x => x.id + '@' + x.t).join(',')); return id ? '/api/frigate/notifications/' + id + '/snapshot.jpg' : '/lovelace/camera-pool'; ]]]"
                   },
                   "hold_action": {
                     "action": "url",
@@ -2748,6 +2748,20 @@
                   },
                   "hold_action": {
                     "action": "more-info"
+                  },
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "Wake WSL",
+                  "icon": "mdi:sleep-off",
+                  "show_name": true,
+                  "show_icon": true,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "rest_command.wake_wsl"
                   },
                   "grid_options": {
                     "columns": 6
@@ -4874,6 +4888,29 @@
                     "columns": 6
                   },
                   "icon": "mdi:garage-alert-variant"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Keypad",
+                  "icon": "mdi:dialpad"
+                },
+                {
+                  "type": "alarm-panel",
+                  "entity": "alarm_control_panel.ser2sock_10000_alarm_panel",
+                  "name": "Alarm",
+                  "states": [
+                    "arm_home",
+                    "arm_away",
+                    "arm_night"
+                  ],
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 }
               ]
             }
