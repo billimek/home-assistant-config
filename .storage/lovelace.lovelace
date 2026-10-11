@@ -585,7 +585,8 @@
                   "name": "Alarm",
                   "show_state": true,
                   "tap_action": {
-                    "action": "more-info"
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/alarm-keypad"
                   },
                   "grid_options": {
                     "columns": "full"
@@ -790,55 +791,13 @@
                         }
                       ]
                     }
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.alarm_panel_message",
-                  "name": "Panel",
-                  "icon": "mdi:shield-home",
-                  "color": "blue",
-                  "tap_action": {
+                  },
+                  "triggers_update": [
+                    "sensor.alarm_panel_message"
+                  ],
+                  "state_display": "[[[ const s = entity.state; const l = s.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase()); const m = states['sensor.alarm_panel_message']; return (s === 'disarmed' && m && m.state !== 'unknown' && m.state !== 'unavailable') ? l + ' · ' + m.state : l; ]]]",
+                  "hold_action": {
                     "action": "more-info"
-                  },
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.alarm_zones_active",
-                  "name": "Zones",
-                  "icon": "mdi:shield-search",
-                  "tap_action": {
-                    "action": "none"
-                  },
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.auto_alarm_presence",
-                  "name": "Arm away / disarm home",
-                  "color": "blue",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.auto_arm_disarm_alarm_night",
-                  "name": "Arm at midnight",
-                  "color": "blue",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
                   }
                 }
               ],
@@ -1194,7 +1153,8 @@
                   "name": "Alarm",
                   "show_state": true,
                   "tap_action": {
-                    "action": "more-info"
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/alarm-keypad"
                   },
                   "grid_options": {
                     "columns": "full"
@@ -1399,55 +1359,13 @@
                         }
                       ]
                     }
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.alarm_panel_message",
-                  "name": "Panel",
-                  "icon": "mdi:shield-home",
-                  "color": "blue",
-                  "tap_action": {
+                  },
+                  "triggers_update": [
+                    "sensor.alarm_panel_message"
+                  ],
+                  "state_display": "[[[ const s = entity.state; const l = s.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase()); const m = states['sensor.alarm_panel_message']; return (s === 'disarmed' && m && m.state !== 'unknown' && m.state !== 'unavailable') ? l + ' · ' + m.state : l; ]]]",
+                  "hold_action": {
                     "action": "more-info"
-                  },
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.alarm_zones_active",
-                  "name": "Zones",
-                  "icon": "mdi:shield-search",
-                  "tap_action": {
-                    "action": "none"
-                  },
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.auto_alarm_presence",
-                  "name": "Arm away / disarm home",
-                  "color": "blue",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.auto_arm_disarm_alarm_night",
-                  "name": "Arm at midnight",
-                  "color": "blue",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "grid_options": {
-                    "columns": 12
                   }
                 },
                 {
@@ -4169,7 +4087,8 @@
                   "name": "Alarm",
                   "show_state": true,
                   "tap_action": {
-                    "action": "more-info"
+                    "action": "navigate",
+                    "navigation_path": "/lovelace/alarm-keypad"
                   },
                   "grid_options": {
                     "columns": "full"
@@ -4374,31 +4293,13 @@
                         }
                       ]
                     }
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.alarm_panel_message",
-                  "name": "Panel",
-                  "icon": "mdi:shield-home",
-                  "color": "blue",
-                  "tap_action": {
+                  },
+                  "triggers_update": [
+                    "sensor.alarm_panel_message"
+                  ],
+                  "state_display": "[[[ const s = entity.state; const l = s.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase()); const m = states['sensor.alarm_panel_message']; return (s === 'disarmed' && m && m.state !== 'unknown' && m.state !== 'unavailable') ? l + ' · ' + m.state : l; ]]]",
+                  "hold_action": {
                     "action": "more-info"
-                  },
-                  "grid_options": {
-                    "columns": "full"
-                  }
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.alarm_zones_active",
-                  "name": "Zones",
-                  "icon": "mdi:shield-search",
-                  "tap_action": {
-                    "action": "none"
-                  },
-                  "grid_options": {
-                    "columns": "full"
                   }
                 },
                 {
@@ -4415,41 +4316,36 @@
                     "entity": "timer.guest_mode"
                   },
                   "grid_options": {
-                    "columns": "full"
+                    "columns": 4
                   }
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.auto_alarm_presence",
-                  "name": "Arm away / disarm home",
+                  "name": "Presence arm",
                   "color": "blue",
                   "tap_action": {
                     "action": "toggle"
                   },
                   "grid_options": {
-                    "columns": "full"
+                    "columns": 4
                   }
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.auto_arm_disarm_alarm_night",
-                  "name": "Arm at midnight",
+                  "name": "Midnight arm",
                   "color": "blue",
                   "tap_action": {
                     "action": "toggle"
                   },
                   "grid_options": {
-                    "columns": "full"
+                    "columns": 4
                   }
                 },
                 {
-                  "type": "heading",
-                  "heading": "Snoozed alerts",
-                  "icon": "mdi:bell-sleep"
-                },
-                {
                   "type": "markdown",
-                  "content": "{% set t = states.timer | selectattr('state', 'eq', 'active') | selectattr('entity_id', 'search', 'snooze') | rejectattr('entity_id', 'search', 'mute') | list %}{% if t %}{% for x in t %}- **{{ x.name }}**: {{ (((as_timestamp(x.attributes.finishes_at) - now().timestamp()) / 60) | round(0) | int) }} min left\n{% endfor %}{% else %}Nothing snoozed.{% endif %}",
+                  "content": "{% set t = states.timer | selectattr('state', 'eq', 'active') | selectattr('entity_id', 'search', 'snooze') | rejectattr('entity_id', 'search', 'mute') | list %}{% if t %}**Snoozed alerts**\n{% for x in t %}- {{ x.name }}: {{ (((as_timestamp(x.attributes.finishes_at) - now().timestamp()) / 60) | round(0) | int) }} min left\n{% endfor %}{% else %}No alerts snoozed.{% endif %}",
                   "grid_options": {
                     "columns": "full"
                   }
@@ -5788,6 +5684,287 @@
             }
           ],
           "dense_section_placement": true
+        },
+        {
+          "title": "Keypad",
+          "path": "alarm-keypad",
+          "icon": "mdi:dialpad",
+          "type": "sections",
+          "max_columns": 1,
+          "theme": "home_new",
+          "subview": true,
+          "back_path": "/lovelace/home",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Keypad",
+                  "icon": "mdi:dialpad"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.ser2sock_10000_alarm_panel_display",
+                  "name": "Display",
+                  "icon": "mdi:shield-home",
+                  "color": "blue",
+                  "tap_action": {
+                    "action": "none"
+                  },
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "1",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "1"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "2",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "2"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "3",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "3"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "4",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "4"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "5",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "5"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "6",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "6"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "7",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "7"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "8",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "8"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "9",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "9"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "*",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "*"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "0",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "0"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "button",
+                  "name": "#",
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "alarmdecoder.alarm_keypress",
+                    "target": {
+                      "entity_id": "alarm_control_panel.ser2sock_10000_alarm_panel"
+                    },
+                    "data": {
+                      "keypress": "#"
+                    }
+                  },
+                  "grid_options": {
+                    "columns": 4,
+                    "rows": 1
+                  }
+                },
+                {
+                  "type": "heading",
+                  "heading": "History",
+                  "icon": "mdi:history"
+                },
+                {
+                  "type": "logbook",
+                  "target": {
+                    "entity_id": [
+                      "alarm_control_panel.ser2sock_10000_alarm_panel",
+                      "sensor.alarm_panel_message"
+                    ]
+                  },
+                  "hours_to_show": 24,
+                  "grid_options": {
+                    "columns": "full"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ],
       "button_card_templates": {
