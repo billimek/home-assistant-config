@@ -58,6 +58,7 @@ input_boolean: !include config/input_boolean.yaml
 input_datetime: !include config/input_datetime.yaml
 input_number: !include config/input_number.yaml
 timer: !include config/timer.yaml
+sensor: !include config/sensor.yaml
 template: !include config/template.yaml
 
 notify:

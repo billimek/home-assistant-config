@@ -4145,17 +4145,17 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Charging cost this month",
+                  "heading": "Charging cost, last 30 days",
                   "icon": "mdi:cash"
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.ev_charging_cost_month",
+                  "entity": "sensor.ev_charging_cost_30d",
                   "name": "All cars",
                   "color": "green",
                   "state_content": [
                     "state",
-                    "last_month"
+                    "energy_label"
                   ],
                   "grid_options": {
                     "columns": 12
@@ -4163,12 +4163,12 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.karr_charging_cost_month",
+                  "entity": "sensor.karr_charging_cost_30d",
                   "name": "KARR",
                   "color": "green",
                   "state_content": [
                     "state",
-                    "energy_kwh"
+                    "energy_label"
                   ],
                   "grid_options": {
                     "columns": 12
@@ -4176,12 +4176,12 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.orion_charging_cost_month",
+                  "entity": "sensor.orion_charging_cost_30d",
                   "name": "Orion",
                   "color": "green",
                   "state_content": [
                     "state",
-                    "energy_kwh"
+                    "energy_label"
                   ],
                   "grid_options": {
                     "columns": 12
@@ -4189,12 +4189,12 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.elektra_charging_cost_month",
+                  "entity": "sensor.elektra_charging_cost_30d",
                   "name": "Elektra",
                   "color": "green",
                   "state_content": [
                     "state",
-                    "energy_kwh"
+                    "energy_label"
                   ],
                   "grid_options": {
                     "columns": 12

@@ -1,0 +1,24 @@
+## Trailing 30 days of charging energy per car. The monthly utility_meter helpers reset on the 1st;
+## sum_differences_nonnegative adds up their increases and ignores the drop at each reset.
+## Priced in config/template.yaml (sensor.<car>_charging_cost_30d).
+- platform: statistics
+  name: "KARR charging energy 30d"
+  unique_id: karr_charging_energy_30d
+  entity_id: sensor.karr_charging_energy_month
+  state_characteristic: sum_differences_nonnegative
+  max_age:
+    days: 30
+- platform: statistics
+  name: "Orion charging energy 30d"
+  unique_id: orion_charging_energy_30d
+  entity_id: sensor.orion_charging_energy_month
+  state_characteristic: sum_differences_nonnegative
+  max_age:
+    days: 30
+- platform: statistics
+  name: "Elektra charging energy 30d"
+  unique_id: elektra_charging_energy_30d
+  entity_id: sensor.elektra_charging_energy_month
+  state_characteristic: sum_differences_nonnegative
+  max_age:
+    days: 30
