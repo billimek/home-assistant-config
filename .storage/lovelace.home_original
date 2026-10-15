@@ -155,6 +155,9 @@
                   "secondary_info": "last-changed"
                 },
                 {
+                  "entity": "device_tracker.brinleythebest_wifi"
+                },
+                {
                   "entity": "device_tracker.brinleythebest"
                 }
               ],

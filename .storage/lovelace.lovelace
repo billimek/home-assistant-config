@@ -5702,12 +5702,22 @@
                 },
                 {
                   "type": "tile",
+                  "entity": "device_tracker.brinleythebest_wifi",
+                  "name": "Wi-Fi",
+                  "icon": "mdi:wifi",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
                   "entity": "device_tracker.brinleythebest",
                   "name": "GPS",
                   "icon": "mdi:crosshairs-gps",
                   "color": "green",
                   "grid_options": {
-                    "columns": 12
+                    "columns": 6
                   }
                 },
                 {
