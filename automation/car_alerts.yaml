@@ -78,7 +78,7 @@
         url: /lovelace/cars
 
 
-## Elektra arrives on a weekday and is still unplugged 2 hours later (audience jeff until Brinley's phone is set up).
+## Elektra arrives on a weekday and is still unplugged 2 hours later.
 - id: elektra_not_plugged_in_after_arrival
   alias: 'Elektra not plugged in 2 hours after arriving'
   description: 'On a weekday arrival, push if Elektra is still home and unplugged after 2 hours.'
@@ -103,7 +103,7 @@
            and is_state('binary_sensor.elektra_plug', 'off') }}
     - action: script.notify_phones
       data:
-        audience: jeff
+        audience: jeff brinley
         title: "🔌 Plug in Elektra"
         message: "Elektra got home 2 hours ago and is not plugged in ({{ states('sensor.elektra_battery') | float(0) | round(0) | int }}%)."
         level: active

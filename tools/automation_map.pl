@@ -17,10 +17,11 @@ sub slurp { open my $fh, '<', $_[0] or die "$_[0]: $!"; local $/; my $t = <$fh>;
 sub unq { my $s = shift // ''; $s =~ s/^\s+|\s+$//g; $s =~ s/^(["'])(.*)\1$/$2/; return $s }
 
 ## Phones / destinations
-my %PHONE = (jeff => 'phone_jeff', jen => 'phone_jen');
+my %PHONE = (jeff => 'phone_jeff', jen => 'phone_jen', brinley => 'phone_brinley');
 my %DEST = (
   phone_jeff => { label => "Jeff's phone", kind => 'phone' },
   phone_jen  => { label => "Jen's phone",  kind => 'phone' },
+  phone_brinley => { label => "Brinley's phone", kind => 'phone' },
   discord    => { label => 'Discord',      kind => 'chat' },
 );
 
@@ -31,6 +32,7 @@ sub audience_dests {
   my @d;
   push @d, 'phone_jeff' if $aud =~ /\bjeff\b/;
   push @d, 'phone_jen'  if $aud =~ /\bjen\b/;
+  push @d, 'phone_brinley' if $aud =~ /\bbrinley\b/;
   return @d ? @d : qw(phone_jeff phone_jen);
 }
 
@@ -52,6 +54,7 @@ sub scan_actions {
     elsif ($svc eq 'script.notify_clear') { next }
     elsif ($svc =~ /^notify\.mobile_app_.*jeff/) { $dests{phone_jeff} = 1 }
     elsif ($svc =~ /^notify\.mobile_app_.*jen/)  { $dests{phone_jen} = 1 }
+    elsif ($svc =~ /^notify\.mobile_app_.*brinley/) { $dests{phone_brinley} = 1 }
     elsif ($svc eq 'notify.discord') { $dests{discord} = 1 }
     elsif ($svc =~ /^notify\.(.+)/) { $dests{"notify_$1"} = 1; $DEST{"notify_$1"} ||= { label => $svc, kind => 'chat' } }
     elsif ($svc =~ /^script\./) { $scripts{$svc} = 1 }

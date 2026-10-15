@@ -155,12 +155,7 @@
                   "secondary_info": "last-changed"
                 },
                 {
-                  "entity": "device_tracker.brinleythebest2"
-                },
-                {
-                  "entity": "sensor.home_brinley_s_phone_gps_distance",
-                  "secondary_info": "last-changed",
-                  "name": "Distance to Home"
+                  "entity": "device_tracker.brinleythebest"
                 }
               ],
               "title": "Brinley Presence",

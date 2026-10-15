@@ -31,6 +31,7 @@ Every push goes through `script.notify_phones` ([scripts/notify.yaml](../scripts
 | 🥶 Freeze coming | `sensor.forecast_low_2_nights` crosses below 28 °F (once per cold snap) | Jeff | passive | none | |
 | 🔌 Plug in the car | 21:00, a car is home, unplugged and under 50 % | Jeff | active | none | |
 | 🛞 Tire pressure | a car reports a soft tire for 10 min | Jeff | active | none | |
+| 🔌 Plug in Elektra | weekday arrival, still home and unplugged 2 h later | Jeff and Brinley | active | none | |
 | AlarmDecoder reconnected | panel stopped reporting; integration reloaded | Jeff | time-sensitive | none | |
 | 🏠 Someone came home | `zone.home` goes above 0 | Jeff | passive | none | |
 | 🏠 Jen came home | Jen's person entity becomes `home` | Jeff | active | none | |
@@ -65,7 +66,7 @@ Call the script instead of `notify.mobile_app_*`:
 ```yaml
 - action: script.notify_phones
   data:
-    audience: all            # all (default), jeff or jen
+    audience: all            # all (default, Jeff and Jen), jeff, jen, brinley, or a list like "jeff brinley"
     title: "🚗 Garage"
     message: "The door is open"
     level: time-sensitive    # passive, active, time-sensitive or critical

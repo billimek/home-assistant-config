@@ -1,5 +1,6 @@
 ## Central iOS push sender. Automations call script.notify_phones instead of notify.mobile_app_*.
-##   audience: all (default, both phones) | jeff | jen (in test mode jen pushes go to Jeff's phone instead)
+##   audience: all (default, Jeff and Jen) | jeff | jen | brinley, or a space-separated list such as "jeff brinley"
+##             (in test mode every push goes to Jeff's phone instead)
 ##   level:    passive | active (default) | time-sensitive | critical (critical needs a sound; defaults to the system one)
 ##   tag:      a later push with the same tag replaces the earlier one; script.notify_clear removes it
 ##   actions:  list of iOS action buttons; action ids are "KIND|arg|arg" strings handled by
@@ -23,8 +24,8 @@ notify_phones:
     subtitle:
       description: Optional second line
     audience:
-      description: all (both phones) or jeff
-      example: all
+      description: all (Jeff and Jen), or any of jeff, jen, brinley separated by spaces
+      example: "jeff brinley"
     level:
       description: passive, active, time-sensitive or critical
       example: time-sensitive
@@ -62,14 +63,17 @@ notify_phones:
         ico: "{{ icon | default(looks.get(group | default(''), {}).get('icon', '')) }}"
         col: "{{ color | default(looks.get(group | default(''), {}).get('color', '')) }}"
         targets: >-
-          {%- set aud = audience | default('all') -%}
+          {%- set aud = (audience | default('all')).split() -%}
           {%- set test = is_state('input_boolean.notify_test_mode', 'on') -%}
           {%- set t = [] -%}
-          {%- if aud in ['all', 'jeff'] or test -%}
+          {%- if 'all' in aud or 'jeff' in aud or test -%}
             {%- set t = t + ['notify.mobile_app_jeffsphone'] -%}
           {%- endif -%}
-          {%- if aud in ['all', 'jen'] and not test -%}
+          {%- if ('all' in aud or 'jen' in aud) and not test -%}
             {%- set t = t + ['notify.mobile_app_jensphone'] -%}
+          {%- endif -%}
+          {%- if 'brinley' in aud and not test -%}
+            {%- set t = t + ['notify.mobile_app_brinleythebest'] -%}
           {%- endif -%}
           {{ t }}
         payload: >-
@@ -118,7 +122,7 @@ notify_clear:
         targets: >-
           {%- set t = ['notify.mobile_app_jeffsphone'] -%}
           {%- if not is_state('input_boolean.notify_test_mode', 'on') -%}
-            {%- set t = t + ['notify.mobile_app_jensphone'] -%}
+            {%- set t = t + ['notify.mobile_app_jensphone', 'notify.mobile_app_brinleythebest'] -%}
           {%- endif -%}
           {{ t }}
     - repeat:

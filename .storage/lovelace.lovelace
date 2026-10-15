@@ -223,7 +223,7 @@
                   "type": "custom:mushroom-template-card",
                   "entity": "person.brinley",
                   "primary": "Brinley",
-                  "secondary": "{% set s = states('person.brinley') %}{% if s == 'home' %}Home{% elif s == 'not_home' %}Away{% else %}{{ s | replace('_', ' ') | title }}{% endif %}",
+                  "secondary": "{% set s = states('person.brinley') %}{% if s == 'home' %}Home{% elif s == 'not_home' %}Away{% else %}{{ s | replace('_', ' ') | title }}{% endif %} · {{ states('sensor.brinleythebest_battery_level') | int(0) }}%",
                   "picture": "{{ state_attr('person.brinley', 'entity_picture') }}",
                   "icon": "mdi:account",
                   "icon_color": "{{ 'green' if is_state('person.brinley', 'home') else 'grey' }}",
@@ -235,7 +235,9 @@
                   },
                   "grid_options": {
                     "columns": 3
-                  }
+                  },
+                  "badge_icon": "{{ 'mdi:battery-alert' if states('sensor.brinleythebest_battery_level') | float(100) < 20 and not is_state('sensor.brinleythebest_battery_state', 'Charging') else '' }}",
+                  "badge_color": "red"
                 }
               ],
               "visibility": [
@@ -1128,7 +1130,7 @@
                   "type": "custom:mushroom-template-card",
                   "entity": "person.brinley",
                   "primary": "Brinley",
-                  "secondary": "{% set s = states('person.brinley') %}{% if s == 'home' %}Home{% elif s == 'not_home' %}Away{% else %}{{ s | replace('_', ' ') | title }}{% endif %}",
+                  "secondary": "{% set s = states('person.brinley') %}{% if s == 'home' %}Home{% elif s == 'not_home' %}Away{% else %}{{ s | replace('_', ' ') | title }}{% endif %} · {{ states('sensor.brinleythebest_battery_level') | int(0) }}%",
                   "picture": "{{ state_attr('person.brinley', 'entity_picture') }}",
                   "icon": "mdi:account",
                   "icon_color": "{{ 'green' if is_state('person.brinley', 'home') else 'grey' }}",
@@ -1140,7 +1142,9 @@
                   },
                   "grid_options": {
                     "columns": 3
-                  }
+                  },
+                  "badge_icon": "{{ 'mdi:battery-alert' if states('sensor.brinleythebest_battery_level') | float(100) < 20 and not is_state('sensor.brinleythebest_battery_state', 'Charging') else '' }}",
+                  "badge_color": "red"
                 },
                 {
                   "type": "heading",
@@ -5698,10 +5702,76 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "device_tracker.brinleythebest2",
+                  "entity": "device_tracker.brinleythebest",
                   "name": "GPS",
                   "icon": "mdi:crosshairs-gps",
                   "color": "green",
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "Distance from home",
+                  "secondary": "{% set d = distance('device_tracker.brinleythebest') %}{% if d is none %}Unknown{% else %}{% set ft = d * 3280.84 %}{{ (ft | round(0) | int ~ ' ft') if ft < 1000 else ((ft / 5280) | round(1) ~ ' mi') }}{% endif %}",
+                  "icon": "mdi:map-marker-distance",
+                  "icon_color": "{{ 'green' if is_state('person.brinley', 'home') else 'grey' }}",
+                  "grid_options": {
+                    "columns": 12
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.brinleythebest_battery_level",
+                  "primary": "Battery {{ states('sensor.brinleythebest_battery_level') | int(0) }}%",
+                  "secondary": "{{ states('sensor.brinleythebest_battery_state') }}",
+                  "icon": "{{ 'mdi:battery-charging' if is_state('sensor.brinleythebest_battery_state', 'Charging') else 'mdi:battery' }}",
+                  "icon_color": "{% if states('sensor.brinleythebest_battery_level') | float(100) < 20 %}red{% elif states('sensor.brinleythebest_battery_level') | float(100) < 40 %}amber{% else %}green{% endif %}",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.brinleythebest_ssid",
+                  "primary": "{{ states('sensor.brinleythebest_ssid') if states('sensor.brinleythebest_connection_type') == 'Wi-Fi' else states('sensor.brinleythebest_connection_type') }}",
+                  "secondary": "Network",
+                  "icon": "mdi:wifi",
+                  "icon_color": "blue",
+                  "fill_container": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.brinleythebest_activity",
+                  "name": "Activity",
+                  "icon": "mdi:run",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.brinleythebest_steps",
+                  "name": "Steps today",
+                  "icon": "mdi:shoe-print",
+                  "color": "green",
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "entity": "sensor.brinleythebest_geocoded_location",
+                  "primary": "{{ states('sensor.brinleythebest_geocoded_location') | regex_replace('[\\r\\n]+', ', ') }}",
+                  "secondary": "Last known address",
+                  "icon": "mdi:map-marker",
+                  "icon_color": "green",
+                  "fill_container": true,
                   "grid_options": {
                     "columns": 12
                   }
