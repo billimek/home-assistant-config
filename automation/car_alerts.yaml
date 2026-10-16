@@ -78,10 +78,10 @@
         url: /lovelace/cars
 
 
-## Elektra arrives on a weekday and is still unplugged 2 hours later.
+## Elektra arrives on a weekday and is still unplugged 1 hour later.
 - id: elektra_not_plugged_in_after_arrival
-  alias: 'Elektra not plugged in 2 hours after arriving'
-  description: 'On a weekday arrival, push if Elektra is still home and unplugged after 2 hours.'
+  alias: 'Elektra not plugged in 1 hour after arriving'
+  description: 'On a weekday arrival, push if Elektra is still home and unplugged after 1 hour.'
   mode: restart
   trigger:
     - platform: state
@@ -95,7 +95,7 @@
         - platform: state
           entity_id: binary_sensor.elektra_plug
           to: 'on'
-      timeout: '02:00:00'
+      timeout: '01:00:00'
       continue_on_timeout: true
     - condition: template
       value_template: >-
@@ -105,7 +105,7 @@
       data:
         audience: jeff brinley
         title: "🔌 Plug in Elektra"
-        message: "Elektra got home 2 hours ago and is not plugged in ({{ states('sensor.elektra_battery') | float(0) | round(0) | int }}%)."
+        message: "Elektra got home 1 hour ago and is not plugged in ({{ states('sensor.elektra_battery') | float(0) | round(0) | int }}%)."
         level: active
         tag: elektra_plug_in
         group: cars
