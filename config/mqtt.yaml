@@ -1,0 +1,88 @@
+## OpenGarage devices (og-jeff, og-jen), read and controlled over MQTT.
+## Topics: <name>/OUT/STATE (OPEN|CLOSED|STOPPED, every 15 s and on change), <name>/OUT/STATUS (retained
+## online|offline, last will), <name>/IN/STATE (open|close|click).
+## og-jeff (fw 1.2.1) publishes OUT/DIST; og-jen (fw 1.1.2) publishes OUT/JSON with the vehicle flag.
+
+cover:
+  - name: "Jeff's Garage"
+    unique_id: og_jeff_cover
+    default_entity_id: cover.jeff_garage_door
+    device_class: garage
+    state_topic: og-jeff/OUT/STATE
+    state_open: OPEN
+    state_closed: CLOSED
+    state_stopped: STOPPED
+    command_topic: og-jeff/IN/STATE
+    payload_open: open
+    payload_close: close
+    payload_stop: null
+    availability_topic: og-jeff/OUT/STATUS
+    payload_available: online
+    payload_not_available: offline
+    optimistic: false
+    device: &og_jeff_device
+      identifiers: [og_jeff]
+      name: og-jeff
+      manufacturer: OpenGarage
+
+  - name: "Jen's Garage"
+    unique_id: og_jen_cover
+    default_entity_id: cover.jen_garage_door
+    device_class: garage
+    state_topic: og-jen/OUT/STATE
+    state_open: OPEN
+    state_closed: CLOSED
+    state_stopped: STOPPED
+    command_topic: og-jen/IN/STATE
+    payload_open: open
+    payload_close: close
+    payload_stop: null
+    availability_topic: og-jen/OUT/STATUS
+    payload_available: online
+    payload_not_available: offline
+    optimistic: false
+    device: &og_jen_device
+      identifiers: [og_jen]
+      name: og-jen
+      manufacturer: OpenGarage
+
+binary_sensor:
+  ## og-jeff: vehicle present = distance under the device's vehicle threshold (vth 150 cm)
+  - name: "og-jeff Vehicle"
+    unique_id: og_jeff_vehicle
+    default_entity_id: binary_sensor.og_jeff_vehicle
+    device_class: occupancy
+    state_topic: og-jeff/OUT/DIST
+    value_template: "{{ 'ON' if value | int(9999) < 150 else 'OFF' }}"
+    availability_topic: og-jeff/OUT/STATUS
+    device: *og_jeff_device
+
+  - name: "og-jen Vehicle"
+    unique_id: og_jen_vehicle
+    default_entity_id: binary_sensor.og_jen_vehicle
+    device_class: occupancy
+    state_topic: og-jen/OUT/JSON
+    value_template: "{{ value_json.vehicle | default(2) }}"
+    payload_on: "1"
+    payload_off: "0"
+    availability_topic: og-jen/OUT/STATUS
+    device: *og_jen_device
+
+  ## Goes unavailable when no state message arrives for 2 minutes (device hung or off Wi-Fi without a last will).
+  - name: "og-jeff Online"
+    unique_id: og_jeff_online
+    default_entity_id: binary_sensor.og_jeff_online
+    device_class: connectivity
+    state_topic: og-jeff/OUT/STATE
+    value_template: "ON"
+    expire_after: 120
+    device: *og_jeff_device
+
+  - name: "og-jen Online"
+    unique_id: og_jen_online
+    default_entity_id: binary_sensor.og_jen_online
+    device_class: connectivity
+    state_topic: og-jen/OUT/STATE
+    value_template: "ON"
+    expire_after: 120
+    device: *og_jen_device

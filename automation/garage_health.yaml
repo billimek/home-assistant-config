@@ -1,0 +1,57 @@
+################################################
+## Garage opener health (og-jeff, og-jen)
+################################################
+## The openers publish over MQTT. If one stops publishing (or its last will fires) for 5 minutes,
+## Jeff gets a time-sensitive push; it is replaced by a quiet one when the opener is back.
+
+- id: garage_opener_offline
+  alias: 'Alert when a garage opener stops reporting'
+  description: 'Push after 5 min without MQTT state from og-jeff or og-jen; replaced by a quiet push when it returns.'
+  mode: parallel
+  max: 4
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.og_jeff_online
+      to: 'unavailable'
+      for: '00:05:00'
+      id: jeff
+    - platform: state
+      entity_id: cover.jeff_garage_door
+      to: 'unavailable'
+      for: '00:05:00'
+      id: jeff
+    - platform: state
+      entity_id: binary_sensor.og_jen_online
+      to: 'unavailable'
+      for: '00:05:00'
+      id: jen
+    - platform: state
+      entity_id: cover.jen_garage_door
+      to: 'unavailable'
+      for: '00:05:00'
+      id: jen
+  variables:
+    door: "{{ trigger.id }}"
+    cover: "cover.{{ trigger.id }}_garage_door"
+    online: "binary_sensor.og_{{ trigger.id }}_online"
+  action:
+    - action: script.notify_phones
+      data:
+        title: "Garage opener offline"
+        message: "{{ door | capitalize }}'s garage opener has not reported for 5 minutes. Garage automations for that door will not work."
+        audience: jeff
+        level: time-sensitive
+        tag: "garage_offline_{{ door }}"
+        group: garage
+        url: /lovelace/security
+    - wait_template: "{{ not is_state(cover, 'unavailable') and not is_state(online, 'unavailable') }}"
+      timeout: '12:00:00'
+      continue_on_timeout: false
+    - action: script.notify_phones
+      data:
+        title: "Garage opener back"
+        message: "{{ door | capitalize }}'s garage opener is reporting again."
+        audience: jeff
+        level: passive
+        tag: "garage_offline_{{ door }}"
+        group: garage

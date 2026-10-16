@@ -60,6 +60,7 @@ input_number: !include config/input_number.yaml
 timer: !include config/timer.yaml
 sensor: !include config/sensor.yaml
 template: !include config/template.yaml
+mqtt: !include config/mqtt.yaml
 
 notify:
   - name: ALL_DEVICES
