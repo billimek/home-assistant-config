@@ -4,7 +4,9 @@ blueprint:
     Push (via script.notify_phones) when a sensor (door/window) stays open for too long. The push
     has a "Snooze 1 h" button, which starts timer.snooze_<key> (key = the part of the sensor id
     after ser2sock_10000_); the alert is skipped while that timer is active and the push is
-    removed when the sensor closes.
+    removed when the sensor closes. With climate_entity and weather_entity set, the alert only
+    fires while the open sensor is costing HVAC: the thermostat is cooling or heating, or the
+    outdoor temperature is within margin_degrees of (or beyond) the thermostat setpoint.
   domain: automation
   input:
     sensor_entity:
@@ -28,6 +30,30 @@ blueprint:
           min: 60
           max: 3600
           unit_of_measurement: seconds
+    climate_entity:
+      name: Thermostat (optional)
+      description: Leave empty to alert on time alone
+      default: ''
+      selector:
+        entity:
+          filter:
+            - domain: climate
+    weather_entity:
+      name: Outdoor weather (optional)
+      description: Weather entity whose temperature attribute is the outdoor temperature
+      default: ''
+      selector:
+        entity:
+          filter:
+            - domain: weather
+    margin_degrees:
+      name: Margin
+      description: Alert when outdoor temperature is within this many degrees of the setpoint, or past it
+      default: 3
+      selector:
+        number:
+          min: 0
+          max: 20
     notify_jeff:
       name: Notify Jeff
       description: Send notification to Jeff's phone
@@ -41,11 +67,37 @@ blueprint:
       selector:
         boolean:
 
+trigger_variables:
+  sensor: !input sensor_entity
+  climate: !input climate_entity
+  weather: !input weather_entity
+  margin: !input margin_degrees
+
 trigger:
-  - platform: state
-    entity_id: !input sensor_entity
-    from: 'off'
-    to: 'on'
+  - platform: template
+    value_template: >-
+      {% if not is_state(sensor, 'on') %}
+        false
+      {% elif climate == '' %}
+        true
+      {% else %}
+        {% set mode = states(climate) %}
+        {% set sp = state_attr(climate, 'temperature') %}
+        {% set hi = state_attr(climate, 'target_temp_high') %}
+        {% set lo = state_attr(climate, 'target_temp_low') %}
+        {% set out = state_attr(weather, 'temperature') %}
+        {% if state_attr(climate, 'hvac_action') in ['cooling', 'heating'] or out is not number %}
+          true
+        {% elif mode == 'cool' and sp is number %}
+          {{ out > sp - margin }}
+        {% elif mode == 'heat' and sp is number %}
+          {{ out < sp + margin }}
+        {% elif mode == 'heat_cool' and hi is number and lo is number %}
+          {{ out > hi - margin or out < lo + margin }}
+        {% else %}
+          {{ out < 50 or out > 78 }}
+        {% endif %}
+      {% endif %}
     for:
       seconds: !input timeout_seconds
     id: too_long
@@ -61,7 +113,7 @@ action:
       timeout_seconds: !input timeout_seconds
       notify_jeff: !input notify_jeff
       notify_jen: !input notify_jen
-      key: "{{ trigger.entity_id.split('ser2sock_10000_')[-1] }}"
+      key: "{{ sensor.split('ser2sock_10000_')[-1] }}"
       audience: >-
         {{ 'all' if notify_jeff and notify_jen else 'jeff' if notify_jeff else 'jen' if notify_jen else 'none' }}
   - choose:

@@ -64,7 +64,9 @@
     input:
       sensor_entity: binary_sensor.ser2sock_10000_sliding_door
       sensor_name: "Sliding door"
-      timeout_seconds: 300
+      timeout_seconds: 900
+      climate_entity: climate.downstairs
+      weather_entity: weather.unknown
       notify_jeff: true
       notify_jen: true
 

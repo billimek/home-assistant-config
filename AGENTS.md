@@ -109,7 +109,7 @@ Sends notification when a sensor (door/window/motion) triggers while nobody is h
 
 ### sensor_alert_timeout.yaml
 Sends notification when a sensor (door/window) stays open for too long.
-- **Inputs**: sensor_entity, sensor_name, timeout_seconds (default: 300), notify_jeff (bool), notify_jen (bool)
+- **Inputs**: sensor_entity, sensor_name, timeout_seconds (default: 300), notify_jeff (bool), notify_jen (bool), optional climate_entity + weather_entity + margin_degrees (default 3; when set, the alert only fires while the thermostat is cooling/heating or the outdoor temperature is near or past the setpoint; used by the sliding door with a 900 s timeout)
 - **Usage**: Used by 5 timeout automations in `automation/alarm.yaml`
 - **Example**:
   ```yaml
