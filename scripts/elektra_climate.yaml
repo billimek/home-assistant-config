@@ -1,0 +1,11 @@
+## Dashboard Climate tile on the Cars tab: tesla_custom's climate entity has no turn_on/toggle, only set_hvac_mode.
+elektra_climate_toggle:
+  alias: 'Toggle Elektra climate'
+  icon: mdi:air-conditioner
+  mode: single
+  sequence:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.elektra_hvac_climate_system
+      data:
+        hvac_mode: "{{ 'heat_cool' if is_state('climate.elektra_hvac_climate_system', 'off') else 'off' }}"
