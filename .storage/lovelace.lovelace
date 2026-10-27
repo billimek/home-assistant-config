@@ -3965,7 +3965,8 @@
                   "icon": "{{ 'mdi:thermometer' if is_state('climate.elektra_hvac_climate_system','off') else 'mdi:air-conditioner' }}",
                   "icon_color": "{{ 'grey' if is_state('climate.elektra_hvac_climate_system','off') else 'cyan' }}",
                   "tap_action": {
-                    "action": "toggle"
+                    "action": "perform-action",
+                    "perform_action": "script.elektra_climate_toggle"
                   },
                   "hold_action": {
                     "action": "more-info"
