@@ -147,7 +147,7 @@
                   "grid_options": {
                     "columns": "full"
                   },
-                  "content": "{% for x in state_attr('sensor.attention_items', 'items') %}- {{ x }}\n{% endfor %}"
+                  "content": "{% for x in state_attr('sensor.attention_items', 'items') | default([], true) %}- {{ x }}\n{% endfor %}"
                 }
               ]
             },

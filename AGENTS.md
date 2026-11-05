@@ -82,6 +82,14 @@ All automation logic is native Home Assistant YAML. It used to run in Node-RED (
 
 Notes: Jen's phone (`notify.mobile_app_jensphone`) is included in the shared household pushes; the siren, Slack and the cleaning-calendar disarm were dropped on purpose. Automation timers (garage lights, deck lights, etc.) live in memory like Node-RED's did, so an HA restart while one is running leaves that light on.
 
+## Custom integrations and cards (Marketplace)
+Since HA 2026.11 the built-in Marketplace (Settings > Marketplace) replaces HACS; installed items were migrated on first start. Update custom integrations and cards there, not through the HACS UI. Installed: Dahua, Frigate, GE Home, Tesla (`tesla_custom`), Home Connect Alt, Mail and Packages, ha-mcp; cards Bubble Card, Mushroom, button-card, mini-graph-card, Advanced Camera Card.
+- The migration rewrote the card URLs in `.storage/lovelace_resources` from `/hacsfiles/...?hacstag=` to `/local/community/...?v=`. Do not re-add a card resource that the Marketplace already registered (it creates a duplicate).
+- Custom integrations can break on a core upgrade (Home Connect Alt failed to load on 2026.11 until 1.5.0). After an upgrade, check `ha_get_integration` for `setup_error` and the system log.
+- Cards and tiles without an explicit `name:` show device name + entity name since 2026.11. Set `name:` on dashboard cards where the label reads badly.
+- MQTT entities in `config/mqtt.yaml` must keep a `unique_id`; since 2026.11 an entity without one no longer creates its `device`.
+- Templates should not use `friendly_name`; it is planned for deprecation. Use `entity_name()`, `device_name()`, `area_name()`.
+
 ## Dashboard helpers
 `sensor.attention_items` (state = count, attribute `items`) is built by the macro in `custom_templates/attention.jinja` (low phone/leak/weather-station batteries, toner, fridge door, unplugged cars, tire alerts, stale backup). The Home dashboard's "Needs attention" section is only visible while the count is above 0. Reload macro edits with `homeassistant.reload_custom_templates`.
 
